@@ -1,58 +1,74 @@
-<div align="center">
-  
-![Repo Traffic](https://komarev.com/ghpvc/?username=ak-base-kit-stm32l151&label=Repo+Traffic&color=blue&style=flat-square)
+# Space Shooter Game
+(The project is currently under development)
+## Introduction
 
-</div>
+Space Shooter is a classic arcade game project developed for the AK embedded system kit (STM32L151), inspired by the game Chicken Invaders. This project serves as a practical demonstration of applying event-driven architecture to game logic on a resource-limited microcontroller. While designing this Space Shooter, you put the following core concepts of modern embedded engineering into practice:
 
-# AK Embedded Base Kit - STM32L151
+  **System design:** Modelling complex logic flows with UML and State Machines.
+  **Process management:** Coordinating cooperative Tasks and scheduling them efficiently.
+  **Communication:** Using Signals, Timers, and Messages to react in real time.
+  **Control logic:** Building robust mechanics for player input, random alien generation, and Boss fight sequences.
 
-[<img src="hardware/images/ak-foundation-logo.png" width="240"/>](https://github.com/the-ak-foundation)
+### I. Hardware
 
-This kit would not have been possible without the help of [EPCB](https://epcb.vn/pages/frontpage).
+[AK Embedded Base Kit](https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu) is an evaluation kit aimed at intermediate and advanced embedded software learners.
 
-AK Embedded Base Kit, utilizing STM32L151 MCU, is an evaluation kit for advanced embedded software learners.
+The kit integrates a **1.54" OLED LCD**, **3 push buttons**, and **a buzzer** capable of playing short melodies, giving you everything you need to study **event-driven systems** through hands-on game-machine design.
 
-## Features
+**MCU Overview:**
 
-- This kit integrates 1.54" Oled LCD, 3 push buttons, and 1 buzzer, which would be sufficient to create a small video game with an event driven paradigm.
-- It also includes RS485, Qwiic Connect System, and Grove Ecosystems, suitable for prototyping other practical applications in embedded systems.
+```text
+SoC Name : STM32L151CBT6
+RAM      : 16 KB
 
-[<img src="hardware/images/ak-embedded-base-kit-version-3.jpg" width="480"/>](<https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu>)
+Flash Partitions Layout
+----------------------
+[ 0x08000000 - 0x08001FFF ] : Bootloader Partition (8 KB)
+=> AK Bootloader
 
-## Purpose
+[ 0x08002000 - 0x08002FFF ] : BSF Shared Partition (4 KB)
+=> Used for data sharing between Bootloader and Application
 
-Students who are enrolled in the AK foundation's embedded training program will make use of this evaluation kit to develop a small unique video game that will be able to run smoothly as well as closely follow an event driven paradigm in embedded systems programming. This repository also contains all the code which would form the AK framework that students can use to facilitate their development process.
-
-We also hope that this repository will also be useful for those are on the look out for a well-built kit to practice their embedded systems programming skills.
-
-
-[<img src="hardware/images/ak-mcu-kit-hw2-github-1280x640px.png" width="960"/>](<https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu>)
-
-## Memory map
-
-AK base kit uses the following memory map to run its application code
-
-- [ 0x08000000 ] : **Boot** [[ak-base-kit-stm32l151-boot.bin]](https://github.com/ak-embedded-software/ak-base-kit-stm32l151/blob/main/hardware/bin/ak-base-kit-stm32l151-boot.bin)
-- [ 0x08002000 ] : **BSF** [ Memory for data sharing between Boot and Application ]
-- [ 0x08003000 ] : **Application** [[ak-base-kit-stm32l151-application.bin]](https://github.com/ak-embedded-software/ak-base-kit-stm32l151/blob/main/hardware/bin/ak-base-kit-stm32l151-application.bin)                                             |
-
->**Note:** After loading the boot and application firmware, you can use [AK - Flash](https://github.com/ak-embedded-software/ak-flash), a CLI to work with the AK base kit, to load the application directly through the kit's USB port. Once installed, the following command will flash user's defined code into the kit's application's memory region.
-
-```sh
-ak_flash /dev/ttyUSB0 ak-base-kit-stm32l151-application.bin 0x08003000
+[ 0x08003000 - 0x0801FFFF ] : Application Partition (116 KB)
+=> Space Shooter firmware
 ```
 
-## Hardware
+**MCU Naming Convention:**
 
-[AK base kit's schematic](/hardware/schematic/schematic-ak-embedded-base-kit-version-3.pdf)
+| Part | Meaning |
+|---|---|
+| `STM32` | STMicroelectronics 32-bit MCU family. |
+| `L` | Low-power series. |
+| `151` | STM32L151 product line. |
+| `C` | 48-pin package. |
+| `B` | 128 KB Flash memory. |
+| `T` | LQFP package. |
+| `6` | Industrial temperature grade. |
 
-[<img src="hardware/images/board-view-top.png" width="480"/>](<https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu>)
+### II. Game Description and Objects (Concept)
 
-[<img src="hardware/images/board-view-bottom.png" width="480"/>](https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu)
+The following section describes the conceptual gameplay and core mechanics of **"Space Shooter"**. It serves as a reference for ongoing game design and firmware development.
 
-## Reference
+#### 1. The Spaceship (Player)
+  Controlled via `UP` (Left) and `DOWN` (Right) buttons.
+  Fires bullets using the `MODE` button.
+  Equipped with an anti-spam mechanism to limit on-screen bullets.
+  Starts with 3 lives. Features a temporary invulnerability (blinking) frame upon taking damage.
 
-| Topic | Link |
-| ------ | ------ |
-| Tutorials | <https://epcb.vn/blogs/ak-embedded-software> |
-| Vendor | <https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu> |
+#### 2. The Alien Invaders
+  Spawned in grid formations at the top of the screen.
+  3 distinct types of aliens yielding different score values.
+  Formations are dynamically randomized (e.g., 30% chance for an empty cell) to ensure unpredictable waves.
+  Difficulty automatically scales over time (faster movement, more aggressive attacks).
+
+#### 3. The Epic Boss
+  An intimidating Boss entity designed to appear every 5 levels.
+  Features advanced movement and attack patterns:
+    **Fast Sweep:** Moves horizontally at 3x speed.
+    **Triple Shot Burst:** Fires a dangerous 3-bullet spread simultaneously.
+    **Slow Descend:** Creeps closer to the player over time, tightening the dodge space.
+
+#### 4. High Score Tracker
+  Constantly tracks the player's highest score.
+  Saves data persistently to the STM32's non-volatile Flash memory to retain records even after power-off.
+
