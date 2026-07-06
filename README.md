@@ -1,19 +1,20 @@
 # Space Shooter Game
-(The project is currently under development)
+
 ## Introduction
 
-Space Shooter is a classic arcade game project developed for the AK embedded system kit (STM32L151), inspired by the game Chicken Invaders. This project serves as a practical demonstration of applying event-driven architecture to game logic on a resource-limited microcontroller. While designing this Space Shooter, you put the following core concepts of modern embedded engineering into practice:
+Space Shooter is a classic arcade game developed for the AK embedded system kit (STM32L151), inspired by the popular Chicken Invaders series. This repository contains the full firmware implementation, demonstrating the application of event-driven architecture to game logic on a resource-constrained microcontroller.
 
-  **System design:** Modelling complex logic flows with UML and State Machines.
-  **Process management:** Coordinating cooperative Tasks and scheduling them efficiently.
-  **Communication:** Using Signals, Timers, and Messages to react in real time.
-  **Control logic:** Building robust mechanics for player input, random alien generation, and Boss fight sequences.
+The system architecture highlights the following core concepts of embedded engineering:
+- **System Design:** Complex logic flows are modeled utilizing UML and Finite State Machines (FSM).
+- **Process Management:** Efficient scheduling and coordination of cooperative OS Tasks.
+- **Communication:** Real-time inter-process communication using Signals, hardware Timers, and Messages.
+- **Control Logic:** Robust mechanics for asynchronous player input, procedural alien generation, and Boss fight sequences.
 
-### I. Hardware
+### I. Hardware Requirements
 
-[AK Embedded Base Kit](https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu) is an evaluation kit aimed at intermediate and advanced embedded software learners.
+[AK Embedded Base Kit](https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu) is the target hardware platform for this firmware.
 
-The kit integrates a **1.54" OLED LCD**, **3 push buttons**, and **a buzzer** capable of playing short melodies, giving you everything you need to study **event-driven systems** through hands-on game-machine design.
+The board integrates a **1.54" OLED LCD**, **3 push buttons**, and a **buzzer** for audio feedback, providing the necessary peripherals to run the event-driven game engine.
 
 **MCU Overview:**
 
