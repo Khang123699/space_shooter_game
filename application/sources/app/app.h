@@ -159,7 +159,8 @@ enum {
 	AC_DISPLAY_SHOW_MERRY_CHRISTMAS_SNOW_MOVING_UPDATE,
 	AC_DISPLAY_SHOW_MERRY_CHRISTMAS_SLEEP,
 	AC_DISPLAY_SHOW_MODBUS_PULL_UPDATE,
-	AC_DISPLAY_SHOW_MODBUS_PULL_SLEEP
+	AC_DISPLAY_SHOW_MODBUS_PULL_SLEEP,
+	AC_DISPLAY_GAME_OVER_NEXT
 };
 
 /*****************************************************************************/
@@ -175,7 +176,18 @@ enum {
 	AC_ZIGBEE_PERMIT_JOINING_REQ,
 	AC_ZIGBEE_ZCL_CMD_HANDLER
 };
-
+/*****************************************************************************/
+/* GAME SHOOTER task define
+ */
+/*****************************************************************************/
+/* define signal */
+enum {
+    AC_GAME_START_REQ = AK_USER_DEFINE_SIG, 
+    AC_GAME_UPDATE_TICK,                    
+    AC_GAME_BTN_UP,                         
+    AC_GAME_BTN_DOWN,                       
+    AC_GAME_BTN_MODE,                       
+};
 /*****************************************************************************/
 /* DBG task define
  */
