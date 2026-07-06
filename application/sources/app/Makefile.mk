@@ -1,4 +1,6 @@
 include sources/app/screens/Makefile.mk
+include sources/app/space_shooter/Makefile.mk
+
 
 CFLAGS		+= -I./sources/app
 CPPFLAGS	+= -I./sources/app

@@ -19,7 +19,7 @@ FLASH_BASE_ADDR_VAL = 0x08000000
 NAME_MODULE = ak-base-kit-stm32l151-application
 PROJECT = $(NAME_MODULE)
 
-GCC_PATH			= $(HOME)/Workspace/Tools/gcc-arm-none-eabi-10.3-2021.10
+GCC_PATH			= /usr
 PROGRAMER_PATH		= $(HOME)/workspace/tools/STM32CubeProgrammer/bin
 OPENOCD_CFG_PATH	= /usr/local/share/openocd/scripts/board/stm32ldiscovery.cfg
 
@@ -90,17 +90,17 @@ SOURCES_ASM	+=
 SOURCES_ASM_	 = $(shell find $(SOURCES_ASM) -type f -printf "%f\n")
 OBJECTS		+= $(patsubst %.s, $(OBJECTS_DIR)/%.o, $(SOURCES_ASM_))
 
-LIBC		= $(GCC_PATH)/arm-none-eabi/lib/thumb/v7-m/nofp/libc.a
-LIBM		= $(GCC_PATH)/arm-none-eabi/lib/thumb/v7-m/nofp/libm.a
-LIBFPU		= $(GCC_PATH)/arm-none-eabi/lib/thumb/v7-m/nofp/libg.a
-LIBRDPMON	= $(GCC_PATH)/arm-none-eabi/lib/thumb/v7-m/nofp/librdpmon.a
-LIBSTDCPP_NANO	= $(GCC_PATH)/arm-none-eabi/lib/thumb/v7-m/nofp/libstdc++_nano.a
+LIBC		= $(GCC_PATH)/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a
+LIBM		= $(GCC_PATH)/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libm.a
+LIBFPU		= $(GCC_PATH)/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libg.a
+LIBRDPMON	= $(GCC_PATH)/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/librdpmon.a
+LIBSTDCPP_NANO	= $(GCC_PATH)/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libstdc++_nano.a
 
-LIBGCC		= $(GCC_PATH)/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/libgcc.a
-LIBGCOV		= $(GCC_PATH)/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/libgcov.a
+LIBGCC		= $(GCC_PATH)/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
+LIBGCOV		= $(GCC_PATH)/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcov.a
 
-LIB_PATH += -L$(GCC_PATH)/arm-none-eabi/lib/thumb/v7-m/nofp
-LIB_PATH += -L$(GCC_PATH)/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp
+LIB_PATH += -L$(GCC_PATH)/lib/arm-none-eabi/newlib/thumb/v7-m/nofp
+LIB_PATH += -L$(GCC_PATH)/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp
 
 # The command for calling the compiler.
 CC		=	$(GCC_PATH)/bin/arm-none-eabi-gcc
