@@ -5,22 +5,7 @@
 #include "buzzer.h"
 #include "xprintf.h"
 #include <string.h>
-
-// Define 8x8 bitmaps for menu icons and entities
-static const uint8_t icon_player[8]   = { 0x18, 0x18, 0x3c, 0x3c, 0x5a, 0x99, 0xff, 0xff };
-static const uint8_t icon_enemy1[8]   = { 0x42, 0x24, 0x3c, 0x5a, 0xff, 0xa5, 0x24, 0x42 };
-static const uint8_t bmp_explosion[8] = { 0x42, 0x24, 0x18, 0x99, 0x99, 0x18, 0x24, 0x42 };
-
-static const uint8_t icon_play[8] = { 0x10, 0x18, 0x1c, 0x1e, 0x1e, 0x1c, 0x18, 0x10 };
-static const uint8_t icon_setting[8] = { 0x24, 0x7e, 0xe7, 0xdb, 0xdb, 0xe7, 0x7e, 0x24 };
-static const uint8_t icon_trophy[8] = { 0xff, 0x7e, 0x7e, 0x3c, 0x18, 0x18, 0x3c, 0x7e };
-static const uint8_t icon_menu[8] = { 0x00, 0x7e, 0x00, 0x7e, 0x00, 0x7e, 0x00, 0x00 };
-static const uint8_t icon_heart[8] = { 0x00, 0x66, 0xff, 0xff, 0x7e, 0x3c, 0x18, 0x00 };
-
-static const uint8_t bmp_boss[32] = {
-	0x03, 0xc0, 0x0f, 0xf0, 0x1e, 0x78, 0x39, 0x9c, 0x71, 0x8e, 0x71, 0x8e, 0x71, 0x8e, 0xff, 0xff,
-	0xff, 0xff, 0x71, 0x8e, 0x71, 0x8e, 0x39, 0x9c, 0x1c, 0x38, 0x0c, 0x30, 0x04, 0x20, 0x00, 0x00
-};
+#include "game_bitmaps.h"
 
 void view_scr_game_ui();
 
@@ -140,7 +125,21 @@ static void game_shooter_playing_display() {
 	
 	for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
 		if (g_explosions[ex].active) {
-			view_render.drawBitmap(g_explosions[ex].x, g_explosions[ex].y, bmp_explosion, 8, 8, WHITE);
+			int r = 5 - g_explosions[ex].timer;
+			int cx = g_explosions[ex].x + 4;
+			int cy = g_explosions[ex].y + 4;
+			if (r > 0) {
+				view_render.drawPixel(cx - r, cy - r, WHITE);
+				view_render.drawPixel(cx + r, cy - r, WHITE);
+				view_render.drawPixel(cx - r, cy + r, WHITE);
+				view_render.drawPixel(cx + r, cy + r, WHITE);
+				view_render.drawPixel(cx, cy - r - 1, WHITE);
+				view_render.drawPixel(cx, cy + r + 1, WHITE);
+				view_render.drawPixel(cx - r - 1, cy, WHITE);
+				view_render.drawPixel(cx + r + 1, cy, WHITE);
+			} else {
+				view_render.fillRect(cx - 1, cy - 1, 3, 3, WHITE);
+			}
 		}
 	}
 	for (int i = 0; i < MAX_BULLETS; i++) {
@@ -228,6 +227,14 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 	if (msg->sig == AC_DISPLAY_SHOW_IDLE) {
 		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 50, TIMER_ONE_SHOT);
 		return;
+	}
+
+	if (msg->sig == AC_DISPLAY_BUTON_UP_PRESSED || 
+	    msg->sig == AC_DISPLAY_BUTON_DOWN_PRESSED || 
+	    msg->sig == AC_DISPLAY_BUTON_MODE_PRESSED) {
+		if (g_game_state != GAME_STATE_PLAYING && g_game_data.sound_en) {
+			BUZZER_PlaySound(BUZZER_SOUND_CLICK);
+		}
 	}
 
 	if (msg->sig == AC_DISPLAY_GAME_OVER_NEXT) {

@@ -77,7 +77,6 @@ void game_player_move(int8_t dir) {
 }
 
 void game_player_shoot() {
-	if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_CLICK);
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		if (!g_bullets[i].active) {
 			g_bullets[i].active = true;
@@ -99,7 +98,7 @@ void game_logic_update() {
 			g_bullets[i].x += g_bullets[i].vx;
 			
 			if (g_bullets[i].is_enemy) {
-				g_bullets[i].y += (2 + g_game_data.difficulty);
+				g_bullets[i].y += (1 + g_game_data.difficulty);
 				if (g_bullets[i].y > 64) g_bullets[i].active = false;
 				
 				// Hit player
@@ -110,7 +109,7 @@ void game_logic_update() {
 					if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
 				}
 			} else {
-				g_bullets[i].y -= 3;
+				g_bullets[i].y -= 2;
 				if (g_bullets[i].y < 0) g_bullets[i].active = false;
 				
 				for (int e = 0; e < MAX_ENEMIES; e++) {
