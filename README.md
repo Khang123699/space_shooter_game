@@ -73,3 +73,4 @@ The following section describes the conceptual gameplay and core mechanics of **
   Constantly tracks the player's highest score.
   Saves data persistently to the STM32's non-volatile Flash memory to retain records even after power-off.
 
+(The project is currently under development)
