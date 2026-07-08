@@ -37,6 +37,6 @@ extern void game_player_shoot();
 extern void game_logic_update();
 
 // UI Interfaces
-extern void view_scr_idle();
+extern void view_scr_game_ui();
 
 #endif

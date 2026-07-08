@@ -1,4 +1,4 @@
-#include "scr_idle.h"
+#include "scr_game_ui.h"
 #include "game_shooter.h"
 #include "view_render.h"
 
@@ -7,16 +7,16 @@ static const uint8_t icon_player[8]   = { 0x18, 0x18, 0x3c, 0x3c, 0x5a, 0x99, 0x
 static const uint8_t icon_enemy1[8]   = { 0x42, 0x24, 0x3c, 0x5a, 0xff, 0xa5, 0x24, 0x42 };
 static const uint8_t bmp_explosion[8] = { 0x42, 0x24, 0x18, 0x99, 0x99, 0x18, 0x24, 0x42 };
 
-static void view_scr_idle();
+static void view_scr_game_ui();
 
 view_dynamic_t dyn_view_idle = {
 	{
 		.item_type = ITEM_TYPE_DYNAMIC,
 	},
-	view_scr_idle
+	view_scr_game_ui
 };
 
-view_screen_t scr_idle = {
+view_screen_t scr_game_ui = {
 	&dyn_view_idle,
 	ITEM_NULL,
 	ITEM_NULL,
@@ -24,7 +24,7 @@ view_screen_t scr_idle = {
 	.focus_item = 0,
 };
 
-static void view_scr_idle() {
+static void view_scr_game_ui() {
 	if (g_game_state == GAME_STATE_MENU) {
 		view_render.drawRect(0, 0, 128, 64, WHITE);
 		view_render.setCursor(26, 6);
@@ -52,7 +52,7 @@ static void view_scr_idle() {
 	}
 }
 
-void scr_idle_handle(ak_msg_t *msg) {
+void scr_game_ui_handle(ak_msg_t *msg) {
 	switch (msg->sig) {
 	default:
 		break;

@@ -21,10 +21,10 @@
 #include <vector>
 
 
-// scr_idle
+// scr_game_ui
 extern view_dynamic_t dyn_view_idle;
-extern view_screen_t scr_idle;
-extern void scr_idle_handle(ak_msg_t* msg);
+extern view_screen_t scr_game_ui;
+extern void scr_game_ui_handle(ak_msg_t* msg);
 
 
 // scr_startup
