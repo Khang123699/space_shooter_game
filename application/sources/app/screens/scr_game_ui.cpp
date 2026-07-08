@@ -231,7 +231,7 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 	}
 
 	if (msg->sig == AC_DISPLAY_GAME_OVER_NEXT) {
-		bool new_record = game_update_high_score(g_score);
+		game_update_high_score(g_score);
 		g_game_state = GAME_STATE_GAMEOVER;
 		if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_LOWSCORE);
 		// Automatically transition to SCORE screen after a delay

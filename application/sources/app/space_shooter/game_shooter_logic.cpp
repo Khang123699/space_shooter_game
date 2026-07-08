@@ -77,7 +77,7 @@ void game_player_move(int8_t dir) {
 }
 
 void game_player_shoot() {
-	if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_TICK);
+	if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_CLICK);
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		if (!g_bullets[i].active) {
 			g_bullets[i].active = true;
