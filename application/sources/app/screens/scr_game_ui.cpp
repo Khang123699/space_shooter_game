@@ -3,7 +3,7 @@
 #include "game_save.h"
 #include "view_render.h"
 #include "buzzer.h"
-#include <stdio.h>
+#include "xprintf.h"
 #include <string.h>
 
 // Define 8x8 bitmaps for menu icons and entities
@@ -101,7 +101,7 @@ static void game_shooter_highscore_display() {
 		else view_render.print("3rd: ");
 		
 		char temp_str[12];
-		sprintf(temp_str, "%u", (unsigned int)g_game_data.top_score[i]);
+		xsprintf(temp_str, "%u", (unsigned int)g_game_data.top_score[i]);
 		view_render.print(temp_str);
 	}
 	
@@ -158,13 +158,13 @@ static void game_shooter_playing_display() {
 	view_render.setCursor(2, 2);
 	view_render.print("S:");
 	char temp_sc[12];
-	sprintf(temp_sc, "%u", (unsigned int)g_score);
+	xsprintf(temp_sc, "%u", (unsigned int)g_score);
 	view_render.print(temp_sc);
 	
 	view_render.setCursor(50, 2);
 	view_render.print("L:");
 	char temp_lv[12];
-	sprintf(temp_lv, "%u", (unsigned int)g_stage);
+	xsprintf(temp_lv, "%u", (unsigned int)g_stage);
 	view_render.print(temp_lv);
 	
 	for (int i = 0; i < g_lives; i++) {
@@ -193,7 +193,7 @@ static void game_shooter_score_display() {
 	view_render.print("YOUR SCORE:");
 	view_render.setTextSize(2);
 	char temp_final[12];
-	sprintf(temp_final, "%u", (unsigned int)g_score);
+	xsprintf(temp_final, "%u", (unsigned int)g_score);
 	int16_t w = strlen(temp_final) * 12;
 	view_render.setCursor((128 - w) / 2, 28);
 	view_render.print(temp_final);
