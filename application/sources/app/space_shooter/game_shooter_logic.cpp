@@ -50,7 +50,7 @@ static void spawn_enemies() {
 		g_enemies[e].type = 1 + (rand() % 3); // random type 1, 2, or 3
 		g_enemies[e].hp = g_enemies[e].type + g_game_data.difficulty; // HP based on type
 		g_enemies[e].x = 10 + (e % 5) * 20;
-		g_enemies[e].y = (e / 5) * 12;
+		g_enemies[e].y = 14 + (e / 5) * 12;
 	}
 }
 
