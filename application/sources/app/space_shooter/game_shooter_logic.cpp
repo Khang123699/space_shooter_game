@@ -68,3 +68,72 @@ void game_player_shoot() {
 		}
 	}
 }
+
+// Main game logic loop (50ms tick)
+void game_logic_update() {
+	// 1. Update bullets
+	for (int i = 0; i < MAX_BULLETS; i++) {
+		if (g_bullets[i].active) {
+			g_bullets[i].y -= 3;
+			if (g_bullets[i].y < 0) g_bullets[i].active = false;
+			
+			// Check collision
+			for (int e = 0; e < MAX_ENEMIES; e++) {
+				if (g_enemies[e].active && g_bullets[i].x >= g_enemies[e].x && g_bullets[i].x <= g_enemies[e].x + 8 
+					&& g_bullets[i].y >= g_enemies[e].y && g_bullets[i].y <= g_enemies[e].y + 8) {
+					g_bullets[i].active = false;
+					g_enemies[e].active = false;
+					g_score += 10;
+					BUZZER_PlaySound(BUZZER_SOUND_BANG);
+					
+					// Spawn explosion
+					for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
+						if (!g_explosions[ex].active) {
+							g_explosions[ex].x = g_enemies[e].x;
+							g_explosions[ex].y = g_enemies[e].y;
+							g_explosions[ex].timer = 5;
+							g_explosions[ex].active = true;
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	// 2. Update explosions
+	for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
+		if (g_explosions[ex].active) {
+			g_explosions[ex].timer--;
+			if (g_explosions[ex].timer <= 0) g_explosions[ex].active = false;
+		}
+	}
+	
+	// 3. Next stage
+	bool all_dead = true;
+	for (int e = 0; e < MAX_ENEMIES; e++) {
+		if (g_enemies[e].active) {
+			all_dead = false;
+			break;
+		}
+	}
+	
+	if (all_dead && g_transition_timer == 0) {
+		g_stage++;
+		g_transition_timer = 40; // 2s delay
+	}
+	
+	if (g_transition_timer > 0) {
+		g_transition_timer--;
+		if (g_transition_timer == 0) spawn_enemies();
+	}
+	
+	// 4. Game over
+	if (g_lives <= 0) {
+		timer_remove_attr(AC_TASK_GAME_SHOOTER_ID, AC_GAME_UPDATE_TICK);
+		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_OVER_NEXT);
+	}
+	
+	// Request render
+	task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
+}
