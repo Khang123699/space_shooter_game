@@ -84,6 +84,7 @@ void game_player_shoot() {
 			g_bullets[i].is_enemy = false;
 			g_bullets[i].x = g_player_x + 4;
 			g_bullets[i].y = 52;
+			g_bullets[i].vx = 0;
 			break;
 		}
 	}
@@ -95,6 +96,8 @@ void game_logic_update() {
 	// 1. Update bullets
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		if (g_bullets[i].active) {
+			g_bullets[i].x += g_bullets[i].vx;
+			
 			if (g_bullets[i].is_enemy) {
 				g_bullets[i].y += (2 + g_game_data.difficulty);
 				if (g_bullets[i].y > 64) g_bullets[i].active = false;
@@ -158,20 +161,40 @@ void game_logic_update() {
 			all_dead = false;
 			int ew = (g_enemies[e].type == 4) ? 16 : 8;
 			if (do_move) {
-				g_enemies[e].x += enemy_dir;
+				g_enemies[e].x += (g_enemies[e].type == 4) ? (enemy_dir * 3) : enemy_dir;
 				if (g_enemies[e].x <= 0 || g_enemies[e].x + ew >= 128) hit_edge = true;
 			}
 			
 			// Shoot
 			int shoot_chance = (g_enemies[e].type == 4) ? (10 + g_game_data.difficulty * 5) : (1 + g_game_data.difficulty);
 			if (rand() % 100 < shoot_chance) {
-				for (int i = 0; i < MAX_BULLETS; i++) {
-					if (!g_bullets[i].active) {
-						g_bullets[i].active = true;
-						g_bullets[i].x = g_enemies[e].x + ew / 2;
-						g_bullets[i].y = g_enemies[e].y + 8;
-						g_bullets[i].is_enemy = true;
-						break; // Only spawn one bullet
+				if (g_enemies[e].type == 4) {
+					// Triple shot burst for Boss
+					int bullets_spawned = 0;
+					for (int i = 0; i < MAX_BULLETS && bullets_spawned < 3; i++) {
+						if (!g_bullets[i].active) {
+							g_bullets[i].active = true;
+							g_bullets[i].x = g_enemies[e].x + ew / 2;
+							g_bullets[i].y = g_enemies[e].y + 12;
+							g_bullets[i].is_enemy = true;
+							
+							if (bullets_spawned == 0) g_bullets[i].vx = 0;
+							else if (bullets_spawned == 1) g_bullets[i].vx = -1;
+							else if (bullets_spawned == 2) g_bullets[i].vx = 1;
+							
+							bullets_spawned++;
+						}
+					}
+				} else {
+					for (int i = 0; i < MAX_BULLETS; i++) {
+						if (!g_bullets[i].active) {
+							g_bullets[i].active = true;
+							g_bullets[i].x = g_enemies[e].x + ew / 2;
+							g_bullets[i].y = g_enemies[e].y + 8;
+							g_bullets[i].is_enemy = true;
+							g_bullets[i].vx = 0;
+							break;
+						}
 					}
 				}
 			}

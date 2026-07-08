@@ -7,7 +7,13 @@
 #define MAX_BULLETS 20
 #define MAX_EXPLOSIONS 5
 
-typedef struct { int8_t x, y; bool active, is_enemy; } bullet_t;
+typedef struct {
+	int16_t x;
+	int16_t y;
+	int8_t vx;
+	bool active;
+	bool is_enemy;
+} bullet_t;
 typedef struct { int8_t x, y; int8_t hp; uint8_t type; bool active; } enemy_t;
 typedef struct { int8_t x, y; int8_t timer; bool active; } explosion_t;
 
