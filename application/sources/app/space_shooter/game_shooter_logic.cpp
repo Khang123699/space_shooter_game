@@ -19,7 +19,11 @@ game_state_t g_game_state = GAME_STATE_MENU;
 int16_t g_player_x = 60;
 uint8_t g_player_blink = 0;
 uint32_t g_score = 0;
-int8_t g_lives = 3;
+uint8_t g_lives = 3;
+
+static uint8_t g_shoot_cooldown = 0;
+static uint16_t g_tick_count = 0;
+
 enemy_t g_enemies[MAX_ENEMIES];
 bullet_t g_bullets[MAX_BULLETS];
 explosion_t g_explosions[MAX_EXPLOSIONS];
@@ -77,6 +81,8 @@ void game_player_move(int8_t dir) {
 }
 
 void game_player_shoot() {
+	if (g_shoot_cooldown > 0) return;
+	
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		if (!g_bullets[i].active) {
 			g_bullets[i].active = true;
@@ -84,6 +90,7 @@ void game_player_shoot() {
 			g_bullets[i].x = g_player_x + 4;
 			g_bullets[i].y = 52;
 			g_bullets[i].vx = 0;
+			g_shoot_cooldown = 10; // Cooldown of 10 ticks
 			break;
 		}
 	}
@@ -91,6 +98,8 @@ void game_player_shoot() {
 
 void game_logic_update() {
 	if (g_player_blink > 0) g_player_blink--;
+	if (g_shoot_cooldown > 0) g_shoot_cooldown--;
+	g_tick_count++;
 
 	// 1. Update bullets
 	for (int i = 0; i < MAX_BULLETS; i++) {
@@ -98,7 +107,16 @@ void game_logic_update() {
 			g_bullets[i].x += g_bullets[i].vx;
 			
 			if (g_bullets[i].is_enemy) {
-				g_bullets[i].y += (1 + g_game_data.difficulty);
+				// Base speed: move every tick. Slower speeds can be achieved by skipping ticks.
+				// Speed 1: move 1 pixel every 2 ticks (for EASY)
+				// Speed 2: move 1 pixel every 1 tick (for NORMAL)
+				// Speed 3: move 2 pixels every 1 tick (for HARD)
+				int drop = 0;
+				if (g_game_data.difficulty == 0 && (g_tick_count % 2 == 0)) drop = 1;
+				else if (g_game_data.difficulty == 1) drop = 1;
+				else if (g_game_data.difficulty == 2) drop = 2;
+				
+				g_bullets[i].y += drop;
 				if (g_bullets[i].y > 64) g_bullets[i].active = false;
 				
 				// Hit player

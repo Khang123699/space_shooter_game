@@ -41,7 +41,7 @@ extern uint8_t g_gameover_anim_frame;
 extern int16_t g_player_x;
 extern uint8_t g_player_blink;
 extern uint32_t g_score;
-extern int8_t g_lives;
+extern uint8_t g_lives;
 extern enemy_t g_enemies[];
 extern bullet_t g_bullets[];
 extern explosion_t g_explosions[];
