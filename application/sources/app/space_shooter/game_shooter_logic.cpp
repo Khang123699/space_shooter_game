@@ -82,7 +82,7 @@ void game_player_shoot() {
 			g_bullets[i].x = g_player_x + 4;
 			g_bullets[i].y = 52;
 			g_bullets[i].vx = 0;
-			g_shoot_cooldown = 10; // Cooldown of 10 ticks
+			g_shoot_cooldown = 3; // Cooldown of 5 ticks (faster fire rate)
 			break;
 		}
 	}
@@ -99,14 +99,10 @@ void game_logic_update() {
 			g_bullets[i].x += g_bullets[i].vx;
 			
 			if (g_bullets[i].is_enemy) {
-				// Base speed: move every tick. Slower speeds can be achieved by skipping ticks.
-				// Speed 1: move 1 pixel every 2 ticks (for EASY)
-				// Speed 2: move 1 pixel every 1 tick (for NORMAL)
-				// Speed 3: move 2 pixels every 1 tick (for HARD)
 				int drop = 0;
-				if (g_game_data.difficulty == 0 && (g_tick_count % 2 == 0)) drop = 1;
-				else if (g_game_data.difficulty == 1) drop = 1;
-				else if (g_game_data.difficulty == 2) drop = 2;
+				if (g_game_data.difficulty == 0) drop = 1;
+				else if (g_game_data.difficulty == 1) drop = 2;
+				else if (g_game_data.difficulty == 2) drop = 3;
 				
 				g_bullets[i].y += drop;
 				if (g_bullets[i].y > 64) g_bullets[i].active = false;
@@ -176,7 +172,7 @@ void game_logic_update() {
 			
 			// Shoot
 			int shoot_chance = (g_enemies[e].type == 4) ? (10 + g_game_data.difficulty * 5) : (1 + g_game_data.difficulty);
-			if (rand() % 100 < shoot_chance) {
+			if (rand() % 400 < shoot_chance) {
 				if (g_enemies[e].type == 4) {
 					// Triple shot burst for Boss
 					int bullets_spawned = 0;
