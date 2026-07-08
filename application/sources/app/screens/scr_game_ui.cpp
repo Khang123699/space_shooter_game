@@ -7,7 +7,7 @@ static const uint8_t icon_player[8]   = { 0x18, 0x18, 0x3c, 0x3c, 0x5a, 0x99, 0x
 static const uint8_t icon_enemy1[8]   = { 0x42, 0x24, 0x3c, 0x5a, 0xff, 0xa5, 0x24, 0x42 };
 static const uint8_t bmp_explosion[8] = { 0x42, 0x24, 0x18, 0x99, 0x99, 0x18, 0x24, 0x42 };
 
-static void view_scr_game_ui();
+void view_scr_game_ui();
 
 view_dynamic_t dyn_view_idle = {
 	{
@@ -24,7 +24,7 @@ view_screen_t scr_game_ui = {
 	.focus_item = 0,
 };
 
-static void view_scr_game_ui() {
+void view_scr_game_ui() {
 	if (g_game_state == GAME_STATE_MENU) {
 		view_render.drawRect(0, 0, 128, 64, WHITE);
 		view_render.setCursor(26, 6);
