@@ -48,3 +48,23 @@ void game_logic_init() {
 	memset(g_explosions, 0, sizeof(g_explosions));
 	spawn_enemies();
 }
+
+// Move the player horizontally
+void game_player_move(int8_t dir) {
+	g_player_x += dir;
+	if (g_player_x < 0) g_player_x = 0;
+	if (g_player_x > 120) g_player_x = 120;
+}
+
+// Spawn a bullet from the player's position
+void game_player_shoot() {
+	for (int i = 0; i < MAX_BULLETS; i++) {
+		// Find the first inactive bullet in the array
+		if (!g_bullets[i].active) {
+			g_bullets[i].active = true;
+			g_bullets[i].x = g_player_x + 4;
+			g_bullets[i].y = 52;
+			break;
+		}
+	}
+}
