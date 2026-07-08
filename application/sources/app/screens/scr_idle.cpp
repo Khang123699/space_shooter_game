@@ -1,78 +1,11 @@
 #include "scr_idle.h"
+#include "game_shooter.h"
+#include "view_render.h"
 
-using namespace std;
-
-#define MAX_BALL_DISPLAY (16)
-#define BALL_MOVE_STEP	 (2)
-
-class ball {
-	// rand from a to b
-	// (rand() % (b - a + 1)) + a
-public:
-	static int total;
-	int id, x, y, slope, axis_x, axis_y, radius;
-
-	ball() {
-		axis_x = 1;
-		axis_y = 1;
-		slope  = (rand() % (31)) - 15;
-		radius = (rand() % (7)) + 6;
-		x	   = radius + (rand() % (LCD_WIDTH - 2 * radius));
-		y	   = radius + (rand() % (LCD_HEIGHT - 2 * radius));
-	}
-
-	int distance(ball &__ball) {
-		uint8_t dx, dy;
-		dx = abs(x - __ball.x);
-		dy = abs(y - __ball.y);
-		return sqrt(dx * dx + dy * dy);
-	}
-
-	bool is_hit_to_other(ball &__ball) {
-		if ((radius + __ball.radius) <= distance(__ball)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	void moving() {
-		if (axis_x > 0) {
-			x = x + BALL_MOVE_STEP;
-		}
-		else {
-			x = x - BALL_MOVE_STEP;
-		}
-
-		if (axis_y > 0) {
-			y += BALL_MOVE_STEP * atan(slope);
-		}
-		else {
-			y -= BALL_MOVE_STEP * atan(slope);
-		}
-
-		if (x > ((LCD_WIDTH - 1) - radius) || x < radius) {
-			axis_x = -axis_x;
-			if (x < radius) {
-				x = radius;
-			}
-			else if (x > ((LCD_WIDTH - 1) - radius)) {
-				x = (LCD_WIDTH - 1) - radius;
-			}
-		}
-
-		if (y > ((LCD_HEIGHT - 1) - radius) || y < radius) {
-			axis_y = -axis_y;
-			if (y < radius) {
-				y = radius;
-			}
-			else if (y > ((LCD_HEIGHT - 1) - radius)) {
-				y = (LCD_HEIGHT - 1) - radius;
-			}
-		}
-	}
-};
+// Define 8x8 bitmaps for menu icons and entities
+static const uint8_t icon_player[8]   = { 0x18, 0x18, 0x3c, 0x3c, 0x5a, 0x99, 0xff, 0xff };
+static const uint8_t icon_enemy1[8]   = { 0x42, 0x24, 0x3c, 0x5a, 0xff, 0xa5, 0x24, 0x42 };
+static const uint8_t bmp_explosion[8] = { 0x42, 0x24, 0x18, 0x99, 0x99, 0x18, 0x24, 0x42 };
 
 static void view_scr_idle();
 
@@ -91,81 +24,36 @@ view_screen_t scr_idle = {
 	.focus_item = 0,
 };
 
-vector<ball> v_idle_ball;
-int ball::total;
-
-static void scr_idle_return_screen() {
-	timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE_BALL_MOVING_UPDATE);
-	SCREEN_BACK();
-}
-
-void view_scr_idle() {
-	for (ball _ball : v_idle_ball) {
-		view_render.drawCircle(_ball.x, _ball.y, _ball.radius, 144);
+static void view_scr_idle() {
+	if (g_game_state == GAME_STATE_MENU) {
+		view_render.drawRect(0, 0, 128, 64, WHITE);
+		view_render.setCursor(26, 6);
+		view_render.print("SHOOTER GAME");
+	} 
+	else if (g_game_state == GAME_STATE_PLAYING) {
+		if (g_player_blink % 2 == 0) {
+			view_render.drawBitmap(g_player_x, 54, icon_player, 8, 8, WHITE);
+		}
+		for (int e = 0; e < MAX_ENEMIES; e++) {
+			if (g_enemies[e].active) {
+				view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon_enemy1, 8, 8, WHITE);
+			}
+		}
+		for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
+			if (g_explosions[ex].active) {
+				view_render.drawBitmap(g_explosions[ex].x, g_explosions[ex].y, bmp_explosion, 8, 8, WHITE);
+			}
+		}
+		if (g_transition_timer > 0) {
+			view_render.setCursor(40, 28);
+			view_render.print("STAGE ");
+			view_render.print(g_stage);
+		}
 	}
 }
 
 void scr_idle_handle(ak_msg_t *msg) {
 	switch (msg->sig) {
-	case SCREEN_ENTRY: {
-		APP_DBG_SIG("SCREEN_ENTRY\n");
-		if (v_idle_ball.empty()) {
-			ball new_ball;
-			new_ball.id = ball::total++;
-			v_idle_ball.push_back(new_ball);
-		}
-
-		timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE);
-
-		timer_set(AC_TASK_DISPLAY_ID, \
-				  AC_DISPLAY_SHOW_IDLE_BALL_MOVING_UPDATE, \
-				  AC_DISPLAY_SHOW_IDLE_BALL_MOVING_UPDATE_INTERAL, \
-				  TIMER_PERIODIC);
-	} break;
-
-	case AC_DISPLAY_SHOW_IDLE_BALL_MOVING_UPDATE: {
-		for (unsigned int i = 0; i < v_idle_ball.size(); i++) {
-			v_idle_ball[i].moving();
-		}
-	} break;
-
-	case AC_DISPLAY_BUTON_MODE_PRESSED: {
-		APP_DBG_SIG("AC_DISPLAY_BUTON_MODE_PRESSED\n");
-		scr_idle_return_screen();
-	} break;
-
-	case AC_DISPLAY_BUTON_UP_PRESSED: {
-		APP_DBG_SIG("AC_DISPLAY_BUTON_UP_PRESSED\n");
-		ball new_ball;
-		new_ball.id = ball::total++;
-
-		if (v_idle_ball.empty()) {
-			timer_set(AC_TASK_DISPLAY_ID, \
-					  AC_DISPLAY_SHOW_IDLE_BALL_MOVING_UPDATE, \
-					  AC_DISPLAY_SHOW_IDLE_BALL_MOVING_UPDATE_INTERAL, \
-					  TIMER_PERIODIC);
-		}
-
-		if (v_idle_ball.size() < MAX_BALL_DISPLAY) {
-			v_idle_ball.push_back(new_ball);
-		}
-		else {
-			BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
-		}
-	} break;
-
-	case AC_DISPLAY_BUTON_DOWN_PRESSED: {
-		APP_DBG_SIG("AC_DISPLAY_BUTON_DOWN_PRESSED\n");
-		if (v_idle_ball.size()) {
-			ball::total--;
-			v_idle_ball.pop_back();
-		}
-
-		if (v_idle_ball.empty()) {
-			scr_idle_return_screen();
-		}
-	} break;
-
 	default:
 		break;
 	}
