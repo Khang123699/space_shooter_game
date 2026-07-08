@@ -3218,7 +3218,7 @@ Linker script and memory map
                 0x08003000                isr_vector
                 0x080030f4                        . = ALIGN (0x4)
 
-.text           0x080030f8     0xccc0
+.text           0x080030f8     0xccc8
                 0x080030f8                        . = ALIGN (0x4)
  *(.text)
  .text          0x080030f8       0x48 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
@@ -4179,768 +4179,768 @@ Linker script and memory map
                 0x08009d70       0x44 build_ak-base-kit-stm32l151-application/scr_game_ui.o
                 0x08009d70                scr_game_ui_handle(ak_msg_t*)
  .text._Z16view_scr_game_uiv
-                0x08009db4      0x114 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+                0x08009db4      0x11c build_ak-base-kit-stm32l151-application/scr_game_ui.o
                 0x08009db4                view_scr_game_ui()
  .text._ZL16view_scr_startupv
-                0x08009ec8       0x90 build_ak-base-kit-stm32l151-application/scr_startup.o
+                0x08009ed0       0x90 build_ak-base-kit-stm32l151-application/scr_startup.o
  .text._Z18scr_startup_handleP8ak_msg_t
-                0x08009f58       0x7c build_ak-base-kit-stm32l151-application/scr_startup.o
-                0x08009f58                scr_startup_handle(ak_msg_t*)
+                0x08009f60       0x7c build_ak-base-kit-stm32l151-application/scr_startup.o
+                0x08009f60                scr_startup_handle(ak_msg_t*)
  .text._ZL13spawn_enemiesv
-                0x08009fd4       0x60 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+                0x08009fdc       0x60 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
  .text._Z15game_logic_initv
-                0x0800a034       0x58 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
-                0x0800a034                game_logic_init()
+                0x0800a03c       0x58 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+                0x0800a03c                game_logic_init()
  .text._Z16game_player_movea
-                0x0800a08c       0x1c build_ak-base-kit-stm32l151-application/game_shooter_logic.o
-                0x0800a08c                game_player_move(signed char)
+                0x0800a094       0x1c build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+                0x0800a094                game_player_move(signed char)
  .text._Z17game_player_shootv
-                0x0800a0a8       0x38 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
-                0x0800a0a8                game_player_shoot()
+                0x0800a0b0       0x38 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+                0x0800a0b0                game_player_shoot()
  .text._Z17game_logic_updatev
-                0x0800a0e0      0x150 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
-                0x0800a0e0                game_logic_update()
+                0x0800a0e8      0x150 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+                0x0800a0e8                game_logic_update()
  .text._Z17game_shooter_taskP8ak_msg_t
-                0x0800a230       0x4a build_ak-base-kit-stm32l151-application/game_shooter_task.o
-                0x0800a230                game_shooter_task(ak_msg_t*)
- *fill*         0x0800a27a        0x2 
+                0x0800a238       0x4a build_ak-base-kit-stm32l151-application/game_shooter_task.o
+                0x0800a238                game_shooter_task(ak_msg_t*)
+ *fill*         0x0800a282        0x2 
  .text._Z11task_systemP8ak_msg_t
-                0x0800a27c       0x44 build_ak-base-kit-stm32l151-application/task_system.o
-                0x0800a27c                task_system(ak_msg_t*)
+                0x0800a284       0x44 build_ak-base-kit-stm32l151-application/task_system.o
+                0x0800a284                task_system(ak_msg_t*)
  .text.main_app
-                0x0800a2c0      0x290 build_ak-base-kit-stm32l151-application/app.o
-                0x0800a2c0                main_app
+                0x0800a2c8      0x290 build_ak-base-kit-stm32l151-application/app.o
+                0x0800a2c8                main_app
  .text._Z19task_polling_zigbeev
-                0x0800a550        0x2 build_ak-base-kit-stm32l151-application/app.o
-                0x0800a550                task_polling_zigbee()
- *fill*         0x0800a552        0x2 
+                0x0800a558        0x2 build_ak-base-kit-stm32l151-application/app.o
+                0x0800a558                task_polling_zigbee()
+ *fill*         0x0800a55a        0x2 
  .text._Z20task_polling_consolev
-                0x0800a554       0xd4 build_ak-base-kit-stm32l151-application/app.o
-                0x0800a554                task_polling_console()
+                0x0800a55c       0xd4 build_ak-base-kit-stm32l151-application/app.o
+                0x0800a55c                task_polling_console()
  .text.sys_irq_timer_10ms
-                0x0800a628       0x24 build_ak-base-kit-stm32l151-application/app.o
-                0x0800a628                sys_irq_timer_10ms
+                0x0800a630       0x24 build_ak-base-kit-stm32l151-application/app.o
+                0x0800a630                sys_irq_timer_10ms
  .text._Z17btn_mode_callbackPv
-                0x0800a64c       0x40 build_ak-base-kit-stm32l151-application/app_bsp.o
-                0x0800a64c                btn_mode_callback(void*)
+                0x0800a654       0x40 build_ak-base-kit-stm32l151-application/app_bsp.o
+                0x0800a654                btn_mode_callback(void*)
  .text._Z15btn_up_callbackPv
-                0x0800a68c       0x40 build_ak-base-kit-stm32l151-application/app_bsp.o
-                0x0800a68c                btn_up_callback(void*)
+                0x0800a694       0x40 build_ak-base-kit-stm32l151-application/app_bsp.o
+                0x0800a694                btn_up_callback(void*)
  .text._Z17btn_down_callbackPv
-                0x0800a6cc       0x40 build_ak-base-kit-stm32l151-application/app_bsp.o
-                0x0800a6cc                btn_down_callback(void*)
+                0x0800a6d4       0x40 build_ak-base-kit-stm32l151-application/app_bsp.o
+                0x0800a6d4                btn_down_callback(void*)
  .text._Z22updateDataModbusDeviceP21ModbusDeviceStructure
-                0x0800a70c       0xc4 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
-                0x0800a70c                updateDataModbusDevice(ModbusDeviceStructure*)
+                0x0800a714       0xc4 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+                0x0800a714                updateDataModbusDevice(ModbusDeviceStructure*)
  .text._ZL19str_parser_get_attrh
-                0x0800a7d0       0x1c build_ak-base-kit-stm32l151-application/shell.o
+                0x0800a7d8       0x1c build_ak-base-kit-stm32l151-application/shell.o
  .text._Z9shell_sttPh
-                0x0800a7ec        0x4 build_ak-base-kit-stm32l151-application/shell.o
-                0x0800a7ec                shell_stt(unsigned char*)
+                0x0800a7f4        0x4 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800a7f4                shell_stt(unsigned char*)
  .text._Z9shell_psvPh
-                0x0800a7f0       0x14 build_ak-base-kit-stm32l151-application/shell.o
-                0x0800a7f0                shell_psv(unsigned char*)
+                0x0800a7f8       0x14 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800a7f8                shell_psv(unsigned char*)
  .text._Z11shell_resetPh
-                0x0800a804       0x10 build_ak-base-kit-stm32l151-application/shell.o
-                0x0800a804                shell_reset(unsigned char*)
+                0x0800a80c       0x10 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800a80c                shell_reset(unsigned char*)
  .text._Z10shell_helpPh
-                0x0800a814       0x2c build_ak-base-kit-stm32l151-application/shell.o
-                0x0800a814                shell_help(unsigned char*)
+                0x0800a81c       0x2c build_ak-base-kit-stm32l151-application/shell.o
+                0x0800a81c                shell_help(unsigned char*)
  .text._Z9shell_verPh
-                0x0800a840      0x118 build_ak-base-kit-stm32l151-application/shell.o
-                0x0800a840                shell_ver(unsigned char*)
+                0x0800a848      0x118 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800a848                shell_ver(unsigned char*)
  .text._Z12shell_rebootPh
-                0x0800a958       0x10 build_ak-base-kit-stm32l151-application/shell.o
-                0x0800a958                shell_reboot(unsigned char*)
+                0x0800a960       0x10 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800a960                shell_reboot(unsigned char*)
  .text._ZL10str_parserPc
-                0x0800a968       0x60 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800a970       0x60 build_ak-base-kit-stm32l151-application/shell.o
  .text._Z11shell_fatalPh
-                0x0800a9c8      0x2e4 build_ak-base-kit-stm32l151-application/shell.o
-                0x0800a9c8                shell_fatal(unsigned char*)
+                0x0800a9d0      0x2e4 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800a9d0                shell_fatal(unsigned char*)
  .text._Z11shell_flashPh
-                0x0800acac      0x148 build_ak-base-kit-stm32l151-application/shell.o
-                0x0800acac                shell_flash(unsigned char*)
+                0x0800acb4      0x148 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800acb4                shell_flash(unsigned char*)
  .text._Z9shell_epsPh
-                0x0800adf4       0xc8 build_ak-base-kit-stm32l151-application/shell.o
-                0x0800adf4                shell_eps(unsigned char*)
+                0x0800adfc       0xc8 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800adfc                shell_eps(unsigned char*)
  .text._Z9shell_ramPh
-                0x0800aebc      0x1fc build_ak-base-kit-stm32l151-application/shell.o
-                0x0800aebc                shell_ram(unsigned char*)
+                0x0800aec4      0x1fc build_ak-base-kit-stm32l151-application/shell.o
+                0x0800aec4                shell_ram(unsigned char*)
  .text._Z10shell_bootPh
-                0x0800b0b8       0xdc build_ak-base-kit-stm32l151-application/shell.o
-                0x0800b0b8                shell_boot(unsigned char*)
+                0x0800b0c0       0xdc build_ak-base-kit-stm32l151-application/shell.o
+                0x0800b0c0                shell_boot(unsigned char*)
  .text._Z9shell_fwuPh
-                0x0800b194       0x34 build_ak-base-kit-stm32l151-application/shell.o
-                0x0800b194                shell_fwu(unsigned char*)
+                0x0800b19c       0x34 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800b19c                shell_fwu(unsigned char*)
  .text._Z12shell_buzzerPh
-                0x0800b1c8       0x78 build_ak-base-kit-stm32l151-application/shell.o
-                0x0800b1c8                shell_buzzer(unsigned char*)
+                0x0800b1d0       0x78 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800b1d0                shell_buzzer(unsigned char*)
  .text._Z9shell_dbgPh
-                0x0800b240       0x3c build_ak-base-kit-stm32l151-application/shell.o
-                0x0800b240                shell_dbg(unsigned char*)
+                0x0800b248       0x3c build_ak-base-kit-stm32l151-application/shell.o
+                0x0800b248                shell_dbg(unsigned char*)
  .text._Z12shell_modbusPh
-                0x0800b27c       0xd0 build_ak-base-kit-stm32l151-application/shell.o
-                0x0800b27c                shell_modbus(unsigned char*)
+                0x0800b284       0xd0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800b284                shell_modbus(unsigned char*)
  .text._Z9shell_epiPh
-                0x0800b34c        0x4 build_ak-base-kit-stm32l151-application/shell.o
-                0x0800b34c                shell_epi(unsigned char*)
+                0x0800b354        0x4 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800b354                shell_epi(unsigned char*)
  .text._Z9shell_lcdPh
-                0x0800b350      0x1cc build_ak-base-kit-stm32l151-application/shell.o
-                0x0800b350                shell_lcd(unsigned char*)
+                0x0800b358      0x1cc build_ak-base-kit-stm32l151-application/shell.o
+                0x0800b358                shell_lcd(unsigned char*)
  .text.sys_irq_shell
-                0x0800b51c       0x2c build_ak-base-kit-stm32l151-application/task_shell.o
-                0x0800b51c                sys_irq_shell
+                0x0800b524       0x2c build_ak-base-kit-stm32l151-application/task_shell.o
+                0x0800b524                sys_irq_shell
  .text._Z10task_shellP8ak_msg_t
-                0x0800b548       0x7c build_ak-base-kit-stm32l151-application/task_shell.o
-                0x0800b548                task_shell(ak_msg_t*)
+                0x0800b550       0x7c build_ak-base-kit-stm32l151-application/task_shell.o
+                0x0800b550                task_shell(ak_msg_t*)
  .text._Z9task_lifeP8ak_msg_t
-                0x0800b5c4       0x20 build_ak-base-kit-stm32l151-application/task_life.o
-                0x0800b5c4                task_life(ak_msg_t*)
+                0x0800b5cc       0x20 build_ak-base-kit-stm32l151-application/task_life.o
+                0x0800b5cc                task_life(ak_msg_t*)
  .text._Z7task_fwP8ak_msg_t
-                0x0800b5e4      0x490 build_ak-base-kit-stm32l151-application/task_fw.o
-                0x0800b5e4                task_fw(ak_msg_t*)
+                0x0800b5ec      0x490 build_ak-base-kit-stm32l151-application/task_fw.o
+                0x0800b5ec                task_fw(ak_msg_t*)
  .text._Z12task_displayP8ak_msg_t
-                0x0800ba74        0x4 build_ak-base-kit-stm32l151-application/task_display.o
-                0x0800ba74                task_display(ak_msg_t*)
+                0x0800ba7c        0x4 build_ak-base-kit-stm32l151-application/task_display.o
+                0x0800ba7c                task_display(ak_msg_t*)
  .text._Z7task_ifP8ak_msg_t
-                0x0800ba78       0xe4 build_ak-base-kit-stm32l151-application/task_if.o
-                0x0800ba78                task_if(ak_msg_t*)
+                0x0800ba80       0xe4 build_ak-base-kit-stm32l151-application/task_if.o
+                0x0800ba80                task_if(ak_msg_t*)
  .text._Z12task_rf24_ifP8ak_msg_t
-                0x0800bb5c        0x2 build_ak-base-kit-stm32l151-application/task_rf24_if.o
-                0x0800bb5c                task_rf24_if(ak_msg_t*)
- *fill*         0x0800bb5e        0x2 
+                0x0800bb64        0x2 build_ak-base-kit-stm32l151-application/task_rf24_if.o
+                0x0800bb64                task_rf24_if(ak_msg_t*)
+ *fill*         0x0800bb66        0x2 
  .text._Z12task_uart_ifP8ak_msg_t
-                0x0800bb60       0xc4 build_ak-base-kit-stm32l151-application/task_uart_if.o
-                0x0800bb60                task_uart_if(ak_msg_t*)
+                0x0800bb68       0xc4 build_ak-base-kit-stm32l151-application/task_uart_if.o
+                0x0800bb68                task_uart_if(ak_msg_t*)
  .text._Z8task_dbgP8ak_msg_t
-                0x0800bc24        0x2 build_ak-base-kit-stm32l151-application/task_dbg.o
-                0x0800bc24                task_dbg(ak_msg_t*)
+                0x0800bc2c        0x2 build_ak-base-kit-stm32l151-application/task_dbg.o
+                0x0800bc2c                task_dbg(ak_msg_t*)
  .text._ZL19view_render_dynamicPv
-                0x0800bc26        0xa build_ak-base-kit-stm32l151-application/view_render.o
+                0x0800bc2e        0xa build_ak-base-kit-stm32l151-application/view_render.o
  .text._Z22view_render_display_onv
-                0x0800bc30        0xc build_ak-base-kit-stm32l151-application/view_render.o
-                0x0800bc30                view_render_display_on()
+                0x0800bc38        0xc build_ak-base-kit-stm32l151-application/view_render.o
+                0x0800bc38                view_render_display_on()
  .text.startup._GLOBAL__sub_I_view_render
-                0x0800bc3c        0xc build_ak-base-kit-stm32l151-application/view_render.o
+                0x0800bc44        0xc build_ak-base-kit-stm32l151-application/view_render.o
  .text.exit._GLOBAL__sub_D_view_render
-                0x0800bc48        0xc build_ak-base-kit-stm32l151-application/view_render.o
+                0x0800bc50        0xc build_ak-base-kit-stm32l151-application/view_render.o
  .text._Z18view_render_screenP13view_screen_t
-                0x0800bc54       0x68 build_ak-base-kit-stm32l151-application/view_render.o
-                0x0800bc54                view_render_screen(view_screen_t*)
+                0x0800bc5c       0x68 build_ak-base-kit-stm32l151-application/view_render.o
+                0x0800bc5c                view_render_screen(view_screen_t*)
  .text._ZL21view_render_rectanglePv
-                0x0800bcbc       0xe8 build_ak-base-kit-stm32l151-application/view_render.o
+                0x0800bcc4       0xe8 build_ak-base-kit-stm32l151-application/view_render.o
  .text._Z12scr_mng_ctorP9scr_mng_tPFvP8ak_msg_tEP13view_screen_t
-                0x0800bda4       0x30 build_ak-base-kit-stm32l151-application/screen_manager.o
-                0x0800bda4                scr_mng_ctor(scr_mng_t*, void (*)(ak_msg_t*), view_screen_t*)
+                0x0800bdac       0x30 build_ak-base-kit-stm32l151-application/screen_manager.o
+                0x0800bdac                scr_mng_ctor(scr_mng_t*, void (*)(ak_msg_t*), view_screen_t*)
  .text._Z16scr_mng_dispatchP8ak_msg_t
-                0x0800bdd4       0x6c build_ak-base-kit-stm32l151-application/screen_manager.o
-                0x0800bdd4                scr_mng_dispatch(ak_msg_t*)
+                0x0800bddc       0x6c build_ak-base-kit-stm32l151-application/screen_manager.o
+                0x0800bddc                scr_mng_dispatch(ak_msg_t*)
  .text._Z12scr_mng_tranPFvP8ak_msg_tEP13view_screen_t
-                0x0800be40       0x50 build_ak-base-kit-stm32l151-application/screen_manager.o
-                0x0800be40                scr_mng_tran(void (*)(ak_msg_t*), view_screen_t*)
+                0x0800be48       0x50 build_ak-base-kit-stm32l151-application/screen_manager.o
+                0x0800be48                scr_mng_tran(void (*)(ak_msg_t*), view_screen_t*)
  .text._ZN12Adafruit_GFX8drawLineEsssst
-                0x0800be90       0xca build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800be90                Adafruit_GFX::drawLine(short, short, short, short, unsigned short)
+                0x0800be98       0xca build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800be98                Adafruit_GFX::drawLine(short, short, short, short, unsigned short)
  .text._ZN12Adafruit_GFX8drawRectEsssst
-                0x0800bf5a       0x68 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800bf5a                Adafruit_GFX::drawRect(short, short, short, short, unsigned short)
+                0x0800bf62       0x68 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800bf62                Adafruit_GFX::drawRect(short, short, short, short, unsigned short)
  .text._ZN12Adafruit_GFX13drawFastVLineEssst
-                0x0800bfc2       0x1c build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800bfc2                Adafruit_GFX::drawFastVLine(short, short, short, unsigned short)
+                0x0800bfca       0x1c build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800bfca                Adafruit_GFX::drawFastVLine(short, short, short, unsigned short)
  .text._ZN12Adafruit_GFX13drawFastHLineEssst
-                0x0800bfde       0x1a build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800bfde                Adafruit_GFX::drawFastHLine(short, short, short, unsigned short)
+                0x0800bfe6       0x1a build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800bfe6                Adafruit_GFX::drawFastHLine(short, short, short, unsigned short)
  .text._ZN12Adafruit_GFX8fillRectEsssst
-                0x0800bff8       0x38 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800bff8                Adafruit_GFX::fillRect(short, short, short, short, unsigned short)
+                0x0800c000       0x38 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800c000                Adafruit_GFX::fillRect(short, short, short, short, unsigned short)
  .text._ZN12Adafruit_GFX10fillScreenEt
-                0x0800c030       0x1c build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800c030                Adafruit_GFX::fillScreen(unsigned short)
+                0x0800c038       0x1c build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800c038                Adafruit_GFX::fillScreen(unsigned short)
  .text._ZN12Adafruit_GFXC2Ess
-                0x0800c04c       0x28 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800c04c                Adafruit_GFX::Adafruit_GFX(short, short)
-                0x0800c04c                Adafruit_GFX::Adafruit_GFX(short, short)
+                0x0800c054       0x28 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800c054                Adafruit_GFX::Adafruit_GFX(short, short)
+                0x0800c054                Adafruit_GFX::Adafruit_GFX(short, short)
  .text._ZN12Adafruit_GFX10drawBitmapEssPKhsst
-                0x0800c074       0x82 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800c074                Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)
- *fill*         0x0800c0f6        0x2 
+                0x0800c07c       0x82 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800c07c                Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)
+ *fill*         0x0800c0fe        0x2 
  .text._ZN12Adafruit_GFX8drawCharEsshtth
-                0x0800c0f8      0x110 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800c0f8                Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char)
+                0x0800c100      0x110 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800c100                Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char)
  .text._ZN12Adafruit_GFX5writeEh
-                0x0800c208       0x60 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800c208                Adafruit_GFX::write(unsigned char)
+                0x0800c210       0x60 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800c210                Adafruit_GFX::write(unsigned char)
  .text._ZN12Adafruit_GFX9setCursorEss
-                0x0800c268        0x6 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800c268                Adafruit_GFX::setCursor(short, short)
+                0x0800c270        0x6 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800c270                Adafruit_GFX::setCursor(short, short)
  .text._ZN12Adafruit_GFX11setTextSizeEh
-                0x0800c26e        0xa build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800c26e                Adafruit_GFX::setTextSize(unsigned char)
+                0x0800c276        0xa build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800c276                Adafruit_GFX::setTextSize(unsigned char)
  .text._ZN12Adafruit_GFX12setTextColorEt
-                0x0800c278        0x6 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800c278                Adafruit_GFX::setTextColor(unsigned short)
+                0x0800c280        0x6 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800c280                Adafruit_GFX::setTextColor(unsigned short)
  .text._ZN12Adafruit_GFX5widthEv
-                0x0800c27e        0x6 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800c27e                Adafruit_GFX::width()
+                0x0800c286        0x6 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800c286                Adafruit_GFX::width()
  .text._ZN12Adafruit_GFX6heightEv
-                0x0800c284        0x6 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800c284                Adafruit_GFX::height()
+                0x0800c28c        0x6 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800c28c                Adafruit_GFX::height()
  .text._ZN17Adafruit_oled_drv9updateRowEii
-                0x0800c28a       0x1e build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c28a                Adafruit_oled_drv::updateRow(int, int)
+                0x0800c292       0x1e build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c292                Adafruit_oled_drv::updateRow(int, int)
  .text._ZN17Adafruit_oled_drv9drawPixelEsst
-                0x0800c2a8       0x52 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c2a8                Adafruit_oled_drv::drawPixel(short, short, unsigned short)
- *fill*         0x0800c2fa        0x2 
+                0x0800c2b0       0x52 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c2b0                Adafruit_oled_drv::drawPixel(short, short, unsigned short)
+ *fill*         0x0800c302        0x2 
  .text._ZN17Adafruit_oled_drvC2Ev
-                0x0800c2fc       0x28 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c2fc                Adafruit_oled_drv::Adafruit_oled_drv()
-                0x0800c2fc                Adafruit_oled_drv::Adafruit_oled_drv()
+                0x0800c304       0x28 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c304                Adafruit_oled_drv::Adafruit_oled_drv()
+                0x0800c304                Adafruit_oled_drv::Adafruit_oled_drv()
  .text._ZN17Adafruit_oled_drvD2Ev
-                0x0800c324        0x2 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c324                Adafruit_oled_drv::~Adafruit_oled_drv()
-                0x0800c324                Adafruit_oled_drv::~Adafruit_oled_drv()
+                0x0800c32c        0x2 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c32c                Adafruit_oled_drv::~Adafruit_oled_drv()
+                0x0800c32c                Adafruit_oled_drv::~Adafruit_oled_drv()
  .text._ZN17Adafruit_oled_drv5clearEb
-                0x0800c326       0x22 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c326                Adafruit_oled_drv::clear(bool)
+                0x0800c32e       0x22 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c32e                Adafruit_oled_drv::clear(bool)
  .text._ZNK17Adafruit_oled_drv14getFrameBufferEv
-                0x0800c348        0x4 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c348                Adafruit_oled_drv::getFrameBuffer() const
+                0x0800c350        0x4 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c350                Adafruit_oled_drv::getFrameBuffer() const
  .text._ZNK17Adafruit_oled_drv18getFrameBufferSizeEv
-                0x0800c34c        0x6 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c34c                Adafruit_oled_drv::getFrameBufferSize() const
+                0x0800c354        0x6 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c354                Adafruit_oled_drv::getFrameBufferSize() const
  .text._ZN17Adafruit_oled_drv9writeByteEh
-                0x0800c352       0x54 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c352                Adafruit_oled_drv::writeByte(unsigned char)
+                0x0800c35a       0x54 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c35a                Adafruit_oled_drv::writeByte(unsigned char)
  .text._ZN17Adafruit_oled_drv8startIICEv
-                0x0800c3a6       0x2c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c3a6                Adafruit_oled_drv::startIIC()
+                0x0800c3ae       0x2c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c3ae                Adafruit_oled_drv::startIIC()
  .text._ZN17Adafruit_oled_drv7stopIICEv
-                0x0800c3d2       0x2c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c3d2                Adafruit_oled_drv::stopIIC()
+                0x0800c3da       0x2c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c3da                Adafruit_oled_drv::stopIIC()
  .text._ZN17Adafruit_oled_drv12writeCommandEh
-                0x0800c3fe       0x2c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c3fe                Adafruit_oled_drv::writeCommand(unsigned char)
- *fill*         0x0800c42a        0x2 
+                0x0800c406       0x2c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c406                Adafruit_oled_drv::writeCommand(unsigned char)
+ *fill*         0x0800c432        0x2 
  .text._ZN17Adafruit_oled_drv10initializeEv
-                0x0800c42c      0x120 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c42c                Adafruit_oled_drv::initialize()
+                0x0800c434      0x120 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c434                Adafruit_oled_drv::initialize()
  .text._ZN17Adafruit_oled_drv10display_onEv
-                0x0800c54c        0x6 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c54c                Adafruit_oled_drv::display_on()
+                0x0800c554        0x6 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c554                Adafruit_oled_drv::display_on()
  .text._ZN17Adafruit_oled_drv11display_offEv
-                0x0800c552        0x6 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c552                Adafruit_oled_drv::display_off()
+                0x0800c55a        0x6 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c55a                Adafruit_oled_drv::display_off()
  .text._ZN17Adafruit_oled_drv17startDataSequenceEv
-                0x0800c558       0x1c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c558                Adafruit_oled_drv::startDataSequence()
+                0x0800c560       0x1c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c560                Adafruit_oled_drv::startDataSequence()
  .text._ZN17Adafruit_oled_drv6updateEv
-                0x0800c574       0x4e build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c574                Adafruit_oled_drv::update()
+                0x0800c57c       0x4e build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c57c                Adafruit_oled_drv::update()
  .text._ZN17Adafruit_oled_drv9updateRowEi
-                0x0800c5c2       0x6c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800c5c2                Adafruit_oled_drv::updateRow(int)
+                0x0800c5ca       0x6c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800c5ca                Adafruit_oled_drv::updateRow(int)
  .text.eeprom_read
-                0x0800c62e        0x4 build_ak-base-kit-stm32l151-application/eeprom.o
-                0x0800c62e                eeprom_read
+                0x0800c636        0x4 build_ak-base-kit-stm32l151-application/eeprom.o
+                0x0800c636                eeprom_read
  .text.eeprom_erase
-                0x0800c632        0x4 build_ak-base-kit-stm32l151-application/eeprom.o
-                0x0800c632                eeprom_erase
+                0x0800c63a        0x4 build_ak-base-kit-stm32l151-application/eeprom.o
+                0x0800c63a                eeprom_erase
  .text._ZL19link_hal_write_byteh
-                0x0800c636        0x2 build_ak-base-kit-stm32l151-application/link_hal.o
+                0x0800c63e        0x2 build_ak-base-kit-stm32l151-application/link_hal.o
  .text._ZL17link_hal_rev_byteh
-                0x0800c638        0x4 build_ak-base-kit-stm32l151-application/link_hal.o
+                0x0800c640        0x4 build_ak-base-kit-stm32l151-application/link_hal.o
  .text._Z23link_hal_reg_write_bytePFhhE
-                0x0800c63c       0x28 build_ak-base-kit-stm32l151-application/link_hal.o
-                0x0800c63c                link_hal_reg_write_byte(unsigned char (*)(unsigned char))
+                0x0800c644       0x28 build_ak-base-kit-stm32l151-application/link_hal.o
+                0x0800c644                link_hal_reg_write_byte(unsigned char (*)(unsigned char))
  .text._Z21link_hal_reg_rev_bytePFhhE
-                0x0800c664       0x28 build_ak-base-kit-stm32l151-application/link_hal.o
-                0x0800c664                link_hal_reg_rev_byte(unsigned char (*)(unsigned char))
+                0x0800c66c       0x28 build_ak-base-kit-stm32l151-application/link_hal.o
+                0x0800c66c                link_hal_reg_rev_byte(unsigned char (*)(unsigned char))
  .text._ZL21fsm_link_state_handleP8ak_msg_t
-                0x0800c68c      0x294 build_ak-base-kit-stm32l151-application/link.o
+                0x0800c694      0x294 build_ak-base-kit-stm32l151-application/link.o
  .text._ZL19fsm_link_state_initP8ak_msg_t
-                0x0800c920       0x80 build_ak-base-kit-stm32l151-application/link.o
+                0x0800c928       0x80 build_ak-base-kit-stm32l151-application/link.o
  .text._Z9task_linkP8ak_msg_t
-                0x0800c9a0        0xc build_ak-base-kit-stm32l151-application/link.o
-                0x0800c9a0                task_link(ak_msg_t*)
+                0x0800c9a8        0xc build_ak-base-kit-stm32l151-application/link.o
+                0x0800c9a8                task_link(ak_msg_t*)
  .text._Z23link_init_state_machinev
-                0x0800c9ac       0x2c build_ak-base-kit-stm32l151-application/link.o
-                0x0800c9ac                link_init_state_machine()
+                0x0800c9b4       0x2c build_ak-base-kit-stm32l151-application/link.o
+                0x0800c9b4                link_init_state_machine()
  .text._ZL23link_mac_frame_send_reqv
-                0x0800c9d8       0x3c build_ak-base-kit-stm32l151-application/link_mac.o
+                0x0800c9e0       0x3c build_ak-base-kit-stm32l151-application/link_mac.o
  .text._ZL23link_mac_frame_send_endv
-                0x0800ca14       0x34 build_ak-base-kit-stm32l151-application/link_mac.o
+                0x0800ca1c       0x34 build_ak-base-kit-stm32l151-application/link_mac.o
  .text._ZL28link_mac_frame_cals_checksumP16link_mac_frame_t.constprop.0
-                0x0800ca48       0x38 build_ak-base-kit-stm32l151-application/link_mac.o
+                0x0800ca50       0x38 build_ak-base-kit-stm32l151-application/link_mac.o
  .text._Z25fsm_link_mac_state_handleP8ak_msg_t
-                0x0800ca80      0x2b8 build_ak-base-kit-stm32l151-application/link_mac.o
-                0x0800ca80                fsm_link_mac_state_handle(ak_msg_t*)
+                0x0800ca88      0x2b8 build_ak-base-kit-stm32l151-application/link_mac.o
+                0x0800ca88                fsm_link_mac_state_handle(ak_msg_t*)
  .text._Z13task_link_macP8ak_msg_t
-                0x0800cd38        0xc build_ak-base-kit-stm32l151-application/link_mac.o
-                0x0800cd38                task_link_mac(ak_msg_t*)
+                0x0800cd40        0xc build_ak-base-kit-stm32l151-application/link_mac.o
+                0x0800cd40                task_link_mac(ak_msg_t*)
  .text._Z23fsm_link_mac_state_initP8ak_msg_t
-                0x0800cd44       0x88 build_ak-base-kit-stm32l151-application/link_mac.o
-                0x0800cd44                fsm_link_mac_state_init(ak_msg_t*)
+                0x0800cd4c       0x88 build_ak-base-kit-stm32l151-application/link_mac.o
+                0x0800cd4c                fsm_link_mac_state_init(ak_msg_t*)
  .text._ZL26link_phy_frame_write_blockPhm
-                0x0800cdcc       0x1c build_ak-base-kit-stm32l151-application/link_phy.o
+                0x0800cdd4       0x1c build_ak-base-kit-stm32l151-application/link_phy.o
  .text._ZL20link_phy_frame_writeP16link_phy_frame_t
-                0x0800cde8       0x1c build_ak-base-kit-stm32l151-application/link_phy.o
+                0x0800cdf0       0x1c build_ak-base-kit-stm32l151-application/link_phy.o
  .text._ZL28link_phy_frame_cals_checksumP16link_phy_frame_t
-                0x0800ce04       0x38 build_ak-base-kit-stm32l151-application/link_phy.o
+                0x0800ce0c       0x38 build_ak-base-kit-stm32l151-application/link_phy.o
  .text._ZL25link_phy_frame_write_byteh
-                0x0800ce3c        0xc build_ak-base-kit-stm32l151-application/link_phy.o
+                0x0800ce44        0xc build_ak-base-kit-stm32l151-application/link_phy.o
  .text._ZL26ac_link_phy_frame_rev_byteh
-                0x0800ce48       0xfc build_ak-base-kit-stm32l151-application/link_phy.o
+                0x0800ce50       0xfc build_ak-base-kit-stm32l151-application/link_phy.o
  .text._ZL19link_phy_frame_sendv
-                0x0800cf44       0x2c build_ak-base-kit-stm32l151-application/link_phy.o
+                0x0800cf4c       0x2c build_ak-base-kit-stm32l151-application/link_phy.o
  .text._Z25fsm_link_phy_state_handleP8ak_msg_t
-                0x0800cf70      0x1f4 build_ak-base-kit-stm32l151-application/link_phy.o
-                0x0800cf70                fsm_link_phy_state_handle(ak_msg_t*)
+                0x0800cf78      0x1f4 build_ak-base-kit-stm32l151-application/link_phy.o
+                0x0800cf78                fsm_link_phy_state_handle(ak_msg_t*)
  .text._Z13task_link_phyP8ak_msg_t
-                0x0800d164        0xc build_ak-base-kit-stm32l151-application/link_phy.o
-                0x0800d164                task_link_phy(ak_msg_t*)
+                0x0800d16c        0xc build_ak-base-kit-stm32l151-application/link_phy.o
+                0x0800d16c                task_link_phy(ak_msg_t*)
  .text._Z23fsm_link_phy_state_initP8ak_msg_t
-                0x0800d170       0x90 build_ak-base-kit-stm32l151-application/link_phy.o
-                0x0800d170                fsm_link_phy_state_init(ak_msg_t*)
+                0x0800d178       0x90 build_ak-base-kit-stm32l151-application/link_phy.o
+                0x0800d178                fsm_link_phy_state_init(ak_msg_t*)
  .text._Z26link_phy_get_send_frame_tov
-                0x0800d200       0x10 build_ak-base-kit-stm32l151-application/link_phy.o
-                0x0800d200                link_phy_get_send_frame_to()
+                0x0800d208       0x10 build_ak-base-kit-stm32l151-application/link_phy.o
+                0x0800d208                link_phy_get_send_frame_to()
  .text._Z13link_pdu_initv
-                0x0800d210       0x54 build_ak-base-kit-stm32l151-application/link_data.o
-                0x0800d210                link_pdu_init()
+                0x0800d218       0x54 build_ak-base-kit-stm32l151-application/link_data.o
+                0x0800d218                link_pdu_init()
  .text._Z15link_pdu_mallocv
-                0x0800d264       0x24 build_ak-base-kit-stm32l151-application/link_data.o
-                0x0800d264                link_pdu_malloc()
+                0x0800d26c       0x24 build_ak-base-kit-stm32l151-application/link_data.o
+                0x0800d26c                link_pdu_malloc()
  .text._Z12link_pdu_getm
-                0x0800d288       0x3c build_ak-base-kit-stm32l151-application/link_data.o
-                0x0800d288                link_pdu_get(unsigned long)
+                0x0800d290       0x3c build_ak-base-kit-stm32l151-application/link_data.o
+                0x0800d290                link_pdu_get(unsigned long)
  .text._Z13link_pdu_freem
-                0x0800d2c4       0x4c build_ak-base-kit-stm32l151-application/link_data.o
-                0x0800d2c4                link_pdu_free(unsigned long)
+                0x0800d2cc       0x4c build_ak-base-kit-stm32l151-application/link_data.o
+                0x0800d2cc                link_pdu_free(unsigned long)
  .text._Z17link_get_src_addrv
-                0x0800d310       0x18 build_ak-base-kit-stm32l151-application/link_data.o
-                0x0800d310                link_get_src_addr()
+                0x0800d318       0x18 build_ak-base-kit-stm32l151-application/link_data.o
+                0x0800d318                link_get_src_addr()
  .text._Z17link_get_des_addrv
-                0x0800d328       0x18 build_ak-base-kit-stm32l151-application/link_data.o
-                0x0800d328                link_get_des_addr()
+                0x0800d330       0x18 build_ak-base-kit-stm32l151-application/link_data.o
+                0x0800d330                link_get_des_addr()
  .text._Z7pinModehh
-                0x0800d340       0x84 build_ak-base-kit-stm32l151-application/wiring_digital.o
-                0x0800d340                pinMode(unsigned char, unsigned char)
+                0x0800d348       0x84 build_ak-base-kit-stm32l151-application/wiring_digital.o
+                0x0800d348                pinMode(unsigned char, unsigned char)
  .text._Z12digitalWritehh
-                0x0800d3c4       0x78 build_ak-base-kit-stm32l151-application/wiring_digital.o
-                0x0800d3c4                digitalWrite(unsigned char, unsigned char)
+                0x0800d3cc       0x78 build_ak-base-kit-stm32l151-application/wiring_digital.o
+                0x0800d3cc                digitalWrite(unsigned char, unsigned char)
  .text._ZN5Print5writeEPKhj
-                0x0800d43c       0x22 build_ak-base-kit-stm32l151-application/Print.o
-                0x0800d43c                Print::write(unsigned char const*, unsigned int)
+                0x0800d444       0x22 build_ak-base-kit-stm32l151-application/Print.o
+                0x0800d444                Print::write(unsigned char const*, unsigned int)
  .text._ZN5Print5writeEPKc
-                0x0800d45e       0x20 build_ak-base-kit-stm32l151-application/Print.o
-                0x0800d45e                Print::write(char const*)
+                0x0800d466       0x20 build_ak-base-kit-stm32l151-application/Print.o
+                0x0800d466                Print::write(char const*)
  .text._ZN5Print5printEPKc
-                0x0800d47e        0x8 build_ak-base-kit-stm32l151-application/Print.o
-                0x0800d47e                Print::print(char const*)
+                0x0800d486        0x8 build_ak-base-kit-stm32l151-application/Print.o
+                0x0800d486                Print::print(char const*)
  .text._ZN5Print11printNumberEmh
-                0x0800d486       0x3a build_ak-base-kit-stm32l151-application/Print.o
-                0x0800d486                Print::printNumber(unsigned long, unsigned char)
+                0x0800d48e       0x3a build_ak-base-kit-stm32l151-application/Print.o
+                0x0800d48e                Print::printNumber(unsigned long, unsigned char)
  .text._ZN5Print5printEmi
-                0x0800d4c0       0x16 build_ak-base-kit-stm32l151-application/Print.o
-                0x0800d4c0                Print::print(unsigned long, int)
+                0x0800d4c8       0x16 build_ak-base-kit-stm32l151-application/Print.o
+                0x0800d4c8                Print::print(unsigned long, int)
  .text._ZN5Print5printEhi
-                0x0800d4d6        0x4 build_ak-base-kit-stm32l151-application/Print.o
-                0x0800d4d6                Print::print(unsigned char, int)
+                0x0800d4de        0x4 build_ak-base-kit-stm32l151-application/Print.o
+                0x0800d4de                Print::print(unsigned char, int)
  .text._ZN14HardwareSerial9availableEv
-                0x0800d4da        0xa build_ak-base-kit-stm32l151-application/HardwareSerial.o
-                0x0800d4da                HardwareSerial::available()
+                0x0800d4e2        0xa build_ak-base-kit-stm32l151-application/HardwareSerial.o
+                0x0800d4e2                HardwareSerial::available()
  .text._ZN14HardwareSerial4peekEv
-                0x0800d4e4       0x14 build_ak-base-kit-stm32l151-application/HardwareSerial.o
-                0x0800d4e4                HardwareSerial::peek()
+                0x0800d4ec       0x14 build_ak-base-kit-stm32l151-application/HardwareSerial.o
+                0x0800d4ec                HardwareSerial::peek()
  .text._ZN14HardwareSerial4readEv
-                0x0800d4f8       0x20 build_ak-base-kit-stm32l151-application/HardwareSerial.o
-                0x0800d4f8                HardwareSerial::read()
+                0x0800d500       0x20 build_ak-base-kit-stm32l151-application/HardwareSerial.o
+                0x0800d500                HardwareSerial::read()
  .text._ZN14HardwareSerial5flushEv
-                0x0800d518        0x2 build_ak-base-kit-stm32l151-application/HardwareSerial.o
-                0x0800d518                HardwareSerial::flush()
+                0x0800d520        0x2 build_ak-base-kit-stm32l151-application/HardwareSerial.o
+                0x0800d520                HardwareSerial::flush()
  .text._ZN14HardwareSerial17availableForWriteEv
-                0x0800d51a       0x26 build_ak-base-kit-stm32l151-application/HardwareSerial.o
-                0x0800d51a                HardwareSerial::availableForWrite()
+                0x0800d522       0x26 build_ak-base-kit-stm32l151-application/HardwareSerial.o
+                0x0800d522                HardwareSerial::availableForWrite()
  .text._ZN14HardwareSerial5writeEh
-                0x0800d540       0x30 build_ak-base-kit-stm32l151-application/HardwareSerial.o
-                0x0800d540                HardwareSerial::write(unsigned char)
+                0x0800d548       0x30 build_ak-base-kit-stm32l151-application/HardwareSerial.o
+                0x0800d548                HardwareSerial::write(unsigned char)
  .text._ZL20serial2_trigger_putcv
-                0x0800d570       0x10 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+                0x0800d578       0x10 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
  .text.startup._GLOBAL__sub_I_Serial2
-                0x0800d580       0x34 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+                0x0800d588       0x34 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
  .text._ZN8SPIClass9io_configEv
-                0x0800d5b4       0x68 build_ak-base-kit-stm32l151-application/SPI.o
-                0x0800d5b4                SPIClass::io_config()
+                0x0800d5bc       0x68 build_ak-base-kit-stm32l151-application/SPI.o
+                0x0800d5bc                SPIClass::io_config()
  .text._ZN8SPIClass5beginEv
-                0x0800d61c       0xd4 build_ak-base-kit-stm32l151-application/SPI.o
-                0x0800d61c                SPIClass::begin()
+                0x0800d624       0xd4 build_ak-base-kit-stm32l151-application/SPI.o
+                0x0800d624                SPIClass::begin()
  .text.startup._GLOBAL__sub_I__ZN8SPIClassC2Ev
-                0x0800d6f0       0x14 build_ak-base-kit-stm32l151-application/SPI.o
+                0x0800d6f8       0x14 build_ak-base-kit-stm32l151-application/SPI.o
  .text._ZN7TwoWire9availableEv
-                0x0800d704       0x14 build_ak-base-kit-stm32l151-application/Wire.o
-                0x0800d704                TwoWire::available()
+                0x0800d70c       0x14 build_ak-base-kit-stm32l151-application/Wire.o
+                0x0800d70c                TwoWire::available()
  .text._ZN7TwoWire4readEv
-                0x0800d718       0x28 build_ak-base-kit-stm32l151-application/Wire.o
-                0x0800d718                TwoWire::read()
+                0x0800d720       0x28 build_ak-base-kit-stm32l151-application/Wire.o
+                0x0800d720                TwoWire::read()
  .text._ZN7TwoWire4peekEv
-                0x0800d740       0x24 build_ak-base-kit-stm32l151-application/Wire.o
-                0x0800d740                TwoWire::peek()
+                0x0800d748       0x24 build_ak-base-kit-stm32l151-application/Wire.o
+                0x0800d748                TwoWire::peek()
  .text._ZN7TwoWire5flushEv
-                0x0800d764        0x2 build_ak-base-kit-stm32l151-application/Wire.o
-                0x0800d764                TwoWire::flush()
- *fill*         0x0800d766        0x2 
+                0x0800d76c        0x2 build_ak-base-kit-stm32l151-application/Wire.o
+                0x0800d76c                TwoWire::flush()
+ *fill*         0x0800d76e        0x2 
  .text._ZN7TwoWire5writeEh
-                0x0800d768       0x54 build_ak-base-kit-stm32l151-application/Wire.o
-                0x0800d768                TwoWire::write(unsigned char)
+                0x0800d770       0x54 build_ak-base-kit-stm32l151-application/Wire.o
+                0x0800d770                TwoWire::write(unsigned char)
  .text._ZN7TwoWire5writeEPKhj
-                0x0800d7bc       0x34 build_ak-base-kit-stm32l151-application/Wire.o
-                0x0800d7bc                TwoWire::write(unsigned char const*, unsigned int)
+                0x0800d7c4       0x34 build_ak-base-kit-stm32l151-application/Wire.o
+                0x0800d7c4                TwoWire::write(unsigned char const*, unsigned int)
  .text.startup._GLOBAL__sub_I__ZN7TwoWire8rxBufferE
-                0x0800d7f0       0x1c build_ak-base-kit-stm32l151-application/Wire.o
+                0x0800d7f8       0x1c build_ak-base-kit-stm32l151-application/Wire.o
  .text._Z12twi_transmitPKhh
-                0x0800d80c       0x40 build_ak-base-kit-stm32l151-application/twi.o
-                0x0800d80c                twi_transmit(unsigned char const*, unsigned char)
+                0x0800d814       0x40 build_ak-base-kit-stm32l151-application/twi.o
+                0x0800d814                twi_transmit(unsigned char const*, unsigned char)
  .text.__cxa_pure_virtual
-                0x0800d84c       0x1c build_ak-base-kit-stm32l151-application/mini_cpp.o
-                0x0800d84c                __cxa_pure_virtual
- .text._sbrk    0x0800d868       0x1c build_ak-base-kit-stm32l151-application/mini_cpp.o
-                0x0800d868                _sbrk
+                0x0800d854       0x1c build_ak-base-kit-stm32l151-application/mini_cpp.o
+                0x0800d854                __cxa_pure_virtual
+ .text._sbrk    0x0800d870       0x1c build_ak-base-kit-stm32l151-application/mini_cpp.o
+                0x0800d870                _sbrk
  *(.rodata)
- .rodata        0x0800d884      0x101 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
-                0x0800d884                _ctype_
+ .rodata        0x0800d88c      0x101 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+                0x0800d88c                _ctype_
  *(.rodata*)
  .rodata.task_create.str1.1
-                0x0800d985     0x1609 build_ak-base-kit-stm32l151-application/task.o
+                0x0800d98d     0x1609 build_ak-base-kit-stm32l151-application/task.o
                                   0x3 (size before relaxing)
  .rodata.task_run.str1.1
-                0x0800ef8e        0x0 build_ak-base-kit-stm32l151-application/task.o
+                0x0800ef96        0x0 build_ak-base-kit-stm32l151-application/task.o
                                  0x25 (size before relaxing)
  .rodata.timer_set.str1.1
-                0x0800ef8e        0x0 build_ak-base-kit-stm32l151-application/timer.o
+                0x0800ef96        0x0 build_ak-base-kit-stm32l151-application/timer.o
                                   0x3 (size before relaxing)
  .rodata.msg_force_free.str1.1
-                0x0800ef8e        0x0 build_ak-base-kit-stm32l151-application/message.o
+                0x0800ef96        0x0 build_ak-base-kit-stm32l151-application/message.o
                                   0x3 (size before relaxing)
  .rodata.ak_malloc.str1.1
-                0x0800ef8e        0x0 build_ak-base-kit-stm32l151-application/message.o
+                0x0800ef96        0x0 build_ak-base-kit-stm32l151-application/message.o
                                   0xa (size before relaxing)
  .rodata.fifo_put.str1.1
-                0x0800ef8e        0x0 build_ak-base-kit-stm32l151-application/fifo.o
+                0x0800ef96        0x0 build_ak-base-kit-stm32l151-application/fifo.o
                                   0x5 (size before relaxing)
  .rodata.xvfprintf.str1.1
-                0x0800ef8e        0x0 build_ak-base-kit-stm32l151-application/xprintf.o
+                0x0800ef96        0x0 build_ak-base-kit-stm32l151-application/xprintf.o
                                   0xc (size before relaxing)
- *fill*         0x0800ef8e        0x2 
+ *fill*         0x0800ef96        0x2 
  .rodata.buzzer_music_table
-                0x0800ef90       0xa8 build_ak-base-kit-stm32l151-application/buzzer.o
+                0x0800ef98       0xa8 build_ak-base-kit-stm32l151-application/buzzer.o
  .rodata.sTone7
-                0x0800f038       0xdc build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f038                sTone7
+                0x0800f040       0xdc build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f040                sTone7
  .rodata.sTone6
-                0x0800f114        0x8 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f114                sTone6
- .rodata.sTone5
                 0x0800f11c        0x8 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f11c                sTone5
- .rodata.sTone4
+                0x0800f11c                sTone6
+ .rodata.sTone5
                 0x0800f124        0x8 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f124                sTone4
+                0x0800f124                sTone5
+ .rodata.sTone4
+                0x0800f12c        0x8 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f12c                sTone4
  .rodata.sTone3
-                0x0800f12c       0x1c build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f12c                sTone3
+                0x0800f134       0x1c build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f134                sTone3
  .rodata.sTone2
-                0x0800f148       0x24 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f148                sTone2
+                0x0800f150       0x24 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f150                sTone2
  .rodata.sTone1
-                0x0800f16c        0x8 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f16c                sTone1
+                0x0800f174        0x8 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f174                sTone1
  .rodata.tones_merry_christmas
-                0x0800f174       0xd0 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f174                tones_merry_christmas
+                0x0800f17c       0xd0 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f17c                tones_merry_christmas
  .rodata.tones_supper_mario_bros
-                0x0800f244      0x104 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f244                tones_supper_mario_bros
+                0x0800f24c      0x104 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f24c                tones_supper_mario_bros
  .rodata.tones_lowscore
-                0x0800f348       0x14 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f348                tones_lowscore
+                0x0800f350       0x14 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f350                tones_lowscore
  .rodata.tones_highscore
-                0x0800f35c       0x20 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f35c                tones_highscore
+                0x0800f364       0x20 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f364                tones_highscore
  .rodata.tones_goodbye
-                0x0800f37c       0x14 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f37c                tones_goodbye
+                0x0800f384       0x14 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f384                tones_goodbye
  .rodata.tones_welcome
-                0x0800f390       0x14 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f390                tones_welcome
+                0x0800f398       0x14 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f398                tones_welcome
  .rodata.tones_3beep
-                0x0800f3a4       0x18 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f3a4                tones_3beep
+                0x0800f3ac       0x18 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f3ac                tones_3beep
  .rodata.tones_startup
-                0x0800f3bc       0x28 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f3bc                tones_startup
+                0x0800f3c4       0x28 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f3c4                tones_startup
  .rodata.tones_lets_go
-                0x0800f3e4       0x28 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f3e4                tones_lets_go
+                0x0800f3ec       0x28 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f3ec                tones_lets_go
  .rodata.tones_usb_disconnected
-                0x0800f40c       0x10 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f40c                tones_usb_disconnected
+                0x0800f414       0x10 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f414                tones_usb_disconnected
  .rodata.tones_usb_connected
-                0x0800f41c       0x10 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f41c                tones_usb_connected
+                0x0800f424       0x10 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f424                tones_usb_connected
  .rodata.tones_bang
-                0x0800f42c        0xc build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f42c                tones_bang
+                0x0800f434        0xc build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f434                tones_bang
  .rodata.tones_click
-                0x0800f438        0x8 build_ak-base-kit-stm32l151-application/buzzer_music.o
-                0x0800f438                tones_click
+                0x0800f440        0x8 build_ak-base-kit-stm32l151-application/buzzer_music.o
+                0x0800f440                tones_click
  .rodata.sys_dbg_cpu_dump.str1.1
-                0x0800f440        0x0 build_ak-base-kit-stm32l151-application/sys_dbg.o
+                0x0800f448        0x0 build_ak-base-kit-stm32l151-application/sys_dbg.o
                                  0x5f (size before relaxing)
  .rodata.sys_dbg_stack_space_dump.str1.1
-                0x0800f440        0x0 build_ak-base-kit-stm32l151-application/sys_dbg.o
+                0x0800f448        0x0 build_ak-base-kit-stm32l151-application/sys_dbg.o
                                  0x2f (size before relaxing)
  .rodata.sys_dbg_fatal.str1.1
-                0x0800f440        0x0 build_ak-base-kit-stm32l151-application/sys_dbg.o
+                0x0800f448        0x0 build_ak-base-kit-stm32l151-application/sys_dbg.o
                                 0x261 (size before relaxing)
  .rodata.CSWTCH.8
-                0x0800f440        0xb build_ak-base-kit-stm32l151-application/mbutils.o
+                0x0800f448        0xb build_ak-base-kit-stm32l151-application/mbutils.o
  .rodata.aucCRCLo
-                0x0800f44b      0x100 build_ak-base-kit-stm32l151-application/mbmcrc.o
+                0x0800f453      0x100 build_ak-base-kit-stm32l151-application/mbmcrc.o
  .rodata.aucCRCHi
-                0x0800f54b      0x100 build_ak-base-kit-stm32l151-application/mbmcrc.o
+                0x0800f553      0x100 build_ak-base-kit-stm32l151-application/mbmcrc.o
  .rodata.vMBPAssert.str1.1
-                0x0800f64b        0x0 build_ak-base-kit-stm32l151-application/mbportother.o
+                0x0800f653        0x0 build_ak-base-kit-stm32l151-application/mbportother.o
                                   0x3 (size before relaxing)
  .rodata.APBAHBPrescTable
-                0x0800f64b       0x10 build_ak-base-kit-stm32l151-application/stm32l1xx_rcc.o
+                0x0800f653       0x10 build_ak-base-kit-stm32l151-application/stm32l1xx_rcc.o
  .rodata.PLLMulTable
-                0x0800f65b        0x9 build_ak-base-kit-stm32l151-application/stm32l1xx_rcc.o
+                0x0800f663        0x9 build_ak-base-kit-stm32l151-application/stm32l1xx_rcc.o
  .rodata.exit_critical.str1.1
-                0x0800f664        0x0 build_ak-base-kit-stm32l151-application/platform.o
+                0x0800f66c        0x0 build_ak-base-kit-stm32l151-application/platform.o
                                   0x4 (size before relaxing)
  .rodata.default_handler.str1.1
-                0x0800f664        0x0 build_ak-base-kit-stm32l151-application/system.o
+                0x0800f66c        0x0 build_ak-base-kit-stm32l151-application/system.o
                                   0x3 (size before relaxing)
  .rodata.sys_cfg_update_info.str1.1
-                0x0800f664        0x0 build_ak-base-kit-stm32l151-application/sys_cfg.o
+                0x0800f66c        0x0 build_ak-base-kit-stm32l151-application/sys_cfg.o
                                  0x64 (size before relaxing)
  .rodata.sys_ctrl_soft_watchdog_increase_counter.str1.1
-                0x0800f664        0x0 build_ak-base-kit-stm32l151-application/sys_cfg.o
+                0x0800f66c        0x0 build_ak-base-kit-stm32l151-application/sys_cfg.o
                                   0x5 (size before relaxing)
  .rodata.flash_transfer.str1.1
-                0x0800f664        0x0 build_ak-base-kit-stm32l151-application/io_cfg.o
+                0x0800f66c        0x0 build_ak-base-kit-stm32l151-application/io_cfg.o
                                   0x4 (size before relaxing)
  .rodata.AHBPrescTable
-                0x0800f664       0x10 build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
-                0x0800f664                AHBPrescTable
+                0x0800f66c       0x10 build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
+                0x0800f66c                AHBPrescTable
  .rodata.PLLMulTable
-                0x0800f674        0x9 build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
-                0x0800f674                PLLMulTable
+                0x0800f67c        0x9 build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
+                0x0800f67c                PLLMulTable
  .rodata._Z16view_scr_game_uiv.str1.1
-                0x0800f67d        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+                0x0800f685        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui.o
                                  0x14 (size before relaxing)
  .rodata._ZL13bmp_explosion
-                0x0800f67d        0x8 build_ak-base-kit-stm32l151-application/scr_game_ui.o
- .rodata._ZL11icon_enemy1
                 0x0800f685        0x8 build_ak-base-kit-stm32l151-application/scr_game_ui.o
- .rodata._ZL11icon_player
+ .rodata._ZL11icon_enemy1
                 0x0800f68d        0x8 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+ .rodata._ZL11icon_player
+                0x0800f695        0x8 build_ak-base-kit-stm32l151-application/scr_game_ui.o
  .rodata._ZL16view_scr_startupv.str1.1
-                0x0800f695        0x0 build_ak-base-kit-stm32l151-application/scr_startup.o
+                0x0800f69d        0x0 build_ak-base-kit-stm32l151-application/scr_startup.o
                                  0x49 (size before relaxing)
  .rodata._Z18scr_startup_handleP8ak_msg_t.str1.1
-                0x0800f695        0x0 build_ak-base-kit-stm32l151-application/scr_startup.o
+                0x0800f69d        0x0 build_ak-base-kit-stm32l151-application/scr_startup.o
                                  0x7b (size before relaxing)
  .rodata._Z11task_systemP8ak_msg_t.str1.1
-                0x0800f695        0x0 build_ak-base-kit-stm32l151-application/task_system.o
+                0x0800f69d        0x0 build_ak-base-kit-stm32l151-application/task_system.o
                                  0x23 (size before relaxing)
  .rodata.main_app.str1.1
-                0x0800f695        0x0 build_ak-base-kit-stm32l151-application/app.o
+                0x0800f69d        0x0 build_ak-base-kit-stm32l151-application/app.o
                                 0x27a (size before relaxing)
  .rodata._Z20task_polling_consolev.str1.1
-                0x0800f695        0x0 build_ak-base-kit-stm32l151-application/app.o
+                0x0800f69d        0x0 build_ak-base-kit-stm32l151-application/app.o
                                  0x31 (size before relaxing)
- *fill*         0x0800f695        0x3 
+ *fill*         0x0800f69d        0x3 
  .rodata.app_info
-                0x0800f698        0x8 build_ak-base-kit-stm32l151-application/app.o
-                0x0800f698                app_info
+                0x0800f6a0        0x8 build_ak-base-kit-stm32l151-application/app.o
+                0x0800f6a0                app_info
  .rodata._Z17btn_mode_callbackPv.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/app_bsp.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/app_bsp.o
                                  0x6b (size before relaxing)
  .rodata._Z15btn_up_callbackPv.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/app_bsp.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/app_bsp.o
                                  0x67 (size before relaxing)
  .rodata._Z17btn_down_callbackPv.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/app_bsp.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/app_bsp.o
                                  0x6b (size before relaxing)
  .rodata.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
                                  0xc1 (size before relaxing)
  .rodata._Z11shell_resetPh.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                   0x6 (size before relaxing)
  .rodata._Z10shell_helpPh.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                  0x24 (size before relaxing)
  .rodata._Z9shell_verPh.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                 0x180 (size before relaxing)
  .rodata._Z11shell_fatalPh.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                 0x229 (size before relaxing)
  .rodata._Z11shell_flashPh.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                  0x55 (size before relaxing)
  .rodata._Z9shell_epsPh.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                  0x28 (size before relaxing)
  .rodata._Z9shell_ramPh.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                  0x53 (size before relaxing)
  .rodata._Z10shell_bootPh.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                 0x166 (size before relaxing)
  .rodata._Z12shell_buzzerPh.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                 0x16f (size before relaxing)
  .rodata._Z9shell_dbgPh.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                  0x1b (size before relaxing)
  .rodata._Z12shell_modbusPh.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                  0x8f (size before relaxing)
  .rodata._Z9shell_lcdPh.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                  0xe2 (size before relaxing)
  .rodata.str1.1
-                0x0800f6a0        0x0 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                  0xdf (size before relaxing)
  .rodata.lgn_cmd_table
-                0x0800f6a0       0xd8 build_ak-base-kit-stm32l151-application/shell.o
-                0x0800f6a0                lgn_cmd_table
+                0x0800f6a8       0xd8 build_ak-base-kit-stm32l151-application/shell.o
+                0x0800f6a8                lgn_cmd_table
  .rodata._Z10task_shellP8ak_msg_t.str1.1
-                0x0800f778        0x0 build_ak-base-kit-stm32l151-application/task_shell.o
+                0x0800f780        0x0 build_ak-base-kit-stm32l151-application/task_shell.o
                                  0x43 (size before relaxing)
  .rodata._Z7task_fwP8ak_msg_t.str1.1
-                0x0800f778        0x0 build_ak-base-kit-stm32l151-application/task_fw.o
+                0x0800f780        0x0 build_ak-base-kit-stm32l151-application/task_fw.o
                                 0x206 (size before relaxing)
  .rodata.app_task_polling_table
-                0x0800f778       0x18 build_ak-base-kit-stm32l151-application/task_list.o
-                0x0800f778                app_task_polling_table
+                0x0800f780       0x18 build_ak-base-kit-stm32l151-application/task_list.o
+                0x0800f780                app_task_polling_table
  .rodata.app_task_table
-                0x0800f790       0x78 build_ak-base-kit-stm32l151-application/task_list.o
-                0x0800f790                app_task_table
+                0x0800f798       0x78 build_ak-base-kit-stm32l151-application/task_list.o
+                0x0800f798                app_task_table
  .rodata._Z7task_ifP8ak_msg_t.str1.1
-                0x0800f808        0x0 build_ak-base-kit-stm32l151-application/task_if.o
+                0x0800f810        0x0 build_ak-base-kit-stm32l151-application/task_if.o
                                  0xa9 (size before relaxing)
  .rodata._Z12task_uart_ifP8ak_msg_t.str1.1
-                0x0800f808        0x0 build_ak-base-kit-stm32l151-application/task_uart_if.o
+                0x0800f810        0x0 build_ak-base-kit-stm32l151-application/task_uart_if.o
                                  0xdf (size before relaxing)
  .rodata._ZL11render_list
-                0x0800f808        0x8 build_ak-base-kit-stm32l151-application/view_render.o
+                0x0800f810        0x8 build_ak-base-kit-stm32l151-application/view_render.o
  .rodata._Z16scr_mng_dispatchP8ak_msg_t.str1.1
-                0x0800f810        0x0 build_ak-base-kit-stm32l151-application/screen_manager.o
+                0x0800f818        0x0 build_ak-base-kit-stm32l151-application/screen_manager.o
                                   0x8 (size before relaxing)
  .rodata._ZTV12Adafruit_GFX
-                0x0800f810       0x2c build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
-                0x0800f810                vtable for Adafruit_GFX
+                0x0800f818       0x2c build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0800f818                vtable for Adafruit_GFX
  .rodata._ZL4font
-                0x0800f83c      0x4fb build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
- *fill*         0x0800fd37        0x1 
+                0x0800f844      0x4fb build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+ *fill*         0x0800fd3f        0x1 
  .rodata._ZTV17Adafruit_oled_drv
-                0x0800fd38       0x3c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
-                0x0800fd38                vtable for Adafruit_oled_drv
+                0x0800fd40       0x3c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0800fd40                vtable for Adafruit_oled_drv
  .rodata._Z23link_hal_reg_write_bytePFhhE.str1.1
-                0x0800fd74        0x0 build_ak-base-kit-stm32l151-application/link_hal.o
+                0x0800fd7c        0x0 build_ak-base-kit-stm32l151-application/link_hal.o
                                   0x9 (size before relaxing)
  .rodata._ZL19fsm_link_state_initP8ak_msg_t.str1.1
-                0x0800fd74        0x0 build_ak-base-kit-stm32l151-application/link.o
+                0x0800fd7c        0x0 build_ak-base-kit-stm32l151-application/link.o
                                 0x110 (size before relaxing)
  .rodata._ZL23link_mac_frame_send_reqv.str1.1
-                0x0800fd74        0x0 build_ak-base-kit-stm32l151-application/link_mac.o
+                0x0800fd7c        0x0 build_ak-base-kit-stm32l151-application/link_mac.o
                                   0x9 (size before relaxing)
  .rodata._Z25fsm_link_mac_state_handleP8ak_msg_t.str1.1
-                0x0800fd74        0x0 build_ak-base-kit-stm32l151-application/link_mac.o
+                0x0800fd7c        0x0 build_ak-base-kit-stm32l151-application/link_mac.o
                                   0x5 (size before relaxing)
  .rodata._Z25fsm_link_phy_state_handleP8ak_msg_t.str1.1
-                0x0800fd74        0x0 build_ak-base-kit-stm32l151-application/link_phy.o
+                0x0800fd7c        0x0 build_ak-base-kit-stm32l151-application/link_phy.o
                                   0x7 (size before relaxing)
  .rodata._Z13link_pdu_freeP10link_pdu_t.str1.1
-                0x0800fd74        0x0 build_ak-base-kit-stm32l151-application/link_data.o
+                0x0800fd7c        0x0 build_ak-base-kit-stm32l151-application/link_data.o
                                   0x9 (size before relaxing)
  .rodata._Z7pinModehh.str1.1
-                0x0800fd74        0x0 build_ak-base-kit-stm32l151-application/wiring_digital.o
+                0x0800fd7c        0x0 build_ak-base-kit-stm32l151-application/wiring_digital.o
                                   0x3 (size before relaxing)
  .rodata._ZTV14HardwareSerial
-                0x0800fd74       0x24 build_ak-base-kit-stm32l151-application/HardwareSerial.o
-                0x0800fd74                vtable for HardwareSerial
+                0x0800fd7c       0x24 build_ak-base-kit-stm32l151-application/HardwareSerial.o
+                0x0800fd7c                vtable for HardwareSerial
  .rodata._ZTV7TwoWire
-                0x0800fd98       0x20 build_ak-base-kit-stm32l151-application/Wire.o
-                0x0800fd98                vtable for TwoWire
+                0x0800fda0       0x20 build_ak-base-kit-stm32l151-application/Wire.o
+                0x0800fda0                vtable for TwoWire
  .rodata.__cxa_pure_virtual.str1.1
-                0x0800fdb8        0x0 build_ak-base-kit-stm32l151-application/mini_cpp.o
+                0x0800fdc0        0x0 build_ak-base-kit-stm32l151-application/mini_cpp.o
                                   0x4 (size before relaxing)
  *(.glue_7)
- .glue_7        0x0800fdb8        0x0 linker stubs
+ .glue_7        0x0800fdc0        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x0800fdb8        0x0 linker stubs
+ .glue_7t       0x0800fdc0        0x0 linker stubs
  *(.init)
  *(.fini)
-                0x0800fdb8                        . = ALIGN (0x4)
-                0x0800fdb8                        _etext = .
+                0x0800fdc0                        . = ALIGN (0x4)
+                0x0800fdc0                        _etext = .
 
-.vfp11_veneer   0x0800fdb8        0x0
- .vfp11_veneer  0x0800fdb8        0x0 linker stubs
+.vfp11_veneer   0x0800fdc0        0x0
+ .vfp11_veneer  0x0800fdc0        0x0 linker stubs
 
-.v4_bx          0x0800fdb8        0x0
- .v4_bx         0x0800fdb8        0x0 linker stubs
+.v4_bx          0x0800fdc0        0x0
+ .v4_bx         0x0800fdc0        0x0 linker stubs
 
-.iplt           0x0800fdb8        0x0
- .iplt          0x0800fdb8        0x0 build_ak-base-kit-stm32l151-application/task.o
+.iplt           0x0800fdc0        0x0
+ .iplt          0x0800fdc0        0x0 build_ak-base-kit-stm32l151-application/task.o
 
-.rel.dyn        0x0800fdb8        0x0
- .rel.iplt      0x0800fdb8        0x0 build_ak-base-kit-stm32l151-application/task.o
+.rel.dyn        0x0800fdc0        0x0
+ .rel.iplt      0x0800fdc0        0x0 build_ak-base-kit-stm32l151-application/task.o
 
-.ARM.exidx      0x0800fdb8        0x8
- .ARM.exidx     0x0800fdb8        0x8 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
- .ARM.exidx     0x0800fdc0        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+.ARM.exidx      0x0800fdc0        0x8
+ .ARM.exidx     0x0800fdc0        0x8 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .ARM.exidx     0x0800fdc8        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
                                   0x8 (size before relaxing)
- .ARM.exidx     0x0800fdc0        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .ARM.exidx     0x0800fdc8        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
                                   0x8 (size before relaxing)
 
-.preinit_array  0x0800fdc0        0x0
-                0x0800fdc0                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x0800fdc8        0x0
+                0x0800fdc8                        PROVIDE (__preinit_array_start = .)
  *(SORT_BY_NAME(.preinit_array.*))
  *(.preinit_array*)
-                0x0800fdc0                        PROVIDE (__preinit_array_end = .)
+                0x0800fdc8                        PROVIDE (__preinit_array_end = .)
 
-.init_array     0x0800fdc0       0x10
-                0x0800fdc0                        PROVIDE (__init_array_start = .)
+.init_array     0x0800fdc8       0x10
+                0x0800fdc8                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x0800fdc0        0x4 build_ak-base-kit-stm32l151-application/view_render.o
- .init_array    0x0800fdc4        0x4 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
- .init_array    0x0800fdc8        0x4 build_ak-base-kit-stm32l151-application/SPI.o
- .init_array    0x0800fdcc        0x4 build_ak-base-kit-stm32l151-application/Wire.o
-                0x0800fdd0                        PROVIDE (__init_array_end = .)
+ .init_array    0x0800fdc8        0x4 build_ak-base-kit-stm32l151-application/view_render.o
+ .init_array    0x0800fdcc        0x4 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+ .init_array    0x0800fdd0        0x4 build_ak-base-kit-stm32l151-application/SPI.o
+ .init_array    0x0800fdd4        0x4 build_ak-base-kit-stm32l151-application/Wire.o
+                0x0800fdd8                        PROVIDE (__init_array_end = .)
 
-.fini_array     0x0800fdd0        0x4
+.fini_array     0x0800fdd8        0x4
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(.fini_array*)
- .fini_array    0x0800fdd0        0x4 build_ak-base-kit-stm32l151-application/view_render.o
+ .fini_array    0x0800fdd8        0x4 build_ak-base-kit-stm32l151-application/view_render.o
  *(SORT_BY_NAME(.fini_array.*))
                 [!provide]                        PROVIDE (__fini_array_end = .)
 
-.end_flash      0x0800fdd4        0x0
-                0x0800fdd4                        _end_flash = .
+.end_flash      0x0800fddc        0x0
+                0x0800fddc                        _end_flash = .
 
 .start_ram      0x20000000        0x0
                 0x20000000                        _start_ram = .
 
-.data           0x20000000      0x6c8 load address 0x0800fdd4
+.data           0x20000000      0x6c8 load address 0x0800fddc
                 0x20000000                        _data = .
-                0x0800fdd4                        _ldata = LOADADDR (.data)
+                0x0800fddc                        _ldata = LOADADDR (.data)
  *(vtable)
  *(.data)
  .data          0x20000000      0x128 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
@@ -5004,10 +5004,10 @@ Linker script and memory map
  *(.ram_func*)
                 0x200006c8                        _edata = .
 
-.igot.plt       0x200006c8        0x0 load address 0x0801049c
+.igot.plt       0x200006c8        0x0 load address 0x080104a4
  .igot.plt      0x200006c8        0x0 build_ak-base-kit-stm32l151-application/task.o
 
-.bss            0x200006c8     0x2470 load address 0x0801049c
+.bss            0x200006c8     0x2470 load address 0x080104a4
                 0x200006c8                        _bss = .
  *(.bss)
  .bss           0x200006c8      0x13c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
@@ -5324,14 +5324,14 @@ Linker script and memory map
  *(COMMON)
                 0x20002b38                        _ebss = .
 
-.heap           0x20002b38      0x800 load address 0x0801290c
+.heap           0x20002b38      0x800 load address 0x08012914
                 0x20002b38                        __heap_start__ = .
                 0x20003338                        . = (. + HEAP_SIZE)
  *fill*         0x20002b38      0x800 
                 0x20003338                        . = ALIGN (0x4)
                 0x20003338                        __heap_end__ = .
 
-.non_clear_ram  0x20003338        0x4 load address 0x0801310c
+.non_clear_ram  0x20003338        0x4 load address 0x08013114
                 0x20003338                        _non_clear_ram = .
  *(.non_clear_ram)
  .non_clear_ram
@@ -5482,7 +5482,7 @@ LOAD /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libm.a
 LOAD /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libg.a
 LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
 
-.debug_info     0x00000000    0x6672a
+.debug_info     0x00000000    0x66763
  .debug_info    0x00000000      0x20b build_ak-base-kit-stm32l151-application/fsm.o
  .debug_info    0x0000020b      0xf2c build_ak-base-kit-stm32l151-application/task.o
  .debug_info    0x00001137      0x807 build_ak-base-kit-stm32l151-application/timer.o
@@ -5529,75 +5529,75 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_info    0x00016688     0x20b1 build_ak-base-kit-stm32l151-application/sys_cfg.o
  .debug_info    0x00018739     0x26af build_ak-base-kit-stm32l151-application/io_cfg.o
  .debug_info    0x0001ade8      0x58d build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
- .debug_info    0x0001b375     0x2484 build_ak-base-kit-stm32l151-application/scr_game_ui.o
- .debug_info    0x0001d7f9     0x2302 build_ak-base-kit-stm32l151-application/scr_startup.o
- .debug_info    0x0001fafb      0xe88 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
- .debug_info    0x00020983      0x9d9 build_ak-base-kit-stm32l151-application/game_shooter_task.o
- .debug_info    0x0002135c      0xa9a build_ak-base-kit-stm32l151-application/task_system.o
- .debug_info    0x00021df6     0x7d5f build_ak-base-kit-stm32l151-application/app.o
- .debug_info    0x00029b55      0x792 build_ak-base-kit-stm32l151-application/app_data.o
- .debug_info    0x0002a2e7      0x792 build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
- .debug_info    0x0002aa79      0xbfc build_ak-base-kit-stm32l151-application/app_bsp.o
- .debug_info    0x0002b675      0xd4b build_ak-base-kit-stm32l151-application/app_modbus_pull.o
- .debug_info    0x0002c3c0     0x4715 build_ak-base-kit-stm32l151-application/shell.o
- .debug_info    0x00030ad5      0xc27 build_ak-base-kit-stm32l151-application/task_shell.o
- .debug_info    0x000316fc      0x9c0 build_ak-base-kit-stm32l151-application/task_life.o
- .debug_info    0x000320bc     0x1705 build_ak-base-kit-stm32l151-application/task_fw.o
- .debug_info    0x000337c1      0xaf9 build_ak-base-kit-stm32l151-application/task_list.o
- .debug_info    0x000342ba     0x1dfa build_ak-base-kit-stm32l151-application/task_display.o
- .debug_info    0x000360b4      0xae5 build_ak-base-kit-stm32l151-application/task_if.o
- .debug_info    0x00036b99      0x83c build_ak-base-kit-stm32l151-application/task_rf24_if.o
- .debug_info    0x000373d5      0xb04 build_ak-base-kit-stm32l151-application/task_uart_if.o
- .debug_info    0x00037ed9      0x83c build_ak-base-kit-stm32l151-application/task_dbg.o
- .debug_info    0x00038715     0x244d build_ak-base-kit-stm32l151-application/view_render.o
- .debug_info    0x0003ab62     0x2316 build_ak-base-kit-stm32l151-application/screen_manager.o
- .debug_info    0x0003ce78     0x426b build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
- .debug_info    0x000410e3     0x2f70 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
- .debug_info    0x00044053      0x8ec build_ak-base-kit-stm32l151-application/eeprom.o
- .debug_info    0x0004493f      0x91a build_ak-base-kit-stm32l151-application/link_hal.o
- .debug_info    0x00045259     0x14ed build_ak-base-kit-stm32l151-application/link.o
- .debug_info    0x00046746     0x1829 build_ak-base-kit-stm32l151-application/link_mac.o
- .debug_info    0x00047f6f     0x155c build_ak-base-kit-stm32l151-application/link_phy.o
- .debug_info    0x000494cb      0xc52 build_ak-base-kit-stm32l151-application/link_data.o
- .debug_info    0x0004a11d     0x1e4d build_ak-base-kit-stm32l151-application/wiring_digital.o
- .debug_info    0x0004bf6a     0x32f9 build_ak-base-kit-stm32l151-application/Print.o
- .debug_info    0x0004f263     0x368c build_ak-base-kit-stm32l151-application/HardwareSerial.o
- .debug_info    0x000528ef     0x37da build_ak-base-kit-stm32l151-application/HardwareSerial2.o
- .debug_info    0x000560c9      0xf88 build_ak-base-kit-stm32l151-application/SPI.o
- .debug_info    0x00057051     0x43d8 build_ak-base-kit-stm32l151-application/Wire.o
- .debug_info    0x0005b429     0x2849 build_ak-base-kit-stm32l151-application/twi.o
- .debug_info    0x0005dc72     0x1170 build_ak-base-kit-stm32l151-application/mini_cpp.o
- .debug_info    0x0005ede2      0x754 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
- .debug_info    0x0005f536       0x33 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
- .debug_info    0x0005f569      0x12b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
- .debug_info    0x0005f694      0x70f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
- .debug_info    0x0005fda3       0xbd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
- .debug_info    0x0005fe60       0xc3 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
- .debug_info    0x0005ff23      0xd95 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
- .debug_info    0x00060cb8      0x7b4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
- .debug_info    0x0006146c       0xb9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
- .debug_info    0x00061525      0x135 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
- .debug_info    0x0006165a      0x729 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
- .debug_info    0x00061d83      0x73a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
- .debug_info    0x000624bd       0x33 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
- .debug_info    0x000624f0      0xea8 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
- .debug_info    0x00063398      0xcd9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
- .debug_info    0x00064071      0x796 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
- .debug_info    0x00064807      0xb55 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
- .debug_info    0x0006535c      0x831 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
- .debug_info    0x00065b8d       0xc1 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
- .debug_info    0x00065c4e       0xd3 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
- .debug_info    0x00065d21       0x57 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
- .debug_info    0x00065d78       0xdf /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
- .debug_info    0x00065e57       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
- .debug_info    0x00065e93       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
- .debug_info    0x00065ecf       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
- .debug_info    0x00065f0b       0xca /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
- .debug_info    0x00065fd5       0x24 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
- .debug_info    0x00065ff9      0x6f5 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
- .debug_info    0x000666ee       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x0001b375     0x24bd build_ak-base-kit-stm32l151-application/scr_game_ui.o
+ .debug_info    0x0001d832     0x2302 build_ak-base-kit-stm32l151-application/scr_startup.o
+ .debug_info    0x0001fb34      0xe88 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+ .debug_info    0x000209bc      0x9d9 build_ak-base-kit-stm32l151-application/game_shooter_task.o
+ .debug_info    0x00021395      0xa9a build_ak-base-kit-stm32l151-application/task_system.o
+ .debug_info    0x00021e2f     0x7d5f build_ak-base-kit-stm32l151-application/app.o
+ .debug_info    0x00029b8e      0x792 build_ak-base-kit-stm32l151-application/app_data.o
+ .debug_info    0x0002a320      0x792 build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
+ .debug_info    0x0002aab2      0xbfc build_ak-base-kit-stm32l151-application/app_bsp.o
+ .debug_info    0x0002b6ae      0xd4b build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+ .debug_info    0x0002c3f9     0x4715 build_ak-base-kit-stm32l151-application/shell.o
+ .debug_info    0x00030b0e      0xc27 build_ak-base-kit-stm32l151-application/task_shell.o
+ .debug_info    0x00031735      0x9c0 build_ak-base-kit-stm32l151-application/task_life.o
+ .debug_info    0x000320f5     0x1705 build_ak-base-kit-stm32l151-application/task_fw.o
+ .debug_info    0x000337fa      0xaf9 build_ak-base-kit-stm32l151-application/task_list.o
+ .debug_info    0x000342f3     0x1dfa build_ak-base-kit-stm32l151-application/task_display.o
+ .debug_info    0x000360ed      0xae5 build_ak-base-kit-stm32l151-application/task_if.o
+ .debug_info    0x00036bd2      0x83c build_ak-base-kit-stm32l151-application/task_rf24_if.o
+ .debug_info    0x0003740e      0xb04 build_ak-base-kit-stm32l151-application/task_uart_if.o
+ .debug_info    0x00037f12      0x83c build_ak-base-kit-stm32l151-application/task_dbg.o
+ .debug_info    0x0003874e     0x244d build_ak-base-kit-stm32l151-application/view_render.o
+ .debug_info    0x0003ab9b     0x2316 build_ak-base-kit-stm32l151-application/screen_manager.o
+ .debug_info    0x0003ceb1     0x426b build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+ .debug_info    0x0004111c     0x2f70 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+ .debug_info    0x0004408c      0x8ec build_ak-base-kit-stm32l151-application/eeprom.o
+ .debug_info    0x00044978      0x91a build_ak-base-kit-stm32l151-application/link_hal.o
+ .debug_info    0x00045292     0x14ed build_ak-base-kit-stm32l151-application/link.o
+ .debug_info    0x0004677f     0x1829 build_ak-base-kit-stm32l151-application/link_mac.o
+ .debug_info    0x00047fa8     0x155c build_ak-base-kit-stm32l151-application/link_phy.o
+ .debug_info    0x00049504      0xc52 build_ak-base-kit-stm32l151-application/link_data.o
+ .debug_info    0x0004a156     0x1e4d build_ak-base-kit-stm32l151-application/wiring_digital.o
+ .debug_info    0x0004bfa3     0x32f9 build_ak-base-kit-stm32l151-application/Print.o
+ .debug_info    0x0004f29c     0x368c build_ak-base-kit-stm32l151-application/HardwareSerial.o
+ .debug_info    0x00052928     0x37da build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+ .debug_info    0x00056102      0xf88 build_ak-base-kit-stm32l151-application/SPI.o
+ .debug_info    0x0005708a     0x43d8 build_ak-base-kit-stm32l151-application/Wire.o
+ .debug_info    0x0005b462     0x2849 build_ak-base-kit-stm32l151-application/twi.o
+ .debug_info    0x0005dcab     0x1170 build_ak-base-kit-stm32l151-application/mini_cpp.o
+ .debug_info    0x0005ee1b      0x754 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+ .debug_info    0x0005f56f       0x33 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .debug_info    0x0005f5a2      0x12b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+ .debug_info    0x0005f6cd      0x70f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+ .debug_info    0x0005fddc       0xbd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+ .debug_info    0x0005fe99       0xc3 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+ .debug_info    0x0005ff5c      0xd95 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+ .debug_info    0x00060cf1      0x7b4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+ .debug_info    0x000614a5       0xb9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+ .debug_info    0x0006155e      0x135 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+ .debug_info    0x00061693      0x729 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
+ .debug_info    0x00061dbc      0x73a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+ .debug_info    0x000624f6       0x33 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+ .debug_info    0x00062529      0xea8 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+ .debug_info    0x000633d1      0xcd9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+ .debug_info    0x000640aa      0x796 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+ .debug_info    0x00064840      0xb55 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+ .debug_info    0x00065395      0x831 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+ .debug_info    0x00065bc6       0xc1 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+ .debug_info    0x00065c87       0xd3 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+ .debug_info    0x00065d5a       0x57 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+ .debug_info    0x00065db1       0xdf /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+ .debug_info    0x00065e90       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+ .debug_info    0x00065ecc       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+ .debug_info    0x00065f08       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_info    0x00065f44       0xca /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+ .debug_info    0x0006600e       0x24 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_info    0x00066032      0x6f5 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .debug_info    0x00066727       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
 
-.debug_abbrev   0x00000000    0x11458
+.debug_abbrev   0x00000000    0x11466
  .debug_abbrev  0x00000000       0xda build_ak-base-kit-stm32l151-application/fsm.o
  .debug_abbrev  0x000000da      0x3f3 build_ak-base-kit-stm32l151-application/task.o
  .debug_abbrev  0x000004cd      0x349 build_ak-base-kit-stm32l151-application/timer.o
@@ -5644,73 +5644,73 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_abbrev  0x00005b74      0x570 build_ak-base-kit-stm32l151-application/sys_cfg.o
  .debug_abbrev  0x000060e4      0x384 build_ak-base-kit-stm32l151-application/io_cfg.o
  .debug_abbrev  0x00006468      0x19c build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
- .debug_abbrev  0x00006604      0x41f build_ak-base-kit-stm32l151-application/scr_game_ui.o
- .debug_abbrev  0x00006a23      0x3d5 build_ak-base-kit-stm32l151-application/scr_startup.o
- .debug_abbrev  0x00006df8      0x2ff build_ak-base-kit-stm32l151-application/game_shooter_logic.o
- .debug_abbrev  0x000070f7      0x236 build_ak-base-kit-stm32l151-application/game_shooter_task.o
- .debug_abbrev  0x0000732d      0x213 build_ak-base-kit-stm32l151-application/task_system.o
- .debug_abbrev  0x00007540      0x853 build_ak-base-kit-stm32l151-application/app.o
- .debug_abbrev  0x00007d93      0x1cd build_ak-base-kit-stm32l151-application/app_data.o
- .debug_abbrev  0x00007f60      0x1cd build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
- .debug_abbrev  0x0000812d      0x29a build_ak-base-kit-stm32l151-application/app_bsp.o
- .debug_abbrev  0x000083c7      0x312 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
- .debug_abbrev  0x000086d9      0x632 build_ak-base-kit-stm32l151-application/shell.o
- .debug_abbrev  0x00008d0b      0x2d5 build_ak-base-kit-stm32l151-application/task_shell.o
- .debug_abbrev  0x00008fe0      0x24d build_ak-base-kit-stm32l151-application/task_life.o
- .debug_abbrev  0x0000922d      0x367 build_ak-base-kit-stm32l151-application/task_fw.o
- .debug_abbrev  0x00009594      0x21d build_ak-base-kit-stm32l151-application/task_list.o
- .debug_abbrev  0x000097b1      0x2b9 build_ak-base-kit-stm32l151-application/task_display.o
- .debug_abbrev  0x00009a6a      0x25c build_ak-base-kit-stm32l151-application/task_if.o
- .debug_abbrev  0x00009cc6      0x1aa build_ak-base-kit-stm32l151-application/task_rf24_if.o
- .debug_abbrev  0x00009e70      0x222 build_ak-base-kit-stm32l151-application/task_uart_if.o
- .debug_abbrev  0x0000a092      0x1aa build_ak-base-kit-stm32l151-application/task_dbg.o
- .debug_abbrev  0x0000a23c      0x49d build_ak-base-kit-stm32l151-application/view_render.o
- .debug_abbrev  0x0000a6d9      0x3c2 build_ak-base-kit-stm32l151-application/screen_manager.o
- .debug_abbrev  0x0000aa9b      0x729 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
- .debug_abbrev  0x0000b1c4      0x5bf build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
- .debug_abbrev  0x0000b783      0x1e8 build_ak-base-kit-stm32l151-application/eeprom.o
- .debug_abbrev  0x0000b96b      0x274 build_ak-base-kit-stm32l151-application/link_hal.o
- .debug_abbrev  0x0000bbdf      0x406 build_ak-base-kit-stm32l151-application/link.o
- .debug_abbrev  0x0000bfe5      0x511 build_ak-base-kit-stm32l151-application/link_mac.o
- .debug_abbrev  0x0000c4f6      0x5d3 build_ak-base-kit-stm32l151-application/link_phy.o
- .debug_abbrev  0x0000cac9      0x318 build_ak-base-kit-stm32l151-application/link_data.o
- .debug_abbrev  0x0000cde1      0x28a build_ak-base-kit-stm32l151-application/wiring_digital.o
- .debug_abbrev  0x0000d06b      0x4f1 build_ak-base-kit-stm32l151-application/Print.o
- .debug_abbrev  0x0000d55c      0x520 build_ak-base-kit-stm32l151-application/HardwareSerial.o
- .debug_abbrev  0x0000da7c      0x5a7 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
- .debug_abbrev  0x0000e023      0x3cb build_ak-base-kit-stm32l151-application/SPI.o
- .debug_abbrev  0x0000e3ee      0x7a0 build_ak-base-kit-stm32l151-application/Wire.o
- .debug_abbrev  0x0000eb8e      0x487 build_ak-base-kit-stm32l151-application/twi.o
- .debug_abbrev  0x0000f015      0x445 build_ak-base-kit-stm32l151-application/mini_cpp.o
- .debug_abbrev  0x0000f45a      0x1dc /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
- .debug_abbrev  0x0000f636       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
- .debug_abbrev  0x0000f65e       0x90 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
- .debug_abbrev  0x0000f6ee      0x19a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
- .debug_abbrev  0x0000f888       0x78 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
- .debug_abbrev  0x0000f900       0x7b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
- .debug_abbrev  0x0000f97b      0x326 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
- .debug_abbrev  0x0000fca1      0x20b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
- .debug_abbrev  0x0000feac       0x62 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
- .debug_abbrev  0x0000ff0e       0xb7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
- .debug_abbrev  0x0000ffc5      0x185 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
- .debug_abbrev  0x0001014a      0x1ce /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
- .debug_abbrev  0x00010318       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
- .debug_abbrev  0x00010340      0x446 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
- .debug_abbrev  0x00010786      0x2d7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
- .debug_abbrev  0x00010a5d      0x216 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
- .debug_abbrev  0x00010c73      0x27f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
- .debug_abbrev  0x00010ef2      0x22a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
- .debug_abbrev  0x0001111c       0x80 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
- .debug_abbrev  0x0001119c       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
- .debug_abbrev  0x000111c4       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
- .debug_abbrev  0x000111ec       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
- .debug_abbrev  0x00011214       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
- .debug_abbrev  0x0001123c       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
- .debug_abbrev  0x00011264       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
- .debug_abbrev  0x0001128c       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
- .debug_abbrev  0x000112b4       0x14 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
- .debug_abbrev  0x000112c8      0x16a /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
- .debug_abbrev  0x00011432       0x26 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x00006604      0x42d build_ak-base-kit-stm32l151-application/scr_game_ui.o
+ .debug_abbrev  0x00006a31      0x3d5 build_ak-base-kit-stm32l151-application/scr_startup.o
+ .debug_abbrev  0x00006e06      0x2ff build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+ .debug_abbrev  0x00007105      0x236 build_ak-base-kit-stm32l151-application/game_shooter_task.o
+ .debug_abbrev  0x0000733b      0x213 build_ak-base-kit-stm32l151-application/task_system.o
+ .debug_abbrev  0x0000754e      0x853 build_ak-base-kit-stm32l151-application/app.o
+ .debug_abbrev  0x00007da1      0x1cd build_ak-base-kit-stm32l151-application/app_data.o
+ .debug_abbrev  0x00007f6e      0x1cd build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
+ .debug_abbrev  0x0000813b      0x29a build_ak-base-kit-stm32l151-application/app_bsp.o
+ .debug_abbrev  0x000083d5      0x312 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+ .debug_abbrev  0x000086e7      0x632 build_ak-base-kit-stm32l151-application/shell.o
+ .debug_abbrev  0x00008d19      0x2d5 build_ak-base-kit-stm32l151-application/task_shell.o
+ .debug_abbrev  0x00008fee      0x24d build_ak-base-kit-stm32l151-application/task_life.o
+ .debug_abbrev  0x0000923b      0x367 build_ak-base-kit-stm32l151-application/task_fw.o
+ .debug_abbrev  0x000095a2      0x21d build_ak-base-kit-stm32l151-application/task_list.o
+ .debug_abbrev  0x000097bf      0x2b9 build_ak-base-kit-stm32l151-application/task_display.o
+ .debug_abbrev  0x00009a78      0x25c build_ak-base-kit-stm32l151-application/task_if.o
+ .debug_abbrev  0x00009cd4      0x1aa build_ak-base-kit-stm32l151-application/task_rf24_if.o
+ .debug_abbrev  0x00009e7e      0x222 build_ak-base-kit-stm32l151-application/task_uart_if.o
+ .debug_abbrev  0x0000a0a0      0x1aa build_ak-base-kit-stm32l151-application/task_dbg.o
+ .debug_abbrev  0x0000a24a      0x49d build_ak-base-kit-stm32l151-application/view_render.o
+ .debug_abbrev  0x0000a6e7      0x3c2 build_ak-base-kit-stm32l151-application/screen_manager.o
+ .debug_abbrev  0x0000aaa9      0x729 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+ .debug_abbrev  0x0000b1d2      0x5bf build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+ .debug_abbrev  0x0000b791      0x1e8 build_ak-base-kit-stm32l151-application/eeprom.o
+ .debug_abbrev  0x0000b979      0x274 build_ak-base-kit-stm32l151-application/link_hal.o
+ .debug_abbrev  0x0000bbed      0x406 build_ak-base-kit-stm32l151-application/link.o
+ .debug_abbrev  0x0000bff3      0x511 build_ak-base-kit-stm32l151-application/link_mac.o
+ .debug_abbrev  0x0000c504      0x5d3 build_ak-base-kit-stm32l151-application/link_phy.o
+ .debug_abbrev  0x0000cad7      0x318 build_ak-base-kit-stm32l151-application/link_data.o
+ .debug_abbrev  0x0000cdef      0x28a build_ak-base-kit-stm32l151-application/wiring_digital.o
+ .debug_abbrev  0x0000d079      0x4f1 build_ak-base-kit-stm32l151-application/Print.o
+ .debug_abbrev  0x0000d56a      0x520 build_ak-base-kit-stm32l151-application/HardwareSerial.o
+ .debug_abbrev  0x0000da8a      0x5a7 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+ .debug_abbrev  0x0000e031      0x3cb build_ak-base-kit-stm32l151-application/SPI.o
+ .debug_abbrev  0x0000e3fc      0x7a0 build_ak-base-kit-stm32l151-application/Wire.o
+ .debug_abbrev  0x0000eb9c      0x487 build_ak-base-kit-stm32l151-application/twi.o
+ .debug_abbrev  0x0000f023      0x445 build_ak-base-kit-stm32l151-application/mini_cpp.o
+ .debug_abbrev  0x0000f468      0x1dc /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+ .debug_abbrev  0x0000f644       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .debug_abbrev  0x0000f66c       0x90 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+ .debug_abbrev  0x0000f6fc      0x19a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+ .debug_abbrev  0x0000f896       0x78 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+ .debug_abbrev  0x0000f90e       0x7b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+ .debug_abbrev  0x0000f989      0x326 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+ .debug_abbrev  0x0000fcaf      0x20b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+ .debug_abbrev  0x0000feba       0x62 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+ .debug_abbrev  0x0000ff1c       0xb7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+ .debug_abbrev  0x0000ffd3      0x185 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
+ .debug_abbrev  0x00010158      0x1ce /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+ .debug_abbrev  0x00010326       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+ .debug_abbrev  0x0001034e      0x446 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+ .debug_abbrev  0x00010794      0x2d7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+ .debug_abbrev  0x00010a6b      0x216 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+ .debug_abbrev  0x00010c81      0x27f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+ .debug_abbrev  0x00010f00      0x22a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+ .debug_abbrev  0x0001112a       0x80 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+ .debug_abbrev  0x000111aa       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+ .debug_abbrev  0x000111d2       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+ .debug_abbrev  0x000111fa       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+ .debug_abbrev  0x00011222       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+ .debug_abbrev  0x0001124a       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+ .debug_abbrev  0x00011272       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_abbrev  0x0001129a       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+ .debug_abbrev  0x000112c2       0x14 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_abbrev  0x000112d6      0x16a /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .debug_abbrev  0x00011440       0x26 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
 
 .debug_loclists
                 0x00000000    0x13a45
@@ -6300,7 +6300,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_rnglists
                 0x00002224       0x93 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
 
-.debug_line     0x00000000    0x20f14
+.debug_line     0x00000000    0x20f35
  .debug_line    0x00000000       0xa7 build_ak-base-kit-stm32l151-application/fsm.o
  .debug_line    0x000000a7      0x874 build_ak-base-kit-stm32l151-application/task.o
  .debug_line    0x0000091b      0x4cf build_ak-base-kit-stm32l151-application/timer.o
@@ -6347,73 +6347,73 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_line    0x0000ef77      0xb86 build_ak-base-kit-stm32l151-application/sys_cfg.o
  .debug_line    0x0000fafd      0xe64 build_ak-base-kit-stm32l151-application/io_cfg.o
  .debug_line    0x00010961      0x3c8 build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
- .debug_line    0x00010d29      0x476 build_ak-base-kit-stm32l151-application/scr_game_ui.o
- .debug_line    0x0001119f      0x412 build_ak-base-kit-stm32l151-application/scr_startup.o
- .debug_line    0x000115b1      0x61a build_ak-base-kit-stm32l151-application/game_shooter_logic.o
- .debug_line    0x00011bcb      0x24a build_ak-base-kit-stm32l151-application/game_shooter_task.o
- .debug_line    0x00011e15      0x238 build_ak-base-kit-stm32l151-application/task_system.o
- .debug_line    0x0001204d      0xf9d build_ak-base-kit-stm32l151-application/app.o
- .debug_line    0x00012fea      0x1f2 build_ak-base-kit-stm32l151-application/app_data.o
- .debug_line    0x000131dc      0x1c8 build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
- .debug_line    0x000133a4      0x359 build_ak-base-kit-stm32l151-application/app_bsp.o
- .debug_line    0x000136fd      0x3bd build_ak-base-kit-stm32l151-application/app_modbus_pull.o
- .debug_line    0x00013aba     0x11a1 build_ak-base-kit-stm32l151-application/shell.o
- .debug_line    0x00014c5b      0x361 build_ak-base-kit-stm32l151-application/task_shell.o
- .debug_line    0x00014fbc      0x263 build_ak-base-kit-stm32l151-application/task_life.o
- .debug_line    0x0001521f      0x7fe build_ak-base-kit-stm32l151-application/task_fw.o
- .debug_line    0x00015a1d      0x196 build_ak-base-kit-stm32l151-application/task_list.o
- .debug_line    0x00015bb3      0x241 build_ak-base-kit-stm32l151-application/task_display.o
- .debug_line    0x00015df4      0x2c9 build_ak-base-kit-stm32l151-application/task_if.o
- .debug_line    0x000160bd      0x193 build_ak-base-kit-stm32l151-application/task_rf24_if.o
- .debug_line    0x00016250      0x2eb build_ak-base-kit-stm32l151-application/task_uart_if.o
- .debug_line    0x0001653b      0x18d build_ak-base-kit-stm32l151-application/task_dbg.o
- .debug_line    0x000166c8      0x504 build_ak-base-kit-stm32l151-application/view_render.o
- .debug_line    0x00016bcc      0x4f9 build_ak-base-kit-stm32l151-application/screen_manager.o
- .debug_line    0x000170c5     0x1147 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
- .debug_line    0x0001820c      0x84c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
- .debug_line    0x00018a58      0x1c4 build_ak-base-kit-stm32l151-application/eeprom.o
- .debug_line    0x00018c1c      0x2cc build_ak-base-kit-stm32l151-application/link_hal.o
- .debug_line    0x00018ee8      0x68e build_ak-base-kit-stm32l151-application/link.o
- .debug_line    0x00019576      0x9cd build_ak-base-kit-stm32l151-application/link_mac.o
- .debug_line    0x00019f43      0xa7d build_ak-base-kit-stm32l151-application/link_phy.o
- .debug_line    0x0001a9c0      0x541 build_ak-base-kit-stm32l151-application/link_data.o
- .debug_line    0x0001af01      0x3e7 build_ak-base-kit-stm32l151-application/wiring_digital.o
- .debug_line    0x0001b2e8      0x81b build_ak-base-kit-stm32l151-application/Print.o
- .debug_line    0x0001bb03      0x3e0 build_ak-base-kit-stm32l151-application/HardwareSerial.o
- .debug_line    0x0001bee3      0x3cf build_ak-base-kit-stm32l151-application/HardwareSerial2.o
- .debug_line    0x0001c2b2      0x56b build_ak-base-kit-stm32l151-application/SPI.o
- .debug_line    0x0001c81d      0x7cb build_ak-base-kit-stm32l151-application/Wire.o
- .debug_line    0x0001cfe8      0x604 build_ak-base-kit-stm32l151-application/twi.o
- .debug_line    0x0001d5ec      0x411 build_ak-base-kit-stm32l151-application/mini_cpp.o
- .debug_line    0x0001d9fd      0x17f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
- .debug_line    0x0001db7c       0xbd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
- .debug_line    0x0001dc39      0x17b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
- .debug_line    0x0001ddb4      0x10c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
- .debug_line    0x0001dec0       0xf4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
- .debug_line    0x0001dfb4       0xb9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
- .debug_line    0x0001e06d      0x429 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
- .debug_line    0x0001e496      0x16b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
- .debug_line    0x0001e601       0x97 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
- .debug_line    0x0001e698      0x1a3 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
- .debug_line    0x0001e83b       0xe7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
- .debug_line    0x0001e922      0x153 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
- .debug_line    0x0001ea75       0xdd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
- .debug_line    0x0001eb52      0x51f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
- .debug_line    0x0001f071      0x8e0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
- .debug_line    0x0001f951      0x196 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
- .debug_line    0x0001fae7      0x52a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
- .debug_line    0x00020011      0x1f0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
- .debug_line    0x00020201       0xf0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
- .debug_line    0x000202f1      0x16f /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
- .debug_line    0x00020460      0x184 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
- .debug_line    0x000205e4       0xa6 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
- .debug_line    0x0002068a       0x57 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
- .debug_line    0x000206e1       0x62 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
- .debug_line    0x00020743       0x5e /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
- .debug_line    0x000207a1      0x103 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
- .debug_line    0x000208a4       0x4e /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
- .debug_line    0x000208f2      0x5d8 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
- .debug_line    0x00020eca       0x4a /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x00010d29      0x497 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+ .debug_line    0x000111c0      0x412 build_ak-base-kit-stm32l151-application/scr_startup.o
+ .debug_line    0x000115d2      0x61a build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+ .debug_line    0x00011bec      0x24a build_ak-base-kit-stm32l151-application/game_shooter_task.o
+ .debug_line    0x00011e36      0x238 build_ak-base-kit-stm32l151-application/task_system.o
+ .debug_line    0x0001206e      0xf9d build_ak-base-kit-stm32l151-application/app.o
+ .debug_line    0x0001300b      0x1f2 build_ak-base-kit-stm32l151-application/app_data.o
+ .debug_line    0x000131fd      0x1c8 build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
+ .debug_line    0x000133c5      0x359 build_ak-base-kit-stm32l151-application/app_bsp.o
+ .debug_line    0x0001371e      0x3bd build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+ .debug_line    0x00013adb     0x11a1 build_ak-base-kit-stm32l151-application/shell.o
+ .debug_line    0x00014c7c      0x361 build_ak-base-kit-stm32l151-application/task_shell.o
+ .debug_line    0x00014fdd      0x263 build_ak-base-kit-stm32l151-application/task_life.o
+ .debug_line    0x00015240      0x7fe build_ak-base-kit-stm32l151-application/task_fw.o
+ .debug_line    0x00015a3e      0x196 build_ak-base-kit-stm32l151-application/task_list.o
+ .debug_line    0x00015bd4      0x241 build_ak-base-kit-stm32l151-application/task_display.o
+ .debug_line    0x00015e15      0x2c9 build_ak-base-kit-stm32l151-application/task_if.o
+ .debug_line    0x000160de      0x193 build_ak-base-kit-stm32l151-application/task_rf24_if.o
+ .debug_line    0x00016271      0x2eb build_ak-base-kit-stm32l151-application/task_uart_if.o
+ .debug_line    0x0001655c      0x18d build_ak-base-kit-stm32l151-application/task_dbg.o
+ .debug_line    0x000166e9      0x504 build_ak-base-kit-stm32l151-application/view_render.o
+ .debug_line    0x00016bed      0x4f9 build_ak-base-kit-stm32l151-application/screen_manager.o
+ .debug_line    0x000170e6     0x1147 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+ .debug_line    0x0001822d      0x84c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+ .debug_line    0x00018a79      0x1c4 build_ak-base-kit-stm32l151-application/eeprom.o
+ .debug_line    0x00018c3d      0x2cc build_ak-base-kit-stm32l151-application/link_hal.o
+ .debug_line    0x00018f09      0x68e build_ak-base-kit-stm32l151-application/link.o
+ .debug_line    0x00019597      0x9cd build_ak-base-kit-stm32l151-application/link_mac.o
+ .debug_line    0x00019f64      0xa7d build_ak-base-kit-stm32l151-application/link_phy.o
+ .debug_line    0x0001a9e1      0x541 build_ak-base-kit-stm32l151-application/link_data.o
+ .debug_line    0x0001af22      0x3e7 build_ak-base-kit-stm32l151-application/wiring_digital.o
+ .debug_line    0x0001b309      0x81b build_ak-base-kit-stm32l151-application/Print.o
+ .debug_line    0x0001bb24      0x3e0 build_ak-base-kit-stm32l151-application/HardwareSerial.o
+ .debug_line    0x0001bf04      0x3cf build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+ .debug_line    0x0001c2d3      0x56b build_ak-base-kit-stm32l151-application/SPI.o
+ .debug_line    0x0001c83e      0x7cb build_ak-base-kit-stm32l151-application/Wire.o
+ .debug_line    0x0001d009      0x604 build_ak-base-kit-stm32l151-application/twi.o
+ .debug_line    0x0001d60d      0x411 build_ak-base-kit-stm32l151-application/mini_cpp.o
+ .debug_line    0x0001da1e      0x17f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+ .debug_line    0x0001db9d       0xbd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .debug_line    0x0001dc5a      0x17b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+ .debug_line    0x0001ddd5      0x10c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+ .debug_line    0x0001dee1       0xf4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+ .debug_line    0x0001dfd5       0xb9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+ .debug_line    0x0001e08e      0x429 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+ .debug_line    0x0001e4b7      0x16b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+ .debug_line    0x0001e622       0x97 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+ .debug_line    0x0001e6b9      0x1a3 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+ .debug_line    0x0001e85c       0xe7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
+ .debug_line    0x0001e943      0x153 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+ .debug_line    0x0001ea96       0xdd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+ .debug_line    0x0001eb73      0x51f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+ .debug_line    0x0001f092      0x8e0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+ .debug_line    0x0001f972      0x196 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+ .debug_line    0x0001fb08      0x52a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+ .debug_line    0x00020032      0x1f0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+ .debug_line    0x00020222       0xf0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+ .debug_line    0x00020312      0x16f /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+ .debug_line    0x00020481      0x184 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+ .debug_line    0x00020605       0xa6 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+ .debug_line    0x000206ab       0x57 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+ .debug_line    0x00020702       0x62 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+ .debug_line    0x00020764       0x5e /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_line    0x000207c2      0x103 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+ .debug_line    0x000208c5       0x4e /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_line    0x00020913      0x5d8 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .debug_line    0x00020eeb       0x4a /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
 
 .debug_str      0x00000000    0x15063
  .debug_str     0x00000000    0x15063 build_ak-base-kit-stm32l151-application/fsm.o
@@ -6509,7 +6509,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_str     0x00015063        0x0 build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
                                 0x340 (size before relaxing)
  .debug_str     0x00015063        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui.o
-                               0x161a (size before relaxing)
+                               0x163f (size before relaxing)
  .debug_str     0x00015063        0x0 build_ak-base-kit-stm32l151-application/scr_startup.o
                                0x13f5 (size before relaxing)
  .debug_str     0x00015063        0x0 build_ak-base-kit-stm32l151-application/game_shooter_logic.o

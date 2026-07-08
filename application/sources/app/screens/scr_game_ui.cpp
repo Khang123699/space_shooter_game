@@ -25,6 +25,8 @@ view_screen_t scr_game_ui = {
 };
 
 void view_scr_game_ui() {
+	view_render.clear();
+	
 	if (g_game_state == GAME_STATE_MENU) {
 		view_render.drawRect(0, 0, 128, 64, WHITE);
 		view_render.setCursor(26, 6);
