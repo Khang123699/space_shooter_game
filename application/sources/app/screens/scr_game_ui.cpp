@@ -52,9 +52,16 @@ static void view_scr_game_ui() {
 	}
 }
 
+#include "buzzer.h"
+
 void scr_game_ui_handle(ak_msg_t *msg) {
+	// Game Over handler from Game Task
+	if (msg->sig == AC_DISPLAY_GAME_OVER_NEXT) {
+		g_game_state = GAME_STATE_GAMEOVER;
+		BUZZER_PlaySound(BUZZER_SOUND_LOWSCORE);
+	}
 	// If the game is currently playing, forward directional inputs to Game Task
-	if (g_game_state == GAME_STATE_PLAYING) {
+	else if (g_game_state == GAME_STATE_PLAYING) {
 		if (msg->sig == AC_DISPLAY_BUTON_UP_PRESSED) 
 			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_UP);
 		else if (msg->sig == AC_DISPLAY_BUTON_DOWN_PRESSED) 
