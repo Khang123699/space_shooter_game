@@ -5,9 +5,11 @@
 
 #define MAX_ENEMIES 35
 #define MAX_BULLETS 20
+#define MAX_EXPLOSIONS 5
 
 typedef struct { int8_t x, y; bool active, is_enemy; } bullet_t;
 typedef struct { int8_t x, y; int8_t hp; uint8_t type; bool active; } enemy_t;
+typedef struct { int8_t x, y; int8_t timer; bool active; } explosion_t;
 
 // Define states for the game menu and play flow
 typedef enum {
@@ -24,6 +26,9 @@ extern uint32_t g_score;
 extern int8_t g_lives;
 extern enemy_t g_enemies[];
 extern bullet_t g_bullets[];
+extern explosion_t g_explosions[];
+extern uint8_t g_stage;
+extern int8_t g_transition_timer;
 
 // Logic Interfaces
 extern void game_logic_init();
