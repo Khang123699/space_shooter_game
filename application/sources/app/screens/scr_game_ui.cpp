@@ -201,8 +201,8 @@ static void game_shooter_gameover_display() {
 	
 	view_render.setTextSize(1);
 	if ((g_gameover_anim_frame / 5) % 2 == 0) {
-		view_render.setCursor(0, 50);
-		view_render.print("Press Mode to continue");
+		view_render.setCursor(6, 50);
+		view_render.print("Press MODE to next");
 	}
 }
 
@@ -258,8 +258,10 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 		return;
 	}
 	if (msg->sig == AC_DISPLAY_SHOW_IDLE) {
+		bool need_render = false;
 		if (g_game_state == GAME_STATE_GAMEOVER) {
 			g_gameover_anim_frame++;
+			need_render = true;
 		} else if (g_game_state == GAME_STATE_NEW_HIGH_SCORE) {
 			if (g_new_high_score_timer > 0) {
 				g_new_high_score_timer--;
@@ -268,7 +270,13 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 					g_show_score_selected = 0;
 				}
 			}
+			need_render = true;
 		}
+		
+		if (need_render) {
+			task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
+		}
+		
 		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 50, TIMER_ONE_SHOT);
 		return;
 	}
