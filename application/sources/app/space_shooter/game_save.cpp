@@ -26,7 +26,7 @@ void game_load_data() {
 	}
 }
 
-bool game_update_high_score(uint32_t final_score) {
+uint8_t game_update_high_score(uint32_t final_score) {
 	int index = -1;
 	for (int i = 0; i < 3; i++) {
 		if (final_score > g_game_data.top_score[i]) {
@@ -40,7 +40,7 @@ bool game_update_high_score(uint32_t final_score) {
 		}
 		g_game_data.top_score[index] = final_score;
 		game_save_data();
-		return true;
+		return index + 1;
 	}
-	return false;
+	return 0;
 }

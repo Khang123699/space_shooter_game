@@ -7,6 +7,10 @@
 #include <string.h>
 #include "game_bitmaps.h"
 
+uint8_t g_new_high_score_rank = 0;
+uint8_t g_gameover_anim_frame = 0;
+static uint8_t g_new_high_score_timer = 0;
+
 void view_scr_game_ui();
 
 view_dynamic_t dyn_view_idle = {
@@ -181,9 +185,33 @@ static void game_shooter_gameover_display() {
 	view_render.setTextSize(2);
 	view_render.setCursor(10, 16);
 	view_render.print("GAME OVER");
+	
+	// Draw animated broken spaceship
+	int anim_x = (g_gameover_anim_frame * 2) % 128; // moves across screen
+	view_render.drawBitmap(anim_x, 34, icon_player, 8, 8, WHITE);
+	if ((g_gameover_anim_frame / 2) % 2 == 0) {
+		view_render.drawBitmap(anim_x - 8, 34, icon_flame1, 8, 8, WHITE);
+	} else {
+		view_render.drawBitmap(anim_x - 8, 34, icon_flame2, 8, 8, WHITE);
+	}
+	
 	view_render.setTextSize(1);
-	view_render.setCursor(34, 40);
-	view_render.print(g_encouragement_text);
+	if ((g_gameover_anim_frame / 5) % 2 == 0) {
+		view_render.setCursor(0, 50);
+		view_render.print("Press Mode to continue");
+	}
+}
+
+static void game_shooter_new_highscore_display() {
+	view_render.setTextSize(1);
+	view_render.setCursor(20, 20);
+	view_render.print("NEW HIGH SCORE!");
+	
+	view_render.setCursor(44, 34);
+	view_render.print("TOP ");
+	char temp[4];
+	xsprintf(temp, "%u", (unsigned int)g_new_high_score_rank);
+	view_render.print(temp);
 }
 
 static void game_shooter_score_display() {
@@ -214,6 +242,7 @@ void view_scr_game_ui() {
 		case GAME_STATE_HIGH_SCORE: game_shooter_highscore_display(); break;
 		case GAME_STATE_PLAYING: game_shooter_playing_display(); break;
 		case GAME_STATE_GAMEOVER: game_shooter_gameover_display(); break;
+		case GAME_STATE_NEW_HIGH_SCORE: game_shooter_new_highscore_display(); break;
 		case GAME_STATE_SHOW_SCORE: game_shooter_score_display(); break;
 	}
 }
@@ -225,6 +254,17 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 		return;
 	}
 	if (msg->sig == AC_DISPLAY_SHOW_IDLE) {
+		if (g_game_state == GAME_STATE_GAMEOVER) {
+			g_gameover_anim_frame++;
+		} else if (g_game_state == GAME_STATE_NEW_HIGH_SCORE) {
+			if (g_new_high_score_timer > 0) {
+				g_new_high_score_timer--;
+				if (g_new_high_score_timer == 0) {
+					g_game_state = GAME_STATE_SHOW_SCORE;
+					g_show_score_selected = 0;
+				}
+			}
+		}
 		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 50, TIMER_ONE_SHOT);
 		return;
 	}
@@ -238,11 +278,9 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 	}
 
 	if (msg->sig == AC_DISPLAY_GAME_OVER_NEXT) {
-		game_update_high_score(g_score);
 		g_game_state = GAME_STATE_GAMEOVER;
+		g_gameover_anim_frame = 0;
 		if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_LOWSCORE);
-		// Automatically transition to SCORE screen after a delay
-		// Or wait for user input
 		return;
 	}
 
@@ -280,7 +318,17 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 			else if (msg->sig == AC_DISPLAY_BUTON_MODE_PRESSED) task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_MODE);
 			break;
 		case GAME_STATE_GAMEOVER:
-			if (msg->sig == AC_DISPLAY_BUTON_MODE_PRESSED) { g_game_state = GAME_STATE_SHOW_SCORE; g_show_score_selected = 0; }
+			if (msg->sig == AC_DISPLAY_BUTON_MODE_PRESSED) { 
+				g_new_high_score_rank = game_update_high_score(g_score);
+				if (g_new_high_score_rank > 0) {
+					g_game_state = GAME_STATE_NEW_HIGH_SCORE;
+					g_new_high_score_timer = 30; // 1.5s
+					if (g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_HIGHSCORE);
+				} else {
+					g_game_state = GAME_STATE_SHOW_SCORE; 
+					g_show_score_selected = 0; 
+				}
+			}
 			break;
 		case GAME_STATE_SHOW_SCORE:
 			if (msg->sig == AC_DISPLAY_BUTON_UP_PRESSED) { g_show_score_selected = (g_show_score_selected > 0) ? g_show_score_selected - 1 : 2; }

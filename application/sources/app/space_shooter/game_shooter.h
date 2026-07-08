@@ -24,6 +24,7 @@ typedef enum {
 	GAME_STATE_HIGH_SCORE,
 	GAME_STATE_PLAYING,
 	GAME_STATE_GAMEOVER,
+	GAME_STATE_NEW_HIGH_SCORE,
 	GAME_STATE_SHOW_SCORE
 } game_state_t;
 
@@ -34,6 +35,8 @@ extern uint8_t g_setting_selected;
 extern uint8_t g_score_selected;
 extern uint8_t g_show_score_selected;
 extern const char* g_encouragement_text;
+extern uint8_t g_new_high_score_rank;
+extern uint8_t g_gameover_anim_frame;
 
 extern int16_t g_player_x;
 extern uint8_t g_player_blink;
