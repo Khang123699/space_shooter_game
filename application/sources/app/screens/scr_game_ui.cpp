@@ -121,6 +121,10 @@ static void game_shooter_playing_display() {
 				if (hp_width < 0) hp_width = 0;
 				view_render.fillRect(g_enemies[e].x, g_enemies[e].y - 3, 16, 2, BLACK);
 				view_render.fillRect(g_enemies[e].x, g_enemies[e].y - 3, hp_width, 2, WHITE);
+			} else if (g_enemies[e].type == 3) {
+				view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon_enemy3, 8, 8, WHITE);
+			} else if (g_enemies[e].type == 2) {
+				view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon_enemy2, 8, 8, WHITE);
 			} else {
 				view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon_enemy1, 8, 8, WHITE);
 			}

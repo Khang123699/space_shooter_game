@@ -5,6 +5,8 @@
 
 extern const uint8_t icon_player[8];
 extern const uint8_t icon_enemy1[8];
+extern const uint8_t icon_enemy2[8];
+extern const uint8_t icon_enemy3[8];
 extern const uint8_t icon_play[8];
 extern const uint8_t icon_setting[8];
 extern const uint8_t icon_trophy[8];

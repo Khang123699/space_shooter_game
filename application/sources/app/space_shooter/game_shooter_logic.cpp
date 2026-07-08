@@ -34,7 +34,6 @@ static int8_t enemy_dir = 1;
 static int enemy_move_ticks = 0;
 
 static void spawn_enemies() {
-	int idx = 0;
 	if (g_stage % 5 == 0) {
 		g_enemies[0].active = true;
 		g_enemies[0].type = 4;
@@ -45,20 +44,13 @@ static void spawn_enemies() {
 		return;
 	}
 	
-	for (int r = 0; r < 3; r++) {
-		for (int c = 0; c < 6; c++) {
-			int spawn_chance = 30 + g_game_data.difficulty * 20; 
-			if (rand() % 100 < spawn_chance) { 
-				g_enemies[idx].active = true;
-				g_enemies[idx].type = 1;
-				g_enemies[idx].hp = 1;
-				g_enemies[idx].x = 10 + c * 14;
-				g_enemies[idx].y = r * 10 + 12;
-			} else {
-				g_enemies[idx].active = false;
-			}
-			idx++;
-		}
+	// Normal
+	for (int e = 0; e < 10; e++) {
+		g_enemies[e].active = true;
+		g_enemies[e].type = 1 + (rand() % 3); // random type 1, 2, or 3
+		g_enemies[e].hp = g_enemies[e].type + g_game_data.difficulty; // HP based on type
+		g_enemies[e].x = 10 + (e % 5) * 20;
+		g_enemies[e].y = (e / 5) * 12;
 	}
 }
 
