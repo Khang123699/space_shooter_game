@@ -236,6 +236,8 @@ create:
 	$(Print) CREATE $(OBJECTS_DIR) folder
 	@mkdir -p $(OBJECTS_DIR)
 
+BIN_DIR = ../bin
+
 $(TARGET): $(OBJECTS) $(LIBC) $(LIBM) $(LIBSTDCPP_NANO) $(LIBGCC) $(LIBGCOV) $(LIBFPU) $(LIBRDPMON)
 	$(Print) LD $@
 	@$(LD) --entry reset_handler -T $(LDFILE) $(LDFLAGS) -o $(@) $(^)
@@ -243,6 +245,12 @@ $(TARGET): $(OBJECTS) $(LIBC) $(LIBM) $(LIBSTDCPP_NANO) $(LIBGCC) $(LIBGCOV) $(L
 	@$(OBJCOPY) -O binary $(@) $(@:.axf=.bin)
 	@$(OBJCOPY) -O binary $(@) $(@:.axf=.out)
 	@$(OBJCOPY) -O binary $(@) $(@:.axf=.elf)
+	@mkdir -p $(BIN_DIR)
+	@cp $(@) $(BIN_DIR)/
+	@cp $(@:.axf=.bin) $(BIN_DIR)/
+	@cp $(@:.axf=.out) $(BIN_DIR)/
+	@cp $(@:.axf=.elf) $(BIN_DIR)/
+	@cp $(OBJECTS_DIR)/$(PROJECT).map $(BIN_DIR)/
 	@$(ARM_SIZE) $(TARGET)
 
 $(OBJECTS_DIR)/%.o: %.c
