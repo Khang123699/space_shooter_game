@@ -172,7 +172,7 @@ void game_logic_update() {
 			
 			// Shoot
 			int shoot_chance = (g_enemies[e].type == 4) ? (10 + g_game_data.difficulty * 5) : (1 + g_game_data.difficulty);
-			if (rand() % 400 < shoot_chance) {
+			if (rand() % 300 < shoot_chance) {
 				if (g_enemies[e].type == 4) {
 					// Triple shot burst for Boss
 					int bullets_spawned = 0;
