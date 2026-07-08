@@ -1,6 +1,7 @@
 #include "scr_game_ui.h"
 #include "game_shooter.h"
 #include "view_render.h"
+#include "buzzer.h"
 
 // Define 8x8 bitmaps for menu icons and entities
 static const uint8_t icon_player[8]   = { 0x18, 0x18, 0x3c, 0x3c, 0x5a, 0x99, 0xff, 0xff };
@@ -56,15 +57,22 @@ void view_scr_game_ui() {
 	}
 }
 
-#include "buzzer.h"
-
 void scr_game_ui_handle(ak_msg_t *msg) {
+	switch (msg->sig) {
+	case SCREEN_ENTRY:
+		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 50, TIMER_ONE_SHOT);
+		break;
+	case AC_DISPLAY_SHOW_IDLE:
+		// Continuously trigger screen render
+		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 50, TIMER_ONE_SHOT);
+		break;
+	}
+
 	// Game Over handler from Game Task
 	if (msg->sig == AC_DISPLAY_GAME_OVER_NEXT) {
 		g_game_state = GAME_STATE_GAMEOVER;
 		BUZZER_PlaySound(BUZZER_SOUND_LOWSCORE);
 	}
-	// If the game is currently playing, forward directional inputs to Game Task
 	else if (g_game_state == GAME_STATE_PLAYING) {
 		if (msg->sig == AC_DISPLAY_BUTON_UP_PRESSED) 
 			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_UP);
@@ -73,7 +81,6 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 		else if (msg->sig == AC_DISPLAY_BUTON_MODE_PRESSED) 
 			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_MODE);
 	} 
-	// If in menu state, pressing MODE button starts the game
 	else if (g_game_state == GAME_STATE_MENU) {
 		if (msg->sig == AC_DISPLAY_BUTON_MODE_PRESSED) {
 			g_game_state = GAME_STATE_PLAYING;
