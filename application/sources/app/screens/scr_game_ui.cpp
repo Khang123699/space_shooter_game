@@ -330,6 +330,8 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 				}
 			}
 			break;
+		case GAME_STATE_NEW_HIGH_SCORE:
+			break;
 		case GAME_STATE_SHOW_SCORE:
 			if (msg->sig == AC_DISPLAY_BUTON_UP_PRESSED) { g_show_score_selected = (g_show_score_selected > 0) ? g_show_score_selected - 1 : 2; }
 			else if (msg->sig == AC_DISPLAY_BUTON_DOWN_PRESSED) { g_show_score_selected = (g_show_score_selected < 2) ? g_show_score_selected + 1 : 0; }
