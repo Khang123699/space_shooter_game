@@ -14,12 +14,21 @@ typedef struct { int8_t x, y; int8_t timer; bool active; } explosion_t;
 // Define states for the game menu and play flow
 typedef enum {
 	GAME_STATE_MENU,
+	GAME_STATE_SETTING,
+	GAME_STATE_HIGH_SCORE,
 	GAME_STATE_PLAYING,
-	GAME_STATE_GAMEOVER
+	GAME_STATE_GAMEOVER,
+	GAME_STATE_SHOW_SCORE
 } game_state_t;
 
 // Exported global variables for UI and Logic
 extern game_state_t g_game_state;
+extern uint8_t g_menu_selected;
+extern uint8_t g_setting_selected;
+extern uint8_t g_score_selected;
+extern uint8_t g_show_score_selected;
+extern const char* g_encouragement_text;
+
 extern int16_t g_player_x;
 extern uint8_t g_player_blink;
 extern uint32_t g_score;
