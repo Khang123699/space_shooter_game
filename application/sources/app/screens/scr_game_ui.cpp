@@ -53,8 +53,20 @@ static void view_scr_game_ui() {
 }
 
 void scr_game_ui_handle(ak_msg_t *msg) {
-	switch (msg->sig) {
-	default:
-		break;
+	// If the game is currently playing, forward directional inputs to Game Task
+	if (g_game_state == GAME_STATE_PLAYING) {
+		if (msg->sig == AC_DISPLAY_BUTON_UP_PRESSED) 
+			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_UP);
+		else if (msg->sig == AC_DISPLAY_BUTON_DOWN_PRESSED) 
+			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_DOWN);
+		else if (msg->sig == AC_DISPLAY_BUTON_MODE_PRESSED) 
+			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_MODE);
+	} 
+	// If in menu state, pressing MODE button starts the game
+	else if (g_game_state == GAME_STATE_MENU) {
+		if (msg->sig == AC_DISPLAY_BUTON_MODE_PRESSED) {
+			g_game_state = GAME_STATE_PLAYING;
+			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_START_REQ);
+		}
 	}
 }
