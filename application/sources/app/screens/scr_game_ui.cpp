@@ -283,6 +283,8 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 				}
 			}
 			need_render = true;
+		} else if (g_game_state == GAME_STATE_SHOW_SCORE) {
+			need_render = true;
 		}
 		
 		if (need_render) {
@@ -345,7 +347,7 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 				g_new_high_score_rank = game_update_high_score(g_score);
 				if (g_new_high_score_rank > 0) {
 					g_game_state = GAME_STATE_NEW_HIGH_SCORE;
-					g_new_high_score_timer = 30; // 1.5s
+					g_new_high_score_timer = 40; // 2.0s
 					if (g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_HIGHSCORE);
 				} else {
 					g_game_state = GAME_STATE_SHOW_SCORE; 
