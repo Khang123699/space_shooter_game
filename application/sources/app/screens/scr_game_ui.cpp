@@ -186,34 +186,54 @@ static void game_shooter_playing_display() {
 }
 
 static void game_shooter_gameover_display() {
-	// 1. GAME OVER Text
+	// 1. Exploding Spaceship (Particles)
+	if (g_gameover_anim_frame <= 20) {
+		int r = g_gameover_anim_frame / 2; // radius of explosion expands 0 to 10
+		int cx = g_player_x + 4;
+		int cy = 58;
+		
+		// Draw 8 flying particles
+		view_render.drawPixel(cx - r, cy - r, WHITE);
+		view_render.drawPixel(cx + r, cy - r, WHITE);
+		view_render.drawPixel(cx - r, cy + r, WHITE);
+		view_render.drawPixel(cx + r, cy + r, WHITE);
+		view_render.drawPixel(cx, cy - r - 2, WHITE);
+		view_render.drawPixel(cx, cy + r + 2, WHITE);
+		view_render.drawPixel(cx - r - 2, cy, WHITE);
+		view_render.drawPixel(cx + r + 2, cy, WHITE);
+		
+		// Fading center core
+		if (g_gameover_anim_frame < 10) {
+			view_render.drawPixel(cx, cy, WHITE);
+		}
+	}
+
+	// 2. GAME OVER Text
 	view_render.setTextSize(2);
 	int go_y = -16 + (g_gameover_anim_frame * 2);
-	if (go_y > 10) go_y = 10;
+	if (go_y > 8) go_y = 8;
 	view_render.setCursor(10, go_y);
 	view_render.print("GAME OVER");
 	
-	// 2. Exploding Spaceship
-	// Alternate between flame1 and flame2 at player's death position
-	if (g_gameover_anim_frame % 4 < 2) {
-		view_render.drawBitmap(g_player_x, 54, icon_flame1, 8, 8, WHITE);
-	} else {
-		view_render.drawBitmap(g_player_x, 54, icon_flame2, 8, 8, WHITE);
-	}
-	
-	// 3. Stats (Appears after 1 second)
+	// 3. Stats (Appears after text settles)
 	view_render.setTextSize(1);
-	if (g_gameover_anim_frame > 20) {
-		view_render.setCursor(16, 32);
-		view_render.print("STAGE REACHED: ");
-		char stage_str[4];
-		xsprintf(stage_str, "%u", (unsigned int)g_stage);
+	if (g_gameover_anim_frame > 40) {
+		char score_str[16];
+		xsprintf(score_str, "SCORE: %u", (unsigned int)g_score);
+		int score_w = strlen(score_str) * 6;
+		view_render.setCursor((128 - score_w) / 2, 28);
+		view_render.print(score_str);
+		
+		char stage_str[16];
+		xsprintf(stage_str, "STAGE: %u", (unsigned int)g_stage);
+		int stage_w = strlen(stage_str) * 6;
+		view_render.setCursor((128 - stage_w) / 2, 38);
 		view_render.print(stage_str);
 	}
 	
-	// 4. Press MODE (Blinks after 2 seconds)
-	if (g_gameover_anim_frame > 40 && ((g_gameover_anim_frame / 5) % 2 == 0)) {
-		view_render.setCursor(6, 50);
+	// 4. Press MODE (Blinks after stats)
+	if (g_gameover_anim_frame > 60 && ((g_gameover_anim_frame / 5) % 2 == 0)) {
+		view_render.setCursor(10, 52); // (128 - 18 * 6) / 2 = 10
 		view_render.print("Press MODE to next");
 	}
 }
