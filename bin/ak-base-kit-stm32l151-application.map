@@ -1535,6 +1535,9 @@ Discarded input sections
  .text          0x00000000        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui.o
  .data          0x00000000        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui.o
  .bss           0x00000000        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+ .text          0x00000000        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
+ .data          0x00000000        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
+ .bss           0x00000000        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
  .text          0x00000000        0x0 build_ak-base-kit-stm32l151-application/scr_startup.o
  .data          0x00000000        0x0 build_ak-base-kit-stm32l151-application/scr_startup.o
  .bss           0x00000000        0x0 build_ak-base-kit-stm32l151-application/scr_startup.o
@@ -4191,12 +4194,12 @@ Linker script and memory map
  .text.SystemCoreClockUpdate
                 0x08009d24       0x7c build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
                 0x08009d24                SystemCoreClockUpdate
- .text._Z18scr_game_ui_handleP8ak_msg_t
-                0x08009da0      0x24c build_ak-base-kit-stm32l151-application/scr_game_ui.o
-                0x08009da0                scr_game_ui_handle(ak_msg_t*)
  .text._Z16view_scr_game_uiv
-                0x08009fec      0x8b8 build_ak-base-kit-stm32l151-application/scr_game_ui.o
-                0x08009fec                view_scr_game_ui()
+                0x08009da0      0x8b8 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+                0x08009da0                view_scr_game_ui()
+ .text._Z18scr_game_ui_handleP8ak_msg_t
+                0x0800a658      0x24c build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
+                0x0800a658                scr_game_ui_handle(ak_msg_t*)
  .text._ZL16view_scr_startupv
                 0x0800a8a4       0x90 build_ak-base-kit-stm32l151-application/scr_startup.o
  .text._Z18scr_startup_handleP8ak_msg_t
@@ -5204,8 +5207,9 @@ Linker script and memory map
                 0x2000168c      0x200 build_ak-base-kit-stm32l151-application/sys_cfg.o
  .bss.delay_coeficient
                 0x2000188c        0x4 build_ak-base-kit-stm32l151-application/sys_cfg.o
- .bss._ZL22g_new_high_score_timer
+ .bss.g_new_high_score_timer
                 0x20001890        0x1 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+                0x20001890                g_new_high_score_timer
  .bss.g_gameover_anim_frame
                 0x20001891        0x1 build_ak-base-kit-stm32l151-application/scr_game_ui.o
                 0x20001891                g_gameover_anim_frame
@@ -5511,6 +5515,7 @@ LOAD build_ak-base-kit-stm32l151-application/sys_cfg.o
 LOAD build_ak-base-kit-stm32l151-application/io_cfg.o
 LOAD build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
 LOAD build_ak-base-kit-stm32l151-application/scr_game_ui.o
+LOAD build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
 LOAD build_ak-base-kit-stm32l151-application/scr_startup.o
 LOAD build_ak-base-kit-stm32l151-application/game_shooter_logic.o
 LOAD build_ak-base-kit-stm32l151-application/game_shooter_task.o
@@ -5573,7 +5578,7 @@ LOAD /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libm.a
 LOAD /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libg.a
 LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
 
-.debug_info     0x00000000    0x68277
+.debug_info     0x00000000    0x6a144
  .debug_info    0x00000000      0x20b build_ak-base-kit-stm32l151-application/fsm.o
  .debug_info    0x0000020b      0xf2c build_ak-base-kit-stm32l151-application/task.o
  .debug_info    0x00001137      0x807 build_ak-base-kit-stm32l151-application/timer.o
@@ -5620,77 +5625,78 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_info    0x00016688     0x20b1 build_ak-base-kit-stm32l151-application/sys_cfg.o
  .debug_info    0x00018739     0x26af build_ak-base-kit-stm32l151-application/io_cfg.o
  .debug_info    0x0001ade8      0x58d build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
- .debug_info    0x0001b375     0x378e build_ak-base-kit-stm32l151-application/scr_game_ui.o
- .debug_info    0x0001eb03     0x2355 build_ak-base-kit-stm32l151-application/scr_startup.o
- .debug_info    0x00020e58     0x1235 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
- .debug_info    0x0002208d      0x9d9 build_ak-base-kit-stm32l151-application/game_shooter_task.o
- .debug_info    0x00022a66      0x283 build_ak-base-kit-stm32l151-application/game_save.o
- .debug_info    0x00022ce9      0x1a8 build_ak-base-kit-stm32l151-application/game_bitmaps.o
- .debug_info    0x00022e91      0xa9a build_ak-base-kit-stm32l151-application/task_system.o
- .debug_info    0x0002392b     0x7d65 build_ak-base-kit-stm32l151-application/app.o
- .debug_info    0x0002b690      0x792 build_ak-base-kit-stm32l151-application/app_data.o
- .debug_info    0x0002be22      0x792 build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
- .debug_info    0x0002c5b4      0xc02 build_ak-base-kit-stm32l151-application/app_bsp.o
- .debug_info    0x0002d1b6      0xd4b build_ak-base-kit-stm32l151-application/app_modbus_pull.o
- .debug_info    0x0002df01     0x4715 build_ak-base-kit-stm32l151-application/shell.o
- .debug_info    0x00032616      0xc27 build_ak-base-kit-stm32l151-application/task_shell.o
- .debug_info    0x0003323d      0x9c0 build_ak-base-kit-stm32l151-application/task_life.o
- .debug_info    0x00033bfd     0x170b build_ak-base-kit-stm32l151-application/task_fw.o
- .debug_info    0x00035308      0xaf9 build_ak-base-kit-stm32l151-application/task_list.o
- .debug_info    0x00035e01     0x1dfa build_ak-base-kit-stm32l151-application/task_display.o
- .debug_info    0x00037bfb      0xae5 build_ak-base-kit-stm32l151-application/task_if.o
- .debug_info    0x000386e0      0x83c build_ak-base-kit-stm32l151-application/task_rf24_if.o
- .debug_info    0x00038f1c      0xb04 build_ak-base-kit-stm32l151-application/task_uart_if.o
- .debug_info    0x00039a20      0x83c build_ak-base-kit-stm32l151-application/task_dbg.o
- .debug_info    0x0003a25c     0x244d build_ak-base-kit-stm32l151-application/view_render.o
- .debug_info    0x0003c6a9     0x231c build_ak-base-kit-stm32l151-application/screen_manager.o
- .debug_info    0x0003e9c5     0x426b build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
- .debug_info    0x00042c30     0x2f70 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
- .debug_info    0x00045ba0      0x8ec build_ak-base-kit-stm32l151-application/eeprom.o
- .debug_info    0x0004648c      0x91a build_ak-base-kit-stm32l151-application/link_hal.o
- .debug_info    0x00046da6     0x14ed build_ak-base-kit-stm32l151-application/link.o
- .debug_info    0x00048293     0x1829 build_ak-base-kit-stm32l151-application/link_mac.o
- .debug_info    0x00049abc     0x155c build_ak-base-kit-stm32l151-application/link_phy.o
- .debug_info    0x0004b018      0xc52 build_ak-base-kit-stm32l151-application/link_data.o
- .debug_info    0x0004bc6a     0x1e4d build_ak-base-kit-stm32l151-application/wiring_digital.o
- .debug_info    0x0004dab7     0x32f9 build_ak-base-kit-stm32l151-application/Print.o
- .debug_info    0x00050db0     0x368c build_ak-base-kit-stm32l151-application/HardwareSerial.o
- .debug_info    0x0005443c     0x37da build_ak-base-kit-stm32l151-application/HardwareSerial2.o
- .debug_info    0x00057c16      0xf88 build_ak-base-kit-stm32l151-application/SPI.o
- .debug_info    0x00058b9e     0x43d8 build_ak-base-kit-stm32l151-application/Wire.o
- .debug_info    0x0005cf76     0x2849 build_ak-base-kit-stm32l151-application/twi.o
- .debug_info    0x0005f7bf     0x1170 build_ak-base-kit-stm32l151-application/mini_cpp.o
- .debug_info    0x0006092f      0x754 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
- .debug_info    0x00061083       0x33 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
- .debug_info    0x000610b6      0x12b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
- .debug_info    0x000611e1      0x70f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
- .debug_info    0x000618f0       0xbd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
- .debug_info    0x000619ad       0xc3 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
- .debug_info    0x00061a70      0xd95 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
- .debug_info    0x00062805      0x7b4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
- .debug_info    0x00062fb9       0xb9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
- .debug_info    0x00063072      0x135 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
- .debug_info    0x000631a7      0x729 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
- .debug_info    0x000638d0      0x73a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
- .debug_info    0x0006400a       0x33 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
- .debug_info    0x0006403d      0xea8 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
- .debug_info    0x00064ee5      0xcd9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
- .debug_info    0x00065bbe      0x796 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
- .debug_info    0x00066354      0xb55 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
- .debug_info    0x00066ea9      0x831 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
- .debug_info    0x000676da       0xc1 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
- .debug_info    0x0006779b       0xd3 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
- .debug_info    0x0006786e       0x57 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
- .debug_info    0x000678c5       0xdf /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
- .debug_info    0x000679a4       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
- .debug_info    0x000679e0       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
- .debug_info    0x00067a1c       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
- .debug_info    0x00067a58       0xca /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
- .debug_info    0x00067b22       0x24 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
- .debug_info    0x00067b46      0x6f5 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
- .debug_info    0x0006823b       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x0001b375     0x336b build_ak-base-kit-stm32l151-application/scr_game_ui.o
+ .debug_info    0x0001e6e0     0x22f0 build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
+ .debug_info    0x000209d0     0x2355 build_ak-base-kit-stm32l151-application/scr_startup.o
+ .debug_info    0x00022d25     0x1235 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+ .debug_info    0x00023f5a      0x9d9 build_ak-base-kit-stm32l151-application/game_shooter_task.o
+ .debug_info    0x00024933      0x283 build_ak-base-kit-stm32l151-application/game_save.o
+ .debug_info    0x00024bb6      0x1a8 build_ak-base-kit-stm32l151-application/game_bitmaps.o
+ .debug_info    0x00024d5e      0xa9a build_ak-base-kit-stm32l151-application/task_system.o
+ .debug_info    0x000257f8     0x7d65 build_ak-base-kit-stm32l151-application/app.o
+ .debug_info    0x0002d55d      0x792 build_ak-base-kit-stm32l151-application/app_data.o
+ .debug_info    0x0002dcef      0x792 build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
+ .debug_info    0x0002e481      0xc02 build_ak-base-kit-stm32l151-application/app_bsp.o
+ .debug_info    0x0002f083      0xd4b build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+ .debug_info    0x0002fdce     0x4715 build_ak-base-kit-stm32l151-application/shell.o
+ .debug_info    0x000344e3      0xc27 build_ak-base-kit-stm32l151-application/task_shell.o
+ .debug_info    0x0003510a      0x9c0 build_ak-base-kit-stm32l151-application/task_life.o
+ .debug_info    0x00035aca     0x170b build_ak-base-kit-stm32l151-application/task_fw.o
+ .debug_info    0x000371d5      0xaf9 build_ak-base-kit-stm32l151-application/task_list.o
+ .debug_info    0x00037cce     0x1dfa build_ak-base-kit-stm32l151-application/task_display.o
+ .debug_info    0x00039ac8      0xae5 build_ak-base-kit-stm32l151-application/task_if.o
+ .debug_info    0x0003a5ad      0x83c build_ak-base-kit-stm32l151-application/task_rf24_if.o
+ .debug_info    0x0003ade9      0xb04 build_ak-base-kit-stm32l151-application/task_uart_if.o
+ .debug_info    0x0003b8ed      0x83c build_ak-base-kit-stm32l151-application/task_dbg.o
+ .debug_info    0x0003c129     0x244d build_ak-base-kit-stm32l151-application/view_render.o
+ .debug_info    0x0003e576     0x231c build_ak-base-kit-stm32l151-application/screen_manager.o
+ .debug_info    0x00040892     0x426b build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+ .debug_info    0x00044afd     0x2f70 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+ .debug_info    0x00047a6d      0x8ec build_ak-base-kit-stm32l151-application/eeprom.o
+ .debug_info    0x00048359      0x91a build_ak-base-kit-stm32l151-application/link_hal.o
+ .debug_info    0x00048c73     0x14ed build_ak-base-kit-stm32l151-application/link.o
+ .debug_info    0x0004a160     0x1829 build_ak-base-kit-stm32l151-application/link_mac.o
+ .debug_info    0x0004b989     0x155c build_ak-base-kit-stm32l151-application/link_phy.o
+ .debug_info    0x0004cee5      0xc52 build_ak-base-kit-stm32l151-application/link_data.o
+ .debug_info    0x0004db37     0x1e4d build_ak-base-kit-stm32l151-application/wiring_digital.o
+ .debug_info    0x0004f984     0x32f9 build_ak-base-kit-stm32l151-application/Print.o
+ .debug_info    0x00052c7d     0x368c build_ak-base-kit-stm32l151-application/HardwareSerial.o
+ .debug_info    0x00056309     0x37da build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+ .debug_info    0x00059ae3      0xf88 build_ak-base-kit-stm32l151-application/SPI.o
+ .debug_info    0x0005aa6b     0x43d8 build_ak-base-kit-stm32l151-application/Wire.o
+ .debug_info    0x0005ee43     0x2849 build_ak-base-kit-stm32l151-application/twi.o
+ .debug_info    0x0006168c     0x1170 build_ak-base-kit-stm32l151-application/mini_cpp.o
+ .debug_info    0x000627fc      0x754 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+ .debug_info    0x00062f50       0x33 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .debug_info    0x00062f83      0x12b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+ .debug_info    0x000630ae      0x70f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+ .debug_info    0x000637bd       0xbd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+ .debug_info    0x0006387a       0xc3 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+ .debug_info    0x0006393d      0xd95 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+ .debug_info    0x000646d2      0x7b4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+ .debug_info    0x00064e86       0xb9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+ .debug_info    0x00064f3f      0x135 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+ .debug_info    0x00065074      0x729 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
+ .debug_info    0x0006579d      0x73a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+ .debug_info    0x00065ed7       0x33 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+ .debug_info    0x00065f0a      0xea8 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+ .debug_info    0x00066db2      0xcd9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+ .debug_info    0x00067a8b      0x796 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+ .debug_info    0x00068221      0xb55 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+ .debug_info    0x00068d76      0x831 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+ .debug_info    0x000695a7       0xc1 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+ .debug_info    0x00069668       0xd3 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+ .debug_info    0x0006973b       0x57 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+ .debug_info    0x00069792       0xdf /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+ .debug_info    0x00069871       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+ .debug_info    0x000698ad       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+ .debug_info    0x000698e9       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_info    0x00069925       0xca /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+ .debug_info    0x000699ef       0x24 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_info    0x00069a13      0x6f5 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .debug_info    0x0006a108       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
 
-.debug_abbrev   0x00000000    0x1179f
+.debug_abbrev   0x00000000    0x11aa7
  .debug_abbrev  0x00000000       0xda build_ak-base-kit-stm32l151-application/fsm.o
  .debug_abbrev  0x000000da      0x3f3 build_ak-base-kit-stm32l151-application/task.o
  .debug_abbrev  0x000004cd      0x349 build_ak-base-kit-stm32l151-application/timer.o
@@ -5737,78 +5743,79 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_abbrev  0x00005b74      0x570 build_ak-base-kit-stm32l151-application/sys_cfg.o
  .debug_abbrev  0x000060e4      0x384 build_ak-base-kit-stm32l151-application/io_cfg.o
  .debug_abbrev  0x00006468      0x19c build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
- .debug_abbrev  0x00006604      0x4d0 build_ak-base-kit-stm32l151-application/scr_game_ui.o
- .debug_abbrev  0x00006ad4      0x3d3 build_ak-base-kit-stm32l151-application/scr_startup.o
- .debug_abbrev  0x00006ea7      0x39e build_ak-base-kit-stm32l151-application/game_shooter_logic.o
- .debug_abbrev  0x00007245      0x236 build_ak-base-kit-stm32l151-application/game_shooter_task.o
- .debug_abbrev  0x0000747b      0x185 build_ak-base-kit-stm32l151-application/game_save.o
- .debug_abbrev  0x00007600       0x74 build_ak-base-kit-stm32l151-application/game_bitmaps.o
- .debug_abbrev  0x00007674      0x213 build_ak-base-kit-stm32l151-application/task_system.o
- .debug_abbrev  0x00007887      0x853 build_ak-base-kit-stm32l151-application/app.o
- .debug_abbrev  0x000080da      0x1cd build_ak-base-kit-stm32l151-application/app_data.o
- .debug_abbrev  0x000082a7      0x1cd build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
- .debug_abbrev  0x00008474      0x29a build_ak-base-kit-stm32l151-application/app_bsp.o
- .debug_abbrev  0x0000870e      0x312 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
- .debug_abbrev  0x00008a20      0x632 build_ak-base-kit-stm32l151-application/shell.o
- .debug_abbrev  0x00009052      0x2d5 build_ak-base-kit-stm32l151-application/task_shell.o
- .debug_abbrev  0x00009327      0x24d build_ak-base-kit-stm32l151-application/task_life.o
- .debug_abbrev  0x00009574      0x367 build_ak-base-kit-stm32l151-application/task_fw.o
- .debug_abbrev  0x000098db      0x21d build_ak-base-kit-stm32l151-application/task_list.o
- .debug_abbrev  0x00009af8      0x2b9 build_ak-base-kit-stm32l151-application/task_display.o
- .debug_abbrev  0x00009db1      0x25c build_ak-base-kit-stm32l151-application/task_if.o
- .debug_abbrev  0x0000a00d      0x1aa build_ak-base-kit-stm32l151-application/task_rf24_if.o
- .debug_abbrev  0x0000a1b7      0x222 build_ak-base-kit-stm32l151-application/task_uart_if.o
- .debug_abbrev  0x0000a3d9      0x1aa build_ak-base-kit-stm32l151-application/task_dbg.o
- .debug_abbrev  0x0000a583      0x49d build_ak-base-kit-stm32l151-application/view_render.o
- .debug_abbrev  0x0000aa20      0x3c2 build_ak-base-kit-stm32l151-application/screen_manager.o
- .debug_abbrev  0x0000ade2      0x729 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
- .debug_abbrev  0x0000b50b      0x5bf build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
- .debug_abbrev  0x0000baca      0x1e8 build_ak-base-kit-stm32l151-application/eeprom.o
- .debug_abbrev  0x0000bcb2      0x274 build_ak-base-kit-stm32l151-application/link_hal.o
- .debug_abbrev  0x0000bf26      0x406 build_ak-base-kit-stm32l151-application/link.o
- .debug_abbrev  0x0000c32c      0x511 build_ak-base-kit-stm32l151-application/link_mac.o
- .debug_abbrev  0x0000c83d      0x5d3 build_ak-base-kit-stm32l151-application/link_phy.o
- .debug_abbrev  0x0000ce10      0x318 build_ak-base-kit-stm32l151-application/link_data.o
- .debug_abbrev  0x0000d128      0x28a build_ak-base-kit-stm32l151-application/wiring_digital.o
- .debug_abbrev  0x0000d3b2      0x4f1 build_ak-base-kit-stm32l151-application/Print.o
- .debug_abbrev  0x0000d8a3      0x520 build_ak-base-kit-stm32l151-application/HardwareSerial.o
- .debug_abbrev  0x0000ddc3      0x5a7 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
- .debug_abbrev  0x0000e36a      0x3cb build_ak-base-kit-stm32l151-application/SPI.o
- .debug_abbrev  0x0000e735      0x7a0 build_ak-base-kit-stm32l151-application/Wire.o
- .debug_abbrev  0x0000eed5      0x487 build_ak-base-kit-stm32l151-application/twi.o
- .debug_abbrev  0x0000f35c      0x445 build_ak-base-kit-stm32l151-application/mini_cpp.o
- .debug_abbrev  0x0000f7a1      0x1dc /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
- .debug_abbrev  0x0000f97d       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
- .debug_abbrev  0x0000f9a5       0x90 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
- .debug_abbrev  0x0000fa35      0x19a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
- .debug_abbrev  0x0000fbcf       0x78 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
- .debug_abbrev  0x0000fc47       0x7b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
- .debug_abbrev  0x0000fcc2      0x326 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
- .debug_abbrev  0x0000ffe8      0x20b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
- .debug_abbrev  0x000101f3       0x62 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
- .debug_abbrev  0x00010255       0xb7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
- .debug_abbrev  0x0001030c      0x185 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
- .debug_abbrev  0x00010491      0x1ce /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
- .debug_abbrev  0x0001065f       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
- .debug_abbrev  0x00010687      0x446 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
- .debug_abbrev  0x00010acd      0x2d7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
- .debug_abbrev  0x00010da4      0x216 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
- .debug_abbrev  0x00010fba      0x27f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
- .debug_abbrev  0x00011239      0x22a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
- .debug_abbrev  0x00011463       0x80 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
- .debug_abbrev  0x000114e3       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
- .debug_abbrev  0x0001150b       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
- .debug_abbrev  0x00011533       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
- .debug_abbrev  0x0001155b       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
- .debug_abbrev  0x00011583       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
- .debug_abbrev  0x000115ab       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
- .debug_abbrev  0x000115d3       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
- .debug_abbrev  0x000115fb       0x14 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
- .debug_abbrev  0x0001160f      0x16a /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
- .debug_abbrev  0x00011779       0x26 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x00006604      0x453 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+ .debug_abbrev  0x00006a57      0x385 build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
+ .debug_abbrev  0x00006ddc      0x3d3 build_ak-base-kit-stm32l151-application/scr_startup.o
+ .debug_abbrev  0x000071af      0x39e build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+ .debug_abbrev  0x0000754d      0x236 build_ak-base-kit-stm32l151-application/game_shooter_task.o
+ .debug_abbrev  0x00007783      0x185 build_ak-base-kit-stm32l151-application/game_save.o
+ .debug_abbrev  0x00007908       0x74 build_ak-base-kit-stm32l151-application/game_bitmaps.o
+ .debug_abbrev  0x0000797c      0x213 build_ak-base-kit-stm32l151-application/task_system.o
+ .debug_abbrev  0x00007b8f      0x853 build_ak-base-kit-stm32l151-application/app.o
+ .debug_abbrev  0x000083e2      0x1cd build_ak-base-kit-stm32l151-application/app_data.o
+ .debug_abbrev  0x000085af      0x1cd build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
+ .debug_abbrev  0x0000877c      0x29a build_ak-base-kit-stm32l151-application/app_bsp.o
+ .debug_abbrev  0x00008a16      0x312 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+ .debug_abbrev  0x00008d28      0x632 build_ak-base-kit-stm32l151-application/shell.o
+ .debug_abbrev  0x0000935a      0x2d5 build_ak-base-kit-stm32l151-application/task_shell.o
+ .debug_abbrev  0x0000962f      0x24d build_ak-base-kit-stm32l151-application/task_life.o
+ .debug_abbrev  0x0000987c      0x367 build_ak-base-kit-stm32l151-application/task_fw.o
+ .debug_abbrev  0x00009be3      0x21d build_ak-base-kit-stm32l151-application/task_list.o
+ .debug_abbrev  0x00009e00      0x2b9 build_ak-base-kit-stm32l151-application/task_display.o
+ .debug_abbrev  0x0000a0b9      0x25c build_ak-base-kit-stm32l151-application/task_if.o
+ .debug_abbrev  0x0000a315      0x1aa build_ak-base-kit-stm32l151-application/task_rf24_if.o
+ .debug_abbrev  0x0000a4bf      0x222 build_ak-base-kit-stm32l151-application/task_uart_if.o
+ .debug_abbrev  0x0000a6e1      0x1aa build_ak-base-kit-stm32l151-application/task_dbg.o
+ .debug_abbrev  0x0000a88b      0x49d build_ak-base-kit-stm32l151-application/view_render.o
+ .debug_abbrev  0x0000ad28      0x3c2 build_ak-base-kit-stm32l151-application/screen_manager.o
+ .debug_abbrev  0x0000b0ea      0x729 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+ .debug_abbrev  0x0000b813      0x5bf build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+ .debug_abbrev  0x0000bdd2      0x1e8 build_ak-base-kit-stm32l151-application/eeprom.o
+ .debug_abbrev  0x0000bfba      0x274 build_ak-base-kit-stm32l151-application/link_hal.o
+ .debug_abbrev  0x0000c22e      0x406 build_ak-base-kit-stm32l151-application/link.o
+ .debug_abbrev  0x0000c634      0x511 build_ak-base-kit-stm32l151-application/link_mac.o
+ .debug_abbrev  0x0000cb45      0x5d3 build_ak-base-kit-stm32l151-application/link_phy.o
+ .debug_abbrev  0x0000d118      0x318 build_ak-base-kit-stm32l151-application/link_data.o
+ .debug_abbrev  0x0000d430      0x28a build_ak-base-kit-stm32l151-application/wiring_digital.o
+ .debug_abbrev  0x0000d6ba      0x4f1 build_ak-base-kit-stm32l151-application/Print.o
+ .debug_abbrev  0x0000dbab      0x520 build_ak-base-kit-stm32l151-application/HardwareSerial.o
+ .debug_abbrev  0x0000e0cb      0x5a7 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+ .debug_abbrev  0x0000e672      0x3cb build_ak-base-kit-stm32l151-application/SPI.o
+ .debug_abbrev  0x0000ea3d      0x7a0 build_ak-base-kit-stm32l151-application/Wire.o
+ .debug_abbrev  0x0000f1dd      0x487 build_ak-base-kit-stm32l151-application/twi.o
+ .debug_abbrev  0x0000f664      0x445 build_ak-base-kit-stm32l151-application/mini_cpp.o
+ .debug_abbrev  0x0000faa9      0x1dc /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+ .debug_abbrev  0x0000fc85       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .debug_abbrev  0x0000fcad       0x90 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+ .debug_abbrev  0x0000fd3d      0x19a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+ .debug_abbrev  0x0000fed7       0x78 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+ .debug_abbrev  0x0000ff4f       0x7b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+ .debug_abbrev  0x0000ffca      0x326 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+ .debug_abbrev  0x000102f0      0x20b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+ .debug_abbrev  0x000104fb       0x62 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+ .debug_abbrev  0x0001055d       0xb7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+ .debug_abbrev  0x00010614      0x185 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
+ .debug_abbrev  0x00010799      0x1ce /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+ .debug_abbrev  0x00010967       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+ .debug_abbrev  0x0001098f      0x446 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+ .debug_abbrev  0x00010dd5      0x2d7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+ .debug_abbrev  0x000110ac      0x216 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+ .debug_abbrev  0x000112c2      0x27f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+ .debug_abbrev  0x00011541      0x22a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+ .debug_abbrev  0x0001176b       0x80 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+ .debug_abbrev  0x000117eb       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+ .debug_abbrev  0x00011813       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+ .debug_abbrev  0x0001183b       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+ .debug_abbrev  0x00011863       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+ .debug_abbrev  0x0001188b       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+ .debug_abbrev  0x000118b3       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_abbrev  0x000118db       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+ .debug_abbrev  0x00011903       0x14 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_abbrev  0x00011917      0x16a /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .debug_abbrev  0x00011a81       0x26 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
 
 .debug_loclists
-                0x00000000    0x13fc7
+                0x00000000    0x1404e
  .debug_loclists
                 0x00000000       0x46 build_ak-base-kit-stm32l151-application/fsm.o
  .debug_loclists
@@ -5898,103 +5905,105 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_loclists
                 0x0000b3dd       0xea build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
  .debug_loclists
-                0x0000b4c7      0x2cf build_ak-base-kit-stm32l151-application/scr_game_ui.o
+                0x0000b4c7      0x224 build_ak-base-kit-stm32l151-application/scr_game_ui.o
  .debug_loclists
-                0x0000b796       0x76 build_ak-base-kit-stm32l151-application/scr_startup.o
+                0x0000b6eb      0x132 build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
  .debug_loclists
-                0x0000b80c      0x33d build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+                0x0000b81d       0x76 build_ak-base-kit-stm32l151-application/scr_startup.o
  .debug_loclists
-                0x0000bb49       0x8c build_ak-base-kit-stm32l151-application/game_shooter_task.o
+                0x0000b893      0x33d build_ak-base-kit-stm32l151-application/game_shooter_logic.o
  .debug_loclists
-                0x0000bbd5       0xab build_ak-base-kit-stm32l151-application/game_save.o
+                0x0000bbd0       0x8c build_ak-base-kit-stm32l151-application/game_shooter_task.o
  .debug_loclists
-                0x0000bc80       0x29 build_ak-base-kit-stm32l151-application/task_system.o
+                0x0000bc5c       0xab build_ak-base-kit-stm32l151-application/game_save.o
  .debug_loclists
-                0x0000bca9       0x18 build_ak-base-kit-stm32l151-application/app.o
+                0x0000bd07       0x29 build_ak-base-kit-stm32l151-application/task_system.o
  .debug_loclists
-                0x0000bcc1      0x144 build_ak-base-kit-stm32l151-application/app_bsp.o
+                0x0000bd30       0x18 build_ak-base-kit-stm32l151-application/app.o
  .debug_loclists
-                0x0000be05      0x16b build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+                0x0000bd48      0x144 build_ak-base-kit-stm32l151-application/app_bsp.o
  .debug_loclists
-                0x0000bf70      0xc06 build_ak-base-kit-stm32l151-application/shell.o
+                0x0000be8c      0x16b build_ak-base-kit-stm32l151-application/app_modbus_pull.o
  .debug_loclists
-                0x0000cb76       0x4b build_ak-base-kit-stm32l151-application/task_shell.o
+                0x0000bff7      0xc06 build_ak-base-kit-stm32l151-application/shell.o
  .debug_loclists
-                0x0000cbc1       0x30 build_ak-base-kit-stm32l151-application/task_life.o
+                0x0000cbfd       0x4b build_ak-base-kit-stm32l151-application/task_shell.o
  .debug_loclists
-                0x0000cbf1      0x2f9 build_ak-base-kit-stm32l151-application/task_fw.o
+                0x0000cc48       0x30 build_ak-base-kit-stm32l151-application/task_life.o
  .debug_loclists
-                0x0000ceea       0x29 build_ak-base-kit-stm32l151-application/task_display.o
+                0x0000cc78      0x2f9 build_ak-base-kit-stm32l151-application/task_fw.o
  .debug_loclists
-                0x0000cf13      0x118 build_ak-base-kit-stm32l151-application/task_if.o
+                0x0000cf71       0x29 build_ak-base-kit-stm32l151-application/task_display.o
  .debug_loclists
-                0x0000d02b       0xad build_ak-base-kit-stm32l151-application/task_uart_if.o
+                0x0000cf9a      0x118 build_ak-base-kit-stm32l151-application/task_if.o
  .debug_loclists
-                0x0000d0d8      0x1ca build_ak-base-kit-stm32l151-application/view_render.o
+                0x0000d0b2       0xad build_ak-base-kit-stm32l151-application/task_uart_if.o
  .debug_loclists
-                0x0000d2a2      0x143 build_ak-base-kit-stm32l151-application/screen_manager.o
+                0x0000d15f      0x1ca build_ak-base-kit-stm32l151-application/view_render.o
  .debug_loclists
-                0x0000d3e5     0x133a build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x0000d329      0x143 build_ak-base-kit-stm32l151-application/screen_manager.o
  .debug_loclists
-                0x0000e71f      0x517 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x0000d46c     0x133a build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
  .debug_loclists
-                0x0000ec36       0xf4 build_ak-base-kit-stm32l151-application/eeprom.o
+                0x0000e7a6      0x517 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
  .debug_loclists
-                0x0000ed2a       0x63 build_ak-base-kit-stm32l151-application/link_hal.o
+                0x0000ecbd       0xf4 build_ak-base-kit-stm32l151-application/eeprom.o
  .debug_loclists
-                0x0000ed8d      0x3e5 build_ak-base-kit-stm32l151-application/link.o
+                0x0000edb1       0x63 build_ak-base-kit-stm32l151-application/link_hal.o
  .debug_loclists
-                0x0000f172      0x319 build_ak-base-kit-stm32l151-application/link_mac.o
+                0x0000ee14      0x3e5 build_ak-base-kit-stm32l151-application/link.o
  .debug_loclists
-                0x0000f48b      0x382 build_ak-base-kit-stm32l151-application/link_phy.o
+                0x0000f1f9      0x319 build_ak-base-kit-stm32l151-application/link_mac.o
  .debug_loclists
-                0x0000f80d      0x1ae build_ak-base-kit-stm32l151-application/link_data.o
+                0x0000f512      0x382 build_ak-base-kit-stm32l151-application/link_phy.o
  .debug_loclists
-                0x0000f9bb      0x368 build_ak-base-kit-stm32l151-application/wiring_digital.o
+                0x0000f894      0x1ae build_ak-base-kit-stm32l151-application/link_data.o
  .debug_loclists
-                0x0000fd23      0xe59 build_ak-base-kit-stm32l151-application/Print.o
+                0x0000fa42      0x368 build_ak-base-kit-stm32l151-application/wiring_digital.o
  .debug_loclists
-                0x00010b7c      0x17e build_ak-base-kit-stm32l151-application/HardwareSerial.o
+                0x0000fdaa      0xe59 build_ak-base-kit-stm32l151-application/Print.o
  .debug_loclists
-                0x00010cfa       0x40 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+                0x00010c03      0x17e build_ak-base-kit-stm32l151-application/HardwareSerial.o
  .debug_loclists
-                0x00010d3a      0x3ca build_ak-base-kit-stm32l151-application/SPI.o
+                0x00010d81       0x40 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
  .debug_loclists
-                0x00011104      0x684 build_ak-base-kit-stm32l151-application/Wire.o
+                0x00010dc1      0x3ca build_ak-base-kit-stm32l151-application/SPI.o
  .debug_loclists
-                0x00011788      0x30e build_ak-base-kit-stm32l151-application/twi.o
+                0x0001118b      0x684 build_ak-base-kit-stm32l151-application/Wire.o
  .debug_loclists
-                0x00011a96       0xc0 build_ak-base-kit-stm32l151-application/mini_cpp.o
+                0x0001180f      0x30e build_ak-base-kit-stm32l151-application/twi.o
  .debug_loclists
-                0x00011b56       0x24 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+                0x00011b1d       0xc0 build_ak-base-kit-stm32l151-application/mini_cpp.o
  .debug_loclists
-                0x00011b7a       0xcf /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+                0x00011bdd       0x24 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
  .debug_loclists
-                0x00011c49       0x29 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+                0x00011c01       0xcf /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
  .debug_loclists
-                0x00011c72       0x2c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+                0x00011cd0       0x29 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
  .debug_loclists
-                0x00011c9e      0x595 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+                0x00011cf9       0x2c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
  .debug_loclists
-                0x00012233       0x4a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+                0x00011d25      0x595 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
  .debug_loclists
-                0x0001227d      0x17f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+                0x000122ba       0x4a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
  .debug_loclists
-                0x000123fc      0x1d0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+                0x00012304      0x17f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
  .debug_loclists
-                0x000125cc      0x9b6 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+                0x00012483      0x1d0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
  .debug_loclists
-                0x00012f82       0x4b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+                0x00012653      0x9b6 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
  .debug_loclists
-                0x00012fcd      0x48e /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+                0x00013009       0x4b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
  .debug_loclists
-                0x0001345b       0x6e /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+                0x00013054      0x48e /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
  .debug_loclists
-                0x000134c9       0x3b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+                0x000134e2       0x6e /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
  .debug_loclists
-                0x00013504      0xac3 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+                0x00013550       0x3b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+ .debug_loclists
+                0x0001358b      0xac3 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
 
-.debug_aranges  0x00000000     0x27b8
+.debug_aranges  0x00000000     0x27d0
  .debug_aranges
                 0x00000000       0x20 build_ak-base-kit-stm32l151-application/fsm.o
  .debug_aranges
@@ -6088,146 +6097,148 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_aranges
                 0x00001838       0x28 build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
  .debug_aranges
-                0x00001860       0x28 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+                0x00001860       0x20 build_ak-base-kit-stm32l151-application/scr_game_ui.o
  .debug_aranges
-                0x00001888       0x28 build_ak-base-kit-stm32l151-application/scr_startup.o
+                0x00001880       0x20 build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
  .debug_aranges
-                0x000018b0       0x40 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+                0x000018a0       0x28 build_ak-base-kit-stm32l151-application/scr_startup.o
  .debug_aranges
-                0x000018f0       0x20 build_ak-base-kit-stm32l151-application/game_shooter_task.o
+                0x000018c8       0x40 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
  .debug_aranges
-                0x00001910       0x38 build_ak-base-kit-stm32l151-application/game_save.o
+                0x00001908       0x20 build_ak-base-kit-stm32l151-application/game_shooter_task.o
  .debug_aranges
-                0x00001948       0x18 build_ak-base-kit-stm32l151-application/game_bitmaps.o
+                0x00001928       0x38 build_ak-base-kit-stm32l151-application/game_save.o
  .debug_aranges
-                0x00001960       0x20 build_ak-base-kit-stm32l151-application/task_system.o
+                0x00001960       0x18 build_ak-base-kit-stm32l151-application/game_bitmaps.o
  .debug_aranges
-                0x00001980       0x40 build_ak-base-kit-stm32l151-application/app.o
+                0x00001978       0x20 build_ak-base-kit-stm32l151-application/task_system.o
  .debug_aranges
-                0x000019c0       0x18 build_ak-base-kit-stm32l151-application/app_data.o
+                0x00001998       0x40 build_ak-base-kit-stm32l151-application/app.o
  .debug_aranges
-                0x000019d8       0x18 build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
+                0x000019d8       0x18 build_ak-base-kit-stm32l151-application/app_data.o
  .debug_aranges
-                0x000019f0       0x30 build_ak-base-kit-stm32l151-application/app_bsp.o
+                0x000019f0       0x18 build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
  .debug_aranges
-                0x00001a20       0x20 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+                0x00001a08       0x30 build_ak-base-kit-stm32l151-application/app_bsp.o
  .debug_aranges
-                0x00001a40       0xb0 build_ak-base-kit-stm32l151-application/shell.o
+                0x00001a38       0x20 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
  .debug_aranges
-                0x00001af0       0x28 build_ak-base-kit-stm32l151-application/task_shell.o
+                0x00001a58       0xb0 build_ak-base-kit-stm32l151-application/shell.o
  .debug_aranges
-                0x00001b18       0x20 build_ak-base-kit-stm32l151-application/task_life.o
+                0x00001b08       0x28 build_ak-base-kit-stm32l151-application/task_shell.o
  .debug_aranges
-                0x00001b38       0x20 build_ak-base-kit-stm32l151-application/task_fw.o
+                0x00001b30       0x20 build_ak-base-kit-stm32l151-application/task_life.o
  .debug_aranges
-                0x00001b58       0x18 build_ak-base-kit-stm32l151-application/task_list.o
+                0x00001b50       0x20 build_ak-base-kit-stm32l151-application/task_fw.o
  .debug_aranges
-                0x00001b70       0x20 build_ak-base-kit-stm32l151-application/task_display.o
+                0x00001b70       0x18 build_ak-base-kit-stm32l151-application/task_list.o
  .debug_aranges
-                0x00001b90       0x20 build_ak-base-kit-stm32l151-application/task_if.o
+                0x00001b88       0x20 build_ak-base-kit-stm32l151-application/task_display.o
  .debug_aranges
-                0x00001bb0       0x20 build_ak-base-kit-stm32l151-application/task_rf24_if.o
+                0x00001ba8       0x20 build_ak-base-kit-stm32l151-application/task_if.o
  .debug_aranges
-                0x00001bd0       0x20 build_ak-base-kit-stm32l151-application/task_uart_if.o
+                0x00001bc8       0x20 build_ak-base-kit-stm32l151-application/task_rf24_if.o
  .debug_aranges
-                0x00001bf0       0x20 build_ak-base-kit-stm32l151-application/task_dbg.o
+                0x00001be8       0x20 build_ak-base-kit-stm32l151-application/task_uart_if.o
  .debug_aranges
-                0x00001c10       0x58 build_ak-base-kit-stm32l151-application/view_render.o
+                0x00001c08       0x20 build_ak-base-kit-stm32l151-application/task_dbg.o
  .debug_aranges
-                0x00001c68       0x50 build_ak-base-kit-stm32l151-application/screen_manager.o
+                0x00001c28       0x58 build_ak-base-kit-stm32l151-application/view_render.o
  .debug_aranges
-                0x00001cb8      0x100 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x00001c80       0x50 build_ak-base-kit-stm32l151-application/screen_manager.o
  .debug_aranges
-                0x00001db8       0xa0 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x00001cd0      0x100 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
  .debug_aranges
-                0x00001e58       0x30 build_ak-base-kit-stm32l151-application/eeprom.o
+                0x00001dd0       0xa0 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
  .debug_aranges
-                0x00001e88       0x38 build_ak-base-kit-stm32l151-application/link_hal.o
+                0x00001e70       0x30 build_ak-base-kit-stm32l151-application/eeprom.o
  .debug_aranges
-                0x00001ec0       0x38 build_ak-base-kit-stm32l151-application/link.o
+                0x00001ea0       0x38 build_ak-base-kit-stm32l151-application/link_hal.o
  .debug_aranges
-                0x00001ef8       0x48 build_ak-base-kit-stm32l151-application/link_mac.o
+                0x00001ed8       0x38 build_ak-base-kit-stm32l151-application/link.o
  .debug_aranges
-                0x00001f40       0x78 build_ak-base-kit-stm32l151-application/link_phy.o
+                0x00001f10       0x48 build_ak-base-kit-stm32l151-application/link_mac.o
  .debug_aranges
-                0x00001fb8       0x60 build_ak-base-kit-stm32l151-application/link_data.o
+                0x00001f58       0x78 build_ak-base-kit-stm32l151-application/link_phy.o
  .debug_aranges
-                0x00002018       0x30 build_ak-base-kit-stm32l151-application/wiring_digital.o
+                0x00001fd0       0x60 build_ak-base-kit-stm32l151-application/link_data.o
  .debug_aranges
-                0x00002048       0xd8 build_ak-base-kit-stm32l151-application/Print.o
+                0x00002030       0x30 build_ak-base-kit-stm32l151-application/wiring_digital.o
  .debug_aranges
-                0x00002120       0x60 build_ak-base-kit-stm32l151-application/HardwareSerial.o
+                0x00002060       0xd8 build_ak-base-kit-stm32l151-application/Print.o
  .debug_aranges
-                0x00002180       0x30 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+                0x00002138       0x60 build_ak-base-kit-stm32l151-application/HardwareSerial.o
  .debug_aranges
-                0x000021b0       0x98 build_ak-base-kit-stm32l151-application/SPI.o
+                0x00002198       0x30 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
  .debug_aranges
-                0x00002248       0xe8 build_ak-base-kit-stm32l151-application/Wire.o
+                0x000021c8       0x98 build_ak-base-kit-stm32l151-application/SPI.o
  .debug_aranges
-                0x00002330       0x78 build_ak-base-kit-stm32l151-application/twi.o
+                0x00002260       0xe8 build_ak-base-kit-stm32l151-application/Wire.o
  .debug_aranges
-                0x000023a8       0x80 build_ak-base-kit-stm32l151-application/mini_cpp.o
+                0x00002348       0x78 build_ak-base-kit-stm32l151-application/twi.o
  .debug_aranges
-                0x00002428       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+                0x000023c0       0x80 build_ak-base-kit-stm32l151-application/mini_cpp.o
  .debug_aranges
-                0x00002448       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+                0x00002440       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
  .debug_aranges
-                0x00002468       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+                0x00002460       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
  .debug_aranges
-                0x00002488       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+                0x00002480       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
  .debug_aranges
-                0x000024a8       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+                0x000024a0       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
  .debug_aranges
-                0x000024c8       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+                0x000024c0       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
  .debug_aranges
-                0x000024e8       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+                0x000024e0       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
  .debug_aranges
-                0x00002508       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+                0x00002500       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
  .debug_aranges
-                0x00002528       0x18 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+                0x00002520       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
  .debug_aranges
-                0x00002540       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+                0x00002540       0x18 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
  .debug_aranges
-                0x00002560       0x18 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
+                0x00002558       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
  .debug_aranges
-                0x00002578       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+                0x00002578       0x18 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
  .debug_aranges
-                0x00002598       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+                0x00002590       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
  .debug_aranges
-                0x000025b8       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+                0x000025b0       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
  .debug_aranges
-                0x000025d8       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+                0x000025d0       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
  .debug_aranges
-                0x000025f8       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+                0x000025f0       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
  .debug_aranges
-                0x00002618       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+                0x00002610       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
  .debug_aranges
-                0x00002638       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+                0x00002630       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
  .debug_aranges
-                0x00002658       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+                0x00002650       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
  .debug_aranges
-                0x00002678       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+                0x00002670       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
  .debug_aranges
-                0x00002698       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+                0x00002690       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
  .debug_aranges
-                0x000026b8       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+                0x000026b0       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
  .debug_aranges
-                0x000026d8       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+                0x000026d0       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
  .debug_aranges
-                0x000026f8       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+                0x000026f0       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
  .debug_aranges
-                0x00002718       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+                0x00002710       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
  .debug_aranges
-                0x00002738       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+                0x00002730       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
  .debug_aranges
-                0x00002758       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+                0x00002750       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
  .debug_aranges
-                0x00002778       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+                0x00002770       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
  .debug_aranges
-                0x00002798       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+                0x00002790       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .debug_aranges
+                0x000027b0       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
 
 .debug_rnglists
-                0x00000000     0x2470
+                0x00000000     0x24d5
  .debug_rnglists
                 0x00000000       0x13 build_ak-base-kit-stm32l151-application/fsm.o
  .debug_rnglists
@@ -6319,91 +6330,93 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_rnglists
                 0x0000141b       0x1a build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
  .debug_rnglists
-                0x00001435       0xf2 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+                0x00001435       0xdf build_ak-base-kit-stm32l151-application/scr_game_ui.o
  .debug_rnglists
-                0x00001527       0x1b build_ak-base-kit-stm32l151-application/scr_startup.o
+                0x00001514       0x78 build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
  .debug_rnglists
-                0x00001542      0x144 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+                0x0000158c       0x1b build_ak-base-kit-stm32l151-application/scr_startup.o
  .debug_rnglists
-                0x00001686       0x13 build_ak-base-kit-stm32l151-application/game_shooter_task.o
+                0x000015a7      0x144 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
  .debug_rnglists
-                0x00001699       0x40 build_ak-base-kit-stm32l151-application/game_save.o
+                0x000016eb       0x13 build_ak-base-kit-stm32l151-application/game_shooter_task.o
  .debug_rnglists
-                0x000016d9       0x13 build_ak-base-kit-stm32l151-application/task_system.o
+                0x000016fe       0x40 build_ak-base-kit-stm32l151-application/game_save.o
  .debug_rnglists
-                0x000016ec       0x2d build_ak-base-kit-stm32l151-application/app.o
+                0x0000173e       0x13 build_ak-base-kit-stm32l151-application/task_system.o
  .debug_rnglists
-                0x00001719       0x1f build_ak-base-kit-stm32l151-application/app_bsp.o
+                0x00001751       0x2d build_ak-base-kit-stm32l151-application/app.o
  .debug_rnglists
-                0x00001738       0x47 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+                0x0000177e       0x1f build_ak-base-kit-stm32l151-application/app_bsp.o
  .debug_rnglists
-                0x0000177f      0x14f build_ak-base-kit-stm32l151-application/shell.o
+                0x0000179d       0x47 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
  .debug_rnglists
-                0x000018ce       0x19 build_ak-base-kit-stm32l151-application/task_shell.o
+                0x000017e4      0x14f build_ak-base-kit-stm32l151-application/shell.o
  .debug_rnglists
-                0x000018e7       0x13 build_ak-base-kit-stm32l151-application/task_life.o
+                0x00001933       0x19 build_ak-base-kit-stm32l151-application/task_shell.o
  .debug_rnglists
-                0x000018fa       0x55 build_ak-base-kit-stm32l151-application/task_fw.o
+                0x0000194c       0x13 build_ak-base-kit-stm32l151-application/task_life.o
  .debug_rnglists
-                0x0000194f       0x13 build_ak-base-kit-stm32l151-application/task_display.o
+                0x0000195f       0x55 build_ak-base-kit-stm32l151-application/task_fw.o
  .debug_rnglists
-                0x00001962       0x2d build_ak-base-kit-stm32l151-application/task_if.o
+                0x000019b4       0x13 build_ak-base-kit-stm32l151-application/task_display.o
  .debug_rnglists
-                0x0000198f       0x13 build_ak-base-kit-stm32l151-application/task_rf24_if.o
+                0x000019c7       0x2d build_ak-base-kit-stm32l151-application/task_if.o
  .debug_rnglists
-                0x000019a2       0x14 build_ak-base-kit-stm32l151-application/task_uart_if.o
+                0x000019f4       0x13 build_ak-base-kit-stm32l151-application/task_rf24_if.o
  .debug_rnglists
-                0x000019b6       0x13 build_ak-base-kit-stm32l151-application/task_dbg.o
+                0x00001a07       0x14 build_ak-base-kit-stm32l151-application/task_uart_if.o
  .debug_rnglists
-                0x000019c9       0x4a build_ak-base-kit-stm32l151-application/view_render.o
+                0x00001a1b       0x13 build_ak-base-kit-stm32l151-application/task_dbg.o
  .debug_rnglists
-                0x00001a13       0x49 build_ak-base-kit-stm32l151-application/screen_manager.o
+                0x00001a2e       0x4a build_ak-base-kit-stm32l151-application/view_render.o
  .debug_rnglists
-                0x00001a5c      0x17a build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x00001a78       0x49 build_ak-base-kit-stm32l151-application/screen_manager.o
  .debug_rnglists
-                0x00001bd6       0x9b build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x00001ac1      0x17a build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
  .debug_rnglists
-                0x00001c71       0x1f build_ak-base-kit-stm32l151-application/eeprom.o
+                0x00001c3b       0x9b build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
  .debug_rnglists
-                0x00001c90       0x25 build_ak-base-kit-stm32l151-application/link_hal.o
+                0x00001cd6       0x1f build_ak-base-kit-stm32l151-application/eeprom.o
  .debug_rnglists
-                0x00001cb5       0x91 build_ak-base-kit-stm32l151-application/link.o
+                0x00001cf5       0x25 build_ak-base-kit-stm32l151-application/link_hal.o
  .debug_rnglists
-                0x00001d46       0xf4 build_ak-base-kit-stm32l151-application/link_mac.o
+                0x00001d1a       0x91 build_ak-base-kit-stm32l151-application/link.o
  .debug_rnglists
-                0x00001e3a       0xde build_ak-base-kit-stm32l151-application/link_phy.o
+                0x00001dab       0xf4 build_ak-base-kit-stm32l151-application/link_mac.o
  .debug_rnglists
-                0x00001f18       0x4f build_ak-base-kit-stm32l151-application/link_data.o
+                0x00001e9f       0xde build_ak-base-kit-stm32l151-application/link_phy.o
  .debug_rnglists
-                0x00001f67       0x20 build_ak-base-kit-stm32l151-application/wiring_digital.o
+                0x00001f7d       0x4f build_ak-base-kit-stm32l151-application/link_data.o
  .debug_rnglists
-                0x00001f87      0x106 build_ak-base-kit-stm32l151-application/Print.o
+                0x00001fcc       0x20 build_ak-base-kit-stm32l151-application/wiring_digital.o
  .debug_rnglists
-                0x0000208d       0x43 build_ak-base-kit-stm32l151-application/HardwareSerial.o
+                0x00001fec      0x106 build_ak-base-kit-stm32l151-application/Print.o
  .debug_rnglists
-                0x000020d0       0x2b build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+                0x000020f2       0x43 build_ak-base-kit-stm32l151-application/HardwareSerial.o
  .debug_rnglists
-                0x000020fb       0x7b build_ak-base-kit-stm32l151-application/SPI.o
+                0x00002135       0x2b build_ak-base-kit-stm32l151-application/HardwareSerial2.o
  .debug_rnglists
-                0x00002176       0xcd build_ak-base-kit-stm32l151-application/Wire.o
+                0x00002160       0x7b build_ak-base-kit-stm32l151-application/SPI.o
  .debug_rnglists
-                0x00002243       0x58 build_ak-base-kit-stm32l151-application/twi.o
+                0x000021db       0xcd build_ak-base-kit-stm32l151-application/Wire.o
  .debug_rnglists
-                0x0000229b       0x5b build_ak-base-kit-stm32l151-application/mini_cpp.o
+                0x000022a8       0x58 build_ak-base-kit-stm32l151-application/twi.o
  .debug_rnglists
-                0x000022f6       0x13 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+                0x00002300       0x5b build_ak-base-kit-stm32l151-application/mini_cpp.o
  .debug_rnglists
-                0x00002309       0x14 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+                0x0000235b       0x13 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
  .debug_rnglists
-                0x0000231d       0x1b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+                0x0000236e       0x14 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
  .debug_rnglists
-                0x00002338       0x7a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+                0x00002382       0x1b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
  .debug_rnglists
-                0x000023b2       0x2b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+                0x0000239d       0x7a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
  .debug_rnglists
-                0x000023dd       0x93 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+                0x00002417       0x2b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+ .debug_rnglists
+                0x00002442       0x93 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
 
-.debug_line     0x00000000    0x22260
+.debug_line     0x00000000    0x22521
  .debug_line    0x00000000       0xa7 build_ak-base-kit-stm32l151-application/fsm.o
  .debug_line    0x000000a7      0x874 build_ak-base-kit-stm32l151-application/task.o
  .debug_line    0x0000091b      0x4cf build_ak-base-kit-stm32l151-application/timer.o
@@ -6450,306 +6463,309 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_line    0x0000ef77      0xb86 build_ak-base-kit-stm32l151-application/sys_cfg.o
  .debug_line    0x0000fafd      0xe64 build_ak-base-kit-stm32l151-application/io_cfg.o
  .debug_line    0x00010961      0x3c8 build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
- .debug_line    0x00010d29      0xf2c build_ak-base-kit-stm32l151-application/scr_game_ui.o
- .debug_line    0x00011c55      0x419 build_ak-base-kit-stm32l151-application/scr_startup.o
- .debug_line    0x0001206e      0xc35 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
- .debug_line    0x00012ca3      0x24a build_ak-base-kit-stm32l151-application/game_shooter_task.o
- .debug_line    0x00012eed      0x1e1 build_ak-base-kit-stm32l151-application/game_save.o
- .debug_line    0x000130ce       0x93 build_ak-base-kit-stm32l151-application/game_bitmaps.o
- .debug_line    0x00013161      0x238 build_ak-base-kit-stm32l151-application/task_system.o
- .debug_line    0x00013399      0xf9d build_ak-base-kit-stm32l151-application/app.o
- .debug_line    0x00014336      0x1f2 build_ak-base-kit-stm32l151-application/app_data.o
- .debug_line    0x00014528      0x1c8 build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
- .debug_line    0x000146f0      0x359 build_ak-base-kit-stm32l151-application/app_bsp.o
- .debug_line    0x00014a49      0x3bd build_ak-base-kit-stm32l151-application/app_modbus_pull.o
- .debug_line    0x00014e06     0x11a1 build_ak-base-kit-stm32l151-application/shell.o
- .debug_line    0x00015fa7      0x361 build_ak-base-kit-stm32l151-application/task_shell.o
- .debug_line    0x00016308      0x263 build_ak-base-kit-stm32l151-application/task_life.o
- .debug_line    0x0001656b      0x7fe build_ak-base-kit-stm32l151-application/task_fw.o
- .debug_line    0x00016d69      0x196 build_ak-base-kit-stm32l151-application/task_list.o
- .debug_line    0x00016eff      0x241 build_ak-base-kit-stm32l151-application/task_display.o
- .debug_line    0x00017140      0x2c9 build_ak-base-kit-stm32l151-application/task_if.o
- .debug_line    0x00017409      0x193 build_ak-base-kit-stm32l151-application/task_rf24_if.o
- .debug_line    0x0001759c      0x2eb build_ak-base-kit-stm32l151-application/task_uart_if.o
- .debug_line    0x00017887      0x18d build_ak-base-kit-stm32l151-application/task_dbg.o
- .debug_line    0x00017a14      0x504 build_ak-base-kit-stm32l151-application/view_render.o
- .debug_line    0x00017f18      0x4f9 build_ak-base-kit-stm32l151-application/screen_manager.o
- .debug_line    0x00018411     0x1147 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
- .debug_line    0x00019558      0x84c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
- .debug_line    0x00019da4      0x1c4 build_ak-base-kit-stm32l151-application/eeprom.o
- .debug_line    0x00019f68      0x2cc build_ak-base-kit-stm32l151-application/link_hal.o
- .debug_line    0x0001a234      0x68e build_ak-base-kit-stm32l151-application/link.o
- .debug_line    0x0001a8c2      0x9cd build_ak-base-kit-stm32l151-application/link_mac.o
- .debug_line    0x0001b28f      0xa7d build_ak-base-kit-stm32l151-application/link_phy.o
- .debug_line    0x0001bd0c      0x541 build_ak-base-kit-stm32l151-application/link_data.o
- .debug_line    0x0001c24d      0x3e7 build_ak-base-kit-stm32l151-application/wiring_digital.o
- .debug_line    0x0001c634      0x81b build_ak-base-kit-stm32l151-application/Print.o
- .debug_line    0x0001ce4f      0x3e0 build_ak-base-kit-stm32l151-application/HardwareSerial.o
- .debug_line    0x0001d22f      0x3cf build_ak-base-kit-stm32l151-application/HardwareSerial2.o
- .debug_line    0x0001d5fe      0x56b build_ak-base-kit-stm32l151-application/SPI.o
- .debug_line    0x0001db69      0x7cb build_ak-base-kit-stm32l151-application/Wire.o
- .debug_line    0x0001e334      0x604 build_ak-base-kit-stm32l151-application/twi.o
- .debug_line    0x0001e938      0x411 build_ak-base-kit-stm32l151-application/mini_cpp.o
- .debug_line    0x0001ed49      0x17f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
- .debug_line    0x0001eec8       0xbd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
- .debug_line    0x0001ef85      0x17b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
- .debug_line    0x0001f100      0x10c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
- .debug_line    0x0001f20c       0xf4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
- .debug_line    0x0001f300       0xb9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
- .debug_line    0x0001f3b9      0x429 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
- .debug_line    0x0001f7e2      0x16b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
- .debug_line    0x0001f94d       0x97 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
- .debug_line    0x0001f9e4      0x1a3 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
- .debug_line    0x0001fb87       0xe7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
- .debug_line    0x0001fc6e      0x153 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
- .debug_line    0x0001fdc1       0xdd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
- .debug_line    0x0001fe9e      0x51f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
- .debug_line    0x000203bd      0x8e0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
- .debug_line    0x00020c9d      0x196 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
- .debug_line    0x00020e33      0x52a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
- .debug_line    0x0002135d      0x1f0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
- .debug_line    0x0002154d       0xf0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
- .debug_line    0x0002163d      0x16f /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
- .debug_line    0x000217ac      0x184 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
- .debug_line    0x00021930       0xa6 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
- .debug_line    0x000219d6       0x57 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
- .debug_line    0x00021a2d       0x62 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
- .debug_line    0x00021a8f       0x5e /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
- .debug_line    0x00021aed      0x103 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
- .debug_line    0x00021bf0       0x4e /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
- .debug_line    0x00021c3e      0x5d8 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
- .debug_line    0x00022216       0x4a /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x00010d29      0xab8 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+ .debug_line    0x000117e1      0x735 build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
+ .debug_line    0x00011f16      0x419 build_ak-base-kit-stm32l151-application/scr_startup.o
+ .debug_line    0x0001232f      0xc35 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+ .debug_line    0x00012f64      0x24a build_ak-base-kit-stm32l151-application/game_shooter_task.o
+ .debug_line    0x000131ae      0x1e1 build_ak-base-kit-stm32l151-application/game_save.o
+ .debug_line    0x0001338f       0x93 build_ak-base-kit-stm32l151-application/game_bitmaps.o
+ .debug_line    0x00013422      0x238 build_ak-base-kit-stm32l151-application/task_system.o
+ .debug_line    0x0001365a      0xf9d build_ak-base-kit-stm32l151-application/app.o
+ .debug_line    0x000145f7      0x1f2 build_ak-base-kit-stm32l151-application/app_data.o
+ .debug_line    0x000147e9      0x1c8 build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
+ .debug_line    0x000149b1      0x359 build_ak-base-kit-stm32l151-application/app_bsp.o
+ .debug_line    0x00014d0a      0x3bd build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+ .debug_line    0x000150c7     0x11a1 build_ak-base-kit-stm32l151-application/shell.o
+ .debug_line    0x00016268      0x361 build_ak-base-kit-stm32l151-application/task_shell.o
+ .debug_line    0x000165c9      0x263 build_ak-base-kit-stm32l151-application/task_life.o
+ .debug_line    0x0001682c      0x7fe build_ak-base-kit-stm32l151-application/task_fw.o
+ .debug_line    0x0001702a      0x196 build_ak-base-kit-stm32l151-application/task_list.o
+ .debug_line    0x000171c0      0x241 build_ak-base-kit-stm32l151-application/task_display.o
+ .debug_line    0x00017401      0x2c9 build_ak-base-kit-stm32l151-application/task_if.o
+ .debug_line    0x000176ca      0x193 build_ak-base-kit-stm32l151-application/task_rf24_if.o
+ .debug_line    0x0001785d      0x2eb build_ak-base-kit-stm32l151-application/task_uart_if.o
+ .debug_line    0x00017b48      0x18d build_ak-base-kit-stm32l151-application/task_dbg.o
+ .debug_line    0x00017cd5      0x504 build_ak-base-kit-stm32l151-application/view_render.o
+ .debug_line    0x000181d9      0x4f9 build_ak-base-kit-stm32l151-application/screen_manager.o
+ .debug_line    0x000186d2     0x1147 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+ .debug_line    0x00019819      0x84c build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+ .debug_line    0x0001a065      0x1c4 build_ak-base-kit-stm32l151-application/eeprom.o
+ .debug_line    0x0001a229      0x2cc build_ak-base-kit-stm32l151-application/link_hal.o
+ .debug_line    0x0001a4f5      0x68e build_ak-base-kit-stm32l151-application/link.o
+ .debug_line    0x0001ab83      0x9cd build_ak-base-kit-stm32l151-application/link_mac.o
+ .debug_line    0x0001b550      0xa7d build_ak-base-kit-stm32l151-application/link_phy.o
+ .debug_line    0x0001bfcd      0x541 build_ak-base-kit-stm32l151-application/link_data.o
+ .debug_line    0x0001c50e      0x3e7 build_ak-base-kit-stm32l151-application/wiring_digital.o
+ .debug_line    0x0001c8f5      0x81b build_ak-base-kit-stm32l151-application/Print.o
+ .debug_line    0x0001d110      0x3e0 build_ak-base-kit-stm32l151-application/HardwareSerial.o
+ .debug_line    0x0001d4f0      0x3cf build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+ .debug_line    0x0001d8bf      0x56b build_ak-base-kit-stm32l151-application/SPI.o
+ .debug_line    0x0001de2a      0x7cb build_ak-base-kit-stm32l151-application/Wire.o
+ .debug_line    0x0001e5f5      0x604 build_ak-base-kit-stm32l151-application/twi.o
+ .debug_line    0x0001ebf9      0x411 build_ak-base-kit-stm32l151-application/mini_cpp.o
+ .debug_line    0x0001f00a      0x17f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+ .debug_line    0x0001f189       0xbd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .debug_line    0x0001f246      0x17b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+ .debug_line    0x0001f3c1      0x10c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+ .debug_line    0x0001f4cd       0xf4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+ .debug_line    0x0001f5c1       0xb9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+ .debug_line    0x0001f67a      0x429 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+ .debug_line    0x0001faa3      0x16b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+ .debug_line    0x0001fc0e       0x97 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+ .debug_line    0x0001fca5      0x1a3 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+ .debug_line    0x0001fe48       0xe7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
+ .debug_line    0x0001ff2f      0x153 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+ .debug_line    0x00020082       0xdd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+ .debug_line    0x0002015f      0x51f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+ .debug_line    0x0002067e      0x8e0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+ .debug_line    0x00020f5e      0x196 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+ .debug_line    0x000210f4      0x52a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+ .debug_line    0x0002161e      0x1f0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+ .debug_line    0x0002180e       0xf0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+ .debug_line    0x000218fe      0x16f /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+ .debug_line    0x00021a6d      0x184 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+ .debug_line    0x00021bf1       0xa6 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+ .debug_line    0x00021c97       0x57 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+ .debug_line    0x00021cee       0x62 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+ .debug_line    0x00021d50       0x5e /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_line    0x00021dae      0x103 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+ .debug_line    0x00021eb1       0x4e /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_line    0x00021eff      0x5d8 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .debug_line    0x000224d7       0x4a /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
 
-.debug_str      0x00000000    0x154f7
- .debug_str     0x00000000    0x154f7 build_ak-base-kit-stm32l151-application/fsm.o
+.debug_str      0x00000000    0x155b4
+ .debug_str     0x00000000    0x155b4 build_ak-base-kit-stm32l151-application/fsm.o
                                 0x22f (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/task.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/task.o
                                 0x864 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/timer.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/timer.o
                                 0x5a4 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/message.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/message.o
                                 0x660 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/log_queue.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/log_queue.o
                                 0x1e8 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/fifo.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/fifo.o
                                 0x285 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/ring_buffer.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/ring_buffer.o
                                 0x321 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/utils.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/utils.o
                                 0x210 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/xprintf.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/xprintf.o
                                 0x2b7 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/cmd_line.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/cmd_line.o
                                 0x1d8 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/button.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/button.o
                                 0x233 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/flash.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/flash.o
                                 0x2b0 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/led.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/led.o
                                 0x224 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/buzzer.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/buzzer.o
                                 0xd19 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/buzzer_music.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/buzzer_music.o
                                 0x292 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/sys_dbg.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/sys_dbg.o
                                 0x63b (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/sys_boot.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/sys_boot.o
                                 0x358 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/mbutils.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/mbutils.o
                                 0x526 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/mbm.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/mbm.o
                                 0x774 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/mbmcrc.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/mbmcrc.o
                                 0x1c5 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/mbmrtu.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/mbmrtu.o
                                 0x8ca (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/mbmfuncholding.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/mbmfuncholding.o
                                 0x6b1 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/mbmfunccoils.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/mbmfunccoils.o
                                 0x631 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/mbmfuncdisc.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/mbmfuncdisc.o
                                 0x558 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/mbmfuncinput.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/mbmfuncinput.o
                                 0x553 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/mbportevent.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/mbportevent.o
                                 0x3d2 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/mbportother.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/mbportother.o
                                 0x284 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/mbportserial.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/mbportserial.o
                                 0x7b5 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/mbporttimer.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/mbporttimer.o
                                 0x984 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_gpio.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_gpio.o
                                 0x4e6 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_rcc.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_rcc.o
                                 0x707 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_usart.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_usart.o
                                 0x6c7 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_spi.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_spi.o
                                 0x634 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/misc.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/misc.o
                                 0x3d1 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_exti.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_exti.o
                                 0x359 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_tim.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_tim.o
                                 0xc75 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_adc.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_adc.o
                                 0x804 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_pwr.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_pwr.o
                                 0x3e0 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_flash.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_flash.o
                                 0x7d9 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_iwdg.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_iwdg.o
                                 0x264 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_i2c.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/stm32l1xx_i2c.o
                                 0x686 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/platform.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/platform.o
                                 0x231 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/system.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/system.o
                                 0x88c (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/sys_cfg.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/sys_cfg.o
                                0x1356 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/io_cfg.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/io_cfg.o
                                0x1468 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
                                 0x340 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui.o
-                               0x1b4a (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/scr_startup.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+                               0x13f0 (size before relaxing)
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
+                               0x16ab (size before relaxing)
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/scr_startup.o
                                0x144c (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
                                 0xcc5 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/game_shooter_task.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/game_shooter_task.o
                                 0x65a (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/game_save.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/game_save.o
                                 0x2df (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/game_bitmaps.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/game_bitmaps.o
                                 0x226 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/task_system.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/task_system.o
                                 0x57e (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/app.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/app.o
                                0x890a (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/app_data.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/app_data.o
                                 0x382 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
                                 0x397 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/app_bsp.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/app_bsp.o
                                 0x809 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/app_modbus_pull.o
                                 0x976 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/shell.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/shell.o
                                0x1cfa (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/task_shell.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/task_shell.o
                                 0x63d (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/task_life.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/task_life.o
                                 0x513 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/task_fw.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/task_fw.o
                                 0xee4 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/task_list.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/task_list.o
                                 0x7ee (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/task_display.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/task_display.o
                                 0xe4d (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/task_if.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/task_if.o
                                 0x6cc (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/task_rf24_if.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/task_rf24_if.o
                                 0x3e8 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/task_uart_if.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/task_uart_if.o
                                 0x748 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/task_dbg.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/task_dbg.o
                                 0x3db (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/view_render.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/view_render.o
                                0x12d0 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/screen_manager.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/screen_manager.o
                                0x14c2 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
                                0x1552 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
                                0x16bb (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/eeprom.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/eeprom.o
                                 0x371 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/link_hal.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/link_hal.o
                                 0x4cf (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/link.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/link.o
                                 0xd23 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/link_mac.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/link_mac.o
                                 0xf6b (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/link_phy.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/link_phy.o
                                 0xe49 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/link_data.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/link_data.o
                                 0x5c9 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/wiring_digital.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/wiring_digital.o
                                 0xeaa (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/Print.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/Print.o
                                0x1077 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/HardwareSerial.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/HardwareSerial.o
                                0x1f4c (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/HardwareSerial2.o
                                0x2033 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/SPI.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/SPI.o
                                 0x990 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/Wire.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/Wire.o
                                0x246a (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/twi.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/twi.o
                                0x13b9 (size before relaxing)
- .debug_str     0x000154f7        0x0 build_ak-base-kit-stm32l151-application/mini_cpp.o
+ .debug_str     0x000155b4        0x0 build_ak-base-kit-stm32l151-application/mini_cpp.o
                                 0x8a6 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
                                 0x4a7 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
                                  0xa6 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
                                 0x18c (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
                                 0x499 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
                                 0x196 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
                                 0x18a (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
                                 0x720 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
                                 0x4c4 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
                                 0x185 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
                                 0x1a0 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
                                 0x4a4 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
                                 0x4bd (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
                                  0xa6 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
                                 0x6a7 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
                                 0x6c7 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
                                 0x4a8 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
                                 0x60f (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
                                 0x4be (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
                                 0x195 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
                                 0x150 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
                                  0xd0 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
                                 0x159 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
                                  0xbe (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
                                  0xbb (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
                                  0xbf (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
                                 0x144 (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
                                  0x9f (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
                                 0x67d (size before relaxing)
- .debug_str     0x000154f7        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_str     0x000155b4        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
                                  0xbf (size before relaxing)
 
 .comment        0x00000000       0x26
@@ -6846,6 +6862,8 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .comment       0x00000026        0x0 build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
                                  0x27 (size before relaxing)
  .comment       0x00000026        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+                                 0x27 (size before relaxing)
+ .comment       0x00000026        0x0 build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
                                  0x27 (size before relaxing)
  .comment       0x00000026        0x0 build_ak-base-kit-stm32l151-application/scr_startup.o
                                  0x27 (size before relaxing)
@@ -7059,143 +7077,145 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .ARM.attributes
                 0x00000816       0x2d build_ak-base-kit-stm32l151-application/scr_game_ui.o
  .ARM.attributes
-                0x00000843       0x2d build_ak-base-kit-stm32l151-application/scr_startup.o
+                0x00000843       0x2d build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
  .ARM.attributes
-                0x00000870       0x2d build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+                0x00000870       0x2d build_ak-base-kit-stm32l151-application/scr_startup.o
  .ARM.attributes
-                0x0000089d       0x2d build_ak-base-kit-stm32l151-application/game_shooter_task.o
+                0x0000089d       0x2d build_ak-base-kit-stm32l151-application/game_shooter_logic.o
  .ARM.attributes
-                0x000008ca       0x2d build_ak-base-kit-stm32l151-application/game_save.o
+                0x000008ca       0x2d build_ak-base-kit-stm32l151-application/game_shooter_task.o
  .ARM.attributes
-                0x000008f7       0x2d build_ak-base-kit-stm32l151-application/game_bitmaps.o
+                0x000008f7       0x2d build_ak-base-kit-stm32l151-application/game_save.o
  .ARM.attributes
-                0x00000924       0x2d build_ak-base-kit-stm32l151-application/task_system.o
+                0x00000924       0x2d build_ak-base-kit-stm32l151-application/game_bitmaps.o
  .ARM.attributes
-                0x00000951       0x2d build_ak-base-kit-stm32l151-application/app.o
+                0x00000951       0x2d build_ak-base-kit-stm32l151-application/task_system.o
  .ARM.attributes
-                0x0000097e       0x2d build_ak-base-kit-stm32l151-application/app_data.o
+                0x0000097e       0x2d build_ak-base-kit-stm32l151-application/app.o
  .ARM.attributes
-                0x000009ab       0x2d build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
+                0x000009ab       0x2d build_ak-base-kit-stm32l151-application/app_data.o
  .ARM.attributes
-                0x000009d8       0x2d build_ak-base-kit-stm32l151-application/app_bsp.o
+                0x000009d8       0x2d build_ak-base-kit-stm32l151-application/app_non_clear_ram.o
  .ARM.attributes
-                0x00000a05       0x2d build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+                0x00000a05       0x2d build_ak-base-kit-stm32l151-application/app_bsp.o
  .ARM.attributes
-                0x00000a32       0x2d build_ak-base-kit-stm32l151-application/shell.o
+                0x00000a32       0x2d build_ak-base-kit-stm32l151-application/app_modbus_pull.o
  .ARM.attributes
-                0x00000a5f       0x2d build_ak-base-kit-stm32l151-application/task_shell.o
+                0x00000a5f       0x2d build_ak-base-kit-stm32l151-application/shell.o
  .ARM.attributes
-                0x00000a8c       0x2d build_ak-base-kit-stm32l151-application/task_life.o
+                0x00000a8c       0x2d build_ak-base-kit-stm32l151-application/task_shell.o
  .ARM.attributes
-                0x00000ab9       0x2d build_ak-base-kit-stm32l151-application/task_fw.o
+                0x00000ab9       0x2d build_ak-base-kit-stm32l151-application/task_life.o
  .ARM.attributes
-                0x00000ae6       0x2d build_ak-base-kit-stm32l151-application/task_list.o
+                0x00000ae6       0x2d build_ak-base-kit-stm32l151-application/task_fw.o
  .ARM.attributes
-                0x00000b13       0x2d build_ak-base-kit-stm32l151-application/task_display.o
+                0x00000b13       0x2d build_ak-base-kit-stm32l151-application/task_list.o
  .ARM.attributes
-                0x00000b40       0x2d build_ak-base-kit-stm32l151-application/task_if.o
+                0x00000b40       0x2d build_ak-base-kit-stm32l151-application/task_display.o
  .ARM.attributes
-                0x00000b6d       0x2d build_ak-base-kit-stm32l151-application/task_rf24_if.o
+                0x00000b6d       0x2d build_ak-base-kit-stm32l151-application/task_if.o
  .ARM.attributes
-                0x00000b9a       0x2d build_ak-base-kit-stm32l151-application/task_uart_if.o
+                0x00000b9a       0x2d build_ak-base-kit-stm32l151-application/task_rf24_if.o
  .ARM.attributes
-                0x00000bc7       0x2d build_ak-base-kit-stm32l151-application/task_dbg.o
+                0x00000bc7       0x2d build_ak-base-kit-stm32l151-application/task_uart_if.o
  .ARM.attributes
-                0x00000bf4       0x2d build_ak-base-kit-stm32l151-application/view_render.o
+                0x00000bf4       0x2d build_ak-base-kit-stm32l151-application/task_dbg.o
  .ARM.attributes
-                0x00000c21       0x2d build_ak-base-kit-stm32l151-application/screen_manager.o
+                0x00000c21       0x2d build_ak-base-kit-stm32l151-application/view_render.o
  .ARM.attributes
-                0x00000c4e       0x2d build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+                0x00000c4e       0x2d build_ak-base-kit-stm32l151-application/screen_manager.o
  .ARM.attributes
-                0x00000c7b       0x2d build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+                0x00000c7b       0x2d build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
  .ARM.attributes
-                0x00000ca8       0x2d build_ak-base-kit-stm32l151-application/eeprom.o
+                0x00000ca8       0x2d build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
  .ARM.attributes
-                0x00000cd5       0x2d build_ak-base-kit-stm32l151-application/link_hal.o
+                0x00000cd5       0x2d build_ak-base-kit-stm32l151-application/eeprom.o
  .ARM.attributes
-                0x00000d02       0x2d build_ak-base-kit-stm32l151-application/link.o
+                0x00000d02       0x2d build_ak-base-kit-stm32l151-application/link_hal.o
  .ARM.attributes
-                0x00000d2f       0x2d build_ak-base-kit-stm32l151-application/link_mac.o
+                0x00000d2f       0x2d build_ak-base-kit-stm32l151-application/link.o
  .ARM.attributes
-                0x00000d5c       0x2d build_ak-base-kit-stm32l151-application/link_phy.o
+                0x00000d5c       0x2d build_ak-base-kit-stm32l151-application/link_mac.o
  .ARM.attributes
-                0x00000d89       0x2d build_ak-base-kit-stm32l151-application/link_data.o
+                0x00000d89       0x2d build_ak-base-kit-stm32l151-application/link_phy.o
  .ARM.attributes
-                0x00000db6       0x2d build_ak-base-kit-stm32l151-application/wiring_digital.o
+                0x00000db6       0x2d build_ak-base-kit-stm32l151-application/link_data.o
  .ARM.attributes
-                0x00000de3       0x2d build_ak-base-kit-stm32l151-application/Print.o
+                0x00000de3       0x2d build_ak-base-kit-stm32l151-application/wiring_digital.o
  .ARM.attributes
-                0x00000e10       0x2d build_ak-base-kit-stm32l151-application/HardwareSerial.o
+                0x00000e10       0x2d build_ak-base-kit-stm32l151-application/Print.o
  .ARM.attributes
-                0x00000e3d       0x2d build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+                0x00000e3d       0x2d build_ak-base-kit-stm32l151-application/HardwareSerial.o
  .ARM.attributes
-                0x00000e6a       0x2d build_ak-base-kit-stm32l151-application/SPI.o
+                0x00000e6a       0x2d build_ak-base-kit-stm32l151-application/HardwareSerial2.o
  .ARM.attributes
-                0x00000e97       0x2d build_ak-base-kit-stm32l151-application/Wire.o
+                0x00000e97       0x2d build_ak-base-kit-stm32l151-application/SPI.o
  .ARM.attributes
-                0x00000ec4       0x2d build_ak-base-kit-stm32l151-application/twi.o
+                0x00000ec4       0x2d build_ak-base-kit-stm32l151-application/Wire.o
  .ARM.attributes
-                0x00000ef1       0x2d build_ak-base-kit-stm32l151-application/mini_cpp.o
+                0x00000ef1       0x2d build_ak-base-kit-stm32l151-application/twi.o
  .ARM.attributes
-                0x00000f1e       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+                0x00000f1e       0x2d build_ak-base-kit-stm32l151-application/mini_cpp.o
  .ARM.attributes
-                0x00000f4b       0x1b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+                0x00000f4b       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
  .ARM.attributes
-                0x00000f66       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+                0x00000f78       0x1b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
  .ARM.attributes
-                0x00000f93       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+                0x00000f93       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
  .ARM.attributes
-                0x00000fc0       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+                0x00000fc0       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
  .ARM.attributes
-                0x00000fed       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+                0x00000fed       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
  .ARM.attributes
-                0x0000101a       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+                0x0000101a       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
  .ARM.attributes
-                0x00001047       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+                0x00001047       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
  .ARM.attributes
-                0x00001074       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+                0x00001074       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
  .ARM.attributes
-                0x000010a1       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+                0x000010a1       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
  .ARM.attributes
-                0x000010ce       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
+                0x000010ce       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
  .ARM.attributes
-                0x000010fb       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+                0x000010fb       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
  .ARM.attributes
-                0x00001128       0x1b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+                0x00001128       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
  .ARM.attributes
-                0x00001143       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+                0x00001155       0x1b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
  .ARM.attributes
-                0x00001170       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+                0x00001170       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
  .ARM.attributes
-                0x0000119d       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+                0x0000119d       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
  .ARM.attributes
-                0x000011ca       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+                0x000011ca       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
  .ARM.attributes
-                0x000011f7       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+                0x000011f7       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
  .ARM.attributes
-                0x00001224       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+                0x00001224       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
  .ARM.attributes
-                0x00001251       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+                0x00001251       0x2d /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
  .ARM.attributes
-                0x0000126e       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+                0x0000127e       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
  .ARM.attributes
-                0x0000128b       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+                0x0000129b       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
  .ARM.attributes
-                0x000012a8       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+                0x000012b8       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
  .ARM.attributes
-                0x000012c5       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+                0x000012d5       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
  .ARM.attributes
-                0x000012e2       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+                0x000012f2       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
  .ARM.attributes
-                0x000012ff       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+                0x0000130f       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
  .ARM.attributes
-                0x0000131c       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+                0x0000132c       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
  .ARM.attributes
-                0x00001339       0x2d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+                0x00001349       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
  .ARM.attributes
-                0x00001366       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+                0x00001366       0x2d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .ARM.attributes
+                0x00001393       0x1d /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
 
-.debug_frame    0x00000000     0x6154
+.debug_frame    0x00000000     0x6164
  .debug_frame   0x00000000       0x20 build_ak-base-kit-stm32l151-application/fsm.o
  .debug_frame   0x00000020      0x240 build_ak-base-kit-stm32l151-application/task.o
  .debug_frame   0x00000260       0xf0 build_ak-base-kit-stm32l151-application/timer.o
@@ -7241,68 +7261,69 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_frame   0x000033c8      0x30c build_ak-base-kit-stm32l151-application/sys_cfg.o
  .debug_frame   0x000036d4      0x4c0 build_ak-base-kit-stm32l151-application/io_cfg.o
  .debug_frame   0x00003b94       0x38 build_ak-base-kit-stm32l151-application/system_stm32l1xx.o
- .debug_frame   0x00003bcc       0x98 build_ak-base-kit-stm32l151-application/scr_game_ui.o
- .debug_frame   0x00003c64       0x54 build_ak-base-kit-stm32l151-application/scr_startup.o
- .debug_frame   0x00003cb8       0xc0 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
- .debug_frame   0x00003d78       0x48 build_ak-base-kit-stm32l151-application/game_shooter_task.o
- .debug_frame   0x00003dc0       0x74 build_ak-base-kit-stm32l151-application/game_save.o
- .debug_frame   0x00003e34       0x2c build_ak-base-kit-stm32l151-application/task_system.o
- .debug_frame   0x00003e60       0x94 build_ak-base-kit-stm32l151-application/app.o
- .debug_frame   0x00003ef4       0x7c build_ak-base-kit-stm32l151-application/app_bsp.o
- .debug_frame   0x00003f70       0x3c build_ak-base-kit-stm32l151-application/app_modbus_pull.o
- .debug_frame   0x00003fac      0x208 build_ak-base-kit-stm32l151-application/shell.o
- .debug_frame   0x000041b4       0x54 build_ak-base-kit-stm32l151-application/task_shell.o
- .debug_frame   0x00004208       0x30 build_ak-base-kit-stm32l151-application/task_life.o
- .debug_frame   0x00004238       0x88 build_ak-base-kit-stm32l151-application/task_fw.o
- .debug_frame   0x000042c0       0x20 build_ak-base-kit-stm32l151-application/task_display.o
- .debug_frame   0x000042e0       0x30 build_ak-base-kit-stm32l151-application/task_if.o
- .debug_frame   0x00004310       0x20 build_ak-base-kit-stm32l151-application/task_rf24_if.o
- .debug_frame   0x00004330       0x38 build_ak-base-kit-stm32l151-application/task_uart_if.o
- .debug_frame   0x00004368       0x20 build_ak-base-kit-stm32l151-application/task_dbg.o
- .debug_frame   0x00004388       0xb8 build_ak-base-kit-stm32l151-application/view_render.o
- .debug_frame   0x00004440       0xec build_ak-base-kit-stm32l151-application/screen_manager.o
- .debug_frame   0x0000452c      0x418 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
- .debug_frame   0x00004944      0x1d8 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
- .debug_frame   0x00004b1c       0x40 build_ak-base-kit-stm32l151-application/eeprom.o
- .debug_frame   0x00004b5c       0x68 build_ak-base-kit-stm32l151-application/link_hal.o
- .debug_frame   0x00004bc4       0xa8 build_ak-base-kit-stm32l151-application/link.o
- .debug_frame   0x00004c6c      0x100 build_ak-base-kit-stm32l151-application/link_mac.o
- .debug_frame   0x00004d6c      0x170 build_ak-base-kit-stm32l151-application/link_phy.o
- .debug_frame   0x00004edc      0x108 build_ak-base-kit-stm32l151-application/link_data.o
- .debug_frame   0x00004fe4       0xe0 build_ak-base-kit-stm32l151-application/wiring_digital.o
- .debug_frame   0x000050c4      0x2a0 build_ak-base-kit-stm32l151-application/Print.o
- .debug_frame   0x00005364       0xbc build_ak-base-kit-stm32l151-application/HardwareSerial.o
- .debug_frame   0x00005420       0x4c build_ak-base-kit-stm32l151-application/HardwareSerial2.o
- .debug_frame   0x0000546c      0x160 build_ak-base-kit-stm32l151-application/SPI.o
- .debug_frame   0x000055cc      0x21c build_ak-base-kit-stm32l151-application/Wire.o
- .debug_frame   0x000057e8      0x10c build_ak-base-kit-stm32l151-application/twi.o
- .debug_frame   0x000058f4      0x100 build_ak-base-kit-stm32l151-application/mini_cpp.o
- .debug_frame   0x000059f4       0x30 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
- .debug_frame   0x00005a24       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
- .debug_frame   0x00005a4c       0x38 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
- .debug_frame   0x00005a84       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
- .debug_frame   0x00005aa4       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
- .debug_frame   0x00005ac4       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
- .debug_frame   0x00005ae4       0x80 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
- .debug_frame   0x00005b64       0x30 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
- .debug_frame   0x00005b94       0x2c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
- .debug_frame   0x00005bc0       0x30 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
- .debug_frame   0x00005bf0       0x3c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
- .debug_frame   0x00005c2c       0xf4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
- .debug_frame   0x00005d20       0x4c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
- .debug_frame   0x00005d6c       0x2c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
- .debug_frame   0x00005d98       0x84 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
- .debug_frame   0x00005e1c       0x3c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
- .debug_frame   0x00005e58       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
- .debug_frame   0x00005e80       0xac /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
- .debug_frame   0x00005f2c       0x50 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
- .debug_frame   0x00005f7c       0xc4 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
- .debug_frame   0x00006040       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
- .debug_frame   0x00006060       0x24 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
- .debug_frame   0x00006084       0x24 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
- .debug_frame   0x000060a8       0x4c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
- .debug_frame   0x000060f4       0x2c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
- .debug_frame   0x00006120       0x34 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x00003bcc       0x54 build_ak-base-kit-stm32l151-application/scr_game_ui.o
+ .debug_frame   0x00003c20       0x54 build_ak-base-kit-stm32l151-application/scr_game_ui_handle.o
+ .debug_frame   0x00003c74       0x54 build_ak-base-kit-stm32l151-application/scr_startup.o
+ .debug_frame   0x00003cc8       0xc0 build_ak-base-kit-stm32l151-application/game_shooter_logic.o
+ .debug_frame   0x00003d88       0x48 build_ak-base-kit-stm32l151-application/game_shooter_task.o
+ .debug_frame   0x00003dd0       0x74 build_ak-base-kit-stm32l151-application/game_save.o
+ .debug_frame   0x00003e44       0x2c build_ak-base-kit-stm32l151-application/task_system.o
+ .debug_frame   0x00003e70       0x94 build_ak-base-kit-stm32l151-application/app.o
+ .debug_frame   0x00003f04       0x7c build_ak-base-kit-stm32l151-application/app_bsp.o
+ .debug_frame   0x00003f80       0x3c build_ak-base-kit-stm32l151-application/app_modbus_pull.o
+ .debug_frame   0x00003fbc      0x208 build_ak-base-kit-stm32l151-application/shell.o
+ .debug_frame   0x000041c4       0x54 build_ak-base-kit-stm32l151-application/task_shell.o
+ .debug_frame   0x00004218       0x30 build_ak-base-kit-stm32l151-application/task_life.o
+ .debug_frame   0x00004248       0x88 build_ak-base-kit-stm32l151-application/task_fw.o
+ .debug_frame   0x000042d0       0x20 build_ak-base-kit-stm32l151-application/task_display.o
+ .debug_frame   0x000042f0       0x30 build_ak-base-kit-stm32l151-application/task_if.o
+ .debug_frame   0x00004320       0x20 build_ak-base-kit-stm32l151-application/task_rf24_if.o
+ .debug_frame   0x00004340       0x38 build_ak-base-kit-stm32l151-application/task_uart_if.o
+ .debug_frame   0x00004378       0x20 build_ak-base-kit-stm32l151-application/task_dbg.o
+ .debug_frame   0x00004398       0xb8 build_ak-base-kit-stm32l151-application/view_render.o
+ .debug_frame   0x00004450       0xec build_ak-base-kit-stm32l151-application/screen_manager.o
+ .debug_frame   0x0000453c      0x418 build_ak-base-kit-stm32l151-application/Adafruit_GFX.o
+ .debug_frame   0x00004954      0x1d8 build_ak-base-kit-stm32l151-application/Adafruit_oled_drv.o
+ .debug_frame   0x00004b2c       0x40 build_ak-base-kit-stm32l151-application/eeprom.o
+ .debug_frame   0x00004b6c       0x68 build_ak-base-kit-stm32l151-application/link_hal.o
+ .debug_frame   0x00004bd4       0xa8 build_ak-base-kit-stm32l151-application/link.o
+ .debug_frame   0x00004c7c      0x100 build_ak-base-kit-stm32l151-application/link_mac.o
+ .debug_frame   0x00004d7c      0x170 build_ak-base-kit-stm32l151-application/link_phy.o
+ .debug_frame   0x00004eec      0x108 build_ak-base-kit-stm32l151-application/link_data.o
+ .debug_frame   0x00004ff4       0xe0 build_ak-base-kit-stm32l151-application/wiring_digital.o
+ .debug_frame   0x000050d4      0x2a0 build_ak-base-kit-stm32l151-application/Print.o
+ .debug_frame   0x00005374       0xbc build_ak-base-kit-stm32l151-application/HardwareSerial.o
+ .debug_frame   0x00005430       0x4c build_ak-base-kit-stm32l151-application/HardwareSerial2.o
+ .debug_frame   0x0000547c      0x160 build_ak-base-kit-stm32l151-application/SPI.o
+ .debug_frame   0x000055dc      0x21c build_ak-base-kit-stm32l151-application/Wire.o
+ .debug_frame   0x000057f8      0x10c build_ak-base-kit-stm32l151-application/twi.o
+ .debug_frame   0x00005904      0x100 build_ak-base-kit-stm32l151-application/mini_cpp.o
+ .debug_frame   0x00005a04       0x30 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+ .debug_frame   0x00005a34       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .debug_frame   0x00005a5c       0x38 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+ .debug_frame   0x00005a94       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+ .debug_frame   0x00005ab4       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+ .debug_frame   0x00005ad4       0x20 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+ .debug_frame   0x00005af4       0x80 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+ .debug_frame   0x00005b74       0x30 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+ .debug_frame   0x00005ba4       0x2c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+ .debug_frame   0x00005bd0       0x30 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+ .debug_frame   0x00005c00       0x3c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+ .debug_frame   0x00005c3c       0xf4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+ .debug_frame   0x00005d30       0x4c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+ .debug_frame   0x00005d7c       0x2c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+ .debug_frame   0x00005da8       0x84 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+ .debug_frame   0x00005e2c       0x3c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+ .debug_frame   0x00005e68       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+ .debug_frame   0x00005e90       0xac /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+ .debug_frame   0x00005f3c       0x50 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+ .debug_frame   0x00005f8c       0xc4 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+ .debug_frame   0x00006050       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+ .debug_frame   0x00006070       0x24 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+ .debug_frame   0x00006094       0x24 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_frame   0x000060b8       0x4c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+ .debug_frame   0x00006104       0x2c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x00006130       0x34 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
 
 .debug_line_str
                 0x00000000      0x159
