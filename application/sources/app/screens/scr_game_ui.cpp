@@ -266,10 +266,10 @@ void view_scr_game_ui() {
 void scr_game_ui_handle(ak_msg_t *msg) {
 	if (msg->sig == SCREEN_ENTRY) {
 		game_load_data();
-		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 50, TIMER_PERIODIC);
+		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK, 50, TIMER_PERIODIC);
 		return;
 	}
-	if (msg->sig == AC_DISPLAY_SHOW_IDLE) {
+	if (msg->sig == AC_DISPLAY_GAME_UI_ANIM_TICK) {
 		bool need_render = false;
 		if (g_game_state == GAME_STATE_GAMEOVER) {
 			if (g_gameover_anim_frame < 250) g_gameover_anim_frame++;
