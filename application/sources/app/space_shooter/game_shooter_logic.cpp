@@ -225,11 +225,27 @@ void game_logic_update() {
 				}
 			}
 			
-			// Touch bottom
-			if (g_enemies[e].y > 60) {
+			// Collision with player or touch bottom
+			int eh = (g_enemies[e].type == 4) ? 16 : 8;
+			bool hit_player = (g_player_blink == 0 &&
+							   g_enemies[e].x < g_player_x + 8 && g_enemies[e].x + ew > g_player_x &&
+							   g_enemies[e].y < 54 + 8 && g_enemies[e].y + eh > 54);
+			
+			if (g_enemies[e].y > 60 || hit_player) {
 				g_lives--;
 				g_enemies[e].active = false;
 				g_player_blink = 15;
+				if (hit_player) {
+					for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
+						if (!g_explosions[ex].active) {
+							g_explosions[ex].x = g_player_x;
+							g_explosions[ex].y = 54;
+							g_explosions[ex].timer = 5;
+							g_explosions[ex].active = true;
+							break;
+						}
+					}
+				}
 				if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
 			}
 		}
@@ -242,7 +258,7 @@ void game_logic_update() {
 			for (int e = 0; e < MAX_ENEMIES; e++) {
 				if (g_enemies[e].active) {
 					g_enemies[e].x += enemy_dir * 2;
-					g_enemies[e].y += 4;
+					g_enemies[e].y += 2;
 				}
 			}
 		}
