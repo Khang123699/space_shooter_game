@@ -186,21 +186,33 @@ static void game_shooter_playing_display() {
 }
 
 static void game_shooter_gameover_display() {
+	// 1. GAME OVER Text
 	view_render.setTextSize(2);
-	view_render.setCursor(10, 16);
+	int go_y = -16 + (g_gameover_anim_frame * 2);
+	if (go_y > 10) go_y = 10;
+	view_render.setCursor(10, go_y);
 	view_render.print("GAME OVER");
 	
-	// Draw animated broken spaceship
-	int anim_x = (g_gameover_anim_frame * 2) % 128; // moves across screen
-	view_render.drawBitmap(anim_x, 34, icon_player, 8, 8, WHITE);
-	if ((g_gameover_anim_frame / 2) % 2 == 0) {
-		view_render.drawBitmap(anim_x - 8, 34, icon_flame1, 8, 8, WHITE);
+	// 2. Exploding Spaceship
+	// Alternate between flame1 and flame2 at player's death position
+	if (g_gameover_anim_frame % 4 < 2) {
+		view_render.drawBitmap(g_player_x, 54, icon_flame1, 8, 8, WHITE);
 	} else {
-		view_render.drawBitmap(anim_x - 8, 34, icon_flame2, 8, 8, WHITE);
+		view_render.drawBitmap(g_player_x, 54, icon_flame2, 8, 8, WHITE);
 	}
 	
+	// 3. Stats (Appears after 1 second)
 	view_render.setTextSize(1);
-	if ((g_gameover_anim_frame / 5) % 2 == 0) {
+	if (g_gameover_anim_frame > 20) {
+		view_render.setCursor(16, 32);
+		view_render.print("STAGE REACHED: ");
+		char stage_str[4];
+		xsprintf(stage_str, "%u", (unsigned int)g_stage);
+		view_render.print(stage_str);
+	}
+	
+	// 4. Press MODE (Blinks after 2 seconds)
+	if (g_gameover_anim_frame > 40 && ((g_gameover_anim_frame / 5) % 2 == 0)) {
 		view_render.setCursor(6, 50);
 		view_render.print("Press MODE to next");
 	}
@@ -254,13 +266,13 @@ void view_scr_game_ui() {
 void scr_game_ui_handle(ak_msg_t *msg) {
 	if (msg->sig == SCREEN_ENTRY) {
 		game_load_data();
-		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 50, TIMER_ONE_SHOT);
+		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 50, TIMER_PERIODIC);
 		return;
 	}
 	if (msg->sig == AC_DISPLAY_SHOW_IDLE) {
 		bool need_render = false;
 		if (g_game_state == GAME_STATE_GAMEOVER) {
-			g_gameover_anim_frame++;
+			if (g_gameover_anim_frame < 250) g_gameover_anim_frame++;
 			need_render = true;
 		} else if (g_game_state == GAME_STATE_NEW_HIGH_SCORE) {
 			if (g_new_high_score_timer > 0) {
@@ -277,7 +289,6 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 			task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
 		}
 		
-		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 50, TIMER_ONE_SHOT);
 		return;
 	}
 
