@@ -103,7 +103,7 @@ void game_player_shoot() {
 			g_bullets[i].x = g_player_x + 4;
 			g_bullets[i].y = 52;
 			g_bullets[i].vx = 0;
-			g_shoot_cooldown = 3; // Cooldown of 5 ticks (faster fire rate)
+			g_shoot_cooldown = 5; 
 			break;
 		}
 	}
@@ -136,7 +136,7 @@ void game_logic_update() {
 					if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
 				}
 			} else {
-				g_bullets[i].y -= 2;
+				g_bullets[i].y -= 4;
 				if (g_bullets[i].y < 0) g_bullets[i].active = false;
 				
 				for (int e = 0; e < MAX_ENEMIES; e++) {
