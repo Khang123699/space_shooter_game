@@ -103,7 +103,7 @@ void game_player_shoot() {
 			g_bullets[i].x = g_player_x + 4;
 			g_bullets[i].y = 52;
 			g_bullets[i].vx = 0;
-			g_shoot_cooldown = 5; 
+			g_shoot_cooldown = 3; 
 			break;
 		}
 	}
