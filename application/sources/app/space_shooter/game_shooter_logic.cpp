@@ -39,18 +39,39 @@ static void spawn_enemies() {
 		g_enemies[0].type = 4;
 		g_enemies[0].x = 56;
 		g_enemies[0].y = 12;
-		g_enemies[0].hp = 20 + (g_stage / 5) * 10;
+		g_enemies[0].hp = 5 + (g_stage / 5) * 5;
 		for (int i = 1; i < MAX_ENEMIES; i++) g_enemies[i].active = false;
 		return;
 	}
 	
-	// Normal
-	for (int e = 0; e < 10; e++) {
-		g_enemies[e].active = true;
-		g_enemies[e].type = 1 + (rand() % 3); // random type 1, 2, or 3
-		g_enemies[e].hp = g_enemies[e].type; // HP is exactly 1, 2, or 3 based on type
-		g_enemies[e].x = 10 + (e % 5) * 20;
-		g_enemies[e].y = 14 + (e / 5) * 12;
+	// Normal: 3 rows, 6 columns
+	int spawn_chance = 45 + (g_game_data.difficulty * 10);
+	int e = 0;
+	
+	for (int i = 0; i < MAX_ENEMIES; i++) g_enemies[i].active = false;
+	
+	for (int row = 0; row < 3; row++) {
+		for (int col = 0; col < 6; col++) {
+			if (e >= MAX_ENEMIES) break;
+			
+			if ((rand() % 100) < spawn_chance) {
+				g_enemies[e].active = true;
+				g_enemies[e].type = 1 + (rand() % 3); // random type 1, 2, or 3
+				g_enemies[e].hp = g_enemies[e].type;
+				g_enemies[e].x = 8 + col * 20;
+				g_enemies[e].y = 10 + row * 12;
+				e++;
+			}
+		}
+	}
+	
+	// Fallback to avoid empty stage
+	if (e == 0) {
+		g_enemies[0].active = true;
+		g_enemies[0].type = 1 + (rand() % 3);
+		g_enemies[0].hp = g_enemies[0].type;
+		g_enemies[0].x = 56;
+		g_enemies[0].y = 12;
 	}
 }
 
