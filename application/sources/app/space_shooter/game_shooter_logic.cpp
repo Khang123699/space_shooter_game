@@ -7,6 +7,18 @@
 #include "app_dbg.h"
 #include "game_save.h"
 
+// Enemy Spawn Grid & Configuration Constants
+#define SPAWN_GRID_ROWS       3
+#define SPAWN_GRID_COLS       6
+#define SPAWN_START_X         8
+#define SPAWN_OFFSET_X        20
+#define SPAWN_START_Y         10
+#define SPAWN_OFFSET_Y        12
+#define SPAWN_BASE_CHANCE     45
+#define SPAWN_DIFF_MULTIPLIER 10
+#define BOSS_SPAWN_X          56
+#define BOSS_SPAWN_Y          12
+
 // Global UI navigation
 uint8_t g_menu_selected = 0;
 uint8_t g_setting_selected = 0;
@@ -37,29 +49,29 @@ static void spawn_enemies() {
 	if (g_stage % 5 == 0) {
 		g_enemies[0].active = true;
 		g_enemies[0].type = 4;
-		g_enemies[0].x = 56;
-		g_enemies[0].y = 12;
+		g_enemies[0].x = BOSS_SPAWN_X;
+		g_enemies[0].y = BOSS_SPAWN_Y;
 		g_enemies[0].hp = 5 + (g_stage / 5) * 5;
 		for (int i = 1; i < MAX_ENEMIES; i++) g_enemies[i].active = false;
 		return;
 	}
 	
-	// Normal: 3 rows, 6 columns
-	int spawn_chance = 45 + (g_game_data.difficulty * 10);
+	// Normal grid spawn
+	int spawn_chance = SPAWN_BASE_CHANCE + (g_game_data.difficulty * SPAWN_DIFF_MULTIPLIER);
 	int e = 0;
 	
 	for (int i = 0; i < MAX_ENEMIES; i++) g_enemies[i].active = false;
 	
-	for (int row = 0; row < 3; row++) {
-		for (int col = 0; col < 6; col++) {
+	for (int row = 0; row < SPAWN_GRID_ROWS; row++) {
+		for (int col = 0; col < SPAWN_GRID_COLS; col++) {
 			if (e >= MAX_ENEMIES) break;
 			
 			if ((rand() % 100) < spawn_chance) {
 				g_enemies[e].active = true;
 				g_enemies[e].type = 1 + (rand() % 3); // random type 1, 2, or 3
 				g_enemies[e].hp = g_enemies[e].type;
-				g_enemies[e].x = 8 + col * 20;
-				g_enemies[e].y = 10 + row * 12;
+				g_enemies[e].x = SPAWN_START_X + col * SPAWN_OFFSET_X;
+				g_enemies[e].y = SPAWN_START_Y + row * SPAWN_OFFSET_Y;
 				e++;
 			}
 		}
