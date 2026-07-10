@@ -7,6 +7,9 @@
 #include <string.h>
 #include "game_bitmaps.h"
 
+// Helper macro to center text horizontally on a 128px screen
+#define CENTER_X(str_len, char_width) ((128 - (str_len) * (char_width)) / 2)
+
 uint8_t g_new_high_score_rank = 0;
 uint8_t g_gameover_anim_frame = 0;
 uint8_t g_new_high_score_timer = 0;
@@ -30,7 +33,7 @@ view_screen_t scr_game_ui = {
 static void game_shooter_menu_display() {
 	view_render.drawRect(0, 0, 128, 64, WHITE);
 	view_render.setTextSize(1);
-	view_render.setCursor(26, 6);
+	view_render.setCursor(CENTER_X(12, 6), 6);
 	view_render.print("SHOOTER GAME");
 	view_render.drawLine(10, 16, 117, 16, WHITE);
 	
@@ -53,7 +56,7 @@ static void game_shooter_menu_display() {
 static void game_shooter_setting_display() {
 	view_render.drawRect(0, 0, 128, 64, WHITE);
 	view_render.setTextSize(1);
-	view_render.setCursor(40, 6);
+	view_render.setCursor(CENTER_X(8, 6), 6);
 	view_render.print("SETTINGS");
 	view_render.drawLine(10, 16, 117, 16, WHITE);
 	
@@ -79,7 +82,7 @@ static void game_shooter_setting_display() {
 static void game_shooter_highscore_display() {
 	view_render.drawRect(0, 0, 128, 64, WHITE);
 	view_render.setTextSize(1);
-	view_render.setCursor(32, 6);
+	view_render.setCursor(CENTER_X(11, 6), 6);
 	view_render.print("HIGH SCORES");
 	view_render.drawLine(10, 16, 117, 16, WHITE);
 	
@@ -212,7 +215,7 @@ static void game_shooter_gameover_display() {
 	view_render.setTextSize(2);
 	int go_y = -16 + (g_gameover_anim_frame * 2);
 	if (go_y > 8) go_y = 8;
-	view_render.setCursor(10, go_y);
+	view_render.setCursor(CENTER_X(9, 12), go_y);
 	view_render.print("GAME OVER");
 	
 	// 3. Stats (Appears after text settles)
@@ -233,14 +236,14 @@ static void game_shooter_gameover_display() {
 	
 	// 4. Press MODE (Blinks after stats)
 	if (g_gameover_anim_frame > 60 && ((g_gameover_anim_frame / 5) % 2 == 0)) {
-		view_render.setCursor(10, 52); // (128 - 18 * 6) / 2 = 10
+		view_render.setCursor(CENTER_X(18, 6), 52); // (128 - 18 * 6) / 2 = 10
 		view_render.print("Press MODE to next");
 	}
 }
 
 static void game_shooter_new_highscore_display() {
 	view_render.setTextSize(1);
-	view_render.setCursor(20, 20);
+	view_render.setCursor(CENTER_X(15, 6), 20);
 	view_render.print("NEW HIGH SCORE!");
 	
 	view_render.setCursor(44, 34);
@@ -252,7 +255,7 @@ static void game_shooter_new_highscore_display() {
 
 static void game_shooter_score_display() {
 	view_render.setTextSize(1);
-	view_render.setCursor(31, 14);
+	view_render.setCursor(CENTER_X(11, 6), 14);
 	view_render.print("YOUR SCORE:");
 	view_render.setTextSize(2);
 	char temp_final[12];
