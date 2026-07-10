@@ -108,11 +108,7 @@ static void game_shooter_highscore_display() {
 	view_render.print(">");
 }
 
-static void game_shooter_playing_display() {
-	if (g_player_blink % 2 == 0) {
-		view_render.drawBitmap(g_player_x, 54, icon_player, 8, 8, WHITE);
-	}
-	
+static void draw_enemies() {
 	for (int e = 0; e < MAX_ENEMIES; e++) {
 		if (g_enemies[e].active) {
 			if (g_enemies[e].type == 4) {
@@ -133,7 +129,9 @@ static void game_shooter_playing_display() {
 			}
 		}
 	}
-	
+}
+
+static void draw_explosions() {
 	for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
 		if (g_explosions[ex].active) {
 			int r = 5 - g_explosions[ex].timer;
@@ -153,12 +151,25 @@ static void game_shooter_playing_display() {
 			}
 		}
 	}
+}
+
+static void draw_bullets() {
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		if (g_bullets[i].active) {
 			if (g_bullets[i].is_enemy) view_render.fillRect(g_bullets[i].x, g_bullets[i].y, 2, 4, WHITE);
 			else view_render.drawLine(g_bullets[i].x, g_bullets[i].y, g_bullets[i].x, g_bullets[i].y + 3, WHITE);
 		}
 	}
+}
+
+static void game_shooter_playing_display() {
+	if (g_player_blink % 2 == 0) {
+		view_render.drawBitmap(g_player_x, 54, icon_player, 8, 8, WHITE);
+	}
+	
+	draw_enemies();
+	draw_explosions();
+	draw_bullets();
 	
 	// Draw Top UI Bar
 	view_render.fillRect(0, 0, 128, 11, BLACK);
