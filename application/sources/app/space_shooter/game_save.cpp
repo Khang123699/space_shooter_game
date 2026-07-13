@@ -12,6 +12,12 @@ void init_default_save_data() {
 	g_game_data.sound_en = 1;
 	g_game_data.difficulty = 1; 
 }
+// Reset high score data
+void reset_high_score_data() {
+	g_game_data.top_score[0] = 0;
+	g_game_data.top_score[1] = 0;
+	g_game_data.top_score[2] = 0;
+}
 
 void game_save_data() {
 	// Erase sector before writing new data to Flash Memory (Static Address 0x9000)

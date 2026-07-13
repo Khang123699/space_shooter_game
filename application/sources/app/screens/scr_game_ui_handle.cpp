@@ -58,7 +58,7 @@ static void handle_ui_highscore_input(ak_msg_t *msg) {
 			break;
 		case AC_DISPLAY_BUTTON_MODE_PRESSED:
 			if (g_score_selected == 0) { 
-				init_default_save_data(); 
+				reset_high_score_data();
 				game_save_data(); 
 			} else if (g_score_selected == 1) { 
 				g_game_state = GAME_STATE_MENU; 

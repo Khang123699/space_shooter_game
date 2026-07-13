@@ -16,6 +16,7 @@ typedef struct {
 extern game_save_data_t g_game_data;
 
 extern void init_default_save_data();
+extern void reset_high_score_data();
 extern void game_save_data();
 extern void game_load_data();
 extern uint8_t game_update_high_score(uint32_t final_score);
