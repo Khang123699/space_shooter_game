@@ -114,7 +114,7 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 	if (msg->sig == SCREEN_ENTRY) {
 		game_load_data();
 		// Start UI animation timer (50ms interval) for things like blinking or explosions
-		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK, 50, TIMER_PERIODIC);
+		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK, 150, TIMER_PERIODIC);
 		return;
 	}
 	if (msg->sig == AC_DISPLAY_GAME_UI_ANIM_TICK) {
