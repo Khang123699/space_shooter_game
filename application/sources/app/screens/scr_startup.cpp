@@ -61,6 +61,7 @@ void view_scr_startup() {
 void scr_startup_handle(ak_msg_t *msg) {
 	switch (msg->sig) {
 	case AC_DISPLAY_INITIAL: {
+		// System boot up signal: initialize screen and start logo timer
 		APP_DBG_SIG("AC_DISPLAY_INITIAL\n");
 		startup_state = 0;
 		view_render.initialize();

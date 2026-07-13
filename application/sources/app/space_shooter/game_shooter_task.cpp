@@ -2,7 +2,8 @@
 #include "task_list.h"
 #include "timer.h"
 
-// Task handler for Game Shooter OS signals
+// Task handler for Game Shooter OS signals (Main Controller for Game Task)
+// Handles Message Passing events asynchronously
 void game_shooter_task(ak_msg_t* msg) {
 	switch (msg->sig) {
 		case AC_GAME_START_REQ:

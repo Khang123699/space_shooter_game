@@ -245,7 +245,7 @@ static void game_shooter_gameover_display() {
 		view_render.print(stage_str);
 	}
 	
-	// 4. Press MODE (Blinks after stats)
+	// 4. Press MODE (Blinking text effect)
 	if (g_gameover_anim_frame > 60 && ((g_gameover_anim_frame / 5) % 2 == 0)) {
 		view_render.setCursor(CENTER_X(18, 6), 52); // (128 - 18 * 6) / 2 = 10
 		view_render.print("Press MODE to next");
@@ -284,6 +284,7 @@ static void game_shooter_score_display() {
 }
 
 void view_scr_game_ui() {
+	// Clear the RAM buffer before rendering a new frame (Double Buffering)
 	view_render.clear();
 	view_render.setTextColor(WHITE);
 	switch (g_game_state) {

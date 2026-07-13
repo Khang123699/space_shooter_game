@@ -68,6 +68,7 @@ static void handle_ui_highscore_input(ak_msg_t *msg) {
 }
 
 static void handle_ui_playing_input(ak_msg_t *msg) {
+	// Forward hardware button events to Game Logic Task via message passing
 	if (msg->sig == AC_DISPLAY_BUTON_UP_PRESSED) task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_UP);
 	else if (msg->sig == AC_DISPLAY_BUTON_DOWN_PRESSED) task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_DOWN);
 	else if (msg->sig == AC_DISPLAY_BUTON_MODE_PRESSED) task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_MODE);
@@ -112,6 +113,7 @@ static void handle_ui_showscore_input(ak_msg_t *msg) {
 void scr_game_ui_handle(ak_msg_t *msg) {
 	if (msg->sig == SCREEN_ENTRY) {
 		game_load_data();
+		// Start UI animation timer (50ms interval) for things like blinking or explosions
 		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK, 50, TIMER_PERIODIC);
 		return;
 	}

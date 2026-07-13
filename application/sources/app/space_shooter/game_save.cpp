@@ -14,6 +14,7 @@ void init_default_save_data() {
 }
 
 void game_save_data() {
+	// Erase sector before writing new data to Flash Memory (Static Address 0x9000)
 	flash_erase_sector(APP_FLASH_GAME_DATA_SECTOR);
 	flash_write(APP_FLASH_GAME_DATA_SECTOR, (uint8_t*)&g_game_data, sizeof(game_save_data_t));
 }

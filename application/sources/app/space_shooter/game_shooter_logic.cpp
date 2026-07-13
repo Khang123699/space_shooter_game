@@ -56,7 +56,8 @@ static void spawn_enemies() {
 		return;
 	}
 	
-	// Normal grid spawn
+	// Normal grid spawn (3x6 Grid)
+	// Base chance to spawn at each cell + scaling based on difficulty
 	int spawn_chance = SPAWN_BASE_CHANCE + (g_game_data.difficulty * SPAWN_DIFF_MULTIPLIER);
 	int e = 0;
 	
@@ -126,7 +127,7 @@ void game_logic_update() {
 	if (g_shoot_cooldown > 0) g_shoot_cooldown--;
 	g_tick_count++;
 
-	// 1. Update bullets
+	// 1. Update bullets and check collisions (AABB)
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		if (g_bullets[i].active) {
 			g_bullets[i].x += g_bullets[i].vx;
@@ -140,7 +141,7 @@ void game_logic_update() {
 				g_bullets[i].y += drop;
 				if (g_bullets[i].y > 64) g_bullets[i].active = false;
 				
-				// Hit player
+				// Hit player: Check AABB collision (X between player boundaries, Y past player's head)
 				if (g_player_blink == 0 && g_bullets[i].x >= g_player_x && g_bullets[i].x <= g_player_x + 8 && g_bullets[i].y >= 54) {
 					g_bullets[i].active = false;
 					g_lives--;
@@ -153,8 +154,11 @@ void game_logic_update() {
 				
 				for (int e = 0; e < MAX_ENEMIES; e++) {
 					if (g_enemies[e].active) {
+						// Determine dynamic bounding box based on enemy type (Boss is 16x16, normal is 8x8)
 						int ew = (g_enemies[e].type == 4) ? 16 : 8;
 						int eh = (g_enemies[e].type == 4) ? 16 : 8;
+						
+						// Check AABB collision between bullet and enemy
 						if (g_bullets[i].x >= g_enemies[e].x && g_bullets[i].x <= g_enemies[e].x + ew 
 							&& g_bullets[i].y >= g_enemies[e].y && g_bullets[i].y <= g_enemies[e].y + eh) {
 							g_bullets[i].active = false;
@@ -237,7 +241,7 @@ void game_logic_update() {
 				}
 			}
 			
-			// Collision with player or touch bottom
+			// Collision: Enemy body hits player (AABB) or touches bottom of screen
 			int eh = (g_enemies[e].type == 4) ? 16 : 8;
 			bool hit_player = (g_player_blink == 0 &&
 							   g_enemies[e].x < g_player_x + 8 && g_enemies[e].x + ew > g_player_x &&
@@ -286,10 +290,14 @@ void game_logic_update() {
 		if (g_transition_timer == 0) spawn_enemies();
 	}
 	
+	// 3. Game Over check
 	if (g_lives <= 0) {
+		// Stop logic timer to pause the game world
 		timer_remove_attr(AC_TASK_GAME_SHOOTER_ID, AC_GAME_UPDATE_TICK);
+		// Signal UI task to transition to Game Over screen
 		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_OVER_NEXT);
 	}
 	
+	// Force a redraw of the UI frame with new positions
 	task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
 }
