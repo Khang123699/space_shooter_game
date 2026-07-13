@@ -17,7 +17,7 @@
 #define SPAWN_BASE_CHANCE     45
 #define SPAWN_DIFF_MULTIPLIER 10
 #define BOSS_SPAWN_X          56
-#define BOSS_SPAWN_Y          12
+#define BOSS_SPAWN_Y          16
 
 // Global UI navigation
 uint8_t g_menu_selected = 0;

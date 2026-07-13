@@ -114,7 +114,7 @@ static void draw_enemies() {
 			if (g_enemies[e].type == 4) {
 				view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, bmp_boss, 16, 16, WHITE);
 				// HP Bar for Boss
-				int max_hp = 20 + (g_stage / 5) * 10;
+				int max_hp = 5 + (g_stage / 5) * 5;
 				int hp_width = (g_enemies[e].hp * 16) / max_hp;
 				if (hp_width > 16) hp_width = 16;
 				if (hp_width < 0) hp_width = 0;

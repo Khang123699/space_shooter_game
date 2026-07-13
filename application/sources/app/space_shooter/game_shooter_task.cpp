@@ -9,7 +9,7 @@ void game_shooter_task(ak_msg_t* msg) {
 		case AC_GAME_START_REQ:
 			// Initialize the physics and logic variables
 			game_logic_init();
-			// Start game tick timer (50ms interval = 20 FPS)
+			// Start game tick timer (150ms interval = 6.7 FPS)
 			timer_set(AC_TASK_GAME_SHOOTER_ID, AC_GAME_UPDATE_TICK, 150, TIMER_PERIODIC);
 			break;
 			
