@@ -3233,7 +3233,7 @@ Linker script and memory map
                 0x08003000                isr_vector
                 0x080030f4                        . = ALIGN (0x4)
 
-.text           0x080030f8     0xdd10
+.text           0x080030f8     0xdd34
                 0x080030f8                        . = ALIGN (0x4)
  *(.text)
  .text          0x080030f8       0x48 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
@@ -4466,536 +4466,536 @@ Linker script and memory map
                 0x0800d47c       0x1c build_space-shooter-game-application/Adafruit_oled_drv.o
                 0x0800d47c                Adafruit_oled_drv::startDataSequence()
  .text._ZN17Adafruit_oled_drv6updateEv
-                0x0800d498       0x4e build_space-shooter-game-application/Adafruit_oled_drv.o
+                0x0800d498       0x72 build_space-shooter-game-application/Adafruit_oled_drv.o
                 0x0800d498                Adafruit_oled_drv::update()
  .text._ZN17Adafruit_oled_drv9updateRowEi
-                0x0800d4e6       0x6c build_space-shooter-game-application/Adafruit_oled_drv.o
-                0x0800d4e6                Adafruit_oled_drv::updateRow(int)
+                0x0800d50a       0x6c build_space-shooter-game-application/Adafruit_oled_drv.o
+                0x0800d50a                Adafruit_oled_drv::updateRow(int)
  .text.eeprom_read
-                0x0800d552        0x4 build_space-shooter-game-application/eeprom.o
-                0x0800d552                eeprom_read
+                0x0800d576        0x4 build_space-shooter-game-application/eeprom.o
+                0x0800d576                eeprom_read
  .text.eeprom_erase
-                0x0800d556        0x4 build_space-shooter-game-application/eeprom.o
-                0x0800d556                eeprom_erase
+                0x0800d57a        0x4 build_space-shooter-game-application/eeprom.o
+                0x0800d57a                eeprom_erase
  .text._ZL19link_hal_write_byteh
-                0x0800d55a        0x2 build_space-shooter-game-application/link_hal.o
+                0x0800d57e        0x2 build_space-shooter-game-application/link_hal.o
  .text._ZL17link_hal_rev_byteh
-                0x0800d55c        0x4 build_space-shooter-game-application/link_hal.o
+                0x0800d580        0x4 build_space-shooter-game-application/link_hal.o
  .text._Z23link_hal_reg_write_bytePFhhE
-                0x0800d560       0x28 build_space-shooter-game-application/link_hal.o
-                0x0800d560                link_hal_reg_write_byte(unsigned char (*)(unsigned char))
+                0x0800d584       0x28 build_space-shooter-game-application/link_hal.o
+                0x0800d584                link_hal_reg_write_byte(unsigned char (*)(unsigned char))
  .text._Z21link_hal_reg_rev_bytePFhhE
-                0x0800d588       0x28 build_space-shooter-game-application/link_hal.o
-                0x0800d588                link_hal_reg_rev_byte(unsigned char (*)(unsigned char))
+                0x0800d5ac       0x28 build_space-shooter-game-application/link_hal.o
+                0x0800d5ac                link_hal_reg_rev_byte(unsigned char (*)(unsigned char))
  .text._ZL21fsm_link_state_handleP8ak_msg_t
-                0x0800d5b0      0x294 build_space-shooter-game-application/link.o
+                0x0800d5d4      0x294 build_space-shooter-game-application/link.o
  .text._ZL19fsm_link_state_initP8ak_msg_t
-                0x0800d844       0x80 build_space-shooter-game-application/link.o
+                0x0800d868       0x80 build_space-shooter-game-application/link.o
  .text._Z9task_linkP8ak_msg_t
-                0x0800d8c4        0xc build_space-shooter-game-application/link.o
-                0x0800d8c4                task_link(ak_msg_t*)
+                0x0800d8e8        0xc build_space-shooter-game-application/link.o
+                0x0800d8e8                task_link(ak_msg_t*)
  .text._Z23link_init_state_machinev
-                0x0800d8d0       0x2c build_space-shooter-game-application/link.o
-                0x0800d8d0                link_init_state_machine()
+                0x0800d8f4       0x2c build_space-shooter-game-application/link.o
+                0x0800d8f4                link_init_state_machine()
  .text._ZL23link_mac_frame_send_reqv
-                0x0800d8fc       0x3c build_space-shooter-game-application/link_mac.o
+                0x0800d920       0x3c build_space-shooter-game-application/link_mac.o
  .text._ZL23link_mac_frame_send_endv
-                0x0800d938       0x34 build_space-shooter-game-application/link_mac.o
+                0x0800d95c       0x34 build_space-shooter-game-application/link_mac.o
  .text._ZL28link_mac_frame_cals_checksumP16link_mac_frame_t.constprop.0
-                0x0800d96c       0x38 build_space-shooter-game-application/link_mac.o
+                0x0800d990       0x38 build_space-shooter-game-application/link_mac.o
  .text._Z25fsm_link_mac_state_handleP8ak_msg_t
-                0x0800d9a4      0x2b8 build_space-shooter-game-application/link_mac.o
-                0x0800d9a4                fsm_link_mac_state_handle(ak_msg_t*)
+                0x0800d9c8      0x2b8 build_space-shooter-game-application/link_mac.o
+                0x0800d9c8                fsm_link_mac_state_handle(ak_msg_t*)
  .text._Z13task_link_macP8ak_msg_t
-                0x0800dc5c        0xc build_space-shooter-game-application/link_mac.o
-                0x0800dc5c                task_link_mac(ak_msg_t*)
+                0x0800dc80        0xc build_space-shooter-game-application/link_mac.o
+                0x0800dc80                task_link_mac(ak_msg_t*)
  .text._Z23fsm_link_mac_state_initP8ak_msg_t
-                0x0800dc68       0x88 build_space-shooter-game-application/link_mac.o
-                0x0800dc68                fsm_link_mac_state_init(ak_msg_t*)
+                0x0800dc8c       0x88 build_space-shooter-game-application/link_mac.o
+                0x0800dc8c                fsm_link_mac_state_init(ak_msg_t*)
  .text._ZL26link_phy_frame_write_blockPhm
-                0x0800dcf0       0x1c build_space-shooter-game-application/link_phy.o
+                0x0800dd14       0x1c build_space-shooter-game-application/link_phy.o
  .text._ZL20link_phy_frame_writeP16link_phy_frame_t
-                0x0800dd0c       0x1c build_space-shooter-game-application/link_phy.o
+                0x0800dd30       0x1c build_space-shooter-game-application/link_phy.o
  .text._ZL28link_phy_frame_cals_checksumP16link_phy_frame_t
-                0x0800dd28       0x38 build_space-shooter-game-application/link_phy.o
+                0x0800dd4c       0x38 build_space-shooter-game-application/link_phy.o
  .text._ZL25link_phy_frame_write_byteh
-                0x0800dd60        0xc build_space-shooter-game-application/link_phy.o
+                0x0800dd84        0xc build_space-shooter-game-application/link_phy.o
  .text._ZL26ac_link_phy_frame_rev_byteh
-                0x0800dd6c       0xfc build_space-shooter-game-application/link_phy.o
+                0x0800dd90       0xfc build_space-shooter-game-application/link_phy.o
  .text._ZL19link_phy_frame_sendv
-                0x0800de68       0x2c build_space-shooter-game-application/link_phy.o
+                0x0800de8c       0x2c build_space-shooter-game-application/link_phy.o
  .text._Z25fsm_link_phy_state_handleP8ak_msg_t
-                0x0800de94      0x1f4 build_space-shooter-game-application/link_phy.o
-                0x0800de94                fsm_link_phy_state_handle(ak_msg_t*)
+                0x0800deb8      0x1f4 build_space-shooter-game-application/link_phy.o
+                0x0800deb8                fsm_link_phy_state_handle(ak_msg_t*)
  .text._Z13task_link_phyP8ak_msg_t
-                0x0800e088        0xc build_space-shooter-game-application/link_phy.o
-                0x0800e088                task_link_phy(ak_msg_t*)
+                0x0800e0ac        0xc build_space-shooter-game-application/link_phy.o
+                0x0800e0ac                task_link_phy(ak_msg_t*)
  .text._Z23fsm_link_phy_state_initP8ak_msg_t
-                0x0800e094       0x90 build_space-shooter-game-application/link_phy.o
-                0x0800e094                fsm_link_phy_state_init(ak_msg_t*)
+                0x0800e0b8       0x90 build_space-shooter-game-application/link_phy.o
+                0x0800e0b8                fsm_link_phy_state_init(ak_msg_t*)
  .text._Z26link_phy_get_send_frame_tov
-                0x0800e124       0x10 build_space-shooter-game-application/link_phy.o
-                0x0800e124                link_phy_get_send_frame_to()
+                0x0800e148       0x10 build_space-shooter-game-application/link_phy.o
+                0x0800e148                link_phy_get_send_frame_to()
  .text._Z13link_pdu_initv
-                0x0800e134       0x54 build_space-shooter-game-application/link_data.o
-                0x0800e134                link_pdu_init()
+                0x0800e158       0x54 build_space-shooter-game-application/link_data.o
+                0x0800e158                link_pdu_init()
  .text._Z15link_pdu_mallocv
-                0x0800e188       0x24 build_space-shooter-game-application/link_data.o
-                0x0800e188                link_pdu_malloc()
+                0x0800e1ac       0x24 build_space-shooter-game-application/link_data.o
+                0x0800e1ac                link_pdu_malloc()
  .text._Z12link_pdu_getm
-                0x0800e1ac       0x3c build_space-shooter-game-application/link_data.o
-                0x0800e1ac                link_pdu_get(unsigned long)
+                0x0800e1d0       0x3c build_space-shooter-game-application/link_data.o
+                0x0800e1d0                link_pdu_get(unsigned long)
  .text._Z13link_pdu_freem
-                0x0800e1e8       0x4c build_space-shooter-game-application/link_data.o
-                0x0800e1e8                link_pdu_free(unsigned long)
+                0x0800e20c       0x4c build_space-shooter-game-application/link_data.o
+                0x0800e20c                link_pdu_free(unsigned long)
  .text._Z17link_get_src_addrv
-                0x0800e234       0x18 build_space-shooter-game-application/link_data.o
-                0x0800e234                link_get_src_addr()
+                0x0800e258       0x18 build_space-shooter-game-application/link_data.o
+                0x0800e258                link_get_src_addr()
  .text._Z17link_get_des_addrv
-                0x0800e24c       0x18 build_space-shooter-game-application/link_data.o
-                0x0800e24c                link_get_des_addr()
+                0x0800e270       0x18 build_space-shooter-game-application/link_data.o
+                0x0800e270                link_get_des_addr()
  .text._Z7pinModehh
-                0x0800e264       0x84 build_space-shooter-game-application/wiring_digital.o
-                0x0800e264                pinMode(unsigned char, unsigned char)
+                0x0800e288       0x84 build_space-shooter-game-application/wiring_digital.o
+                0x0800e288                pinMode(unsigned char, unsigned char)
  .text._Z12digitalWritehh
-                0x0800e2e8       0x78 build_space-shooter-game-application/wiring_digital.o
-                0x0800e2e8                digitalWrite(unsigned char, unsigned char)
+                0x0800e30c       0x78 build_space-shooter-game-application/wiring_digital.o
+                0x0800e30c                digitalWrite(unsigned char, unsigned char)
  .text._ZN5Print5writeEPKhj
-                0x0800e360       0x22 build_space-shooter-game-application/Print.o
-                0x0800e360                Print::write(unsigned char const*, unsigned int)
+                0x0800e384       0x22 build_space-shooter-game-application/Print.o
+                0x0800e384                Print::write(unsigned char const*, unsigned int)
  .text._ZN5Print5writeEPKc
-                0x0800e382       0x20 build_space-shooter-game-application/Print.o
-                0x0800e382                Print::write(char const*)
+                0x0800e3a6       0x20 build_space-shooter-game-application/Print.o
+                0x0800e3a6                Print::write(char const*)
  .text._ZN5Print5printEPKc
-                0x0800e3a2        0x8 build_space-shooter-game-application/Print.o
-                0x0800e3a2                Print::print(char const*)
+                0x0800e3c6        0x8 build_space-shooter-game-application/Print.o
+                0x0800e3c6                Print::print(char const*)
  .text._ZN5Print11printNumberEmh
-                0x0800e3aa       0x3a build_space-shooter-game-application/Print.o
-                0x0800e3aa                Print::printNumber(unsigned long, unsigned char)
+                0x0800e3ce       0x3a build_space-shooter-game-application/Print.o
+                0x0800e3ce                Print::printNumber(unsigned long, unsigned char)
  .text._ZN5Print5printEmi
-                0x0800e3e4       0x16 build_space-shooter-game-application/Print.o
-                0x0800e3e4                Print::print(unsigned long, int)
+                0x0800e408       0x16 build_space-shooter-game-application/Print.o
+                0x0800e408                Print::print(unsigned long, int)
  .text._ZN5Print5printEhi
-                0x0800e3fa        0x4 build_space-shooter-game-application/Print.o
-                0x0800e3fa                Print::print(unsigned char, int)
+                0x0800e41e        0x4 build_space-shooter-game-application/Print.o
+                0x0800e41e                Print::print(unsigned char, int)
  .text._ZN14HardwareSerial9availableEv
-                0x0800e3fe        0xa build_space-shooter-game-application/HardwareSerial.o
-                0x0800e3fe                HardwareSerial::available()
+                0x0800e422        0xa build_space-shooter-game-application/HardwareSerial.o
+                0x0800e422                HardwareSerial::available()
  .text._ZN14HardwareSerial4peekEv
-                0x0800e408       0x14 build_space-shooter-game-application/HardwareSerial.o
-                0x0800e408                HardwareSerial::peek()
+                0x0800e42c       0x14 build_space-shooter-game-application/HardwareSerial.o
+                0x0800e42c                HardwareSerial::peek()
  .text._ZN14HardwareSerial4readEv
-                0x0800e41c       0x20 build_space-shooter-game-application/HardwareSerial.o
-                0x0800e41c                HardwareSerial::read()
+                0x0800e440       0x20 build_space-shooter-game-application/HardwareSerial.o
+                0x0800e440                HardwareSerial::read()
  .text._ZN14HardwareSerial5flushEv
-                0x0800e43c        0x2 build_space-shooter-game-application/HardwareSerial.o
-                0x0800e43c                HardwareSerial::flush()
+                0x0800e460        0x2 build_space-shooter-game-application/HardwareSerial.o
+                0x0800e460                HardwareSerial::flush()
  .text._ZN14HardwareSerial17availableForWriteEv
-                0x0800e43e       0x26 build_space-shooter-game-application/HardwareSerial.o
-                0x0800e43e                HardwareSerial::availableForWrite()
+                0x0800e462       0x26 build_space-shooter-game-application/HardwareSerial.o
+                0x0800e462                HardwareSerial::availableForWrite()
  .text._ZN14HardwareSerial5writeEh
-                0x0800e464       0x30 build_space-shooter-game-application/HardwareSerial.o
-                0x0800e464                HardwareSerial::write(unsigned char)
+                0x0800e488       0x30 build_space-shooter-game-application/HardwareSerial.o
+                0x0800e488                HardwareSerial::write(unsigned char)
  .text._ZL20serial2_trigger_putcv
-                0x0800e494       0x10 build_space-shooter-game-application/HardwareSerial2.o
+                0x0800e4b8       0x10 build_space-shooter-game-application/HardwareSerial2.o
  .text.startup._GLOBAL__sub_I_Serial2
-                0x0800e4a4       0x34 build_space-shooter-game-application/HardwareSerial2.o
+                0x0800e4c8       0x34 build_space-shooter-game-application/HardwareSerial2.o
  .text._ZN8SPIClass9io_configEv
-                0x0800e4d8       0x68 build_space-shooter-game-application/SPI.o
-                0x0800e4d8                SPIClass::io_config()
+                0x0800e4fc       0x68 build_space-shooter-game-application/SPI.o
+                0x0800e4fc                SPIClass::io_config()
  .text._ZN8SPIClass5beginEv
-                0x0800e540       0xd4 build_space-shooter-game-application/SPI.o
-                0x0800e540                SPIClass::begin()
+                0x0800e564       0xd4 build_space-shooter-game-application/SPI.o
+                0x0800e564                SPIClass::begin()
  .text.startup._GLOBAL__sub_I__ZN8SPIClassC2Ev
-                0x0800e614       0x14 build_space-shooter-game-application/SPI.o
+                0x0800e638       0x14 build_space-shooter-game-application/SPI.o
  .text._ZN7TwoWire9availableEv
-                0x0800e628       0x14 build_space-shooter-game-application/Wire.o
-                0x0800e628                TwoWire::available()
+                0x0800e64c       0x14 build_space-shooter-game-application/Wire.o
+                0x0800e64c                TwoWire::available()
  .text._ZN7TwoWire4readEv
-                0x0800e63c       0x28 build_space-shooter-game-application/Wire.o
-                0x0800e63c                TwoWire::read()
+                0x0800e660       0x28 build_space-shooter-game-application/Wire.o
+                0x0800e660                TwoWire::read()
  .text._ZN7TwoWire4peekEv
-                0x0800e664       0x24 build_space-shooter-game-application/Wire.o
-                0x0800e664                TwoWire::peek()
+                0x0800e688       0x24 build_space-shooter-game-application/Wire.o
+                0x0800e688                TwoWire::peek()
  .text._ZN7TwoWire5flushEv
-                0x0800e688        0x2 build_space-shooter-game-application/Wire.o
-                0x0800e688                TwoWire::flush()
- *fill*         0x0800e68a        0x2 
+                0x0800e6ac        0x2 build_space-shooter-game-application/Wire.o
+                0x0800e6ac                TwoWire::flush()
+ *fill*         0x0800e6ae        0x2 
  .text._ZN7TwoWire5writeEh
-                0x0800e68c       0x54 build_space-shooter-game-application/Wire.o
-                0x0800e68c                TwoWire::write(unsigned char)
+                0x0800e6b0       0x54 build_space-shooter-game-application/Wire.o
+                0x0800e6b0                TwoWire::write(unsigned char)
  .text._ZN7TwoWire5writeEPKhj
-                0x0800e6e0       0x34 build_space-shooter-game-application/Wire.o
-                0x0800e6e0                TwoWire::write(unsigned char const*, unsigned int)
+                0x0800e704       0x34 build_space-shooter-game-application/Wire.o
+                0x0800e704                TwoWire::write(unsigned char const*, unsigned int)
  .text.startup._GLOBAL__sub_I__ZN7TwoWire8rxBufferE
-                0x0800e714       0x1c build_space-shooter-game-application/Wire.o
+                0x0800e738       0x1c build_space-shooter-game-application/Wire.o
  .text._Z12twi_transmitPKhh
-                0x0800e730       0x40 build_space-shooter-game-application/twi.o
-                0x0800e730                twi_transmit(unsigned char const*, unsigned char)
+                0x0800e754       0x40 build_space-shooter-game-application/twi.o
+                0x0800e754                twi_transmit(unsigned char const*, unsigned char)
  .text.__cxa_pure_virtual
-                0x0800e770       0x1c build_space-shooter-game-application/mini_cpp.o
-                0x0800e770                __cxa_pure_virtual
- .text._sbrk    0x0800e78c       0x1c build_space-shooter-game-application/mini_cpp.o
-                0x0800e78c                _sbrk
+                0x0800e794       0x1c build_space-shooter-game-application/mini_cpp.o
+                0x0800e794                __cxa_pure_virtual
+ .text._sbrk    0x0800e7b0       0x1c build_space-shooter-game-application/mini_cpp.o
+                0x0800e7b0                _sbrk
  *(.rodata)
- .rodata        0x0800e7a8      0x101 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
-                0x0800e7a8                _ctype_
+ .rodata        0x0800e7cc      0x101 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+                0x0800e7cc                _ctype_
  *(.rodata*)
  .rodata.task_create.str1.1
-                0x0800e8a9     0x16e5 build_space-shooter-game-application/task.o
+                0x0800e8cd     0x16e6 build_space-shooter-game-application/task.o
                                   0x3 (size before relaxing)
  .rodata.task_run.str1.1
-                0x0800ff8e        0x0 build_space-shooter-game-application/task.o
+                0x0800ffb3        0x0 build_space-shooter-game-application/task.o
                                  0x25 (size before relaxing)
  .rodata.timer_set.str1.1
-                0x0800ff8e        0x0 build_space-shooter-game-application/timer.o
+                0x0800ffb3        0x0 build_space-shooter-game-application/timer.o
                                   0x3 (size before relaxing)
  .rodata.msg_force_free.str1.1
-                0x0800ff8e        0x0 build_space-shooter-game-application/message.o
+                0x0800ffb3        0x0 build_space-shooter-game-application/message.o
                                   0x3 (size before relaxing)
  .rodata.ak_malloc.str1.1
-                0x0800ff8e        0x0 build_space-shooter-game-application/message.o
+                0x0800ffb3        0x0 build_space-shooter-game-application/message.o
                                   0xa (size before relaxing)
  .rodata.fifo_put.str1.1
-                0x0800ff8e        0x0 build_space-shooter-game-application/fifo.o
+                0x0800ffb3        0x0 build_space-shooter-game-application/fifo.o
                                   0x5 (size before relaxing)
  .rodata.xvfprintf.str1.1
-                0x0800ff8e        0x0 build_space-shooter-game-application/xprintf.o
+                0x0800ffb3        0x0 build_space-shooter-game-application/xprintf.o
                                   0xc (size before relaxing)
- *fill*         0x0800ff8e        0x2 
+ *fill*         0x0800ffb3        0x1 
  .rodata.buzzer_music_table
-                0x0800ff90       0xa8 build_space-shooter-game-application/buzzer.o
+                0x0800ffb4       0xa8 build_space-shooter-game-application/buzzer.o
  .rodata.sTone7
-                0x08010038       0xdc build_space-shooter-game-application/buzzer_music.o
-                0x08010038                sTone7
+                0x0801005c       0xdc build_space-shooter-game-application/buzzer_music.o
+                0x0801005c                sTone7
  .rodata.sTone6
-                0x08010114        0x8 build_space-shooter-game-application/buzzer_music.o
-                0x08010114                sTone6
+                0x08010138        0x8 build_space-shooter-game-application/buzzer_music.o
+                0x08010138                sTone6
  .rodata.sTone5
-                0x0801011c        0x8 build_space-shooter-game-application/buzzer_music.o
-                0x0801011c                sTone5
+                0x08010140        0x8 build_space-shooter-game-application/buzzer_music.o
+                0x08010140                sTone5
  .rodata.sTone4
-                0x08010124        0x8 build_space-shooter-game-application/buzzer_music.o
-                0x08010124                sTone4
+                0x08010148        0x8 build_space-shooter-game-application/buzzer_music.o
+                0x08010148                sTone4
  .rodata.sTone3
-                0x0801012c       0x1c build_space-shooter-game-application/buzzer_music.o
-                0x0801012c                sTone3
+                0x08010150       0x1c build_space-shooter-game-application/buzzer_music.o
+                0x08010150                sTone3
  .rodata.sTone2
-                0x08010148       0x24 build_space-shooter-game-application/buzzer_music.o
-                0x08010148                sTone2
+                0x0801016c       0x24 build_space-shooter-game-application/buzzer_music.o
+                0x0801016c                sTone2
  .rodata.sTone1
-                0x0801016c        0x8 build_space-shooter-game-application/buzzer_music.o
-                0x0801016c                sTone1
+                0x08010190        0x8 build_space-shooter-game-application/buzzer_music.o
+                0x08010190                sTone1
  .rodata.tones_merry_christmas
-                0x08010174       0xd0 build_space-shooter-game-application/buzzer_music.o
-                0x08010174                tones_merry_christmas
+                0x08010198       0xd0 build_space-shooter-game-application/buzzer_music.o
+                0x08010198                tones_merry_christmas
  .rodata.tones_supper_mario_bros
-                0x08010244      0x104 build_space-shooter-game-application/buzzer_music.o
-                0x08010244                tones_supper_mario_bros
+                0x08010268      0x104 build_space-shooter-game-application/buzzer_music.o
+                0x08010268                tones_supper_mario_bros
  .rodata.tones_lowscore
-                0x08010348       0x14 build_space-shooter-game-application/buzzer_music.o
-                0x08010348                tones_lowscore
+                0x0801036c       0x14 build_space-shooter-game-application/buzzer_music.o
+                0x0801036c                tones_lowscore
  .rodata.tones_highscore
-                0x0801035c       0x20 build_space-shooter-game-application/buzzer_music.o
-                0x0801035c                tones_highscore
+                0x08010380       0x20 build_space-shooter-game-application/buzzer_music.o
+                0x08010380                tones_highscore
  .rodata.tones_goodbye
-                0x0801037c       0x14 build_space-shooter-game-application/buzzer_music.o
-                0x0801037c                tones_goodbye
+                0x080103a0       0x14 build_space-shooter-game-application/buzzer_music.o
+                0x080103a0                tones_goodbye
  .rodata.tones_welcome
-                0x08010390       0x14 build_space-shooter-game-application/buzzer_music.o
-                0x08010390                tones_welcome
+                0x080103b4       0x14 build_space-shooter-game-application/buzzer_music.o
+                0x080103b4                tones_welcome
  .rodata.tones_3beep
-                0x080103a4       0x18 build_space-shooter-game-application/buzzer_music.o
-                0x080103a4                tones_3beep
+                0x080103c8       0x18 build_space-shooter-game-application/buzzer_music.o
+                0x080103c8                tones_3beep
  .rodata.tones_startup
-                0x080103bc       0x28 build_space-shooter-game-application/buzzer_music.o
-                0x080103bc                tones_startup
+                0x080103e0       0x28 build_space-shooter-game-application/buzzer_music.o
+                0x080103e0                tones_startup
  .rodata.tones_lets_go
-                0x080103e4       0x28 build_space-shooter-game-application/buzzer_music.o
-                0x080103e4                tones_lets_go
+                0x08010408       0x28 build_space-shooter-game-application/buzzer_music.o
+                0x08010408                tones_lets_go
  .rodata.tones_usb_disconnected
-                0x0801040c       0x10 build_space-shooter-game-application/buzzer_music.o
-                0x0801040c                tones_usb_disconnected
+                0x08010430       0x10 build_space-shooter-game-application/buzzer_music.o
+                0x08010430                tones_usb_disconnected
  .rodata.tones_usb_connected
-                0x0801041c       0x10 build_space-shooter-game-application/buzzer_music.o
-                0x0801041c                tones_usb_connected
+                0x08010440       0x10 build_space-shooter-game-application/buzzer_music.o
+                0x08010440                tones_usb_connected
  .rodata.tones_bang
-                0x0801042c        0xc build_space-shooter-game-application/buzzer_music.o
-                0x0801042c                tones_bang
+                0x08010450        0xc build_space-shooter-game-application/buzzer_music.o
+                0x08010450                tones_bang
  .rodata.tones_click
-                0x08010438        0x8 build_space-shooter-game-application/buzzer_music.o
-                0x08010438                tones_click
+                0x0801045c        0x8 build_space-shooter-game-application/buzzer_music.o
+                0x0801045c                tones_click
  .rodata.sys_dbg_cpu_dump.str1.1
-                0x08010440        0x0 build_space-shooter-game-application/sys_dbg.o
+                0x08010464        0x0 build_space-shooter-game-application/sys_dbg.o
                                  0x5f (size before relaxing)
  .rodata.sys_dbg_stack_space_dump.str1.1
-                0x08010440        0x0 build_space-shooter-game-application/sys_dbg.o
+                0x08010464        0x0 build_space-shooter-game-application/sys_dbg.o
                                  0x2f (size before relaxing)
  .rodata.sys_dbg_fatal.str1.1
-                0x08010440        0x0 build_space-shooter-game-application/sys_dbg.o
+                0x08010464        0x0 build_space-shooter-game-application/sys_dbg.o
                                 0x261 (size before relaxing)
  .rodata.CSWTCH.8
-                0x08010440        0xb build_space-shooter-game-application/mbutils.o
+                0x08010464        0xb build_space-shooter-game-application/mbutils.o
  .rodata.aucCRCLo
-                0x0801044b      0x100 build_space-shooter-game-application/mbmcrc.o
+                0x0801046f      0x100 build_space-shooter-game-application/mbmcrc.o
  .rodata.aucCRCHi
-                0x0801054b      0x100 build_space-shooter-game-application/mbmcrc.o
+                0x0801056f      0x100 build_space-shooter-game-application/mbmcrc.o
  .rodata.vMBPAssert.str1.1
-                0x0801064b        0x0 build_space-shooter-game-application/mbportother.o
+                0x0801066f        0x0 build_space-shooter-game-application/mbportother.o
                                   0x3 (size before relaxing)
  .rodata.APBAHBPrescTable
-                0x0801064b       0x10 build_space-shooter-game-application/stm32l1xx_rcc.o
+                0x0801066f       0x10 build_space-shooter-game-application/stm32l1xx_rcc.o
  .rodata.PLLMulTable
-                0x0801065b        0x9 build_space-shooter-game-application/stm32l1xx_rcc.o
+                0x0801067f        0x9 build_space-shooter-game-application/stm32l1xx_rcc.o
  .rodata.exit_critical.str1.1
-                0x08010664        0x0 build_space-shooter-game-application/platform.o
+                0x08010688        0x0 build_space-shooter-game-application/platform.o
                                   0x4 (size before relaxing)
  .rodata.default_handler.str1.1
-                0x08010664        0x0 build_space-shooter-game-application/system.o
+                0x08010688        0x0 build_space-shooter-game-application/system.o
                                   0x3 (size before relaxing)
  .rodata.sys_cfg_update_info.str1.1
-                0x08010664        0x0 build_space-shooter-game-application/sys_cfg.o
+                0x08010688        0x0 build_space-shooter-game-application/sys_cfg.o
                                  0x64 (size before relaxing)
  .rodata.sys_ctrl_soft_watchdog_increase_counter.str1.1
-                0x08010664        0x0 build_space-shooter-game-application/sys_cfg.o
+                0x08010688        0x0 build_space-shooter-game-application/sys_cfg.o
                                   0x5 (size before relaxing)
  .rodata.flash_transfer.str1.1
-                0x08010664        0x0 build_space-shooter-game-application/io_cfg.o
+                0x08010688        0x0 build_space-shooter-game-application/io_cfg.o
                                   0x4 (size before relaxing)
  .rodata.AHBPrescTable
-                0x08010664       0x10 build_space-shooter-game-application/system_stm32l1xx.o
-                0x08010664                AHBPrescTable
+                0x08010688       0x10 build_space-shooter-game-application/system_stm32l1xx.o
+                0x08010688                AHBPrescTable
  .rodata.PLLMulTable
-                0x08010674        0x9 build_space-shooter-game-application/system_stm32l1xx.o
-                0x08010674                PLLMulTable
+                0x08010698        0x9 build_space-shooter-game-application/system_stm32l1xx.o
+                0x08010698                PLLMulTable
  .rodata._Z16view_scr_game_uiv.str1.1
-                0x0801067d        0x0 build_space-shooter-game-application/scr_game_ui.o
+                0x080106a1        0x0 build_space-shooter-game-application/scr_game_ui.o
                                  0xdd (size before relaxing)
  .rodata._ZL16view_scr_startupv.str1.1
-                0x0801067d        0x0 build_space-shooter-game-application/scr_startup.o
+                0x080106a1        0x0 build_space-shooter-game-application/scr_startup.o
                                  0x62 (size before relaxing)
  .rodata._Z18scr_startup_handleP8ak_msg_t.str1.1
-                0x0801067d        0x0 build_space-shooter-game-application/scr_startup.o
-                                 0x7b (size before relaxing)
+                0x080106a1        0x0 build_space-shooter-game-application/scr_startup.o
+                                 0x7c (size before relaxing)
  .rodata.bmp_boss
-                0x0801067d       0x20 build_space-shooter-game-application/game_bitmaps.o
-                0x0801067d                bmp_boss
+                0x080106a1       0x20 build_space-shooter-game-application/game_bitmaps.o
+                0x080106a1                bmp_boss
  .rodata.icon_heart
-                0x0801069d        0x8 build_space-shooter-game-application/game_bitmaps.o
-                0x0801069d                icon_heart
+                0x080106c1        0x8 build_space-shooter-game-application/game_bitmaps.o
+                0x080106c1                icon_heart
  .rodata.icon_menu
-                0x080106a5        0x8 build_space-shooter-game-application/game_bitmaps.o
-                0x080106a5                icon_menu
+                0x080106c9        0x8 build_space-shooter-game-application/game_bitmaps.o
+                0x080106c9                icon_menu
  .rodata.icon_trophy
-                0x080106ad        0x8 build_space-shooter-game-application/game_bitmaps.o
-                0x080106ad                icon_trophy
+                0x080106d1        0x8 build_space-shooter-game-application/game_bitmaps.o
+                0x080106d1                icon_trophy
  .rodata.icon_setting
-                0x080106b5        0x8 build_space-shooter-game-application/game_bitmaps.o
-                0x080106b5                icon_setting
+                0x080106d9        0x8 build_space-shooter-game-application/game_bitmaps.o
+                0x080106d9                icon_setting
  .rodata.icon_play
-                0x080106bd        0x8 build_space-shooter-game-application/game_bitmaps.o
-                0x080106bd                icon_play
+                0x080106e1        0x8 build_space-shooter-game-application/game_bitmaps.o
+                0x080106e1                icon_play
  .rodata.icon_enemy3
-                0x080106c5        0x8 build_space-shooter-game-application/game_bitmaps.o
-                0x080106c5                icon_enemy3
+                0x080106e9        0x8 build_space-shooter-game-application/game_bitmaps.o
+                0x080106e9                icon_enemy3
  .rodata.icon_enemy2
-                0x080106cd        0x8 build_space-shooter-game-application/game_bitmaps.o
-                0x080106cd                icon_enemy2
+                0x080106f1        0x8 build_space-shooter-game-application/game_bitmaps.o
+                0x080106f1                icon_enemy2
  .rodata.icon_enemy1
-                0x080106d5        0x8 build_space-shooter-game-application/game_bitmaps.o
-                0x080106d5                icon_enemy1
+                0x080106f9        0x8 build_space-shooter-game-application/game_bitmaps.o
+                0x080106f9                icon_enemy1
  .rodata.icon_player
-                0x080106dd        0x8 build_space-shooter-game-application/game_bitmaps.o
-                0x080106dd                icon_player
+                0x08010701        0x8 build_space-shooter-game-application/game_bitmaps.o
+                0x08010701                icon_player
  .rodata._Z11task_systemP8ak_msg_t.str1.1
-                0x080106e5        0x0 build_space-shooter-game-application/task_system.o
+                0x08010709        0x0 build_space-shooter-game-application/task_system.o
                                  0x23 (size before relaxing)
  .rodata.main_app.str1.1
-                0x080106e5        0x0 build_space-shooter-game-application/app.o
+                0x08010709        0x0 build_space-shooter-game-application/app.o
                                 0x27a (size before relaxing)
  .rodata._Z20task_polling_consolev.str1.1
-                0x080106e5        0x0 build_space-shooter-game-application/app.o
+                0x08010709        0x0 build_space-shooter-game-application/app.o
                                  0x31 (size before relaxing)
- *fill*         0x080106e5        0x3 
+ *fill*         0x08010709        0x3 
  .rodata.app_info
-                0x080106e8        0x8 build_space-shooter-game-application/app.o
-                0x080106e8                app_info
+                0x0801070c        0x8 build_space-shooter-game-application/app.o
+                0x0801070c                app_info
  .rodata._Z17btn_mode_callbackPv.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/app_bsp.o
+                0x08010714        0x0 build_space-shooter-game-application/app_bsp.o
                                  0x6b (size before relaxing)
  .rodata._Z15btn_up_callbackPv.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/app_bsp.o
+                0x08010714        0x0 build_space-shooter-game-application/app_bsp.o
                                  0x67 (size before relaxing)
  .rodata._Z17btn_down_callbackPv.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/app_bsp.o
+                0x08010714        0x0 build_space-shooter-game-application/app_bsp.o
                                  0x6b (size before relaxing)
  .rodata.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/app_modbus_pull.o
+                0x08010714        0x0 build_space-shooter-game-application/app_modbus_pull.o
                                  0xc1 (size before relaxing)
  .rodata._Z11shell_resetPh.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/shell.o
+                0x08010714        0x0 build_space-shooter-game-application/shell.o
                                   0x6 (size before relaxing)
  .rodata._Z10shell_helpPh.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/shell.o
+                0x08010714        0x0 build_space-shooter-game-application/shell.o
                                  0x24 (size before relaxing)
  .rodata._Z9shell_verPh.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/shell.o
+                0x08010714        0x0 build_space-shooter-game-application/shell.o
                                 0x180 (size before relaxing)
  .rodata._Z11shell_fatalPh.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/shell.o
+                0x08010714        0x0 build_space-shooter-game-application/shell.o
                                 0x229 (size before relaxing)
  .rodata._Z11shell_flashPh.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/shell.o
+                0x08010714        0x0 build_space-shooter-game-application/shell.o
                                  0x55 (size before relaxing)
  .rodata._Z9shell_epsPh.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/shell.o
+                0x08010714        0x0 build_space-shooter-game-application/shell.o
                                  0x28 (size before relaxing)
  .rodata._Z9shell_ramPh.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/shell.o
+                0x08010714        0x0 build_space-shooter-game-application/shell.o
                                  0x53 (size before relaxing)
  .rodata._Z10shell_bootPh.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/shell.o
+                0x08010714        0x0 build_space-shooter-game-application/shell.o
                                 0x166 (size before relaxing)
  .rodata._Z12shell_buzzerPh.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/shell.o
+                0x08010714        0x0 build_space-shooter-game-application/shell.o
                                 0x16f (size before relaxing)
  .rodata._Z9shell_dbgPh.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/shell.o
+                0x08010714        0x0 build_space-shooter-game-application/shell.o
                                  0x1b (size before relaxing)
  .rodata._Z12shell_modbusPh.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/shell.o
+                0x08010714        0x0 build_space-shooter-game-application/shell.o
                                  0x8f (size before relaxing)
  .rodata._Z9shell_lcdPh.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/shell.o
+                0x08010714        0x0 build_space-shooter-game-application/shell.o
                                  0xe2 (size before relaxing)
  .rodata.str1.1
-                0x080106f0        0x0 build_space-shooter-game-application/shell.o
+                0x08010714        0x0 build_space-shooter-game-application/shell.o
                                  0xdf (size before relaxing)
  .rodata.lgn_cmd_table
-                0x080106f0       0xd8 build_space-shooter-game-application/shell.o
-                0x080106f0                lgn_cmd_table
+                0x08010714       0xd8 build_space-shooter-game-application/shell.o
+                0x08010714                lgn_cmd_table
  .rodata._Z10task_shellP8ak_msg_t.str1.1
-                0x080107c8        0x0 build_space-shooter-game-application/task_shell.o
+                0x080107ec        0x0 build_space-shooter-game-application/task_shell.o
                                  0x43 (size before relaxing)
  .rodata._Z7task_fwP8ak_msg_t.str1.1
-                0x080107c8        0x0 build_space-shooter-game-application/task_fw.o
+                0x080107ec        0x0 build_space-shooter-game-application/task_fw.o
                                 0x206 (size before relaxing)
  .rodata.app_task_polling_table
-                0x080107c8       0x18 build_space-shooter-game-application/task_list.o
-                0x080107c8                app_task_polling_table
+                0x080107ec       0x18 build_space-shooter-game-application/task_list.o
+                0x080107ec                app_task_polling_table
  .rodata.app_task_table
-                0x080107e0       0x78 build_space-shooter-game-application/task_list.o
-                0x080107e0                app_task_table
+                0x08010804       0x78 build_space-shooter-game-application/task_list.o
+                0x08010804                app_task_table
  .rodata._Z7task_ifP8ak_msg_t.str1.1
-                0x08010858        0x0 build_space-shooter-game-application/task_if.o
+                0x0801087c        0x0 build_space-shooter-game-application/task_if.o
                                  0xa9 (size before relaxing)
  .rodata._Z12task_uart_ifP8ak_msg_t.str1.1
-                0x08010858        0x0 build_space-shooter-game-application/task_uart_if.o
+                0x0801087c        0x0 build_space-shooter-game-application/task_uart_if.o
                                  0xdf (size before relaxing)
  .rodata._ZL11render_list
-                0x08010858        0x8 build_space-shooter-game-application/view_render.o
+                0x0801087c        0x8 build_space-shooter-game-application/view_render.o
  .rodata._Z16scr_mng_dispatchP8ak_msg_t.str1.1
-                0x08010860        0x0 build_space-shooter-game-application/screen_manager.o
+                0x08010884        0x0 build_space-shooter-game-application/screen_manager.o
                                   0x8 (size before relaxing)
  .rodata._ZTV12Adafruit_GFX
-                0x08010860       0x2c build_space-shooter-game-application/Adafruit_GFX.o
-                0x08010860                vtable for Adafruit_GFX
+                0x08010884       0x2c build_space-shooter-game-application/Adafruit_GFX.o
+                0x08010884                vtable for Adafruit_GFX
  .rodata._ZL4font
-                0x0801088c      0x4fb build_space-shooter-game-application/Adafruit_GFX.o
- *fill*         0x08010d87        0x1 
+                0x080108b0      0x4fb build_space-shooter-game-application/Adafruit_GFX.o
+ *fill*         0x08010dab        0x1 
  .rodata._ZTV17Adafruit_oled_drv
-                0x08010d88       0x3c build_space-shooter-game-application/Adafruit_oled_drv.o
-                0x08010d88                vtable for Adafruit_oled_drv
+                0x08010dac       0x3c build_space-shooter-game-application/Adafruit_oled_drv.o
+                0x08010dac                vtable for Adafruit_oled_drv
  .rodata._Z23link_hal_reg_write_bytePFhhE.str1.1
-                0x08010dc4        0x0 build_space-shooter-game-application/link_hal.o
+                0x08010de8        0x0 build_space-shooter-game-application/link_hal.o
                                   0x9 (size before relaxing)
  .rodata._ZL19fsm_link_state_initP8ak_msg_t.str1.1
-                0x08010dc4        0x0 build_space-shooter-game-application/link.o
+                0x08010de8        0x0 build_space-shooter-game-application/link.o
                                 0x110 (size before relaxing)
  .rodata._ZL23link_mac_frame_send_reqv.str1.1
-                0x08010dc4        0x0 build_space-shooter-game-application/link_mac.o
+                0x08010de8        0x0 build_space-shooter-game-application/link_mac.o
                                   0x9 (size before relaxing)
  .rodata._Z25fsm_link_mac_state_handleP8ak_msg_t.str1.1
-                0x08010dc4        0x0 build_space-shooter-game-application/link_mac.o
+                0x08010de8        0x0 build_space-shooter-game-application/link_mac.o
                                   0x5 (size before relaxing)
  .rodata._Z25fsm_link_phy_state_handleP8ak_msg_t.str1.1
-                0x08010dc4        0x0 build_space-shooter-game-application/link_phy.o
+                0x08010de8        0x0 build_space-shooter-game-application/link_phy.o
                                   0x7 (size before relaxing)
  .rodata._Z13link_pdu_freeP10link_pdu_t.str1.1
-                0x08010dc4        0x0 build_space-shooter-game-application/link_data.o
+                0x08010de8        0x0 build_space-shooter-game-application/link_data.o
                                   0x9 (size before relaxing)
  .rodata._Z7pinModehh.str1.1
-                0x08010dc4        0x0 build_space-shooter-game-application/wiring_digital.o
+                0x08010de8        0x0 build_space-shooter-game-application/wiring_digital.o
                                   0x3 (size before relaxing)
  .rodata._ZTV14HardwareSerial
-                0x08010dc4       0x24 build_space-shooter-game-application/HardwareSerial.o
-                0x08010dc4                vtable for HardwareSerial
+                0x08010de8       0x24 build_space-shooter-game-application/HardwareSerial.o
+                0x08010de8                vtable for HardwareSerial
  .rodata._ZTV7TwoWire
-                0x08010de8       0x20 build_space-shooter-game-application/Wire.o
-                0x08010de8                vtable for TwoWire
+                0x08010e0c       0x20 build_space-shooter-game-application/Wire.o
+                0x08010e0c                vtable for TwoWire
  .rodata.__cxa_pure_virtual.str1.1
-                0x08010e08        0x0 build_space-shooter-game-application/mini_cpp.o
+                0x08010e2c        0x0 build_space-shooter-game-application/mini_cpp.o
                                   0x4 (size before relaxing)
  *(.glue_7)
- .glue_7        0x08010e08        0x0 linker stubs
+ .glue_7        0x08010e2c        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x08010e08        0x0 linker stubs
+ .glue_7t       0x08010e2c        0x0 linker stubs
  *(.init)
  *(.fini)
-                0x08010e08                        . = ALIGN (0x4)
-                0x08010e08                        _etext = .
+                0x08010e2c                        . = ALIGN (0x4)
+                0x08010e2c                        _etext = .
 
-.vfp11_veneer   0x08010e08        0x0
- .vfp11_veneer  0x08010e08        0x0 linker stubs
+.vfp11_veneer   0x08010e2c        0x0
+ .vfp11_veneer  0x08010e2c        0x0 linker stubs
 
-.v4_bx          0x08010e08        0x0
- .v4_bx         0x08010e08        0x0 linker stubs
+.v4_bx          0x08010e2c        0x0
+ .v4_bx         0x08010e2c        0x0 linker stubs
 
-.iplt           0x08010e08        0x0
- .iplt          0x08010e08        0x0 build_space-shooter-game-application/task.o
+.iplt           0x08010e2c        0x0
+ .iplt          0x08010e2c        0x0 build_space-shooter-game-application/task.o
 
-.rel.dyn        0x08010e08        0x0
- .rel.iplt      0x08010e08        0x0 build_space-shooter-game-application/task.o
+.rel.dyn        0x08010e2c        0x0
+ .rel.iplt      0x08010e2c        0x0 build_space-shooter-game-application/task.o
 
-.ARM.exidx      0x08010e08        0x8
- .ARM.exidx     0x08010e08        0x8 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
- .ARM.exidx     0x08010e10        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+.ARM.exidx      0x08010e2c        0x8
+ .ARM.exidx     0x08010e2c        0x8 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .ARM.exidx     0x08010e34        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
                                   0x8 (size before relaxing)
- .ARM.exidx     0x08010e10        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .ARM.exidx     0x08010e34        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
                                   0x8 (size before relaxing)
 
-.preinit_array  0x08010e10        0x0
-                0x08010e10                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x08010e34        0x0
+                0x08010e34                        PROVIDE (__preinit_array_start = .)
  *(SORT_BY_NAME(.preinit_array.*))
  *(.preinit_array*)
-                0x08010e10                        PROVIDE (__preinit_array_end = .)
+                0x08010e34                        PROVIDE (__preinit_array_end = .)
 
-.init_array     0x08010e10       0x10
-                0x08010e10                        PROVIDE (__init_array_start = .)
+.init_array     0x08010e34       0x10
+                0x08010e34                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x08010e10        0x4 build_space-shooter-game-application/view_render.o
- .init_array    0x08010e14        0x4 build_space-shooter-game-application/HardwareSerial2.o
- .init_array    0x08010e18        0x4 build_space-shooter-game-application/SPI.o
- .init_array    0x08010e1c        0x4 build_space-shooter-game-application/Wire.o
-                0x08010e20                        PROVIDE (__init_array_end = .)
+ .init_array    0x08010e34        0x4 build_space-shooter-game-application/view_render.o
+ .init_array    0x08010e38        0x4 build_space-shooter-game-application/HardwareSerial2.o
+ .init_array    0x08010e3c        0x4 build_space-shooter-game-application/SPI.o
+ .init_array    0x08010e40        0x4 build_space-shooter-game-application/Wire.o
+                0x08010e44                        PROVIDE (__init_array_end = .)
 
-.fini_array     0x08010e20        0x4
+.fini_array     0x08010e44        0x4
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(.fini_array*)
- .fini_array    0x08010e20        0x4 build_space-shooter-game-application/view_render.o
+ .fini_array    0x08010e44        0x4 build_space-shooter-game-application/view_render.o
  *(SORT_BY_NAME(.fini_array.*))
                 [!provide]                        PROVIDE (__fini_array_end = .)
 
-.end_flash      0x08010e24        0x0
-                0x08010e24                        _end_flash = .
+.end_flash      0x08010e48        0x0
+                0x08010e48                        _end_flash = .
 
 .start_ram      0x20000000        0x0
                 0x20000000                        _start_ram = .
 
-.data           0x20000000      0x6cc load address 0x08010e24
+.data           0x20000000      0x6cc load address 0x08010e48
                 0x20000000                        _data = .
-                0x08010e24                        _ldata = LOADADDR (.data)
+                0x08010e48                        _ldata = LOADADDR (.data)
  *(vtable)
  *(.data)
  .data          0x20000000      0x128 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
@@ -5062,10 +5062,10 @@ Linker script and memory map
  *(.ram_func*)
                 0x200006cc                        _edata = .
 
-.igot.plt       0x200006cc        0x0 load address 0x080114f0
+.igot.plt       0x200006cc        0x0 load address 0x08011514
  .igot.plt      0x200006cc        0x0 build_space-shooter-game-application/task.o
 
-.bss            0x200006cc     0x24ec load address 0x080114f0
+.bss            0x200006cc     0x24ec load address 0x08011514
                 0x200006cc                        _bss = .
  *(.bss)
  .bss           0x200006cc      0x13c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
@@ -5418,14 +5418,14 @@ Linker script and memory map
  *(COMMON)
                 0x20002bb8                        _ebss = .
 
-.heap           0x20002bb8      0x800 load address 0x080139dc
+.heap           0x20002bb8      0x800 load address 0x08013a00
                 0x20002bb8                        __heap_start__ = .
                 0x200033b8                        . = (. + HEAP_SIZE)
  *fill*         0x20002bb8      0x800 
                 0x200033b8                        . = ALIGN (0x4)
                 0x200033b8                        __heap_end__ = .
 
-.non_clear_ram  0x200033b8        0x4 load address 0x080141dc
+.non_clear_ram  0x200033b8        0x4 load address 0x08014200
                 0x200033b8                        _non_clear_ram = .
  *(.non_clear_ram)
  .non_clear_ram
@@ -5579,7 +5579,7 @@ LOAD /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libm.a
 LOAD /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libg.a
 LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
 
-.debug_info     0x00000000    0x6a258
+.debug_info     0x00000000    0x6a33f
  .debug_info    0x00000000      0x20b build_space-shooter-game-application/fsm.o
  .debug_info    0x0000020b      0xf2c build_space-shooter-game-application/task.o
  .debug_info    0x00001137      0x807 build_space-shooter-game-application/timer.o
@@ -5652,52 +5652,52 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_info    0x0003c23d     0x244d build_space-shooter-game-application/view_render.o
  .debug_info    0x0003e68a     0x231c build_space-shooter-game-application/screen_manager.o
  .debug_info    0x000409a6     0x426b build_space-shooter-game-application/Adafruit_GFX.o
- .debug_info    0x00044c11     0x2f70 build_space-shooter-game-application/Adafruit_oled_drv.o
- .debug_info    0x00047b81      0x8ec build_space-shooter-game-application/eeprom.o
- .debug_info    0x0004846d      0x91a build_space-shooter-game-application/link_hal.o
- .debug_info    0x00048d87     0x14ed build_space-shooter-game-application/link.o
- .debug_info    0x0004a274     0x1829 build_space-shooter-game-application/link_mac.o
- .debug_info    0x0004ba9d     0x155c build_space-shooter-game-application/link_phy.o
- .debug_info    0x0004cff9      0xc52 build_space-shooter-game-application/link_data.o
- .debug_info    0x0004dc4b     0x1e4d build_space-shooter-game-application/wiring_digital.o
- .debug_info    0x0004fa98     0x32f9 build_space-shooter-game-application/Print.o
- .debug_info    0x00052d91     0x368c build_space-shooter-game-application/HardwareSerial.o
- .debug_info    0x0005641d     0x37da build_space-shooter-game-application/HardwareSerial2.o
- .debug_info    0x00059bf7      0xf88 build_space-shooter-game-application/SPI.o
- .debug_info    0x0005ab7f     0x43d8 build_space-shooter-game-application/Wire.o
- .debug_info    0x0005ef57     0x2849 build_space-shooter-game-application/twi.o
- .debug_info    0x000617a0     0x1170 build_space-shooter-game-application/mini_cpp.o
- .debug_info    0x00062910      0x754 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
- .debug_info    0x00063064       0x33 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
- .debug_info    0x00063097      0x12b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
- .debug_info    0x000631c2      0x70f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
- .debug_info    0x000638d1       0xbd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
- .debug_info    0x0006398e       0xc3 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
- .debug_info    0x00063a51      0xd95 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
- .debug_info    0x000647e6      0x7b4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
- .debug_info    0x00064f9a       0xb9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
- .debug_info    0x00065053      0x135 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
- .debug_info    0x00065188      0x729 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
- .debug_info    0x000658b1      0x73a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
- .debug_info    0x00065feb       0x33 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
- .debug_info    0x0006601e      0xea8 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
- .debug_info    0x00066ec6      0xcd9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
- .debug_info    0x00067b9f      0x796 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
- .debug_info    0x00068335      0xb55 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
- .debug_info    0x00068e8a      0x831 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
- .debug_info    0x000696bb       0xc1 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
- .debug_info    0x0006977c       0xd3 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
- .debug_info    0x0006984f       0x57 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
- .debug_info    0x000698a6       0xdf /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
- .debug_info    0x00069985       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
- .debug_info    0x000699c1       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
- .debug_info    0x000699fd       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
- .debug_info    0x00069a39       0xca /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
- .debug_info    0x00069b03       0x24 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
- .debug_info    0x00069b27      0x6f5 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
- .debug_info    0x0006a21c       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x00044c11     0x3057 build_space-shooter-game-application/Adafruit_oled_drv.o
+ .debug_info    0x00047c68      0x8ec build_space-shooter-game-application/eeprom.o
+ .debug_info    0x00048554      0x91a build_space-shooter-game-application/link_hal.o
+ .debug_info    0x00048e6e     0x14ed build_space-shooter-game-application/link.o
+ .debug_info    0x0004a35b     0x1829 build_space-shooter-game-application/link_mac.o
+ .debug_info    0x0004bb84     0x155c build_space-shooter-game-application/link_phy.o
+ .debug_info    0x0004d0e0      0xc52 build_space-shooter-game-application/link_data.o
+ .debug_info    0x0004dd32     0x1e4d build_space-shooter-game-application/wiring_digital.o
+ .debug_info    0x0004fb7f     0x32f9 build_space-shooter-game-application/Print.o
+ .debug_info    0x00052e78     0x368c build_space-shooter-game-application/HardwareSerial.o
+ .debug_info    0x00056504     0x37da build_space-shooter-game-application/HardwareSerial2.o
+ .debug_info    0x00059cde      0xf88 build_space-shooter-game-application/SPI.o
+ .debug_info    0x0005ac66     0x43d8 build_space-shooter-game-application/Wire.o
+ .debug_info    0x0005f03e     0x2849 build_space-shooter-game-application/twi.o
+ .debug_info    0x00061887     0x1170 build_space-shooter-game-application/mini_cpp.o
+ .debug_info    0x000629f7      0x754 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+ .debug_info    0x0006314b       0x33 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .debug_info    0x0006317e      0x12b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+ .debug_info    0x000632a9      0x70f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+ .debug_info    0x000639b8       0xbd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+ .debug_info    0x00063a75       0xc3 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+ .debug_info    0x00063b38      0xd95 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+ .debug_info    0x000648cd      0x7b4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+ .debug_info    0x00065081       0xb9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+ .debug_info    0x0006513a      0x135 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+ .debug_info    0x0006526f      0x729 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
+ .debug_info    0x00065998      0x73a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+ .debug_info    0x000660d2       0x33 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+ .debug_info    0x00066105      0xea8 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+ .debug_info    0x00066fad      0xcd9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+ .debug_info    0x00067c86      0x796 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+ .debug_info    0x0006841c      0xb55 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+ .debug_info    0x00068f71      0x831 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+ .debug_info    0x000697a2       0xc1 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+ .debug_info    0x00069863       0xd3 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+ .debug_info    0x00069936       0x57 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+ .debug_info    0x0006998d       0xdf /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+ .debug_info    0x00069a6c       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+ .debug_info    0x00069aa8       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+ .debug_info    0x00069ae4       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_info    0x00069b20       0xca /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+ .debug_info    0x00069bea       0x24 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_info    0x00069c0e      0x6f5 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .debug_info    0x0006a303       0x3c /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
 
-.debug_abbrev   0x00000000    0x11b02
+.debug_abbrev   0x00000000    0x11b0a
  .debug_abbrev  0x00000000       0xda build_space-shooter-game-application/fsm.o
  .debug_abbrev  0x000000da      0x3f3 build_space-shooter-game-application/task.o
  .debug_abbrev  0x000004cd      0x349 build_space-shooter-game-application/timer.o
@@ -5770,53 +5770,53 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_abbrev  0x0000a8e6      0x49d build_space-shooter-game-application/view_render.o
  .debug_abbrev  0x0000ad83      0x3c2 build_space-shooter-game-application/screen_manager.o
  .debug_abbrev  0x0000b145      0x729 build_space-shooter-game-application/Adafruit_GFX.o
- .debug_abbrev  0x0000b86e      0x5bf build_space-shooter-game-application/Adafruit_oled_drv.o
- .debug_abbrev  0x0000be2d      0x1e8 build_space-shooter-game-application/eeprom.o
- .debug_abbrev  0x0000c015      0x274 build_space-shooter-game-application/link_hal.o
- .debug_abbrev  0x0000c289      0x406 build_space-shooter-game-application/link.o
- .debug_abbrev  0x0000c68f      0x511 build_space-shooter-game-application/link_mac.o
- .debug_abbrev  0x0000cba0      0x5d3 build_space-shooter-game-application/link_phy.o
- .debug_abbrev  0x0000d173      0x318 build_space-shooter-game-application/link_data.o
- .debug_abbrev  0x0000d48b      0x28a build_space-shooter-game-application/wiring_digital.o
- .debug_abbrev  0x0000d715      0x4f1 build_space-shooter-game-application/Print.o
- .debug_abbrev  0x0000dc06      0x520 build_space-shooter-game-application/HardwareSerial.o
- .debug_abbrev  0x0000e126      0x5a7 build_space-shooter-game-application/HardwareSerial2.o
- .debug_abbrev  0x0000e6cd      0x3cb build_space-shooter-game-application/SPI.o
- .debug_abbrev  0x0000ea98      0x7a0 build_space-shooter-game-application/Wire.o
- .debug_abbrev  0x0000f238      0x487 build_space-shooter-game-application/twi.o
- .debug_abbrev  0x0000f6bf      0x445 build_space-shooter-game-application/mini_cpp.o
- .debug_abbrev  0x0000fb04      0x1dc /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
- .debug_abbrev  0x0000fce0       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
- .debug_abbrev  0x0000fd08       0x90 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
- .debug_abbrev  0x0000fd98      0x19a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
- .debug_abbrev  0x0000ff32       0x78 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
- .debug_abbrev  0x0000ffaa       0x7b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
- .debug_abbrev  0x00010025      0x326 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
- .debug_abbrev  0x0001034b      0x20b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
- .debug_abbrev  0x00010556       0x62 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
- .debug_abbrev  0x000105b8       0xb7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
- .debug_abbrev  0x0001066f      0x185 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
- .debug_abbrev  0x000107f4      0x1ce /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
- .debug_abbrev  0x000109c2       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
- .debug_abbrev  0x000109ea      0x446 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
- .debug_abbrev  0x00010e30      0x2d7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
- .debug_abbrev  0x00011107      0x216 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
- .debug_abbrev  0x0001131d      0x27f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
- .debug_abbrev  0x0001159c      0x22a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
- .debug_abbrev  0x000117c6       0x80 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
- .debug_abbrev  0x00011846       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
- .debug_abbrev  0x0001186e       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
- .debug_abbrev  0x00011896       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
- .debug_abbrev  0x000118be       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
- .debug_abbrev  0x000118e6       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
- .debug_abbrev  0x0001190e       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
- .debug_abbrev  0x00011936       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
- .debug_abbrev  0x0001195e       0x14 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
- .debug_abbrev  0x00011972      0x16a /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
- .debug_abbrev  0x00011adc       0x26 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x0000b86e      0x5c7 build_space-shooter-game-application/Adafruit_oled_drv.o
+ .debug_abbrev  0x0000be35      0x1e8 build_space-shooter-game-application/eeprom.o
+ .debug_abbrev  0x0000c01d      0x274 build_space-shooter-game-application/link_hal.o
+ .debug_abbrev  0x0000c291      0x406 build_space-shooter-game-application/link.o
+ .debug_abbrev  0x0000c697      0x511 build_space-shooter-game-application/link_mac.o
+ .debug_abbrev  0x0000cba8      0x5d3 build_space-shooter-game-application/link_phy.o
+ .debug_abbrev  0x0000d17b      0x318 build_space-shooter-game-application/link_data.o
+ .debug_abbrev  0x0000d493      0x28a build_space-shooter-game-application/wiring_digital.o
+ .debug_abbrev  0x0000d71d      0x4f1 build_space-shooter-game-application/Print.o
+ .debug_abbrev  0x0000dc0e      0x520 build_space-shooter-game-application/HardwareSerial.o
+ .debug_abbrev  0x0000e12e      0x5a7 build_space-shooter-game-application/HardwareSerial2.o
+ .debug_abbrev  0x0000e6d5      0x3cb build_space-shooter-game-application/SPI.o
+ .debug_abbrev  0x0000eaa0      0x7a0 build_space-shooter-game-application/Wire.o
+ .debug_abbrev  0x0000f240      0x487 build_space-shooter-game-application/twi.o
+ .debug_abbrev  0x0000f6c7      0x445 build_space-shooter-game-application/mini_cpp.o
+ .debug_abbrev  0x0000fb0c      0x1dc /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+ .debug_abbrev  0x0000fce8       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .debug_abbrev  0x0000fd10       0x90 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+ .debug_abbrev  0x0000fda0      0x19a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+ .debug_abbrev  0x0000ff3a       0x78 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+ .debug_abbrev  0x0000ffb2       0x7b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+ .debug_abbrev  0x0001002d      0x326 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+ .debug_abbrev  0x00010353      0x20b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+ .debug_abbrev  0x0001055e       0x62 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+ .debug_abbrev  0x000105c0       0xb7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+ .debug_abbrev  0x00010677      0x185 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
+ .debug_abbrev  0x000107fc      0x1ce /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+ .debug_abbrev  0x000109ca       0x28 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+ .debug_abbrev  0x000109f2      0x446 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+ .debug_abbrev  0x00010e38      0x2d7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+ .debug_abbrev  0x0001110f      0x216 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+ .debug_abbrev  0x00011325      0x27f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+ .debug_abbrev  0x000115a4      0x22a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+ .debug_abbrev  0x000117ce       0x80 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+ .debug_abbrev  0x0001184e       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+ .debug_abbrev  0x00011876       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+ .debug_abbrev  0x0001189e       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+ .debug_abbrev  0x000118c6       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+ .debug_abbrev  0x000118ee       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+ .debug_abbrev  0x00011916       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_abbrev  0x0001193e       0x28 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+ .debug_abbrev  0x00011966       0x14 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_abbrev  0x0001197a      0x16a /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .debug_abbrev  0x00011ae4       0x26 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
 
 .debug_loclists
-                0x00000000    0x14047
+                0x00000000    0x1408f
  .debug_loclists
                 0x00000000       0x46 build_space-shooter-game-application/fsm.o
  .debug_loclists
@@ -5946,63 +5946,63 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_loclists
                 0x0000d465     0x133a build_space-shooter-game-application/Adafruit_GFX.o
  .debug_loclists
-                0x0000e79f      0x517 build_space-shooter-game-application/Adafruit_oled_drv.o
+                0x0000e79f      0x55f build_space-shooter-game-application/Adafruit_oled_drv.o
  .debug_loclists
-                0x0000ecb6       0xf4 build_space-shooter-game-application/eeprom.o
+                0x0000ecfe       0xf4 build_space-shooter-game-application/eeprom.o
  .debug_loclists
-                0x0000edaa       0x63 build_space-shooter-game-application/link_hal.o
+                0x0000edf2       0x63 build_space-shooter-game-application/link_hal.o
  .debug_loclists
-                0x0000ee0d      0x3e5 build_space-shooter-game-application/link.o
+                0x0000ee55      0x3e5 build_space-shooter-game-application/link.o
  .debug_loclists
-                0x0000f1f2      0x319 build_space-shooter-game-application/link_mac.o
+                0x0000f23a      0x319 build_space-shooter-game-application/link_mac.o
  .debug_loclists
-                0x0000f50b      0x382 build_space-shooter-game-application/link_phy.o
+                0x0000f553      0x382 build_space-shooter-game-application/link_phy.o
  .debug_loclists
-                0x0000f88d      0x1ae build_space-shooter-game-application/link_data.o
+                0x0000f8d5      0x1ae build_space-shooter-game-application/link_data.o
  .debug_loclists
-                0x0000fa3b      0x368 build_space-shooter-game-application/wiring_digital.o
+                0x0000fa83      0x368 build_space-shooter-game-application/wiring_digital.o
  .debug_loclists
-                0x0000fda3      0xe59 build_space-shooter-game-application/Print.o
+                0x0000fdeb      0xe59 build_space-shooter-game-application/Print.o
  .debug_loclists
-                0x00010bfc      0x17e build_space-shooter-game-application/HardwareSerial.o
+                0x00010c44      0x17e build_space-shooter-game-application/HardwareSerial.o
  .debug_loclists
-                0x00010d7a       0x40 build_space-shooter-game-application/HardwareSerial2.o
+                0x00010dc2       0x40 build_space-shooter-game-application/HardwareSerial2.o
  .debug_loclists
-                0x00010dba      0x3ca build_space-shooter-game-application/SPI.o
+                0x00010e02      0x3ca build_space-shooter-game-application/SPI.o
  .debug_loclists
-                0x00011184      0x684 build_space-shooter-game-application/Wire.o
+                0x000111cc      0x684 build_space-shooter-game-application/Wire.o
  .debug_loclists
-                0x00011808      0x30e build_space-shooter-game-application/twi.o
+                0x00011850      0x30e build_space-shooter-game-application/twi.o
  .debug_loclists
-                0x00011b16       0xc0 build_space-shooter-game-application/mini_cpp.o
+                0x00011b5e       0xc0 build_space-shooter-game-application/mini_cpp.o
  .debug_loclists
-                0x00011bd6       0x24 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+                0x00011c1e       0x24 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
  .debug_loclists
-                0x00011bfa       0xcf /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+                0x00011c42       0xcf /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
  .debug_loclists
-                0x00011cc9       0x29 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+                0x00011d11       0x29 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
  .debug_loclists
-                0x00011cf2       0x2c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+                0x00011d3a       0x2c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
  .debug_loclists
-                0x00011d1e      0x595 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+                0x00011d66      0x595 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
  .debug_loclists
-                0x000122b3       0x4a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+                0x000122fb       0x4a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
  .debug_loclists
-                0x000122fd      0x17f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+                0x00012345      0x17f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
  .debug_loclists
-                0x0001247c      0x1d0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+                0x000124c4      0x1d0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
  .debug_loclists
-                0x0001264c      0x9b6 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+                0x00012694      0x9b6 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
  .debug_loclists
-                0x00013002       0x4b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+                0x0001304a       0x4b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
  .debug_loclists
-                0x0001304d      0x48e /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+                0x00013095      0x48e /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
  .debug_loclists
-                0x000134db       0x6e /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+                0x00013523       0x6e /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
  .debug_loclists
-                0x00013549       0x3b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+                0x00013591       0x3b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
  .debug_loclists
-                0x00013584      0xac3 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+                0x000135cc      0xac3 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
 
 .debug_aranges  0x00000000     0x27d0
  .debug_aranges
@@ -6239,7 +6239,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
                 0x000027b0       0x20 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
 
 .debug_rnglists
-                0x00000000     0x24e1
+                0x00000000     0x24f6
  .debug_rnglists
                 0x00000000       0x13 build_space-shooter-game-application/fsm.o
  .debug_rnglists
@@ -6375,49 +6375,49 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_rnglists
                 0x00001acd      0x17a build_space-shooter-game-application/Adafruit_GFX.o
  .debug_rnglists
-                0x00001c47       0x9b build_space-shooter-game-application/Adafruit_oled_drv.o
+                0x00001c47       0xb0 build_space-shooter-game-application/Adafruit_oled_drv.o
  .debug_rnglists
-                0x00001ce2       0x1f build_space-shooter-game-application/eeprom.o
+                0x00001cf7       0x1f build_space-shooter-game-application/eeprom.o
  .debug_rnglists
-                0x00001d01       0x25 build_space-shooter-game-application/link_hal.o
+                0x00001d16       0x25 build_space-shooter-game-application/link_hal.o
  .debug_rnglists
-                0x00001d26       0x91 build_space-shooter-game-application/link.o
+                0x00001d3b       0x91 build_space-shooter-game-application/link.o
  .debug_rnglists
-                0x00001db7       0xf4 build_space-shooter-game-application/link_mac.o
+                0x00001dcc       0xf4 build_space-shooter-game-application/link_mac.o
  .debug_rnglists
-                0x00001eab       0xde build_space-shooter-game-application/link_phy.o
+                0x00001ec0       0xde build_space-shooter-game-application/link_phy.o
  .debug_rnglists
-                0x00001f89       0x4f build_space-shooter-game-application/link_data.o
+                0x00001f9e       0x4f build_space-shooter-game-application/link_data.o
  .debug_rnglists
-                0x00001fd8       0x20 build_space-shooter-game-application/wiring_digital.o
+                0x00001fed       0x20 build_space-shooter-game-application/wiring_digital.o
  .debug_rnglists
-                0x00001ff8      0x106 build_space-shooter-game-application/Print.o
+                0x0000200d      0x106 build_space-shooter-game-application/Print.o
  .debug_rnglists
-                0x000020fe       0x43 build_space-shooter-game-application/HardwareSerial.o
+                0x00002113       0x43 build_space-shooter-game-application/HardwareSerial.o
  .debug_rnglists
-                0x00002141       0x2b build_space-shooter-game-application/HardwareSerial2.o
+                0x00002156       0x2b build_space-shooter-game-application/HardwareSerial2.o
  .debug_rnglists
-                0x0000216c       0x7b build_space-shooter-game-application/SPI.o
+                0x00002181       0x7b build_space-shooter-game-application/SPI.o
  .debug_rnglists
-                0x000021e7       0xcd build_space-shooter-game-application/Wire.o
+                0x000021fc       0xcd build_space-shooter-game-application/Wire.o
  .debug_rnglists
-                0x000022b4       0x58 build_space-shooter-game-application/twi.o
+                0x000022c9       0x58 build_space-shooter-game-application/twi.o
  .debug_rnglists
-                0x0000230c       0x5b build_space-shooter-game-application/mini_cpp.o
+                0x00002321       0x5b build_space-shooter-game-application/mini_cpp.o
  .debug_rnglists
-                0x00002367       0x13 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+                0x0000237c       0x13 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
  .debug_rnglists
-                0x0000237a       0x14 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+                0x0000238f       0x14 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
  .debug_rnglists
-                0x0000238e       0x1b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+                0x000023a3       0x1b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
  .debug_rnglists
-                0x000023a9       0x7a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+                0x000023be       0x7a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
  .debug_rnglists
-                0x00002423       0x2b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+                0x00002438       0x2b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
  .debug_rnglists
-                0x0000244e       0x93 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+                0x00002463       0x93 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
 
-.debug_line     0x00000000    0x224f5
+.debug_line     0x00000000    0x22557
  .debug_line    0x00000000       0xa7 build_space-shooter-game-application/fsm.o
  .debug_line    0x000000a7      0x874 build_space-shooter-game-application/task.o
  .debug_line    0x0000091b      0x4cf build_space-shooter-game-application/timer.o
@@ -6490,283 +6490,283 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a
  .debug_line    0x00017ca9      0x504 build_space-shooter-game-application/view_render.o
  .debug_line    0x000181ad      0x4f9 build_space-shooter-game-application/screen_manager.o
  .debug_line    0x000186a6     0x1147 build_space-shooter-game-application/Adafruit_GFX.o
- .debug_line    0x000197ed      0x84c build_space-shooter-game-application/Adafruit_oled_drv.o
- .debug_line    0x0001a039      0x1c4 build_space-shooter-game-application/eeprom.o
- .debug_line    0x0001a1fd      0x2cc build_space-shooter-game-application/link_hal.o
- .debug_line    0x0001a4c9      0x68e build_space-shooter-game-application/link.o
- .debug_line    0x0001ab57      0x9cd build_space-shooter-game-application/link_mac.o
- .debug_line    0x0001b524      0xa7d build_space-shooter-game-application/link_phy.o
- .debug_line    0x0001bfa1      0x541 build_space-shooter-game-application/link_data.o
- .debug_line    0x0001c4e2      0x3e7 build_space-shooter-game-application/wiring_digital.o
- .debug_line    0x0001c8c9      0x81b build_space-shooter-game-application/Print.o
- .debug_line    0x0001d0e4      0x3e0 build_space-shooter-game-application/HardwareSerial.o
- .debug_line    0x0001d4c4      0x3cf build_space-shooter-game-application/HardwareSerial2.o
- .debug_line    0x0001d893      0x56b build_space-shooter-game-application/SPI.o
- .debug_line    0x0001ddfe      0x7cb build_space-shooter-game-application/Wire.o
- .debug_line    0x0001e5c9      0x604 build_space-shooter-game-application/twi.o
- .debug_line    0x0001ebcd      0x411 build_space-shooter-game-application/mini_cpp.o
- .debug_line    0x0001efde      0x17f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
- .debug_line    0x0001f15d       0xbd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
- .debug_line    0x0001f21a      0x17b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
- .debug_line    0x0001f395      0x10c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
- .debug_line    0x0001f4a1       0xf4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
- .debug_line    0x0001f595       0xb9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
- .debug_line    0x0001f64e      0x429 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
- .debug_line    0x0001fa77      0x16b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
- .debug_line    0x0001fbe2       0x97 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
- .debug_line    0x0001fc79      0x1a3 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
- .debug_line    0x0001fe1c       0xe7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
- .debug_line    0x0001ff03      0x153 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
- .debug_line    0x00020056       0xdd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
- .debug_line    0x00020133      0x51f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
- .debug_line    0x00020652      0x8e0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
- .debug_line    0x00020f32      0x196 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
- .debug_line    0x000210c8      0x52a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
- .debug_line    0x000215f2      0x1f0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
- .debug_line    0x000217e2       0xf0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
- .debug_line    0x000218d2      0x16f /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
- .debug_line    0x00021a41      0x184 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
- .debug_line    0x00021bc5       0xa6 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
- .debug_line    0x00021c6b       0x57 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
- .debug_line    0x00021cc2       0x62 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
- .debug_line    0x00021d24       0x5e /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
- .debug_line    0x00021d82      0x103 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
- .debug_line    0x00021e85       0x4e /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
- .debug_line    0x00021ed3      0x5d8 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
- .debug_line    0x000224ab       0x4a /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x000197ed      0x8ae build_space-shooter-game-application/Adafruit_oled_drv.o
+ .debug_line    0x0001a09b      0x1c4 build_space-shooter-game-application/eeprom.o
+ .debug_line    0x0001a25f      0x2cc build_space-shooter-game-application/link_hal.o
+ .debug_line    0x0001a52b      0x68e build_space-shooter-game-application/link.o
+ .debug_line    0x0001abb9      0x9cd build_space-shooter-game-application/link_mac.o
+ .debug_line    0x0001b586      0xa7d build_space-shooter-game-application/link_phy.o
+ .debug_line    0x0001c003      0x541 build_space-shooter-game-application/link_data.o
+ .debug_line    0x0001c544      0x3e7 build_space-shooter-game-application/wiring_digital.o
+ .debug_line    0x0001c92b      0x81b build_space-shooter-game-application/Print.o
+ .debug_line    0x0001d146      0x3e0 build_space-shooter-game-application/HardwareSerial.o
+ .debug_line    0x0001d526      0x3cf build_space-shooter-game-application/HardwareSerial2.o
+ .debug_line    0x0001d8f5      0x56b build_space-shooter-game-application/SPI.o
+ .debug_line    0x0001de60      0x7cb build_space-shooter-game-application/Wire.o
+ .debug_line    0x0001e62b      0x604 build_space-shooter-game-application/twi.o
+ .debug_line    0x0001ec2f      0x411 build_space-shooter-game-application/mini_cpp.o
+ .debug_line    0x0001f040      0x17f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+ .debug_line    0x0001f1bf       0xbd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .debug_line    0x0001f27c      0x17b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+ .debug_line    0x0001f3f7      0x10c /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+ .debug_line    0x0001f503       0xf4 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+ .debug_line    0x0001f5f7       0xb9 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+ .debug_line    0x0001f6b0      0x429 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+ .debug_line    0x0001fad9      0x16b /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+ .debug_line    0x0001fc44       0x97 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+ .debug_line    0x0001fcdb      0x1a3 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+ .debug_line    0x0001fe7e       0xe7 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
+ .debug_line    0x0001ff65      0x153 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+ .debug_line    0x000200b8       0xdd /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+ .debug_line    0x00020195      0x51f /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+ .debug_line    0x000206b4      0x8e0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+ .debug_line    0x00020f94      0x196 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+ .debug_line    0x0002112a      0x52a /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+ .debug_line    0x00021654      0x1f0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+ .debug_line    0x00021844       0xf0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+ .debug_line    0x00021934      0x16f /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+ .debug_line    0x00021aa3      0x184 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+ .debug_line    0x00021c27       0xa6 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+ .debug_line    0x00021ccd       0x57 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+ .debug_line    0x00021d24       0x62 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+ .debug_line    0x00021d86       0x5e /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_line    0x00021de4      0x103 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+ .debug_line    0x00021ee7       0x4e /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_line    0x00021f35      0x5d8 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .debug_line    0x0002250d       0x4a /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
 
-.debug_str      0x00000000    0x155ec
- .debug_str     0x00000000    0x155ec build_space-shooter-game-application/fsm.o
+.debug_str      0x00000000    0x1566c
+ .debug_str     0x00000000    0x1566c build_space-shooter-game-application/fsm.o
                                 0x22f (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/task.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/task.o
                                 0x864 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/timer.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/timer.o
                                 0x5a4 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/message.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/message.o
                                 0x660 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/log_queue.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/log_queue.o
                                 0x1e8 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/fifo.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/fifo.o
                                 0x285 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/ring_buffer.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/ring_buffer.o
                                 0x321 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/utils.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/utils.o
                                 0x210 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/xprintf.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/xprintf.o
                                 0x2b7 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/cmd_line.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/cmd_line.o
                                 0x1d8 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/button.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/button.o
                                 0x233 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/flash.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/flash.o
                                 0x2b0 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/led.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/led.o
                                 0x224 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/buzzer.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/buzzer.o
                                 0xd19 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/buzzer_music.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/buzzer_music.o
                                 0x292 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/sys_dbg.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/sys_dbg.o
                                 0x63b (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/sys_boot.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/sys_boot.o
                                 0x358 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/mbutils.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/mbutils.o
                                 0x526 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/mbm.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/mbm.o
                                 0x774 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/mbmcrc.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/mbmcrc.o
                                 0x1c5 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/mbmrtu.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/mbmrtu.o
                                 0x8ca (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/mbmfuncholding.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/mbmfuncholding.o
                                 0x6b1 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/mbmfunccoils.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/mbmfunccoils.o
                                 0x631 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/mbmfuncdisc.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/mbmfuncdisc.o
                                 0x558 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/mbmfuncinput.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/mbmfuncinput.o
                                 0x553 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/mbportevent.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/mbportevent.o
                                 0x3d2 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/mbportother.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/mbportother.o
                                 0x284 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/mbportserial.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/mbportserial.o
                                 0x7b5 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/mbporttimer.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/mbporttimer.o
                                 0x984 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/stm32l1xx_gpio.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/stm32l1xx_gpio.o
                                 0x4e6 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/stm32l1xx_rcc.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/stm32l1xx_rcc.o
                                 0x707 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/stm32l1xx_usart.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/stm32l1xx_usart.o
                                 0x6c7 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/stm32l1xx_spi.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/stm32l1xx_spi.o
                                 0x634 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/misc.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/misc.o
                                 0x3d1 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/stm32l1xx_exti.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/stm32l1xx_exti.o
                                 0x359 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/stm32l1xx_tim.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/stm32l1xx_tim.o
                                 0xc75 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/stm32l1xx_adc.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/stm32l1xx_adc.o
                                 0x804 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/stm32l1xx_pwr.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/stm32l1xx_pwr.o
                                 0x3e0 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/stm32l1xx_flash.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/stm32l1xx_flash.o
                                 0x7d9 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/stm32l1xx_iwdg.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/stm32l1xx_iwdg.o
                                 0x264 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/stm32l1xx_i2c.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/stm32l1xx_i2c.o
                                 0x686 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/platform.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/platform.o
                                 0x231 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/system.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/system.o
                                 0x88c (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/sys_cfg.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/sys_cfg.o
                                0x1356 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/io_cfg.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/io_cfg.o
                                0x1468 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/system_stm32l1xx.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/system_stm32l1xx.o
                                 0x340 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/scr_game_ui.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/scr_game_ui.o
                                0x141a (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/scr_game_ui_handle.o
-                               0x16ab (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/scr_startup.o
-                               0x146b (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/game_shooter_logic.o
-                                0xcc5 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/game_shooter_task.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/scr_game_ui_handle.o
+                               0x16ae (size before relaxing)
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/scr_startup.o
+                               0x146e (size before relaxing)
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/game_shooter_logic.o
+                                0xcc8 (size before relaxing)
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/game_shooter_task.o
                                 0x65a (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/game_save.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/game_save.o
                                 0x2df (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/game_bitmaps.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/game_bitmaps.o
                                 0x226 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/task_system.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/task_system.o
                                 0x57e (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/app.o
-                               0x890a (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/app_data.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/app.o
+                               0x890d (size before relaxing)
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/app_data.o
                                 0x382 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/app_non_clear_ram.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/app_non_clear_ram.o
                                 0x397 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/app_bsp.o
-                                0x809 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/app_modbus_pull.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/app_bsp.o
+                                0x80c (size before relaxing)
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/app_modbus_pull.o
                                 0x976 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/shell.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/shell.o
                                0x1cfa (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/task_shell.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/task_shell.o
                                 0x63d (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/task_life.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/task_life.o
                                 0x513 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/task_fw.o
-                                0xee4 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/task_list.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/task_fw.o
+                                0xee7 (size before relaxing)
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/task_list.o
                                 0x7ee (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/task_display.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/task_display.o
                                 0xe4d (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/task_if.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/task_if.o
                                 0x6cc (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/task_rf24_if.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/task_rf24_if.o
                                 0x3e8 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/task_uart_if.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/task_uart_if.o
                                 0x748 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/task_dbg.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/task_dbg.o
                                 0x3db (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/view_render.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/view_render.o
                                0x12d0 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/screen_manager.o
-                               0x14c2 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/Adafruit_GFX.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/screen_manager.o
+                               0x14c5 (size before relaxing)
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/Adafruit_GFX.o
                                0x1552 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/Adafruit_oled_drv.o
-                               0x16bb (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/eeprom.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/Adafruit_oled_drv.o
+                               0x1743 (size before relaxing)
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/eeprom.o
                                 0x371 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/link_hal.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/link_hal.o
                                 0x4cf (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/link.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/link.o
                                 0xd23 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/link_mac.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/link_mac.o
                                 0xf6b (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/link_phy.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/link_phy.o
                                 0xe49 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/link_data.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/link_data.o
                                 0x5c9 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/wiring_digital.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/wiring_digital.o
                                 0xeaa (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/Print.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/Print.o
                                0x1077 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/HardwareSerial.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/HardwareSerial.o
                                0x1f4c (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/HardwareSerial2.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/HardwareSerial2.o
                                0x2033 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/SPI.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/SPI.o
                                 0x990 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/Wire.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/Wire.o
                                0x246a (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/twi.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/twi.o
                                0x13b9 (size before relaxing)
- .debug_str     0x000155ec        0x0 build_space-shooter-game-application/mini_cpp.o
+ .debug_str     0x0001566c        0x0 build_space-shooter-game-application/mini_cpp.o
                                 0x8a6 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-rand.o)
                                 0x4a7 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcpy.o)
                                  0xa6 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memcmp.o)
                                 0x18c (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-errno.o)
                                 0x499 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strlen-stub.o)
                                 0x196 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcpy.o)
                                 0x18a (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strtol.o)
                                 0x720 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-malloc.o)
                                 0x4c4 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-ctype_.o)
                                 0x185 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-memset.o)
                                 0x1a0 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-impure.o)
                                 0x4a4 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mlock.o)
                                 0x4bd (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-strcmp.o)
                                  0xa6 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-findfp.o)
                                 0x6a7 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-mallocr.o)
                                 0x6c7 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sbrkr.o)
                                 0x4a8 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-freer.o)
                                 0x60f (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-reent.o)
                                 0x4be (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/arm-none-eabi/newlib/thumb/v7-m/nofp/libc.a(libc_a-sysconf.o)
                                 0x195 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
                                 0x150 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
                                  0xd0 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
                                 0x159 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
                                  0xbe (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
                                  0xbb (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_fixunsdfsi.o)
                                  0xbf (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubsf3.o)
                                 0x144 (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
                                  0x9f (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
                                 0x67d (size before relaxing)
- .debug_str     0x000155ec        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_str     0x0001566c        0x0 /usr/lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
                                  0xbf (size before relaxing)
 
 .comment        0x00000000       0x26
