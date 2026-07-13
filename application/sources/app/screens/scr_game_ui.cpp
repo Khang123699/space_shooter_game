@@ -34,7 +34,7 @@ static void game_shooter_menu_display() {
 	view_render.drawRect(0, 0, 128, 64, WHITE);
 	view_render.setTextSize(1);
 	view_render.setCursor(CENTER_X(12, 6), 6);
-	view_render.print("SHOOTER GAME");
+	view_render.print("SPACE SHOOTER");
 	view_render.drawLine(10, 16, 117, 16, WHITE);
 	
 	view_render.drawBitmap(18, 24, icon_play, 8, 8, WHITE);

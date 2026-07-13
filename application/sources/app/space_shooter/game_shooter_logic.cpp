@@ -116,7 +116,7 @@ void game_player_shoot() {
 			g_bullets[i].x = g_player_x + 4;
 			g_bullets[i].y = 52;
 			g_bullets[i].vx = 0;
-			g_shoot_cooldown = 3; 
+			g_shoot_cooldown = 2; 
 			break;
 		}
 	}
@@ -183,7 +183,7 @@ void game_logic_update() {
 			}
 		}
 	}
-	
+ 
 	for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
 		if (g_explosions[ex].active) {
 			g_explosions[ex].timer--;
@@ -195,7 +195,7 @@ void game_logic_update() {
 	bool all_dead = true;
 	bool hit_edge = false;
 	enemy_move_ticks++;
-	int move_threshold = (g_stage % 5 == 0) ? 2 : (5 - g_game_data.difficulty);
+	int move_threshold = (g_stage % 5 == 0) ? 3 : (4 - g_game_data.difficulty);
 	bool do_move = (enemy_move_ticks >= move_threshold);
 	
 	for (int e = 0; e < MAX_ENEMIES; e++) {
@@ -208,7 +208,7 @@ void game_logic_update() {
 			}
 			
 			// Shoot
-			int shoot_chance = (g_enemies[e].type == 4) ? (10 + g_game_data.difficulty * 5) : (1 + g_game_data.difficulty);
+			int shoot_chance = (g_enemies[e].type == 4) ? (8 + g_game_data.difficulty * 5) : (2 + g_game_data.difficulty);
 			if (rand() % 300 < shoot_chance) {
 				if (g_enemies[e].type == 4) {
 					// Triple shot burst for Boss

@@ -4642,27 +4642,26 @@ Linker script and memory map
                 0x0800e7cc                _ctype_
  *(.rodata*)
  .rodata.task_create.str1.1
-                0x0800e8cd     0x16e6 build_space-shooter-game-application/task.o
+                0x0800e8cd     0x16e7 build_space-shooter-game-application/task.o
                                   0x3 (size before relaxing)
  .rodata.task_run.str1.1
-                0x0800ffb3        0x0 build_space-shooter-game-application/task.o
+                0x0800ffb4        0x0 build_space-shooter-game-application/task.o
                                  0x25 (size before relaxing)
  .rodata.timer_set.str1.1
-                0x0800ffb3        0x0 build_space-shooter-game-application/timer.o
+                0x0800ffb4        0x0 build_space-shooter-game-application/timer.o
                                   0x3 (size before relaxing)
  .rodata.msg_force_free.str1.1
-                0x0800ffb3        0x0 build_space-shooter-game-application/message.o
+                0x0800ffb4        0x0 build_space-shooter-game-application/message.o
                                   0x3 (size before relaxing)
  .rodata.ak_malloc.str1.1
-                0x0800ffb3        0x0 build_space-shooter-game-application/message.o
+                0x0800ffb4        0x0 build_space-shooter-game-application/message.o
                                   0xa (size before relaxing)
  .rodata.fifo_put.str1.1
-                0x0800ffb3        0x0 build_space-shooter-game-application/fifo.o
+                0x0800ffb4        0x0 build_space-shooter-game-application/fifo.o
                                   0x5 (size before relaxing)
  .rodata.xvfprintf.str1.1
-                0x0800ffb3        0x0 build_space-shooter-game-application/xprintf.o
+                0x0800ffb4        0x0 build_space-shooter-game-application/xprintf.o
                                   0xc (size before relaxing)
- *fill*         0x0800ffb3        0x1 
  .rodata.buzzer_music_table
                 0x0800ffb4       0xa8 build_space-shooter-game-application/buzzer.o
  .rodata.sTone7
@@ -4770,7 +4769,7 @@ Linker script and memory map
                 0x08010698                PLLMulTable
  .rodata._Z16view_scr_game_uiv.str1.1
                 0x080106a1        0x0 build_space-shooter-game-application/scr_game_ui.o
-                                 0xdd (size before relaxing)
+                                 0xde (size before relaxing)
  .rodata._ZL16view_scr_startupv.str1.1
                 0x080106a1        0x0 build_space-shooter-game-application/scr_startup.o
                                  0x62 (size before relaxing)
