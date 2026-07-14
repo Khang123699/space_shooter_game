@@ -3,7 +3,7 @@
 #include "app_flash.h"
 
 game_save_data_t g_game_data;
-
+// Initialize default settings and clear high scores
 void init_default_save_data() {
 	g_game_data.magic = GAME_SAVE_MAGIC;
 	g_game_data.top_score[0] = 0;
@@ -12,19 +12,19 @@ void init_default_save_data() {
 	g_game_data.sound_en = 1;
 	g_game_data.difficulty = 1; 
 }
-// Reset high score data
+// Reset all high score data to 0
 void reset_high_score_data() {
 	g_game_data.top_score[0] = 0;
 	g_game_data.top_score[1] = 0;
 	g_game_data.top_score[2] = 0;
 }
-
+// Save game settings and high scores to Flash memory
 void game_save_data() {
 	// Erase sector before writing new data to Flash Memory (Static Address 0x9000)
 	flash_erase_sector(APP_FLASH_GAME_DATA_SECTOR);
 	flash_write(APP_FLASH_GAME_DATA_SECTOR, (uint8_t*)&g_game_data, sizeof(game_save_data_t));
 }
-
+// Load game settings and high scores from Flash memory
 void game_load_data() {
 	flash_read(APP_FLASH_GAME_DATA_SECTOR, (uint8_t*)&g_game_data, sizeof(game_save_data_t));
 	if (g_game_data.magic != GAME_SAVE_MAGIC) {
@@ -32,7 +32,7 @@ void game_load_data() {
 		game_save_data();
 	}
 }
-
+// Update high score list with the final score, returns the rank (1-3) or 0 if not a high score
 uint8_t game_update_high_score(uint32_t final_score) {
 	int index = -1;
 	for (int i = 0; i < 3; i++) {

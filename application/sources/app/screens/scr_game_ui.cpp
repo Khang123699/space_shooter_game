@@ -29,7 +29,7 @@ view_screen_t scr_game_ui = {
 	ITEM_NULL,
 	.focus_item = 0,
 };
-
+// Render Main Menu UI
 static void game_shooter_menu_display() {
 	view_render.drawRect(0, 0, 128, 64, WHITE);
 	view_render.setTextSize(1);
@@ -52,7 +52,7 @@ static void game_shooter_menu_display() {
 	view_render.setCursor(6, 24 + g_menu_selected * 12);
 	view_render.print(">");
 }
-
+// Render Settings Menu UI
 static void game_shooter_setting_display() {
 	view_render.drawRect(0, 0, 128, 64, WHITE);
 	view_render.setTextSize(1);
@@ -78,7 +78,7 @@ static void game_shooter_setting_display() {
 	view_render.setCursor(14, 22 + g_setting_selected * 13);
 	view_render.print(">");
 }
-
+// Render High Score Menu UI
 static void game_shooter_highscore_display() {
 	view_render.drawRect(0, 0, 128, 64, WHITE);
 	view_render.setTextSize(1);
@@ -107,7 +107,7 @@ static void game_shooter_highscore_display() {
 	
 	view_render.print(">");
 }
-
+// Draw all active enemies and boss health bar
 static void draw_enemies() {
 	for (int e = 0; e < MAX_ENEMIES; e++) {
 		if (g_enemies[e].active) {
@@ -130,7 +130,7 @@ static void draw_enemies() {
 		}
 	}
 }
-
+// Draw explosion effects for destroyed entities
 static void draw_explosions() {
 	for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
 		if (g_explosions[ex].active) {
@@ -152,7 +152,7 @@ static void draw_explosions() {
 		}
 	}
 }
-
+// Draw all active player and enemy bullets
 static void draw_bullets() {
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		if (g_bullets[i].active) {
@@ -161,7 +161,7 @@ static void draw_bullets() {
 		}
 	}
 }
-
+// Render Main Gameplay UI (player ship, UI bar, entities)
 static void game_shooter_playing_display() {
 	if (g_player_blink % 2 == 0) {
 		view_render.drawBitmap(g_player_x, 54, icon_player, 8, 8, WHITE);
@@ -198,7 +198,7 @@ static void game_shooter_playing_display() {
 		view_render.print(g_stage);
 	}
 }
-
+// Render Game Over screen with exploding ship animation
 static void game_shooter_gameover_display() {
 	// 1. Exploding Spaceship (Particles)
 	if (g_gameover_anim_frame <= 20) {
@@ -251,7 +251,7 @@ static void game_shooter_gameover_display() {
 		view_render.print("Press MODE to next");
 	}
 }
-
+// Render New High Score congratulations screen
 static void game_shooter_new_highscore_display() {
 	view_render.setTextSize(1);
 	view_render.setCursor(CENTER_X(15, 6), 20);
@@ -263,7 +263,7 @@ static void game_shooter_new_highscore_display() {
 	xsprintf(temp, "%u", (unsigned int)g_new_high_score_rank);
 	view_render.print(temp);
 }
-
+// Render standard Score screen after death
 static void game_shooter_score_display() {
 	view_render.setTextSize(1);
 	view_render.setCursor(CENTER_X(11, 6), 14);
@@ -282,7 +282,7 @@ static void game_shooter_score_display() {
 	uint8_t selected_x = 30 + (g_show_score_selected * 30);
 	view_render.fillRect(selected_x, 58, 8, 2, WHITE);
 }
-
+// Main UI rendering dispatcher based on current game state
 void view_scr_game_ui() {
 	// Clear the RAM buffer before rendering a new frame (Double Buffering)
 	view_render.clear();

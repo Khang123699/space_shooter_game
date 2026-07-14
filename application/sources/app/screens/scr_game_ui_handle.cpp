@@ -4,7 +4,7 @@
 #include "buzzer.h"
 #include "timer.h"
 #include "task_list.h"
-
+// Handle input for Main Menu
 static void handle_ui_menu_input(ak_msg_t *msg) {
 	switch (msg->sig) {
 		case AC_DISPLAY_BUTTON_UP_PRESSED:
@@ -27,7 +27,7 @@ static void handle_ui_menu_input(ak_msg_t *msg) {
 			break;
 	}
 }
-
+// Handle input for Settings Menu
 static void handle_ui_setting_input(ak_msg_t *msg) {
 	switch (msg->sig) {
 		case AC_DISPLAY_BUTTON_UP_PRESSED:
@@ -49,7 +49,7 @@ static void handle_ui_setting_input(ak_msg_t *msg) {
 			break;
 	}
 }
-
+// Handle input for High Score Menu
 static void handle_ui_highscore_input(ak_msg_t *msg) {
 	switch (msg->sig) {
 		case AC_DISPLAY_BUTTON_UP_PRESSED:
@@ -66,14 +66,14 @@ static void handle_ui_highscore_input(ak_msg_t *msg) {
 			break;
 	}
 }
-
+// Forward hardware button events to Game Logic Task during gameplay
 static void handle_ui_playing_input(ak_msg_t *msg) {
 	// Forward hardware button events to Game Logic Task via message passing
 	if (msg->sig == AC_DISPLAY_BUTTON_UP_PRESSED) task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_UP);
 	else if (msg->sig == AC_DISPLAY_BUTTON_DOWN_PRESSED) task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_DOWN);
 	else if (msg->sig == AC_DISPLAY_BUTTON_MODE_PRESSED) task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_MODE);
 }
-
+// Handle input during Game Over animation
 static void handle_ui_gameover_input(ak_msg_t *msg) {
 	if (msg->sig == AC_DISPLAY_BUTTON_MODE_PRESSED) { 
 		g_new_high_score_rank = game_update_high_score(g_score);
@@ -87,7 +87,7 @@ static void handle_ui_gameover_input(ak_msg_t *msg) {
 		}
 	}
 }
-
+// Handle input for Score and New High Score screens
 static void handle_ui_showscore_input(ak_msg_t *msg) {
 	switch (msg->sig) {
 		case AC_DISPLAY_BUTTON_UP_PRESSED:
@@ -109,7 +109,7 @@ static void handle_ui_showscore_input(ak_msg_t *msg) {
 			break;
 	}
 }
-
+// Main UI input message handler based on current game state
 void scr_game_ui_handle(ak_msg_t *msg) {
 	if (msg->sig == SCREEN_ENTRY) {
 		game_load_data();
