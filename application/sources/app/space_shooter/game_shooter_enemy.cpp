@@ -12,7 +12,7 @@ uint8_t enemy_move_ticks = 0;
 
 void game_enemy_spawn() {
 	int e = 0;
-	if (g_stage % 5 == 0) { // Boss stage every 5 stages
+	if (g_stage % 3 == 0) { // Boss stage every 3 stages
 		g_enemies[0].active = true;
 		g_enemies[0].type = 4; // Boss type
 		g_enemies[0].hp = 15 + g_stage;
@@ -60,7 +60,7 @@ void game_enemy_spawn() {
 void game_enemy_update() {
 	bool hit_edge = false;
 	enemy_move_ticks++;
-	int move_threshold = (g_stage % 5 == 0) ? 1 : (4 - g_game_data.difficulty);
+	int move_threshold = (g_stage % 3 == 0) ? 1 : (4 - g_game_data.difficulty);
 	bool do_move = (enemy_move_ticks >= move_threshold);
 	
 	for (int e = 0; e < MAX_ENEMIES; e++) {

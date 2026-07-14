@@ -191,7 +191,7 @@ static void game_shooter_playing_display() {
 	view_render.print(temp_sc);
 	
 	view_render.setCursor(50, 2);
-	view_render.print("L:");
+	view_render.print("Lv:");
 	char temp_lv[12];
 	xsprintf(temp_lv, "%u", (unsigned int)g_stage);
 	view_render.print(temp_lv);
