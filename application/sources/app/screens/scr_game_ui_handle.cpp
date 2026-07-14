@@ -46,11 +46,14 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 	if (msg->sig == AC_DISPLAY_BUTTON_UP_PRESSED || 
 	    msg->sig == AC_DISPLAY_BUTTON_DOWN_PRESSED || 
 	    msg->sig == AC_DISPLAY_BUTTON_MODE_PRESSED) {
-		// Reset idle timer
-		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
+		
+		if (g_game_state != GAME_STATE_PLAYING) {
+			// Reset idle timer only outside gameplay
+			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
 
-		if (g_game_state != GAME_STATE_PLAYING && g_game_data.sound_en) {
-			BUZZER_PlaySound(BUZZER_SOUND_CLICK);
+			if (g_game_data.sound_en) {
+				BUZZER_PlaySound(BUZZER_SOUND_CLICK);
+			}
 		}
 	}
 
@@ -58,6 +61,9 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 		g_game_state = GAME_STATE_GAMEOVER;
 		g_gameover_anim_frame = 0;
 		if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_LOWSCORE);
+		
+		// Start idle timer so it returns to idle if user does nothing
+		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
 		return;
 	}
 

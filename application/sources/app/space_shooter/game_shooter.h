@@ -60,6 +60,11 @@ extern uint16_t g_tick_count;
 extern uint8_t g_shoot_cooldown;
 extern int8_t enemy_dir;
 
+// Flags to prevent button message spam
+extern bool g_btn_up_pending;
+extern bool g_btn_down_pending;
+extern bool g_btn_mode_pending;
+
 // Logic Interfaces
 extern void game_logic_init();
 extern void game_player_move(int8_t dir);

@@ -30,6 +30,10 @@ powerup_t g_powerups[MAX_POWERUPS];
 uint8_t g_stage = 1;
 int8_t g_transition_timer = 0;
 
+bool g_btn_up_pending = false;
+bool g_btn_down_pending = false;
+bool g_btn_mode_pending = false;
+
 // Initialize or reset the game state variables for a new session
 void game_logic_init() {
 	g_player_x = 60;
