@@ -49,12 +49,18 @@ extern explosion_t g_explosions[];
 extern uint8_t g_stage;
 extern int8_t g_transition_timer;
 extern uint16_t g_tick_count;
+extern uint8_t g_shoot_cooldown;
+extern int8_t enemy_dir;
 
 // Logic Interfaces
 extern void game_logic_init();
 extern void game_player_move(int8_t dir);
 extern void game_player_shoot();
 extern void game_logic_update();
+
+extern void game_enemy_spawn();
+extern void game_enemy_update();
+extern void game_physics_update();
 
 // UI Interfaces
 extern void view_scr_game_ui();
