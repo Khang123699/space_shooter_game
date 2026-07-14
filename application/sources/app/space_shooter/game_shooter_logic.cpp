@@ -232,7 +232,8 @@ void game_logic_update() {
 					if (g_bullets[i].y > 64) g_bullets[i].active = false;
 				}
 			} else {
-				g_bullets[i].y -= 2;
+				int speed = (g_tick_count % 5 == 0) ? 2 : 1;
+				g_bullets[i].y -= speed;
 				if (g_bullets[i].y < 0) g_bullets[i].active = false;
 			}
 		}
