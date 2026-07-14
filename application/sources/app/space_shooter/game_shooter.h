@@ -14,7 +14,7 @@ typedef struct {
 	bool active;
 	bool is_enemy;
 } bullet_t;
-typedef struct { int8_t x, y; int8_t hp; uint8_t type; bool active; } enemy_t;
+typedef struct { int8_t x, y; int8_t hp; uint8_t type; bool active; int8_t blink_timer; } enemy_t;
 typedef struct { int8_t x, y; int8_t timer; bool active; } explosion_t;
 
 // Define states for the game menu and play flow
@@ -47,6 +47,7 @@ extern bullet_t g_bullets[];
 extern explosion_t g_explosions[];
 extern uint8_t g_stage;
 extern int8_t g_transition_timer;
+extern uint16_t g_tick_count;
 
 // Logic Interfaces
 extern void game_logic_init();

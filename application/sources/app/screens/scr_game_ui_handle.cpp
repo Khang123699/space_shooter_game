@@ -57,11 +57,11 @@ static void handle_ui_highscore_input(ak_msg_t *msg) {
 			g_score_selected = (g_score_selected == 0) ? 1 : 0;
 			break;
 		case AC_DISPLAY_BUTTON_MODE_PRESSED:
-			if (g_score_selected == 0) { 
+			if (g_score_selected == 0) {
+				g_game_state = GAME_STATE_MENU;
+			} else {
 				reset_high_score_data();
 				game_save_data(); 
-			} else if (g_score_selected == 1) { 
-				g_game_state = GAME_STATE_MENU; 
 			}
 			break;
 	}
@@ -113,7 +113,7 @@ static void handle_ui_showscore_input(ak_msg_t *msg) {
 void scr_game_ui_handle(ak_msg_t *msg) {
 	if (msg->sig == SCREEN_ENTRY) {
 		game_load_data();
-		// Start UI animation timer (50ms interval) for things like blinking or explosions
+		// Start UI animation timer (150ms interval) for things like blinking or explosions
 		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK, 150, TIMER_PERIODIC);
 		return;
 	}

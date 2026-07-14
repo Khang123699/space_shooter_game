@@ -35,7 +35,7 @@ uint32_t g_score = 0;
 uint8_t g_lives = 3;
 
 static uint8_t g_shoot_cooldown = 0;
-static uint16_t g_tick_count = 0;
+uint16_t g_tick_count = 0;
 
 enemy_t g_enemies[MAX_ENEMIES];
 bullet_t g_bullets[MAX_BULLETS];
@@ -81,6 +81,7 @@ static void spawn_enemies() {
 		g_enemies[0].x = BOSS_SPAWN_X;
 		g_enemies[0].y = BOSS_SPAWN_Y;
 		g_enemies[0].hp = 5 + (g_stage / 5) * 5;
+		g_enemies[0].blink_timer = 0;
 		for (int i = 1; i < MAX_ENEMIES; i++) g_enemies[i].active = false;
 		return;
 	}
@@ -100,6 +101,7 @@ static void spawn_enemies() {
 				g_enemies[e].active = true;
 				g_enemies[e].type = 1 + (rand() % 3); // random type 1, 2, or 3
 				g_enemies[e].hp = g_enemies[e].type;
+				g_enemies[e].blink_timer = 0;
 				g_enemies[e].x = SPAWN_START_X + col * SPAWN_OFFSET_X;
 				g_enemies[e].y = SPAWN_START_Y + row * SPAWN_OFFSET_Y;
 				e++;
@@ -112,6 +114,7 @@ static void spawn_enemies() {
 		g_enemies[0].active = true;
 		g_enemies[0].type = 1 + (rand() % 3);
 		g_enemies[0].hp = g_enemies[0].type;
+		g_enemies[0].blink_timer = 0;
 		g_enemies[0].x = 56;
 		g_enemies[0].y = 12;
 	}
@@ -153,6 +156,14 @@ void game_player_shoot() {
 // Main update loop for game logic: moves bullets, checks collisions, moves enemies
 void game_logic_update() {
 	if (g_player_blink > 0) g_player_blink--;
+	
+	// Update enemy blink timers
+	for (int e = 0; e < MAX_ENEMIES; e++) {
+		if (g_enemies[e].active && g_enemies[e].blink_timer > 0) {
+			g_enemies[e].blink_timer--;
+		}
+	}
+	
 	if (g_shoot_cooldown > 0) g_shoot_cooldown--;
 	g_tick_count++;
 
@@ -181,6 +192,7 @@ void game_logic_update() {
 						if (check_collision(g_bullets[i].x, g_bullets[i].y, 1, 4, g_enemies[e].x, g_enemies[e].y, ew, eh)) {
 							g_bullets[i].active = false;
 							g_enemies[e].hp--;
+							g_enemies[e].blink_timer = 10;
 							if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_BANG);
 							if (g_enemies[e].hp <= 0) {
 								g_enemies[e].active = false;

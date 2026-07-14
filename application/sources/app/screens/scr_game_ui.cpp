@@ -98,9 +98,9 @@ static void game_shooter_highscore_display() {
 	}
 	
 	view_render.setCursor(24, 52);
-	view_render.print("Reset");
-	view_render.setCursor(84, 52);
 	view_render.print("Back");
+	view_render.setCursor(84, 52);
+	view_render.print("Reset");
 	
 	if (g_score_selected == 0) view_render.setCursor(14, 52);
 	else view_render.setCursor(74, 52);
@@ -111,8 +111,16 @@ static void game_shooter_highscore_display() {
 static void draw_enemies() {
 	for (int e = 0; e < MAX_ENEMIES; e++) {
 		if (g_enemies[e].active) {
+			// Blinking effect when taking damage
+			bool draw_sprite = true;
+			if (g_enemies[e].blink_timer > 0 && (g_tick_count % 4 < 2)) {
+				draw_sprite = false;
+			}
+			
 			if (g_enemies[e].type == 4) {
-				view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, bmp_boss, 16, 16, WHITE);
+				if (draw_sprite) {
+					view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, bmp_boss, 16, 16, WHITE);
+				}
 				// HP Bar for Boss
 				int max_hp = 5 + (g_stage / 5) * 5;
 				int hp_width = (g_enemies[e].hp * 16) / max_hp;
@@ -121,11 +129,11 @@ static void draw_enemies() {
 				view_render.fillRect(g_enemies[e].x, g_enemies[e].y - 3, 16, 2, BLACK);
 				view_render.fillRect(g_enemies[e].x, g_enemies[e].y - 3, hp_width, 2, WHITE);
 			} else if (g_enemies[e].type == 3) {
-				view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon_enemy3, 8, 8, WHITE);
+				if (draw_sprite) view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon_enemy3, 8, 8, WHITE);
 			} else if (g_enemies[e].type == 2) {
-				view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon_enemy2, 8, 8, WHITE);
+				if (draw_sprite) view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon_enemy2, 8, 8, WHITE);
 			} else {
-				view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon_enemy1, 8, 8, WHITE);
+				if (draw_sprite) view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon_enemy1, 8, 8, WHITE);
 			}
 		}
 	}
