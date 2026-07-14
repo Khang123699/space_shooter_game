@@ -151,7 +151,7 @@ void game_player_shoot() {
 			g_bullets[i].x = g_player_x + 4;
 			g_bullets[i].y = 52;
 			g_bullets[i].vx = 0;
-			g_shoot_cooldown = 6; 
+			g_shoot_cooldown = 8; 
 			break;
 		}
 	}
@@ -232,7 +232,7 @@ void game_logic_update() {
 					if (g_bullets[i].y > 64) g_bullets[i].active = false;
 				}
 			} else {
-				int speed = (g_tick_count % 5 == 0) ? 2 : 1;
+				int speed = (g_tick_count % 5 < 2) ? 2 : 1; 
 				g_bullets[i].y -= speed;
 				if (g_bullets[i].y < 0) g_bullets[i].active = false;
 			}
@@ -265,7 +265,7 @@ void game_logic_update() {
 			
 			// Enemy shoot
 			int shoot_chance = (g_enemies[e].type == 4) ? (9 + g_game_data.difficulty * 5) : (3 + g_game_data.difficulty);
-			if (rand() % 1500 < shoot_chance) {
+			if (rand() % 1200 < shoot_chance) {
 				if (g_enemies[e].type == 4) {
 					// Triple shot burst for Boss
 					int bullets_spawned = 0;
