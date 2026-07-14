@@ -16,4 +16,8 @@ extern const uint8_t bmp_boss[32];
 extern const uint8_t icon_flame1[8];
 extern const uint8_t icon_flame2[8];
 
+extern const uint8_t icon_item_shield[8];
+extern const uint8_t icon_item_dual[8];
+extern const uint8_t icon_item_nuke[8];
+
 #endif // __GAME_BITMAPS_H__

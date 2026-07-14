@@ -182,18 +182,23 @@ void game_physics_update() {
 				} else if (g_powerups[p].type == POWERUP_TYPE_SHIELD) {
 					g_player_shield = true;
 				} else if (g_powerups[p].type == POWERUP_TYPE_NUKE) {
-					// Destroy all enemies on screen except boss
+					// Deal 1 damage to all enemies on screen
 					for (int e = 0; e < MAX_ENEMIES; e++) {
-						if (g_enemies[e].active && g_enemies[e].type != 4) { // 4 is boss
-							g_enemies[e].active = false;
-							g_score += 10;
-							for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
-								if (!g_explosions[ex].active) {
-									g_explosions[ex].active = true;
-									g_explosions[ex].x = g_enemies[e].x;
-									g_explosions[ex].y = g_enemies[e].y;
-									g_explosions[ex].timer = 5;
-									break;
+						if (g_enemies[e].active) {
+							g_enemies[e].hp--;
+							g_enemies[e].blink_timer = 22;
+							
+							if (g_enemies[e].hp <= 0) {
+								g_enemies[e].active = false;
+								g_score += (g_enemies[e].type == 4) ? 100 : 10;
+								for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
+									if (!g_explosions[ex].active) {
+										g_explosions[ex].active = true;
+										g_explosions[ex].x = g_enemies[e].x + (g_enemies[e].type == 4 ? 4 : 0);
+										g_explosions[ex].y = g_enemies[e].y;
+										g_explosions[ex].timer = 5;
+										break;
+									}
 								}
 							}
 						}

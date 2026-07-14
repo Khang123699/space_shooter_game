@@ -45,11 +45,13 @@ static void draw_enemies() {
 static void draw_powerups() {
 	for (int p = 0; p < MAX_POWERUPS; p++) {
 		if (g_powerups[p].active) {
-			view_render.drawRect(g_powerups[p].x, g_powerups[p].y, 7, 7, WHITE);
-			view_render.setCursor(g_powerups[p].x + 1, g_powerups[p].y);
-			if (g_powerups[p].type == POWERUP_TYPE_DUAL_SHOT) view_render.print("D");
-			else if (g_powerups[p].type == POWERUP_TYPE_SHIELD) view_render.print("S");
-			else if (g_powerups[p].type == POWERUP_TYPE_NUKE) view_render.print("B");
+			if (g_powerups[p].type == POWERUP_TYPE_DUAL_SHOT) {
+				view_render.drawBitmap(g_powerups[p].x, g_powerups[p].y, icon_item_dual, 8, 8, WHITE);
+			} else if (g_powerups[p].type == POWERUP_TYPE_SHIELD) {
+				view_render.drawBitmap(g_powerups[p].x, g_powerups[p].y, icon_item_shield, 8, 8, WHITE);
+			} else if (g_powerups[p].type == POWERUP_TYPE_NUKE) {
+				view_render.drawBitmap(g_powerups[p].x, g_powerups[p].y, icon_item_nuke, 8, 8, WHITE);
+			}
 		}
 	}
 }
