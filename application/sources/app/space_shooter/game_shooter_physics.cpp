@@ -95,18 +95,7 @@ void game_physics_update() {
 					if (g_bullets[i].y > 64) g_bullets[i].active = false;
 				}
 			} else {
-				/* 
-				 * HƯỚNG DẪN TỰ ĐIỀU CHỈNH TỐC ĐỘ ĐẠN (Mặc định gốc là 2.0 pixel/frame)
-				 * Để đạt được số lẻ (như 1.4, 1.5, 1.8), ta phải chia chu kỳ (ví dụ 5 frame)
-				 * Công thức: Tốc độ trung bình = (Tổng số pixel đi được trong N frame) / N
-				 * 
-				 * Ví dụ muốn giảm 30% -> Còn 1.4 pixel/frame. 
-				 * 1.4 = 7 / 5 -> Cần đi 7 pixel trong 5 frame.
-				 * -> Trong 5 frame: có 2 frame đi tốc độ 2, và 3 frame đi tốc độ 1. (2*2 + 3*1 = 7).
-				 * 
-				 * Nếu sếp muốn giảm 20% (còn 1.6): 1.6 = 8/5 -> 3 frame tốc độ 2, 2 frame tốc độ 1.
-				 * Sửa lại điều kiện: (g_tick_count % 5 < 3)
-				 */
+				// Average speed: 1.4 px/frame (7 px per 5 frames)
 				int speed = (g_tick_count % 5 < 2) ? 2 : 1; 
 				g_bullets[i].y -= speed;
 				if (g_bullets[i].y < 0) g_bullets[i].active = false;

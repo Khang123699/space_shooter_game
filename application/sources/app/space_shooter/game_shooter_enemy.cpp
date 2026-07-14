@@ -21,21 +21,27 @@ void game_enemy_spawn() {
 		g_enemies[0].y = 16;
 		e = 1;
 	} else {
-		int rows = 2 + (g_stage / 2);
-		if (rows > 4) rows = 4;
-		int cols = 4 + (g_stage / 3);
-		if (cols > 7) cols = 7;
+		int rows = 3;
+		int cols = 6;
+		int spawn_chance = 40 + (g_game_data.difficulty * 10);
+		
+		// Center the 6x3 enemy grid (start_x = 20 for 128px screen width)
+		int start_x = 20; 
 		
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
 				if (e >= MAX_ENEMIES) break;
-				g_enemies[e].active = true;
-				g_enemies[e].type = 1 + (rand() % 3); // random type 1, 2, or 3
-				g_enemies[e].hp = g_enemies[e].type;
-				g_enemies[e].blink_timer = 0;
-				g_enemies[e].x = SPAWN_START_X + col * SPAWN_OFFSET_X;
-				g_enemies[e].y = SPAWN_START_Y + row * SPAWN_OFFSET_Y;
-				e++;
+				
+				// Roll dice % to decide if an enemy spawns in this cell
+				if ((rand() % 100) < spawn_chance) {
+					g_enemies[e].active = true;
+					g_enemies[e].type = 1 + (rand() % 3); // random type 1, 2, or 3
+					g_enemies[e].hp = g_enemies[e].type;
+					g_enemies[e].blink_timer = 0;
+					g_enemies[e].x = start_x + col * SPAWN_OFFSET_X;
+					g_enemies[e].y = SPAWN_START_Y + row * SPAWN_OFFSET_Y;
+					e++;
+				}
 			}
 		}
 	}
