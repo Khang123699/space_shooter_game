@@ -148,7 +148,7 @@ void game_player_shoot() {
 			g_bullets[i].x = g_player_x + 4;
 			g_bullets[i].y = 52;
 			g_bullets[i].vx = 0;
-			g_shoot_cooldown = 2; 
+			g_shoot_cooldown = 6; 
 			break;
 		}
 	}
@@ -177,7 +177,7 @@ void game_logic_update() {
 				if (g_player_blink == 0 && check_player_pixel_collision(g_bullets[i].x, g_bullets[i].y)) {
 					g_bullets[i].active = false;
 					g_lives--;
-					g_player_blink = 15;
+					g_player_blink = 45;
 					if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
 					continue; // Skip movement if destroyed
 				}
@@ -192,7 +192,7 @@ void game_logic_update() {
 						if (check_collision(g_bullets[i].x, g_bullets[i].y, 1, 4, g_enemies[e].x, g_enemies[e].y, ew, eh)) {
 							g_bullets[i].active = false;
 							g_enemies[e].hp--;
-							g_enemies[e].blink_timer = 10;
+							g_enemies[e].blink_timer = 30;
 							if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_BANG);
 							if (g_enemies[e].hp <= 0) {
 								g_enemies[e].active = false;
@@ -219,23 +219,27 @@ void game_logic_update() {
 			// --- B. MOVEMENT UPDATE ---
 			g_bullets[i].x += g_bullets[i].vx;
 			if (g_bullets[i].is_enemy) {
-				int drop = 0;
-				if (g_game_data.difficulty == 0) drop = 1;
-				else if (g_game_data.difficulty == 1) drop = 2;
-				else if (g_game_data.difficulty == 2) drop = 3;
+				int drop = 1;
+				if (g_game_data.difficulty == 2) drop = 2;
 				
-				g_bullets[i].y += drop;
-				if (g_bullets[i].y > 64) g_bullets[i].active = false;
+				bool move_enemy_bullet = (g_game_data.difficulty > 0) || (g_tick_count % 2 == 0);
+				
+				if (move_enemy_bullet) {
+					g_bullets[i].y += drop;
+					if (g_bullets[i].y > 64) g_bullets[i].active = false;
+				}
 			} else {
-				g_bullets[i].y -= 4;
+				g_bullets[i].y -= 2;
 				if (g_bullets[i].y < 0) g_bullets[i].active = false;
 			}
 		}
 	} 
-	for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
-		if (g_explosions[ex].active) {
-			g_explosions[ex].timer--;
-			if (g_explosions[ex].timer <= 0) g_explosions[ex].active = false;
+	if (g_tick_count % 3 == 0) {
+		for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
+			if (g_explosions[ex].active) {
+				g_explosions[ex].timer--;
+				if (g_explosions[ex].timer <= 0) g_explosions[ex].active = false;
+			}
 		}
 	}
 	
@@ -243,7 +247,7 @@ void game_logic_update() {
 	bool all_dead = true;
 	bool hit_edge = false;
 	enemy_move_ticks++;
-	int move_threshold = (g_stage % 5 == 0) ? 3 : (3 - g_game_data.difficulty);
+	int move_threshold = (g_stage % 5 == 0) ? 3 : (9 - g_game_data.difficulty * 3);
 	bool do_move = (enemy_move_ticks >= move_threshold);
 	
 	for (int e = 0; e < MAX_ENEMIES; e++) {
@@ -251,13 +255,13 @@ void game_logic_update() {
 			all_dead = false;
 			int ew = (g_enemies[e].type == 4) ? 16 : 8;
 			if (do_move) {
-				g_enemies[e].x += (g_enemies[e].type == 4) ? (enemy_dir * 3) : enemy_dir;
+				g_enemies[e].x += enemy_dir;
 				if (g_enemies[e].x <= 0 || g_enemies[e].x + ew >= 128) hit_edge = true;
 			}
 			
 			// Enemy shoot
 			int shoot_chance = (g_enemies[e].type == 4) ? (9 + g_game_data.difficulty * 5) : (3 + g_game_data.difficulty);
-			if (rand() % 300 < shoot_chance) {
+			if (rand() % 900 < shoot_chance) {
 				if (g_enemies[e].type == 4) {
 					// Triple shot burst for Boss
 					int bullets_spawned = 0;
@@ -298,7 +302,7 @@ void game_logic_update() {
 			if (g_enemies[e].y > 60 || hit_player) {
 				g_lives--;
 				g_enemies[e].active = false;
-				g_player_blink = 15;
+				g_player_blink = 45;
 				if (hit_player) {
 					for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
 						if (!g_explosions[ex].active) {
@@ -321,7 +325,7 @@ void game_logic_update() {
 			enemy_dir = -enemy_dir;
 			for (int e = 0; e < MAX_ENEMIES; e++) {
 				if (g_enemies[e].active) {
-					g_enemies[e].x += enemy_dir * 2;
+					g_enemies[e].x += enemy_dir;
 					g_enemies[e].y += 2;
 				}
 			}
@@ -330,7 +334,7 @@ void game_logic_update() {
 	
 	if (all_dead && g_transition_timer == 0) {
 		g_stage++;
-		g_transition_timer = 40;
+		g_transition_timer = 120;
 	}
 	
 	if (g_transition_timer > 0) {

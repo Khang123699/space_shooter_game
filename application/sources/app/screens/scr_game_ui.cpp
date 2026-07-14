@@ -111,9 +111,9 @@ static void game_shooter_highscore_display() {
 static void draw_enemies() {
 	for (int e = 0; e < MAX_ENEMIES; e++) {
 		if (g_enemies[e].active) {
-			// Blinking effect when taking damage
+			// Blinking effect when taking damage (except Boss)
 			bool draw_sprite = true;
-			if (g_enemies[e].blink_timer > 0 && (g_tick_count % 4 < 2)) {
+			if (g_enemies[e].blink_timer > 0 && g_enemies[e].type != 4 && (g_tick_count % 4 < 2)) {
 				draw_sprite = false;
 			}
 			
