@@ -1,4 +1,5 @@
 #include "game_shooter.h"
+#include "game_save.h"
 #include <stdlib.h>
 
 #define SPAWN_START_X 8

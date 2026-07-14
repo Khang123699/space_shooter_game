@@ -1,5 +1,6 @@
 #include "game_shooter.h"
 #include "task_list.h"
+#include "timer.h"
 #include <string.h>
 
 // Global UI navigation

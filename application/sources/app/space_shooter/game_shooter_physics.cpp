@@ -1,5 +1,6 @@
 #include "game_shooter.h"
 #include "game_bitmaps.h"
+#include "game_save.h"
 #include "buzzer.h"
 
 static bool check_collision(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2) {
