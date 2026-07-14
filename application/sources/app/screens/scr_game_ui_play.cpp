@@ -41,6 +41,19 @@ static void draw_enemies() {
 	}
 }
 
+// Draw powerups
+static void draw_powerups() {
+	for (int p = 0; p < MAX_POWERUPS; p++) {
+		if (g_powerups[p].active) {
+			view_render.drawRect(g_powerups[p].x, g_powerups[p].y, 7, 7, WHITE);
+			view_render.setCursor(g_powerups[p].x + 1, g_powerups[p].y);
+			if (g_powerups[p].type == POWERUP_TYPE_DUAL_SHOT) view_render.print("D");
+			else if (g_powerups[p].type == POWERUP_TYPE_SHIELD) view_render.print("S");
+			else if (g_powerups[p].type == POWERUP_TYPE_NUKE) view_render.print("B");
+		}
+	}
+}
+
 // Draw explosion effects for destroyed entities
 static void draw_explosions() {
 	for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
@@ -80,6 +93,11 @@ void game_shooter_playing_display() {
 		view_render.drawBitmap(g_player_x, 54, icon_player, 8, 8, WHITE);
 	}
 	
+	if (g_player_shield) {
+		view_render.drawCircle(g_player_x + 3, 54 + 4, 6, WHITE);
+	}
+	
+	draw_powerups();
 	draw_enemies();
 	draw_explosions();
 	draw_bullets();

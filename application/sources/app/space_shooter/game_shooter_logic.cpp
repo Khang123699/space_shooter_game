@@ -14,6 +14,8 @@ const char* g_encouragement_text = "Good Job!";
 game_state_t g_game_state = GAME_STATE_MENU;
 int16_t g_player_x = 60;
 uint8_t g_player_blink = 0;
+uint16_t g_player_dual_shot_timer = 0;
+bool g_player_shield = false;
 bool g_render_pending = false;
 uint32_t g_score = 0;
 uint8_t g_lives = 3;
@@ -24,6 +26,7 @@ uint16_t g_tick_count = 0;
 enemy_t g_enemies[MAX_ENEMIES];
 bullet_t g_bullets[MAX_BULLETS];
 explosion_t g_explosions[MAX_EXPLOSIONS];
+powerup_t g_powerups[MAX_POWERUPS];
 uint8_t g_stage = 1;
 int8_t g_transition_timer = 0;
 
@@ -35,14 +38,18 @@ void game_logic_init() {
 	g_stage = 1;
 	g_transition_timer = 0;
 	enemy_dir = 1;
+	g_player_dual_shot_timer = 0;
+	g_player_shield = false;
 	memset(g_bullets, 0, sizeof(g_bullets));
 	memset(g_explosions, 0, sizeof(g_explosions));
+	memset(g_powerups, 0, sizeof(g_powerups));
 	game_enemy_spawn();
 }
 
 // Main update loop for game logic
 void game_logic_update() {
 	if (g_player_blink > 0) g_player_blink--;
+	if (g_player_dual_shot_timer > 0) g_player_dual_shot_timer--;
 	
 	// Update enemy blink timers
 	for (int e = 0; e < MAX_ENEMIES; e++) {
@@ -57,6 +64,18 @@ void game_logic_update() {
 	// Delegate to specific modules
 	game_physics_update();
 	game_enemy_update();
+	
+	// Update powerups
+	for (int i = 0; i < MAX_POWERUPS; i++) {
+		if (g_powerups[i].active) {
+			if (g_tick_count % 2 == 0) { // Fall slowly
+				g_powerups[i].y++;
+			}
+			if (g_powerups[i].y > 64) { // Screen height
+				g_powerups[i].active = false;
+			}
+		}
+	}
 	
 	// Stage transition logic
 	bool all_dead = true;

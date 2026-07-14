@@ -42,8 +42,14 @@ void game_physics_update() {
 				// Hit player: Check Pixel-Perfect collision
 				if (g_player_blink == 0 && check_player_pixel_collision(g_bullets[i].x, g_bullets[i].y)) {
 					g_bullets[i].active = false;
-					g_lives--;
-					g_player_blink = 34;
+					if (g_player_shield) {
+						g_player_shield = false;
+						g_player_dual_shot_timer = 0;
+						g_player_blink = 34;
+					} else {
+						g_lives--;
+						g_player_blink = 34;
+					}
 					if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
 					continue; // Skip movement if destroyed
 				}
@@ -63,6 +69,19 @@ void game_physics_update() {
 							if (g_enemies[e].hp <= 0) {
 								g_enemies[e].active = false;
 								g_score += (g_enemies[e].type == 4) ? 100 : 10;
+								
+								// Drop powerup chance (10%)
+								if (g_enemies[e].type != 4 && rand() % 100 < 10) {
+									for (int p = 0; p < MAX_POWERUPS; p++) {
+										if (!g_powerups[p].active) {
+											g_powerups[p].active = true;
+											g_powerups[p].x = g_enemies[e].x;
+											g_powerups[p].y = g_enemies[e].y;
+											g_powerups[p].type = 1 + (rand() % 3);
+											break;
+										}
+									}
+								}
 								
 								// Spawn explosion
 								for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
@@ -124,9 +143,17 @@ void game_physics_update() {
 							   g_enemies[e].y < 54 + 8 && g_enemies[e].y + eh > 54);
 			
 			if (g_enemies[e].y > 60 || hit_player) {
-				g_lives--;
 				g_enemies[e].active = false;
-				g_player_blink = 34;
+				
+				if (hit_player && g_player_shield) {
+					g_player_shield = false;
+					g_player_dual_shot_timer = 0;
+					g_player_blink = 34;
+				} else {
+					g_lives--;
+					g_player_blink = 34;
+				}
+				
 				if (hit_player) {
 					for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
 						if (!g_explosions[ex].active) {
@@ -139,6 +166,39 @@ void game_physics_update() {
 					}
 				}
 				if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
+			}
+		}
+	}
+	
+	// 4. Powerup collision with player
+	for (int p = 0; p < MAX_POWERUPS; p++) {
+		if (g_powerups[p].active) {
+			if (check_collision(g_powerups[p].x, g_powerups[p].y, 7, 7, g_player_x, 54, 8, 8)) {
+				g_powerups[p].active = false;
+				if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_CLICK);
+				
+				if (g_powerups[p].type == POWERUP_TYPE_DUAL_SHOT) {
+					g_player_dual_shot_timer = 300; // 15 seconds (20 ticks per second)
+				} else if (g_powerups[p].type == POWERUP_TYPE_SHIELD) {
+					g_player_shield = true;
+				} else if (g_powerups[p].type == POWERUP_TYPE_NUKE) {
+					// Destroy all enemies on screen except boss
+					for (int e = 0; e < MAX_ENEMIES; e++) {
+						if (g_enemies[e].active && g_enemies[e].type != 4) { // 4 is boss
+							g_enemies[e].active = false;
+							g_score += 10;
+							for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
+								if (!g_explosions[ex].active) {
+									g_explosions[ex].active = true;
+									g_explosions[ex].x = g_enemies[e].x;
+									g_explosions[ex].y = g_enemies[e].y;
+									g_explosions[ex].timer = 5;
+									break;
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
