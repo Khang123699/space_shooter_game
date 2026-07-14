@@ -4,6 +4,7 @@
 #include "buzzer.h"
 #include "timer.h"
 #include "task_list.h"
+#include "scr_idle.h"
 // Main UI input message handler based on current game state
 void scr_game_ui_handle(ak_msg_t *msg) {
 	if (msg->sig == AC_DISPLAY_RENDER_SCREEN) {
@@ -15,6 +16,8 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 		game_load_data();
 		// Start UI animation timer (100ms interval) for things like blinking or explosions
 		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK, 100, TIMER_PERIODIC);
+		// Start 12-second idle timer
+		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
 		return;
 	}
 	if (msg->sig == AC_DISPLAY_GAME_UI_ANIM_TICK) {
@@ -33,9 +36,19 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 		return;
 	}
 
+	if (msg->sig == AC_DISPLAY_IDLE_TIMEOUT) {
+		if (g_game_state != GAME_STATE_PLAYING) {
+			SCREEN_TRAN(scr_idle_handle, &scr_idle);
+		}
+		return;
+	}
+
 	if (msg->sig == AC_DISPLAY_BUTTON_UP_PRESSED || 
 	    msg->sig == AC_DISPLAY_BUTTON_DOWN_PRESSED || 
 	    msg->sig == AC_DISPLAY_BUTTON_MODE_PRESSED) {
+		// Reset idle timer
+		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
+
 		if (g_game_state != GAME_STATE_PLAYING && g_game_data.sound_en) {
 			BUZZER_PlaySound(BUZZER_SOUND_CLICK);
 		}

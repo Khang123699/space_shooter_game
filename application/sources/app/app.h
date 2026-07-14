@@ -161,7 +161,8 @@ enum {
 	AC_DISPLAY_SHOW_MODBUS_PULL_UPDATE,
 	AC_DISPLAY_SHOW_MODBUS_PULL_SLEEP,
 	AC_DISPLAY_GAME_OVER_NEXT,
-	AC_DISPLAY_GAME_UI_ANIM_TICK
+	AC_DISPLAY_GAME_UI_ANIM_TICK,
+	AC_DISPLAY_IDLE_TIMEOUT
 };
 
 /*****************************************************************************/

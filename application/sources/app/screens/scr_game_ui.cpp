@@ -15,7 +15,7 @@ uint8_t g_gameover_anim_frame = 0;
 
 void view_scr_game_ui();
 
-view_dynamic_t dyn_view_idle = {
+view_dynamic_t dyn_view_game_ui = {
 	{
 		.item_type = ITEM_TYPE_DYNAMIC,
 	},
@@ -23,7 +23,7 @@ view_dynamic_t dyn_view_idle = {
 };
 
 view_screen_t scr_game_ui = {
-	&dyn_view_idle,
+	&dyn_view_game_ui,
 	ITEM_NULL,
 	ITEM_NULL,
 	.focus_item = 0,

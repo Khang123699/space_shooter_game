@@ -22,7 +22,7 @@
 
 
 // scr_game_ui
-extern view_dynamic_t dyn_view_idle;
+extern view_dynamic_t dyn_view_game_ui;
 extern view_screen_t scr_game_ui;
 extern void scr_game_ui_handle(ak_msg_t* msg);
 
@@ -31,6 +31,11 @@ extern void scr_game_ui_handle(ak_msg_t* msg);
 extern view_dynamic_t dyn_view_startup;
 extern view_screen_t scr_startup;
 extern void scr_startup_handle(ak_msg_t* msg);
+
+// scr_idle
+extern view_dynamic_t dyn_view_idle;
+extern view_screen_t scr_idle;
+extern void scr_idle_handle(ak_msg_t* msg);
 
 
 #endif //__SCREENS_H__
