@@ -250,7 +250,7 @@ void game_logic_update() {
 	bool all_dead = true;
 	bool hit_edge = false;
 	enemy_move_ticks++;
-	int move_threshold = (g_stage % 5 == 0) ? 3 : (9 - g_game_data.difficulty * 3);
+	int move_threshold = (g_stage % 5 == 0) ? 1 : (4 - g_game_data.difficulty);
 	bool do_move = (enemy_move_ticks >= move_threshold);
 	
 	for (int e = 0; e < MAX_ENEMIES; e++) {
@@ -264,7 +264,7 @@ void game_logic_update() {
 			
 			// Enemy shoot
 			int shoot_chance = (g_enemies[e].type == 4) ? (9 + g_game_data.difficulty * 5) : (3 + g_game_data.difficulty);
-			if (rand() % 900 < shoot_chance) {
+			if (rand() % 1500 < shoot_chance) {
 				if (g_enemies[e].type == 4) {
 					// Triple shot burst for Boss
 					int bullets_spawned = 0;
@@ -326,12 +326,19 @@ void game_logic_update() {
 		enemy_move_ticks = 0;
 		if (hit_edge) {
 			enemy_dir = -enemy_dir;
+			static uint8_t edge_hit_count = 0;
+			edge_hit_count++;
+			
 			for (int e = 0; e < MAX_ENEMIES; e++) {
 				if (g_enemies[e].active) {
 					g_enemies[e].x += enemy_dir;
-					g_enemies[e].y += 2;
+					if (edge_hit_count >= 2) {
+						g_enemies[e].y += 1;
+					}
 				}
 			}
+			
+			if (edge_hit_count >= 2) edge_hit_count = 0;
 		}
 	}
 	
