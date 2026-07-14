@@ -16,19 +16,16 @@ void game_shooter_task(ak_msg_t* msg) {
 		case AC_GAME_BTN_UP:
 			// Move player left (negative delta)
 			game_player_move(-8);
-			g_btn_up_pending = false;
 			break;
 			
 		case AC_GAME_BTN_DOWN:
 			// Move player right (positive delta)
 			game_player_move(8);
-			g_btn_down_pending = false;
 			break;
 			
 		case AC_GAME_BTN_MODE:
 			// Player shoots a bullet
 			game_player_shoot();
-			g_btn_mode_pending = false;
 			break;
 			
 		case AC_GAME_UPDATE_TICK:
