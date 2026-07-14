@@ -111,6 +111,11 @@ static void handle_ui_showscore_input(ak_msg_t *msg) {
 }
 // Main UI input message handler based on current game state
 void scr_game_ui_handle(ak_msg_t *msg) {
+	if (msg->sig == AC_DISPLAY_RENDER_SCREEN) {
+		g_render_pending = false;
+		// return; // Let it fall through, so screen_manager will render it
+	}
+	
 	if (msg->sig == SCREEN_ENTRY) {
 		game_load_data();
 		// Start UI animation timer (150ms interval) for things like blinking or explosions

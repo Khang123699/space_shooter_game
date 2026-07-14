@@ -36,6 +36,7 @@ extern uint8_t g_score_selected;
 extern uint8_t g_show_score_selected;
 extern const char* g_encouragement_text;
 extern uint8_t g_new_high_score_rank;
+extern bool g_render_pending;
 extern uint8_t g_gameover_anim_frame;
 
 extern int16_t g_player_x;

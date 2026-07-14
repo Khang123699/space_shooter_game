@@ -31,6 +31,7 @@ const char* g_encouragement_text = "Good Job!";
 game_state_t g_game_state = GAME_STATE_MENU;
 int16_t g_player_x = 60;
 uint8_t g_player_blink = 0;
+bool g_render_pending = false;
 uint32_t g_score = 0;
 uint8_t g_lives = 3;
 
@@ -60,8 +61,10 @@ static bool check_player_pixel_collision(int bullet_x, int bullet_y) {
     int start_y = bullet_y - 54;
     int end_y = start_y + 4; 
     
-    if (start_x < 0) start_x = 0; if (end_x > 8) end_x = 8;
-    if (start_y < 0) start_y = 0; if (end_y > 8) end_y = 8;
+    if (start_x < 0) start_x = 0; 
+    if (end_x > 8) end_x = 8;
+    if (start_y < 0) start_y = 0; 
+    if (end_y > 8) end_y = 8;
     
     for (int y = start_y; y < end_y; y++) {
         uint8_t row_pixels = icon_player[y];
@@ -350,6 +353,9 @@ void game_logic_update() {
 		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_OVER_NEXT);
 	}
 	
-	// Force a redraw of the UI frame with new positions
-	task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
+	// Force a redraw of the UI frame with new positions if not already rendering
+	if (!g_render_pending) {
+		g_render_pending = true;
+		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
+	}
 }
