@@ -2,9 +2,7 @@
 #include "scr_game_ui.h"
 #include "game_shooter.h"
 
-using namespace std;
-
-#define MAX_BALL_DISPLAY (16)
+#define MAX_BALL_DISPLAY (5)
 #define BALL_MOVE_STEP	 (2)
 
 class ball {
@@ -92,7 +90,8 @@ view_screen_t scr_idle = {
 	.focus_item = 0,
 };
 
-vector<ball> v_idle_ball;
+ball v_idle_ball[MAX_BALL_DISPLAY];
+int active_balls = 0;
 int ball::total;
 
 static void scr_idle_return_screen() {
@@ -106,8 +105,8 @@ static void scr_idle_return_screen() {
 
 void view_scr_idle() {
     view_render.clear(); // Important: Clear the screen explicitly
-	for (ball _ball : v_idle_ball) {
-		view_render.drawCircle(_ball.x, _ball.y, _ball.radius, WHITE);
+	for (int i = 0; i < active_balls; i++) {
+		view_render.drawCircle(v_idle_ball[i].x, v_idle_ball[i].y, v_idle_ball[i].radius, WHITE);
 	}
 }
 
@@ -115,12 +114,12 @@ void scr_idle_handle(ak_msg_t *msg) {
 	switch (msg->sig) {
 	case SCREEN_ENTRY: {
 		APP_DBG_SIG("SCREEN_ENTRY\n");
-		if (v_idle_ball.empty()) {
+		if (active_balls == 0) {
             for(int i = 0; i < 5; i++) { // Spawn 5 balls by default
-			    ball new_ball;
-			    new_ball.id = ball::total++;
-			    v_idle_ball.push_back(new_ball);
+			    v_idle_ball[i] = ball();
+			    v_idle_ball[i].id = ball::total++;
             }
+            active_balls = 5;
 		}
 
         // Set to 100ms interval for smooth but safe queueing (10 fps)
@@ -131,7 +130,7 @@ void scr_idle_handle(ak_msg_t *msg) {
 	} break;
 
 	case AC_DISPLAY_SHOW_IDLE_BALL_MOVING_UPDATE: {
-		for (unsigned int i = 0; i < v_idle_ball.size(); i++) {
+		for (int i = 0; i < active_balls; i++) {
 			v_idle_ball[i].moving();
 		}
         // Force screen re-render for animation
