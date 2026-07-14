@@ -40,7 +40,7 @@ void game_enemy_spawn() {
 						g_enemies[e].type = 6; // Carrier
 						spawned_type6 = true;
 						g_enemies[e].hp = 4;
-					} else if (r_val >= 15 && r_val < 35 && !spawned_type5) {
+					} else if (r == 0 && r_val >= 15 && r_val < 35 && !spawned_type5) {
 						g_enemies[e].type = 5; // Spread Shooter
 						spawned_type5 = true;
 						g_enemies[e].hp = 3;
@@ -162,7 +162,7 @@ void game_enemy_update() {
 				if (g_enemies[e].active) {
 					g_enemies[e].x += enemy_dir;
 					if (edge_hit_count >= 2) {
-						if (g_enemies[e].type != 6) { // Carrier (type 6) never drops down
+						if (g_enemies[e].type != 6 && g_enemies[e].type != 5) { // Carrier (6) and Spread (5) never drop down
 							g_enemies[e].y += 1;
 						}
 					}
