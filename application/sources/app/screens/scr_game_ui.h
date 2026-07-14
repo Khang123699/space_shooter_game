@@ -5,7 +5,6 @@
 
 extern uint8_t g_new_high_score_rank;
 extern uint8_t g_gameover_anim_frame;
-extern uint8_t g_new_high_score_timer;
 
 // View Prototypes
 void game_shooter_menu_display();
@@ -13,7 +12,6 @@ void game_shooter_setting_display();
 void game_shooter_highscore_display();
 void game_shooter_playing_display();
 void game_shooter_gameover_display();
-void game_shooter_new_highscore_display();
 void game_shooter_score_display();
 
 // Handle Prototypes

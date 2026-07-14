@@ -22,15 +22,6 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 		if (g_game_state == GAME_STATE_GAMEOVER) {
 			if (g_gameover_anim_frame < 250) g_gameover_anim_frame++;
 			need_render = true;
-		} else if (g_game_state == GAME_STATE_NEW_HIGH_SCORE) {
-			if (g_new_high_score_timer > 0) {
-				g_new_high_score_timer--;
-				if (g_new_high_score_timer == 0) {
-					g_game_state = GAME_STATE_SHOW_SCORE;
-					g_show_score_selected = 0;
-				}
-			}
-			need_render = true;
 		} else if (g_game_state == GAME_STATE_SHOW_SCORE) {
 			need_render = true;
 		}
@@ -63,7 +54,6 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 		case GAME_STATE_HIGH_SCORE: handle_ui_highscore_input(msg); break;
 		case GAME_STATE_PLAYING: handle_ui_playing_input(msg); break;
 		case GAME_STATE_GAMEOVER: handle_ui_gameover_input(msg); break;
-		case GAME_STATE_NEW_HIGH_SCORE: break;
 		case GAME_STATE_SHOW_SCORE: handle_ui_showscore_input(msg); break;
 	}
 }

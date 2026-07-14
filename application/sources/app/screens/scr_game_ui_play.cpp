@@ -166,24 +166,22 @@ void game_shooter_gameover_display() {
 	}
 }
 
-// Render New High Score congratulations screen
-void game_shooter_new_highscore_display() {
-	view_render.setTextSize(1);
-	view_render.setCursor(CENTER_X(15, 6), 20);
-	view_render.print("NEW HIGH SCORE!");
-	
-	view_render.setCursor(44, 34);
-	view_render.print("TOP ");
-	char temp[4];
-	xsprintf(temp, "%u", (unsigned int)g_new_high_score_rank);
-	view_render.print(temp);
-}
-
 // Render standard Score screen after death
 void game_shooter_score_display() {
 	view_render.setTextSize(1);
-	view_render.setCursor(CENTER_X(11, 6), 14);
-	view_render.print("YOUR SCORE:");
+	if (g_new_high_score_rank > 0) {
+		view_render.setCursor(CENTER_X(15, 6), 6);
+		view_render.print("NEW HIGH SCORE!");
+		view_render.setCursor(CENTER_X(5, 6), 16);
+		view_render.print("TOP ");
+		char temp[4];
+		xsprintf(temp, "%u", (unsigned int)g_new_high_score_rank);
+		view_render.print(temp);
+	} else {
+		view_render.setCursor(CENTER_X(11, 6), 14);
+		view_render.print("YOUR SCORE:");
+	}
+	
 	view_render.setTextSize(2);
 	char temp_final[12];
 	xsprintf(temp_final, "%u", (unsigned int)g_score);
@@ -196,5 +194,5 @@ void game_shooter_score_display() {
 	view_render.drawBitmap(90, 48, icon_menu, 8, 8, WHITE);
 	
 	uint8_t selected_x = 30 + (g_show_score_selected * 30);
-	view_render.fillRect(selected_x, 58, 8, 2, WHITE);
+	view_render.drawRect(selected_x - 3, 45, 14, 14, WHITE);
 }

@@ -17,13 +17,10 @@ void handle_ui_playing_input(ak_msg_t *msg) {
 void handle_ui_gameover_input(ak_msg_t *msg) {
 	if (msg->sig == AC_DISPLAY_BUTTON_MODE_PRESSED) { 
 		g_new_high_score_rank = game_update_high_score(g_score);
-		if (g_new_high_score_rank > 0) {
-			g_game_state = GAME_STATE_NEW_HIGH_SCORE;
-			g_new_high_score_timer = 40; // 2.0s
-			if (g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_HIGHSCORE);
-		} else {
-			g_game_state = GAME_STATE_SHOW_SCORE; 
-			g_show_score_selected = 0; 
+		g_game_state = GAME_STATE_SHOW_SCORE;
+		g_show_score_selected = 0;
+		if (g_new_high_score_rank > 0 && g_game_data.sound_en) {
+			BUZZER_PlaySound(BUZZER_SOUND_HIGHSCORE);
 		}
 	}
 }
@@ -43,7 +40,7 @@ void handle_ui_showscore_input(ak_msg_t *msg) {
 				task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_START_REQ); 
 			} else if (g_show_score_selected == 1) { 
 				g_game_state = GAME_STATE_HIGH_SCORE; 
-				g_score_selected = 1; 
+				g_score_selected = 0; 
 			} else if (g_show_score_selected == 2) { 
 				g_game_state = GAME_STATE_MENU; 
 			}

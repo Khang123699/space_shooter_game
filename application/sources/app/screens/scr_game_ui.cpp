@@ -12,7 +12,6 @@
 
 uint8_t g_new_high_score_rank = 0;
 uint8_t g_gameover_anim_frame = 0;
-uint8_t g_new_high_score_timer = 0;
 
 void view_scr_game_ui();
 
@@ -40,7 +39,6 @@ void view_scr_game_ui() {
 		case GAME_STATE_HIGH_SCORE: game_shooter_highscore_display(); break;
 		case GAME_STATE_PLAYING: game_shooter_playing_display(); break;
 		case GAME_STATE_GAMEOVER: game_shooter_gameover_display(); break;
-		case GAME_STATE_NEW_HIGH_SCORE: game_shooter_new_highscore_display(); break;
 		case GAME_STATE_SHOW_SCORE: game_shooter_score_display(); break;
 	}
 }
