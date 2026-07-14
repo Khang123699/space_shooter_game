@@ -15,7 +15,8 @@ void game_enemy_spawn() {
 	if (g_stage % 3 == 0) { // Boss stage every 3 stages
 		g_enemies[0].active = true;
 		g_enemies[0].type = 4; // Boss type
-		g_enemies[0].hp = 15 + g_stage;
+		int boss_cycle = g_stage / 3;
+		g_enemies[0].hp = 10 + (boss_cycle - 1) * 5;
 		g_enemies[0].blink_timer = 0;
 		g_enemies[0].x = 56;
 		g_enemies[0].y = 16;
@@ -26,27 +27,24 @@ void game_enemy_spawn() {
 		int spawn_chance = 40 + (g_game_data.difficulty * 10);
 		
 		// Center the 6x3 enemy grid (start_x = 20 for 128px screen width)
-		int start_x = 20; 
-		
-		for (int row = 0; row < rows; row++) {
-			for (int col = 0; col < cols; col++) {
-				if (e >= MAX_ENEMIES) break;
-				
-				// Roll dice % to decide if an enemy spawns in this cell
-				if ((rand() % 100) < spawn_chance) {
+		for (int r = 0; r < rows; r++) {
+			for (int c = 0; c < cols; c++) {
+				if (rand() % 100 < spawn_chance) {
 					g_enemies[e].active = true;
-					g_enemies[e].type = 1 + (rand() % 3); // random type 1, 2, or 3
+					g_enemies[e].type = 1 + (rand() % 3);
 					g_enemies[e].hp = g_enemies[e].type;
 					g_enemies[e].blink_timer = 0;
-					g_enemies[e].x = start_x + col * SPAWN_OFFSET_X;
-					g_enemies[e].y = SPAWN_START_Y + row * SPAWN_OFFSET_Y;
+					g_enemies[e].x = 20 + c * SPAWN_OFFSET_X;
+					g_enemies[e].y = SPAWN_START_Y + r * SPAWN_OFFSET_Y;
 					e++;
+					if (e >= MAX_ENEMIES) break;
 				}
 			}
+			if (e >= MAX_ENEMIES) break;
 		}
 	}
 	
-	// Fallback to avoid empty stage
+	// Fallback if random spawning resulted in 0 enemies
 	if (e == 0) {
 		g_enemies[0].active = true;
 		g_enemies[0].type = 1 + (rand() % 3);
@@ -60,7 +58,7 @@ void game_enemy_spawn() {
 void game_enemy_update() {
 	bool hit_edge = false;
 	enemy_move_ticks++;
-	int move_threshold = (g_stage % 3 == 0) ? 1 : (4 - g_game_data.difficulty);
+	int move_threshold = (g_stage % 3 == 0) ? 2 : (4 - g_game_data.difficulty);
 	bool do_move = (enemy_move_ticks >= move_threshold);
 	
 	for (int e = 0; e < MAX_ENEMIES; e++) {
@@ -72,8 +70,16 @@ void game_enemy_update() {
 			}
 			
 			// Enemy shoot
-			int shoot_chance = (g_enemies[e].type == 4) ? (9 + g_game_data.difficulty * 5) : (3 + g_game_data.difficulty);
-			if (rand() % 1200 < shoot_chance) {
+			int shoot_chance;
+			if (g_enemies[e].type == 4) {
+				int boss_cycle = g_stage / 3;
+				// Base + difficulty + 5 for every boss cycle passed (no limit)
+				shoot_chance = 9 + (g_game_data.difficulty * 5) + ((boss_cycle - 1) * 5);
+			} else {
+				shoot_chance = 3 + g_game_data.difficulty;
+			}
+			
+			if (rand() % 1000 < shoot_chance) {
 				if (g_enemies[e].type == 4) {
 					// Triple shot burst for Boss
 					int bullets_spawned = 0;
