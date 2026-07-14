@@ -20,4 +20,7 @@ extern const uint8_t icon_item_shield[8];
 extern const uint8_t icon_item_dual[8];
 extern const uint8_t icon_item_nuke[8];
 
+extern const uint8_t bmp_enemy_spread[16];
+extern const uint8_t bmp_enemy_carrier[16];
+
 #endif // __GAME_BITMAPS_H__

@@ -25,14 +25,30 @@ void game_enemy_spawn() {
 		int rows = 3;
 		int cols = 6;
 		int spawn_chance = 40 + (g_game_data.difficulty * 10);
+		bool spawned_type5 = false;
+		bool spawned_type6 = false;
 		
 		// Center the 6x3 enemy grid (start_x = 20 for 128px screen width)
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
 				if (rand() % 100 < spawn_chance) {
 					g_enemies[e].active = true;
-					g_enemies[e].type = 1 + (rand() % 3);
-					g_enemies[e].hp = g_enemies[e].type;
+					
+					// Randomize enemy type based on restrictions
+					int r_val = rand() % 100;
+					if (r == 0 && r_val < 15 && !spawned_type6) {
+						g_enemies[e].type = 6; // Carrier
+						spawned_type6 = true;
+						g_enemies[e].hp = 4;
+					} else if (r_val >= 15 && r_val < 35 && !spawned_type5) {
+						g_enemies[e].type = 5; // Spread Shooter
+						spawned_type5 = true;
+						g_enemies[e].hp = 3;
+					} else {
+						g_enemies[e].type = 1 + (rand() % 3);
+						g_enemies[e].hp = g_enemies[e].type;
+					}
+					
 					g_enemies[e].blink_timer = 0;
 					g_enemies[e].x = 20 + c * SPAWN_OFFSET_X;
 					g_enemies[e].y = SPAWN_START_Y + r * SPAWN_OFFSET_Y;
@@ -63,10 +79,28 @@ void game_enemy_update() {
 	
 	for (int e = 0; e < MAX_ENEMIES; e++) {
 		if (g_enemies[e].active) {
-			int ew = (g_enemies[e].type == 4) ? 16 : 8;
+			int ew = (g_enemies[e].type == 4 || g_enemies[e].type == 5 || g_enemies[e].type == 6) ? 16 : 8;
 			if (do_move) {
 				g_enemies[e].x += enemy_dir;
 				if (g_enemies[e].x <= 0 || g_enemies[e].x + ew >= 128) hit_edge = true;
+			}
+			
+			// Carrier Logic (Type 6)
+			if (g_enemies[e].type == 6) {
+				// Spawn an enemy every 6 seconds (120 ticks)
+				if (g_tick_count > 0 && g_tick_count % 120 == 0) {
+					for (int ne = 0; ne < MAX_ENEMIES; ne++) {
+						if (!g_enemies[ne].active) {
+							g_enemies[ne].active = true;
+							g_enemies[ne].type = 1; // Spawn a basic 1-HP enemy
+							g_enemies[ne].hp = 1;
+							g_enemies[ne].blink_timer = 0;
+							g_enemies[ne].x = g_enemies[e].x + 4; // Center the spawn
+							g_enemies[ne].y = g_enemies[e].y + 8; // Right below carrier
+							break;
+						}
+					}
+				}
 			}
 			
 			// Enemy shoot
@@ -75,19 +109,23 @@ void game_enemy_update() {
 				int boss_cycle = g_stage / 3;
 				// Base + difficulty + 5 for every boss cycle passed (no limit)
 				shoot_chance = 9 + (g_game_data.difficulty * 5) + ((boss_cycle - 1) * 5);
+			} else if (g_enemies[e].type == 5) {
+				shoot_chance = 5 + g_game_data.difficulty * 2; // Spread shooter shoots more often
+			} else if (g_enemies[e].type == 6) {
+				shoot_chance = 0; // Carrier doesn't shoot
 			} else {
 				shoot_chance = 3 + g_game_data.difficulty;
 			}
 			
-			if (rand() % 1000 < shoot_chance) {
-				if (g_enemies[e].type == 4) {
-					// Triple shot burst for Boss
+			if (shoot_chance > 0 && rand() % 1000 < shoot_chance) {
+				if (g_enemies[e].type == 4 || g_enemies[e].type == 5) {
+					// Triple shot burst for Boss and Spread Shooter
 					int bullets_spawned = 0;
 					for (int i = 0; i < MAX_BULLETS && bullets_spawned < 3; i++) {
 						if (!g_bullets[i].active) {
 							g_bullets[i].active = true;
 							g_bullets[i].x = g_enemies[e].x + ew / 2;
-							g_bullets[i].y = g_enemies[e].y + 12;
+							g_bullets[i].y = g_enemies[e].y + (g_enemies[e].type == 4 ? 12 : 8);
 							g_bullets[i].is_enemy = true;
 							
 							if (bullets_spawned == 0) g_bullets[i].vx = 0;
@@ -124,7 +162,9 @@ void game_enemy_update() {
 				if (g_enemies[e].active) {
 					g_enemies[e].x += enemy_dir;
 					if (edge_hit_count >= 2) {
-						g_enemies[e].y += 1;
+						if (g_enemies[e].type != 6) { // Carrier (type 6) never drops down
+							g_enemies[e].y += 1;
+						}
 					}
 				}
 			}

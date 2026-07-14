@@ -56,9 +56,9 @@ void game_physics_update() {
 			} else {
 				for (int e = 0; e < MAX_ENEMIES; e++) {
 					if (g_enemies[e].active) {
-						// Determine dynamic bounding box based on enemy type (Boss is 16x16, normal is 8x8)
-						int ew = (g_enemies[e].type == 4) ? 16 : 8;
-						int eh = (g_enemies[e].type == 4) ? 16 : 8;
+						// Determine dynamic bounding box based on enemy type (Boss, Carrier, Spread are 16 wide)
+						int ew = (g_enemies[e].type >= 4) ? 16 : 8;
+						int eh = (g_enemies[e].type == 4) ? 16 : 8; // Boss is 16x16, Carrier/Spread are 16x8
 						
 						// Check AABB collision between bullet and enemy
 						if (check_collision(g_bullets[i].x, g_bullets[i].y, 1, 4, g_enemies[e].x, g_enemies[e].y, ew, eh)) {
@@ -135,7 +135,7 @@ void game_physics_update() {
 	// 3. Enemy body collision with player or bottom edge
 	for (int e = 0; e < MAX_ENEMIES; e++) {
 		if (g_enemies[e].active) {
-			int ew = (g_enemies[e].type == 4) ? 16 : 8;
+			int ew = (g_enemies[e].type >= 4) ? 16 : 8;
 			int eh = (g_enemies[e].type == 4) ? 16 : 8;
 			
 			bool hit_player = (g_player_blink == 0 &&
@@ -194,7 +194,7 @@ void game_physics_update() {
 								for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
 									if (!g_explosions[ex].active) {
 										g_explosions[ex].active = true;
-										g_explosions[ex].x = g_enemies[e].x + (g_enemies[e].type == 4 ? 4 : 0);
+										g_explosions[ex].x = g_enemies[e].x + (g_enemies[e].type >= 4 ? 4 : 0);
 										g_explosions[ex].y = g_enemies[e].y;
 										g_explosions[ex].timer = 5;
 										break;

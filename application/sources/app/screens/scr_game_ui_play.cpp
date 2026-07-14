@@ -30,12 +30,16 @@ static void draw_enemies() {
 				if (hp_width < 0) hp_width = 0;
 				view_render.fillRect(g_enemies[e].x, g_enemies[e].y - 3, 16, 2, BLACK);
 				view_render.fillRect(g_enemies[e].x, g_enemies[e].y - 3, hp_width, 2, WHITE);
-			} else if (g_enemies[e].type == 3) {
-				if (draw_sprite) view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon_enemy3, 8, 8, WHITE);
-			} else if (g_enemies[e].type == 2) {
-				if (draw_sprite) view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon_enemy2, 8, 8, WHITE);
+			} else if (g_enemies[e].type == 5) {
+				if (draw_sprite) view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, bmp_enemy_spread, 16, 8, WHITE);
+			} else if (g_enemies[e].type == 6) {
+				if (draw_sprite) view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, bmp_enemy_carrier, 16, 8, WHITE);
 			} else {
-				if (draw_sprite) view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon_enemy1, 8, 8, WHITE);
+				const uint8_t* icon = icon_enemy1;
+				if (g_enemies[e].type == 2) icon = icon_enemy2;
+				else if (g_enemies[e].type == 3) icon = icon_enemy3;
+				
+				if (draw_sprite) view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, icon, 8, 8, WHITE);
 			}
 		}
 	}
