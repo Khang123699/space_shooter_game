@@ -49,9 +49,8 @@ void game_shooter_setting_display() {
 	view_render.setCursor(26, 34);
 	view_render.print("Diff:");
 	view_render.setCursor(80, 34);
-	if (g_game_data.difficulty == 0) view_render.print("EASY");
-	else if (g_game_data.difficulty == 1) view_render.print("MED");
-	else view_render.print("HARD");
+	const char* diff_str[] = {"EASY", "MED", "HARD"};
+	view_render.print(diff_str[g_game_data.difficulty]);
 	
 	view_render.setCursor(26, 48);
 	view_render.print("Back");
