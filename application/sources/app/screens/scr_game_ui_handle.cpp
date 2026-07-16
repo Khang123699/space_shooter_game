@@ -7,64 +7,56 @@
 #include "scr_idle.h"
 // Main UI input message handler based on current game state
 void scr_game_ui_handle(ak_msg_t *msg) {
-	if (msg->sig == AC_DISPLAY_RENDER_SCREEN) {
-		g_render_pending = false;
-		// return; // Let it fall through, so screen_manager will render it
-	}
-	
-	if (msg->sig == SCREEN_ENTRY) {
-		game_load_data();
-		// Start UI animation timer (100ms interval) for things like blinking or explosions
-		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK, 100, TIMER_PERIODIC);
-		// Start 12-second idle timer
-		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
-		return;
-	}
-	if (msg->sig == AC_DISPLAY_GAME_UI_ANIM_TICK) {
-		bool need_render = false;
-		if (g_game_state == GAME_STATE_GAMEOVER) {
-			if (g_gameover_anim_frame < 250) g_gameover_anim_frame++;
-			need_render = true;
-		} else if (g_game_state == GAME_STATE_SHOW_SCORE) {
-			need_render = true;
-		}
-		
-		if (need_render) {
-			task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
-		}
-		
-		return;
-	}
-
-	if (msg->sig == AC_DISPLAY_IDLE_TIMEOUT) {
-		if (g_game_state != GAME_STATE_PLAYING) {
-			SCREEN_TRAN(scr_idle_handle, &scr_idle);
-		}
-		return;
-	}
-
-	if (msg->sig == AC_DISPLAY_BUTTON_UP_PRESSED || 
-	    msg->sig == AC_DISPLAY_BUTTON_DOWN_PRESSED || 
-	    msg->sig == AC_DISPLAY_BUTTON_MODE_PRESSED) {
-		
-		if (g_game_state != GAME_STATE_PLAYING) {
-			// Reset idle timer only outside gameplay
+	switch (msg->sig) {
+		case AC_DISPLAY_RENDER_SCREEN:
+			g_render_pending = false;
+			break;
+			
+		case SCREEN_ENTRY:
+			game_load_data();
+			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK, 100, TIMER_PERIODIC);
 			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
+			return;
 
-			if (g_game_data.sound_en) {
-				BUZZER_PlaySound(BUZZER_SOUND_CLICK);
+		case AC_DISPLAY_GAME_UI_ANIM_TICK: {
+			bool need_render = false;
+			if (g_game_state == GAME_STATE_GAMEOVER) {
+				if (g_gameover_anim_frame < 250) g_gameover_anim_frame++;
+				need_render = true;
+			} else if (g_game_state == GAME_STATE_SHOW_SCORE) {
+				need_render = true;
 			}
+			
+			if (need_render) {
+				task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
+			}
+			return;
 		}
-	}
 
-	if (msg->sig == AC_DISPLAY_GAME_OVER_NEXT) {
-		g_game_state = GAME_STATE_GAMEOVER;
-		g_gameover_anim_frame = 0;
-		if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_LOWSCORE);
-		
-		// Start idle timer so it returns to idle if user does nothing
-		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
-		return;
+		case AC_DISPLAY_IDLE_TIMEOUT:
+			if (g_game_state != GAME_STATE_PLAYING) {
+				SCREEN_TRAN(scr_idle_handle, &scr_idle);
+			}
+			return;
+
+		case AC_DISPLAY_BUTTON_UP_PRESSED:
+		case AC_DISPLAY_BUTTON_DOWN_PRESSED:
+		case AC_DISPLAY_BUTTON_MODE_PRESSED:
+			if (g_game_state != GAME_STATE_PLAYING) {
+				timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
+				if (g_game_data.sound_en) {
+					BUZZER_PlaySound(BUZZER_SOUND_CLICK);
+				}
+			}
+			break;
+
+		case AC_DISPLAY_GAME_OVER_NEXT:
+			g_game_state = GAME_STATE_GAMEOVER;
+			g_gameover_anim_frame = 0;
+			if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_LOWSCORE);
+			
+			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
+			return;
 	}
 
 	switch (g_game_state) {
