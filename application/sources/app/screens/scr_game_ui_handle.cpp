@@ -14,11 +14,13 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 			
 		case SCREEN_ENTRY:
 			game_load_data();
+			// Init timers for UI animation and idle timeout
 			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK, 100, TIMER_PERIODIC);
 			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
 			return;
 
 		case AC_DISPLAY_GAME_UI_ANIM_TICK: {
+			// Trigger render for active animations
 			bool need_render = false;
 			if (g_game_state == GAME_STATE_GAMEOVER) {
 				if (g_gameover_anim_frame < 250) g_gameover_anim_frame++;
@@ -43,6 +45,7 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 		case AC_DISPLAY_BUTTON_DOWN_PRESSED:
 		case AC_DISPLAY_BUTTON_MODE_PRESSED:
 			if (g_game_state != GAME_STATE_PLAYING) {
+				// Reset idle timeout on user interaction
 				timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
 				if (g_game_data.sound_en) {
 					BUZZER_PlaySound(BUZZER_SOUND_CLICK);
@@ -59,6 +62,7 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 			return;
 	}
 
+	// Dispatch message based on current UI state
 	switch (g_game_state) {
 		case GAME_STATE_MENU: handle_ui_menu_input(msg); break;
 		case GAME_STATE_SETTING: handle_ui_setting_input(msg); break;
