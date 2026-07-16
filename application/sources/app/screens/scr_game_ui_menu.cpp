@@ -70,9 +70,8 @@ void game_shooter_highscore_display() {
 	
 	for (int i = 0; i < 3; i++) {
 		view_render.setCursor(26, 20 + i * 10);
-		if (i == 0) view_render.print("1st: ");
-		else if (i == 1) view_render.print("2nd: ");
-		else view_render.print("3rd: ");
+		const char* prefixes[] = {"1st: ", "2nd: ", "3rd: "};
+		view_render.print(prefixes[i]);
 		
 		char temp_str[12];
 		xsprintf(temp_str, "%u", (unsigned int)g_game_data.top_score[i]);
