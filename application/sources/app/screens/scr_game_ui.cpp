@@ -34,6 +34,7 @@ void view_scr_game_ui() {
 	view_render.clear();
 	view_render.setTextColor(WHITE);
 	switch (g_game_state) {
+		case GAME_STATE_TITLE: game_shooter_title_display(); break;
 		case GAME_STATE_MENU: game_shooter_menu_display(); break;
 		case GAME_STATE_SETTING: game_shooter_setting_display(); break;
 		case GAME_STATE_HIGH_SCORE: game_shooter_highscore_display(); break;

@@ -33,6 +33,16 @@ static bool check_player_pixel_collision(int bullet_x, int bullet_y) {
 }
 
 void game_physics_update() {
+	// 0. Update Stars (Parallax Background)
+	for (int i = 0; i < MAX_STARS; i++) {
+		g_stars[i].y += g_stars[i].speed;
+		if (g_stars[i].y >= 64) {
+			g_stars[i].y = 0;
+			g_stars[i].x = rand() % 128;
+			g_stars[i].speed = (rand() % 2) + 1;
+		}
+	}
+
 	// 1. Check collisions FIRST, then update bullet movement
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		if (g_bullets[i].active) {
@@ -66,7 +76,7 @@ void game_physics_update() {
 							int damage = (g_player_super_gun_timer > 0) ? 3 : 1;
 							g_enemies[e].hp -= damage;
 							g_enemies[e].blink_timer = 22;
-							if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_BANG);
+							if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_CLICK);
 							if (g_enemies[e].hp <= 0) {
 								g_enemies[e].active = false;
 								g_score += (g_enemies[e].type == 4) ? 100 : 10;
@@ -174,7 +184,7 @@ void game_physics_update() {
 		if (g_powerups[p].active) {
 			if (check_collision(g_powerups[p].x, g_powerups[p].y, 8, 8, g_player_x, 54, 8, 8)) {
 				g_powerups[p].active = false;
-				if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_CLICK);
+				if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_BANG);
 				
 				if (g_powerups[p].type == POWERUP_TYPE_SUPER_GUN) {
 					g_player_super_gun_timer = 200; // 10 seconds (20 ticks per second)

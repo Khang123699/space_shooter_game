@@ -102,8 +102,19 @@ static void draw_bullets() {
 
 // Render Main Gameplay UI (player ship, UI bar, entities)
 void game_shooter_playing_display() {
+	// Draw Parallax Stars
+	for (int i = 0; i < MAX_STARS; i++) {
+		view_render.drawPixel(g_stars[i].x, g_stars[i].y, WHITE);
+	}
+
 	if (g_player_blink % 2 == 0) {
 		view_render.drawBitmap(g_player_x, 54, icon_player, 8, 8, WHITE);
+		// Draw exhaust flame animation
+		if ((g_tick_count / 2) % 2 == 0) {
+			view_render.drawBitmap(g_player_x, 62, icon_flame1, 8, 8, WHITE);
+		} else {
+			view_render.drawBitmap(g_player_x, 62, icon_flame2, 8, 8, WHITE);
+		}
 	}
 	
 	if (g_player_shield_timer > 0) {

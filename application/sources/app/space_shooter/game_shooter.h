@@ -7,6 +7,7 @@
 #define MAX_BULLETS 20
 #define MAX_EXPLOSIONS 5
 #define MAX_POWERUPS 3
+#define MAX_STARS 20
 
 #define POWERUP_TYPE_SUPER_GUN 1
 #define POWERUP_TYPE_SHIELD    2
@@ -23,8 +24,15 @@ typedef struct { int8_t x, y; int8_t hp; uint8_t type; bool active; int8_t blink
 typedef struct { int8_t x, y; int8_t timer; bool active; } explosion_t;
 typedef struct { int8_t x, y; uint8_t type; bool active; } powerup_t;
 
+typedef struct {
+	int8_t x;
+	int8_t y;
+	int8_t speed;
+} star_t;
+
 // Define states for the game menu and play flow
 typedef enum {
+	GAME_STATE_TITLE,
 	GAME_STATE_MENU,
 	GAME_STATE_SETTING,
 	GAME_STATE_HIGH_SCORE,
@@ -54,6 +62,7 @@ extern enemy_t g_enemies[];
 extern bullet_t g_bullets[];
 extern explosion_t g_explosions[];
 extern powerup_t g_powerups[];
+extern star_t g_stars[MAX_STARS];
 extern uint8_t g_stage;
 extern int8_t g_transition_timer;
 extern uint16_t g_tick_count;

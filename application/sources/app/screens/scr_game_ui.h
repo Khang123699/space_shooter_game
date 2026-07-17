@@ -7,6 +7,7 @@ extern uint8_t g_new_high_score_rank;
 extern uint8_t g_gameover_anim_frame;
 
 // View Prototypes
+void game_shooter_title_display();
 void game_shooter_menu_display();
 void game_shooter_setting_display();
 void game_shooter_highscore_display();
@@ -14,7 +15,8 @@ void game_shooter_playing_display();
 void game_shooter_gameover_display();
 void game_shooter_score_display();
 
-// Handle Prototypes
+// Input Handlers
+void handle_ui_title_input(ak_msg_t *msg);
 void handle_ui_menu_input(ak_msg_t *msg);
 void handle_ui_setting_input(ak_msg_t *msg);
 void handle_ui_highscore_input(ak_msg_t *msg);

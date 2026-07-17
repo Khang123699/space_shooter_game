@@ -5,6 +5,13 @@
 #include "timer.h"
 #include "task_list.h"
 
+// Handle input for Title Screen
+void handle_ui_title_input(ak_msg_t *msg) {
+	if (msg->sig == AC_DISPLAY_BUTTON_MODE_PRESSED) {
+		g_game_state = GAME_STATE_MENU;
+	}
+}
+
 // Handle input for Main Menu
 void handle_ui_menu_input(ak_msg_t *msg) {
 	switch (msg->sig) {
