@@ -241,8 +241,6 @@ void Adafruit_oled_drv::startDataSequence() {
 void Adafruit_oled_drv::update() {
 #if defined(SH1106_DRIVER_EN)
 	const byte pageCount = HEIGHT >> 3;
-	const byte chunkCount = 8;
-	const byte chunkWidth = 132 >> 3;
 	const byte rowOffset = 0;
 	const byte colOffset = OLED_COL_OFFSET;
 	int p = 0;
@@ -256,13 +254,11 @@ void Adafruit_oled_drv::update() {
 		writeCommand(colOffset & 0x0F);
 		writeCommand(0x10 | (colOffset >> 4));
 
-		for (byte chunk = 0; chunk < chunkCount; chunk++) {
-			startDataSequence();
-			for (byte col = 0; col < chunkWidth; col++, p++) {
-				writeByte(m_pFramebuffer[p]);
-			}
-			stopIIC();
+		startDataSequence();
+		for (byte col = 0; col < WIDTH; col++, p++) {
+			writeByte(m_pFramebuffer[p]);
 		}
+		stopIIC();
 	}
 
 #elif defined(SSD1306_DRIVER_EN)
