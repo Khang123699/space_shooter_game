@@ -89,15 +89,33 @@ void game_enemy_update() {
 			if (g_enemies[e].type == 6) {
 				// Spawn an enemy every 6 seconds (120 ticks)
 				if (g_tick_count > 0 && g_tick_count % 120 == 0) {
-					for (int ne = 0; ne < MAX_ENEMIES; ne++) {
-						if (!g_enemies[ne].active) {
-							g_enemies[ne].active = true;
-							g_enemies[ne].type = 1; // Spawn a basic 1-HP enemy
-							g_enemies[ne].hp = 1;
-							g_enemies[ne].blink_timer = 0;
-							g_enemies[ne].x = g_enemies[e].x + 4; // Center the spawn
-							g_enemies[ne].y = g_enemies[e].y + 8; // Right below carrier
-							break;
+					int spawn_x = g_enemies[e].x + 4; // Center the spawn
+					int spawn_y = g_enemies[e].y + 12; // Next row down
+					
+					// Check if space below is clear
+					bool space_clear = true;
+					for (int c_e = 0; c_e < MAX_ENEMIES; c_e++) {
+						if (g_enemies[c_e].active && c_e != e) {
+							int ew2 = (g_enemies[c_e].type >= 4) ? 16 : 8;
+							if (spawn_x < g_enemies[c_e].x + ew2 && spawn_x + 8 > g_enemies[c_e].x &&
+								spawn_y < g_enemies[c_e].y + 8 && spawn_y + 8 > g_enemies[c_e].y) {
+								space_clear = false;
+								break;
+							}
+						}
+					}
+					
+					if (space_clear) {
+						for (int ne = 0; ne < MAX_ENEMIES; ne++) {
+							if (!g_enemies[ne].active) {
+								g_enemies[ne].active = true;
+								g_enemies[ne].type = 1; // Spawn a basic 1-HP enemy
+								g_enemies[ne].hp = 1;
+								g_enemies[ne].blink_timer = 0;
+								g_enemies[ne].x = spawn_x;
+								g_enemies[ne].y = spawn_y;
+								break;
+							}
 						}
 					}
 				}

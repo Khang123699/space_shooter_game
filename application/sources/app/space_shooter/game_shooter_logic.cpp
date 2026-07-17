@@ -43,6 +43,7 @@ void game_logic_init() {
 	memset(g_bullets, 0, sizeof(g_bullets));
 	memset(g_explosions, 0, sizeof(g_explosions));
 	memset(g_powerups, 0, sizeof(g_powerups));
+	memset(g_enemies, 0, sizeof(g_enemies));
 	game_enemy_spawn();
 }
 
