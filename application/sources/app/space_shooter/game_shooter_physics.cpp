@@ -63,7 +63,7 @@ void game_physics_update() {
 						// Check AABB collision between bullet and enemy
 						if (check_collision(g_bullets[i].x, g_bullets[i].y, 1, 4, g_enemies[e].x, g_enemies[e].y, ew, eh)) {
 							g_bullets[i].active = false;
-							int damage = (g_player_super_gun_timer > 0) ? 2 : 1;
+							int damage = (g_player_super_gun_timer > 0) ? 3 : 1;
 							g_enemies[e].hp -= damage;
 							g_enemies[e].blink_timer = 22;
 							if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_BANG);
@@ -106,9 +106,9 @@ void game_physics_update() {
 			g_bullets[i].x += g_bullets[i].vx;
 			if (g_bullets[i].is_enemy) {
 				int drop = 1;
-				if (g_game_data.difficulty == 2) drop = 2;
+				if (g_game_data.difficulty == 2 || g_stage >= 10) drop = 2; // Capped at 2px/frame
 				
-				bool move_enemy_bullet = (g_game_data.difficulty > 0) || (g_tick_count % 2 == 0);
+				bool move_enemy_bullet = (g_game_data.difficulty > 0) || (g_stage > 3) || (g_tick_count % 2 == 0);
 				
 				if (move_enemy_bullet) {
 					g_bullets[i].y += drop;

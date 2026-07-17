@@ -123,20 +123,45 @@ void game_shooter_playing_display() {
 	view_render.drawLine(0, 10, 127, 10, WHITE);
 	view_render.setTextSize(1);
 	
-	view_render.setCursor(2, 2);
-	view_render.print("S:");
+	view_render.setCursor(0, 2);
 	char temp_sc[12];
 	xsprintf(temp_sc, "%u", (unsigned int)g_score);
 	view_render.print(temp_sc);
 	
-	view_render.setCursor(50, 2);
-	view_render.print("Lv:");
+	view_render.setCursor(30, 2);
+	view_render.print("L");
 	char temp_lv[12];
 	xsprintf(temp_lv, "%u", (unsigned int)g_stage);
 	view_render.print(temp_lv);
 	
 	for (int i = 0; i < g_lives; i++) {
-		view_render.drawBitmap(128 - 10 - i * 10, 1, icon_heart, 8, 8, WHITE);
+		view_render.drawBitmap(128 - 9 - i * 9, 1, icon_heart, 8, 8, WHITE);
+	}
+	
+	int buff_x = 55;
+	if (g_player_super_gun_timer > 0) {
+		bool draw_gun = true;
+		if (g_player_super_gun_timer > 160) draw_gun = (g_player_super_gun_timer % 6 < 3); // Blink fast (first 2s)
+		else if (g_player_super_gun_timer <= 60) draw_gun = (g_player_super_gun_timer % 10 < 5); // Blink slow (last 3s)
+		
+		if (draw_gun) {
+			view_render.drawBitmap(buff_x, 1, icon_item_dual, 8, 8, WHITE);
+			view_render.setCursor(buff_x + 9, 2);
+			view_render.print((g_player_super_gun_timer + 19) / 20); 
+		}
+		buff_x += 22;
+	}
+	
+	if (g_player_shield_timer > 0) {
+		bool draw_shld = true;
+		if (g_player_shield_timer > 160) draw_shld = (g_player_shield_timer % 6 < 3);
+		else if (g_player_shield_timer <= 60) draw_shld = (g_player_shield_timer % 10 < 5);
+		
+		if (draw_shld) {
+			view_render.drawBitmap(buff_x, 1, icon_item_shield, 8, 8, WHITE);
+			view_render.setCursor(buff_x + 9, 2);
+			view_render.print((g_player_shield_timer + 19) / 20);
+		}
 	}
 	
 	if (g_transition_timer > 0) {
