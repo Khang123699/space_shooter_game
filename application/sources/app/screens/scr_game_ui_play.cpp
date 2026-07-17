@@ -49,7 +49,7 @@ static void draw_enemies() {
 static void draw_powerups() {
 	for (int p = 0; p < MAX_POWERUPS; p++) {
 		if (g_powerups[p].active) {
-			if (g_powerups[p].type == POWERUP_TYPE_DUAL_SHOT) {
+			if (g_powerups[p].type == POWERUP_TYPE_SUPER_GUN) {
 				view_render.drawBitmap(g_powerups[p].x, g_powerups[p].y, icon_item_dual, 8, 8, WHITE);
 			} else if (g_powerups[p].type == POWERUP_TYPE_SHIELD) {
 				view_render.drawBitmap(g_powerups[p].x, g_powerups[p].y, icon_item_shield, 8, 8, WHITE);
@@ -87,8 +87,15 @@ static void draw_explosions() {
 static void draw_bullets() {
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		if (g_bullets[i].active) {
-			if (g_bullets[i].is_enemy) view_render.fillRect(g_bullets[i].x, g_bullets[i].y, 2, 4, WHITE);
-			else view_render.drawLine(g_bullets[i].x, g_bullets[i].y, g_bullets[i].x, g_bullets[i].y + 3, WHITE);
+			if (g_bullets[i].is_enemy) {
+				view_render.fillRect(g_bullets[i].x, g_bullets[i].y, 2, 4, WHITE);
+			} else {
+				if (g_player_super_gun_timer > 0) {
+					view_render.fillRect(g_bullets[i].x - 1, g_bullets[i].y, 3, 4, WHITE);
+				} else {
+					view_render.drawLine(g_bullets[i].x, g_bullets[i].y, g_bullets[i].x, g_bullets[i].y + 3, WHITE);
+				}
+			}
 		}
 	}
 }
@@ -99,8 +106,11 @@ void game_shooter_playing_display() {
 		view_render.drawBitmap(g_player_x, 54, icon_player, 8, 8, WHITE);
 	}
 	
-	if (g_player_shield) {
-		view_render.drawCircle(g_player_x + 3, 54 + 4, 6, WHITE);
+	if (g_player_shield_timer > 0) {
+		// Blinking effect when shield is about to expire (< 3 seconds remaining)
+		if (g_player_shield_timer > 60 || (g_player_shield_timer % 10 < 5)) {
+			view_render.drawCircle(g_player_x + 3, 54 + 4, 6, WHITE);
+		}
 	}
 	
 	draw_powerups();

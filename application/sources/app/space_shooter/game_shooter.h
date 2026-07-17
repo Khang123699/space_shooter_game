@@ -8,7 +8,7 @@
 #define MAX_EXPLOSIONS 5
 #define MAX_POWERUPS 3
 
-#define POWERUP_TYPE_DUAL_SHOT 1
+#define POWERUP_TYPE_SUPER_GUN 1
 #define POWERUP_TYPE_SHIELD    2
 #define POWERUP_TYPE_NUKE      3
 
@@ -46,8 +46,8 @@ extern uint8_t g_gameover_anim_frame;
 
 extern int16_t g_player_x;
 extern uint8_t g_player_blink;
-extern uint16_t g_player_dual_shot_timer;
-extern bool g_player_shield;
+extern uint16_t g_player_super_gun_timer;
+extern uint16_t g_player_shield_timer;
 extern uint32_t g_score;
 extern uint8_t g_lives;
 extern enemy_t g_enemies[];

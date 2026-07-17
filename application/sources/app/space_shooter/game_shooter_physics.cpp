@@ -42,9 +42,9 @@ void game_physics_update() {
 				// Hit player: Check Pixel-Perfect collision
 				if (g_player_blink == 0 && check_player_pixel_collision(g_bullets[i].x, g_bullets[i].y)) {
 					g_bullets[i].active = false;
-					if (g_player_shield) {
-						g_player_shield = false;
-						g_player_dual_shot_timer = 0;
+					if (g_player_shield_timer > 0) {
+						g_player_shield_timer = 0;
+						g_player_super_gun_timer = 0;
 						g_player_blink = 34;
 					} else {
 						g_lives--;
@@ -63,7 +63,8 @@ void game_physics_update() {
 						// Check AABB collision between bullet and enemy
 						if (check_collision(g_bullets[i].x, g_bullets[i].y, 1, 4, g_enemies[e].x, g_enemies[e].y, ew, eh)) {
 							g_bullets[i].active = false;
-							g_enemies[e].hp--;
+							int damage = (g_player_super_gun_timer > 0) ? 2 : 1;
+							g_enemies[e].hp -= damage;
 							g_enemies[e].blink_timer = 22;
 							if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_BANG);
 							if (g_enemies[e].hp <= 0) {
@@ -138,18 +139,16 @@ void game_physics_update() {
 			int ew = (g_enemies[e].type >= 4) ? 16 : 8;
 			int eh = (g_enemies[e].type == 4) ? 16 : 8;
 			
-			bool hit_player = (g_player_blink == 0 &&
-							   g_enemies[e].x < g_player_x + 8 && g_enemies[e].x + ew > g_player_x &&
-							   g_enemies[e].y < 54 + 8 && g_enemies[e].y + eh > 54);
+			bool hit_player = (g_player_blink == 0 && check_collision(g_enemies[e].x, g_enemies[e].y, ew, eh, g_player_x, 54, 8, 8));
 			
 			if (g_enemies[e].y > 60 || hit_player) {
 				g_enemies[e].active = false;
 				
-				if (hit_player && g_player_shield) {
-					g_player_shield = false;
-					g_player_dual_shot_timer = 0;
+				if (hit_player && g_player_shield_timer > 0) {
+					g_player_shield_timer = 0;
+					g_player_super_gun_timer = 0;
 					g_player_blink = 34;
-				} else {
+				} else if (hit_player) {
 					g_lives--;
 					g_player_blink = 34;
 				}
@@ -164,8 +163,8 @@ void game_physics_update() {
 							break;
 						}
 					}
+					if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
 				}
-				if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
 			}
 		}
 	}
@@ -173,14 +172,14 @@ void game_physics_update() {
 	// 4. Powerup collision with player
 	for (int p = 0; p < MAX_POWERUPS; p++) {
 		if (g_powerups[p].active) {
-			if (check_collision(g_powerups[p].x, g_powerups[p].y, 7, 7, g_player_x, 54, 8, 8)) {
+			if (check_collision(g_powerups[p].x, g_powerups[p].y, 8, 8, g_player_x, 54, 8, 8)) {
 				g_powerups[p].active = false;
 				if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_CLICK);
 				
-				if (g_powerups[p].type == POWERUP_TYPE_DUAL_SHOT) {
-					g_player_dual_shot_timer = 300; // 15 seconds (20 ticks per second)
+				if (g_powerups[p].type == POWERUP_TYPE_SUPER_GUN) {
+					g_player_super_gun_timer = 200; // 10 seconds (20 ticks per second)
 				} else if (g_powerups[p].type == POWERUP_TYPE_SHIELD) {
-					g_player_shield = true;
+					g_player_shield_timer = 200; // 10 seconds
 				} else if (g_powerups[p].type == POWERUP_TYPE_NUKE) {
 					// Deal 1 damage to all enemies on screen
 					for (int e = 0; e < MAX_ENEMIES; e++) {

@@ -14,8 +14,8 @@ const char* g_encouragement_text = "Good Job!";
 game_state_t g_game_state = GAME_STATE_MENU;
 int16_t g_player_x = 60;
 uint8_t g_player_blink = 0;
-uint16_t g_player_dual_shot_timer = 0;
-bool g_player_shield = false;
+uint16_t g_player_super_gun_timer = 0;
+uint16_t g_player_shield_timer = 0;
 bool g_render_pending = false;
 uint32_t g_score = 0;
 uint8_t g_lives = 3;
@@ -38,8 +38,8 @@ void game_logic_init() {
 	g_stage = 1;
 	g_transition_timer = 0;
 	enemy_dir = 1;
-	g_player_dual_shot_timer = 0;
-	g_player_shield = false;
+	g_player_super_gun_timer = 0;
+	g_player_shield_timer = 0;
 	memset(g_bullets, 0, sizeof(g_bullets));
 	memset(g_explosions, 0, sizeof(g_explosions));
 	memset(g_powerups, 0, sizeof(g_powerups));
@@ -50,7 +50,8 @@ void game_logic_init() {
 // Main update loop for game logic
 void game_logic_update() {
 	if (g_player_blink > 0) g_player_blink--;
-	if (g_player_dual_shot_timer > 0) g_player_dual_shot_timer--;
+	if (g_player_super_gun_timer > 0) g_player_super_gun_timer--;
+	if (g_player_shield_timer > 0) g_player_shield_timer--;
 	
 	// Update enemy blink timers
 	for (int e = 0; e < MAX_ENEMIES; e++) {
