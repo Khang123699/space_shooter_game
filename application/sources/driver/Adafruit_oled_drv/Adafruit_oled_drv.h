@@ -6,6 +6,8 @@
 
 #if defined (SH1106_DRIVER_EN)
 #define OLED_COL_OFFSET 2
+#elif defined (SSD1309_DRIVER_EN)
+#define OLED_COL_OFFSET 2
 #else
 #define OLED_COL_OFFSET 0
 #endif

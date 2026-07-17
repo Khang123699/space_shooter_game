@@ -281,15 +281,19 @@ void Adafruit_oled_drv::update() {
 
 #elif defined(SSD1309_DRIVER_EN)
 	unsigned int fbIndex = 0;
+	const unsigned char colOffset = OLED_COL_OFFSET;
 	for (unsigned int page = 0; page < MAXROW; page++) {
 		writeCommand(0xB0 + page);
 		writeCommand(0x00);
 		writeCommand(0x10);
 
 		startDataSequence();
+		unsigned int baseIndex = fbIndex;
 		for (unsigned int col = 0; col < WIDTH; col++) {
-			writeByte(m_pFramebuffer[fbIndex++]);
+			unsigned int shifted_col = (col + colOffset) % WIDTH;
+			writeByte(m_pFramebuffer[baseIndex + shifted_col]);
 		}
+		fbIndex += WIDTH;
 		stopIIC();
 	}
 #else
@@ -310,6 +314,7 @@ void Adafruit_oled_drv::updateRow(int rowID) {
 		const unsigned char lowerCol = SSD1306_SET_LOW_COLUMN;
 		const unsigned char higherCol = SSD1306_SET_HIGH_COLUMN;
 #elif defined(SSD1309_DRIVER_EN)
+		const unsigned char colOffset = OLED_COL_OFFSET;
 		const unsigned char lowerCol = 0x00;
 		const unsigned char higherCol = 0x10;
 #else
@@ -329,10 +334,18 @@ void Adafruit_oled_drv::updateRow(int rowID) {
 
 		// start painting the buffer.
 		startDataSequence();
+#if defined(SSD1309_DRIVER_EN)
+		for (x = 0; x < WIDTH; x++) {
+			unsigned char shifted_x = (x + colOffset) % WIDTH;
+			index = rowID * WIDTH + shifted_x;
+			writeByte(m_pFramebuffer[index]);
+		}
+#else
 		for (x = 0; x < WIDTH; x++) {
 			index = rowID * WIDTH + x;
 			writeByte(m_pFramebuffer[index]);
 		}
+#endif
 		stopIIC();
 	}
 }
