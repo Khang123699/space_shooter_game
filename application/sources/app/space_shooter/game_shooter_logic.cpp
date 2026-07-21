@@ -66,10 +66,10 @@ void game_logic_update() {
 	
 	// Smooth sliding movement check
 	if (btn_up.read() == BUTTON_HW_STATE_PRESSED) {
-		game_player_move(-2); // Left
+		game_player_move(2); // Left
 	}
 	if (btn_down.read() == BUTTON_HW_STATE_PRESSED) {
-		game_player_move(2); // Right
+		game_player_move(-2); // Right
 	}
 	
 	// Update enemy blink timers

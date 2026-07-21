@@ -13,14 +13,6 @@ void game_shooter_task(ak_msg_t* msg) {
 			timer_set(AC_TASK_GAME_SHOOTER_ID, AC_GAME_UPDATE_TICK, 50, TIMER_PERIODIC);
 			break;
 			
-		case AC_GAME_BTN_UP:
-			// Handled smoothly in game_logic_update() via hardware button polling
-			break;
-			
-		case AC_GAME_BTN_DOWN:
-			// Handled smoothly in game_logic_update() via hardware button polling
-			break;
-			
 		case AC_GAME_BTN_MODE:
 			// Player shoots a bullet
 			game_player_shoot();
