@@ -49,7 +49,7 @@ static void draw_enemies() {
 static void draw_powerups() {
 	for (int p = 0; p < MAX_POWERUPS; p++) {
 		if (g_powerups[p].active) {
-			if (g_powerups[p].type == POWERUP_TYPE_SUPER_GUN) {
+			if (g_powerups[p].type == POWERUP_TYPE_SUPER_BULLET) {
 				view_render.drawBitmap(g_powerups[p].x, g_powerups[p].y, icon_item_super, 8, 8, WHITE);
 			} else if (g_powerups[p].type == POWERUP_TYPE_SHIELD) {
 				view_render.drawBitmap(g_powerups[p].x, g_powerups[p].y, icon_item_shield, 8, 8, WHITE);
@@ -90,7 +90,7 @@ static void draw_bullets() {
 			if (g_bullets[i].is_enemy) {
 				view_render.fillRect(g_bullets[i].x, g_bullets[i].y, 2, 4, WHITE);
 			} else {
-				if (g_player_super_gun_timer > 0) {
+				if (g_player_super_bullet_timer > 0) {
 					view_render.fillRect(g_bullets[i].x - 1, g_bullets[i].y, 3, 4, WHITE);
 				} else {
 					view_render.drawLine(g_bullets[i].x, g_bullets[i].y, g_bullets[i].x, g_bullets[i].y + 3, WHITE);
@@ -150,15 +150,15 @@ void game_shooter_playing_display() {
 	}
 	
 	int buff_x = 55;
-	if (g_player_super_gun_timer > 0) {
+	if (g_player_super_bullet_timer > 0) {
 		bool draw_gun = true;
-		if (g_player_super_gun_timer > 160) draw_gun = (g_player_super_gun_timer % 6 < 3); // Blink fast (first 2s)
-		else if (g_player_super_gun_timer <= 60) draw_gun = (g_player_super_gun_timer % 10 < 5); // Blink slow (last 3s)
+		if (g_player_super_bullet_timer > 160) draw_gun = (g_player_super_bullet_timer % 6 < 3); // Blink fast (first 2s)
+		else if (g_player_super_bullet_timer <= 60) draw_gun = (g_player_super_bullet_timer % 10 < 5); // Blink slow (last 3s)
 		
 		if (draw_gun) {
 			view_render.drawBitmap(buff_x, 1, icon_item_super, 8, 8, WHITE);
 			view_render.setCursor(buff_x + 9, 2);
-			view_render.print((g_player_super_gun_timer + 19) / 20); 
+			view_render.print((g_player_super_bullet_timer + 19) / 20); 
 		}
 		buff_x += 22;
 	}

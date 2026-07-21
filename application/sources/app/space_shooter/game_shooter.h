@@ -9,7 +9,7 @@
 #define MAX_POWERUPS 3
 #define MAX_STARS 20
 
-#define POWERUP_TYPE_SUPER_GUN 1
+#define POWERUP_TYPE_SUPER_BULLET 1
 #define POWERUP_TYPE_SHIELD    2
 #define POWERUP_TYPE_NUKE      3
 
@@ -54,7 +54,7 @@ extern uint8_t g_gameover_anim_frame;
 
 extern int16_t g_player_x;
 extern uint8_t g_player_blink;
-extern uint16_t g_player_super_gun_timer;
+extern uint16_t g_player_super_bullet_timer;
 extern uint16_t g_player_shield_timer;
 extern uint32_t g_score;
 extern uint8_t g_lives;

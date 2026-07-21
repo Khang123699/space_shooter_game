@@ -24,9 +24,10 @@ Space Shooter is an embedded software project developed for the AK Embedded Base
 
 This repository provides practical examples of:
 
-- **State Machine Integration:** Managing game states through discrete logic.
-- **Event-Driven Architecture:** Processing inputs asynchronously via signals and messages.
-- **Resource Management:** Scheduling UI rendering and physics calculations under strict hardware constraints.
+- **System design:** Modelling complex logic flows with UML.
+- **Process management:** Coordinating cooperative Tasks and scheduling them efficiently.
+- **Communication:** Using Signals, Timers, and Messages to react in real time.
+- **Control logic:** Building robust state machines for the player, the enemies, and the overall match progression.
 
 ## 2. Hardware Platform
 
@@ -57,40 +58,67 @@ Flash Partitions Layout
 => Space Shooter Firmware
 ```
 
+**MCU Naming Convention:**
+
+| Part | Meaning |
+|---|---|
+| `STM32` | STMicroelectronics 32-bit MCU family. |
+| `L` | Low-power series. |
+| `151` | STM32L151 product line. |
+| `C` | 48-pin package. |
+| `B` | 128 KB Flash memory. |
+| `T` | LQFP package. |
+| `6` | Industrial temperature grade. |
+
+<table align="center">
+  <tr>
+    <td align="center"><img src="hardware/images/board-view-top-bottom.png" width="900"/></td>
+  </tr>
+</table>
+<p align="center"><strong><em>Figure 2:</em></strong> Board view Top + Bottom </p>
+
 ## 3. Game Mechanics and Objects
 
 The application boots into a **Title Screen**, progressing to a **Main Menu** containing the following options:
 
 - **Play:** Initialize a new game session.
-- **Setting:** Adjust system parameters (e.g., Audio).
-- **Rank:** Display the highest recorded score.
-- **Exit:** Terminate the application.
+- **Setting:** Adjust system parameters (Sound, Difficulty).
+- **High score:** Display the highest recorded scores.
 
 ### Defined Entities:
 
-| Entity | Functional Description |
-| :--- |:--- |
-| **Player** | The user-controlled unit. Supports horizontal translation (Left/Right) and weapon discharge. |
-| **Bullet** | Projectiles instantiated by either the Player or the Boss. Features simple vertical translation and AABB collision detection. |
-| **Enemy** | Computer-controlled units spawned at the top boundary. They traverse downward using predefined algorithms (Linear, Zigzag, Sine). |
-| **Boss** | A high-HP entity that spawns based on score thresholds. Features advanced horizontal movement and multi-projectile attacks. |
-| **Powerup** | Dropped conditionally upon Enemy destruction. Applies temporary state modifiers to the Player (Shield, Multi-shot, Nuke). |
-| **Explosion** | A transient visual effect rendered at the coordinates of a destroyed entity. |
+| Bitmap | Entity | Functional Description |
+| :---: | :--- |:--- |
+| <img src="resources/images/bitmap/icon_player.png" width="100"/><br><img src="resources/images/bitmap/flame_anim.gif" width="100"/> | **Player** | The user-controlled unit and its animated engine exhaust. Supports horizontal translation (Left/Right) and weapon discharge. |
+| <img src="resources/images/bitmap/img_bullet.png" width="100"/> | **Bullet** | Projectiles instantiated by either the Player or the Boss. Features simple vertical translation and AABB collision detection. |
+| <img src="resources/images/bitmap/icon_enemy1.png" width="100"/><br><img src="resources/images/bitmap/icon_enemy2.png" width="100"/><br><img src="resources/images/bitmap/icon_enemy3.png" width="100"/><br><img src="resources/images/bitmap/bmp_enemy_spread.png" width="100"/><br><img src="resources/images/bitmap/bmp_enemy_carrier.png" width="100"/> | **Enemy** | Computer-controlled units spawned in a grid format. They traverse horizontally and drop downward upon hitting the screen edges (Space Invaders style). Includes specialized types like Carriers and Spread Shooters. |
+| <img src="resources/images/bitmap/bmp_boss.png" width="100"/> | **Boss** | A high-HP entity that spawns every 3 stages. Features horizontal movement, high health, and multi-projectile burst attacks. |
+| <img src="resources/images/bitmap/icon_item_super.png" width="100"/><br><img src="resources/images/bitmap/icon_item_shield.png" width="100"/><br><img src="resources/images/bitmap/icon_item_nuke.png" width="100"/> | **Powerup** | Dropped conditionally upon Enemy destruction. Applies temporary state modifiers to the Player (Super bullet, Shield, Nuke). |
+| <img src="resources/images/bitmap/explosion_anim.gif" width="100"/> | **Explosion** | A transient visual effect rendered at the coordinates of a destroyed entity using particle animation (drawing API). |
+| <img src="resources/images/bitmap/icon_play.png" width="100"/><br><img src="resources/images/bitmap/icon_setting.png" width="100"/><br><img src="resources/images/bitmap/icon_trophy.png" width="100"/><br><img src="resources/images/bitmap/icon_menu.png" width="100"/><br><img src="resources/images/bitmap/icon_heart.png" width="100"/> | **UI Elements** | Assorted UI icons (Play, Settings, High Score, Menu, Hearts) used in menus and the HUD. |
 
-### Gameplay Mechanics:
+### How to Play & Game Mechanics:
 
-- **Controls:** Navigate the Player unit using the **[Up]** and **[Down]** hardware buttons. Trigger the primary weapon using the **[Mode]** button.
-- **Objective:** Maximize the score integer by destroying Enemy units while avoiding collision with hostile entities or projectiles.
-- **Scaling Difficulty:** The spawn rate and translation speed of Enemy units increment dynamically as the session persists.
-- **Termination:** The game session terminates when the Player's life counter reaches zero.
+- **Controls:** Navigate the Player unit horizontally (Left/Right) using the **[Up]** and **[Down]** hardware buttons. Trigger the primary weapon using the **[Mode]** button.
+- **Scoring:** Each enemy destroyed is worth points based on its type. The running score and current lives are shown at the top of the screen.
+- **Waves & Difficulty:** As stages progress, the game dynamically spawns more enemies and increases their movement speed. The starting difficulty (EASY, MED, HARD) can be customized in the **Setting** menu.
+- **Powerups:** Destroying enemies has a chance to drop powerups that provide temporary invincibility shields, weapon upgrades (super bullet), or a screen-clearing nuke.
+- **Boss Fights:** Every 3 stages, a powerful Boss ship appears, requiring the player to dodge multi-projectile burst attacks and chip away at its high health pool.
+- **Game Over:** When the Player's life counter reaches zero, the match ends and the score is saved. The player can then view the top 3 highest scores in the **High score** menu.
 
 ## 4. Technical Architecture
 
 > **Reference:** For comprehensive documentation on system execution flows and object interaction, refer to [Runtime Signal Processing](docs/04-design-sequence-runtime.md) and [Game Object Sequences](docs/03-design-sequence-object.md).
 
-## Support
-
+## 5. Contact & Support
 ``` Note
-Thank you for reviewing the Space Shooter project.
-For technical inquiries or bug reports, please open an issue in the repository.
+Thank you for visiting this repository.
+If you have any questions, suggestions, or feedback about this project or firmware development, feel free to contact me directly.
 ```
+
+<a href="https://github.com/Khang123699">
+  <img src="https://img.shields.io/badge/GitHub-Khang123699-181717?style=for-the-badge&logo=github&logoColor=white"/>
+</a>
+<a href="https://www.linkedin.com/in/khang-nguyen-nhat/">
+  <img src="https://img.shields.io/badge/LinkedIn-Nguyen%20Nhat%20Khang-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
+</a>

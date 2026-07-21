@@ -54,7 +54,7 @@ void game_physics_update() {
 					g_bullets[i].active = false;
 					if (g_player_shield_timer > 0) {
 						g_player_shield_timer = 0;
-						g_player_super_gun_timer = 0;
+						g_player_super_bullet_timer = 0;
 						g_player_blink = 34;
 					} else {
 						g_lives--;
@@ -73,7 +73,7 @@ void game_physics_update() {
 						// Check AABB collision between bullet and enemy
 						if (check_collision(g_bullets[i].x, g_bullets[i].y, 1, 4, g_enemies[e].x, g_enemies[e].y, ew, eh)) {
 							g_bullets[i].active = false;
-							int damage = (g_player_super_gun_timer > 0) ? 3 : 1;
+							int damage = (g_player_super_bullet_timer > 0) ? 3 : 1;
 							g_enemies[e].hp -= damage;
 							g_enemies[e].blink_timer = 22;
 							if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_CLICK);
@@ -156,7 +156,7 @@ void game_physics_update() {
 				
 				if (hit_player && g_player_shield_timer > 0) {
 					g_player_shield_timer = 0;
-					g_player_super_gun_timer = 0;
+					g_player_super_bullet_timer = 0;
 					g_player_blink = 34;
 				} else if (hit_player) {
 					g_lives--;
@@ -186,8 +186,8 @@ void game_physics_update() {
 				g_powerups[p].active = false;
 				if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_BANG);
 				
-				if (g_powerups[p].type == POWERUP_TYPE_SUPER_GUN) {
-					g_player_super_gun_timer = 200; // 10 seconds (20 ticks per second)
+				if (g_powerups[p].type == POWERUP_TYPE_SUPER_BULLET) {
+					g_player_super_bullet_timer = 200; // 10 seconds (20 ticks per second)
 				} else if (g_powerups[p].type == POWERUP_TYPE_SHIELD) {
 					g_player_shield_timer = 200; // 10 seconds
 				} else if (g_powerups[p].type == POWERUP_TYPE_NUKE) {
