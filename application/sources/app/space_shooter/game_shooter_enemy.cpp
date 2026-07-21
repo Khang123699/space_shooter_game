@@ -20,6 +20,8 @@ void game_enemy_spawn() {
 		g_enemies[0].blink_timer = 0;
 		g_enemies[0].x = 56;
 		g_enemies[0].y = 16;
+		g_enemies[0].state = BOSS_STATE_NORMAL;
+		g_enemies[0].timer = 0;
 		e = 1;
 	} else {
 		int rows = 3;
@@ -89,44 +91,118 @@ void game_enemy_update() {
 	if (move_threshold < 1) move_threshold = 1;
 	bool do_move = (enemy_move_ticks >= move_threshold);
 	
+	int boss_max_hp = 10 + ((g_stage / 3) - 1) * 5;
+
 	for (int e = 0; e < MAX_ENEMIES; e++) {
 		if (g_enemies[e].active) {
 			int ew = (g_enemies[e].type == 4 || g_enemies[e].type == 5 || g_enemies[e].type == 6) ? 16 : 8;
-			if (do_move) {
-				g_enemies[e].x += enemy_dir;
-				if (g_enemies[e].x <= 0 || g_enemies[e].x + ew >= 128) hit_edge = true;
-			}
 			
-			// Carrier Logic (Type 6)
-			if (g_enemies[e].type == 6) {
-				// Spawn an enemy every 6 seconds (120 ticks)
-				if (g_tick_count > 0 && g_tick_count % 120 == 0) {
-					int spawn_x = g_enemies[e].x + 4; // Center the spawn
-					int spawn_y = g_enemies[e].y + 12; // Next row down
-					
-					// Check if space below is clear
-					bool space_clear = true;
-					for (int c_e = 0; c_e < MAX_ENEMIES; c_e++) {
-						if (g_enemies[c_e].active && c_e != e) {
-							int ew2 = (g_enemies[c_e].type >= 4) ? 16 : 8;
-							if (spawn_x < g_enemies[c_e].x + ew2 && spawn_x + 8 > g_enemies[c_e].x &&
-								spawn_y < g_enemies[c_e].y + 8 && spawn_y + 8 > g_enemies[c_e].y) {
-								space_clear = false;
-								break;
-							}
+			// --- Boss (Type 4) Logic ---
+			if (g_enemies[e].type == 4) {
+				bool is_enraged = (g_enemies[e].hp <= boss_max_hp / 2);
+				
+				if (g_enemies[e].state == BOSS_STATE_NORMAL) {
+					// Normal move left/right
+					if (do_move || (is_enraged && enemy_move_ticks % (move_threshold > 1 ? move_threshold - 1 : 1) == 0)) {
+						g_enemies[e].x += enemy_dir;
+						if (g_enemies[e].x <= 0) {
+							g_enemies[e].x = 0;
+							hit_edge = true;
+						} else if (g_enemies[e].x + ew >= 128) {
+							g_enemies[e].x = 128 - ew;
+							hit_edge = true;
 						}
 					}
 					
-					if (space_clear) {
-						for (int ne = 0; ne < MAX_ENEMIES; ne++) {
+					// Random state transitions
+					if (g_tick_count > 0 && g_tick_count % 60 == 0) {
+						int r = rand() % 100;
+						if (r < 20) {
+							g_enemies[e].state = BOSS_STATE_DASH_CHARGE;
+							g_enemies[e].timer = 0;
+						} else if (r < 40) {
+							g_enemies[e].state = BOSS_STATE_SUMMON;
+							g_enemies[e].timer = 0;
+						}
+					}
+				} else if (g_enemies[e].state == BOSS_STATE_DASH_CHARGE) {
+					g_enemies[e].timer++;
+					g_enemies[e].blink_timer = 2; // Blink rapidly
+					if (g_enemies[e].timer >= 20) {
+						g_enemies[e].state = BOSS_STATE_DASH_DOWN;
+					}
+				} else if (g_enemies[e].state == BOSS_STATE_DASH_DOWN) {
+					g_enemies[e].y += 3;
+					if (g_enemies[e].y >= 40) {
+						g_enemies[e].state = BOSS_STATE_DASH_UP;
+					}
+				} else if (g_enemies[e].state == BOSS_STATE_DASH_UP) {
+					g_enemies[e].y -= 2;
+					if (g_enemies[e].y <= 16) {
+						g_enemies[e].y = 16;
+						g_enemies[e].state = BOSS_STATE_NORMAL;
+					}
+				} else if (g_enemies[e].state == BOSS_STATE_SUMMON) {
+					g_enemies[e].timer++;
+					g_enemies[e].blink_timer = 2;
+					if (g_enemies[e].timer >= 15) {
+						// Spawn 2 minions
+						int minions_spawned = 0;
+						for (int ne = 0; ne < MAX_ENEMIES && minions_spawned < 2; ne++) {
 							if (!g_enemies[ne].active) {
 								g_enemies[ne].active = true;
-								g_enemies[ne].type = 1; // Spawn a basic 1-HP enemy
+								g_enemies[ne].type = 1;
 								g_enemies[ne].hp = 1;
 								g_enemies[ne].blink_timer = 0;
-								g_enemies[ne].x = spawn_x;
-								g_enemies[ne].y = spawn_y;
-								break;
+								g_enemies[ne].x = g_enemies[e].x + (minions_spawned == 0 ? -12 : 20);
+								g_enemies[ne].y = g_enemies[e].y + 8;
+								if (g_enemies[ne].x < 0) g_enemies[ne].x = 0;
+								if (g_enemies[ne].x > 120) g_enemies[ne].x = 120;
+								minions_spawned++;
+							}
+						}
+						g_enemies[e].state = BOSS_STATE_NORMAL;
+					}
+				}
+			} 
+			// --- Normal Enemy Logic ---
+			else {
+				if (do_move) {
+					g_enemies[e].x += enemy_dir;
+					if (g_enemies[e].x <= 0 || g_enemies[e].x + ew >= 128) hit_edge = true;
+				}
+				
+				// Carrier Logic (Type 6)
+				if (g_enemies[e].type == 6) {
+					// Spawn an enemy every 6 seconds (120 ticks)
+					if (g_tick_count > 0 && g_tick_count % 120 == 0) {
+						int spawn_x = g_enemies[e].x + 4; // Center the spawn
+						int spawn_y = g_enemies[e].y + 12; // Next row down
+						
+						// Check if space below is clear
+						bool space_clear = true;
+						for (int c_e = 0; c_e < MAX_ENEMIES; c_e++) {
+							if (g_enemies[c_e].active && c_e != e) {
+								int ew2 = (g_enemies[c_e].type >= 4) ? 16 : 8;
+								if (spawn_x < g_enemies[c_e].x + ew2 && spawn_x + 8 > g_enemies[c_e].x &&
+									spawn_y < g_enemies[c_e].y + 8 && spawn_y + 8 > g_enemies[c_e].y) {
+									space_clear = false;
+									break;
+								}
+							}
+						}
+						
+						if (space_clear) {
+							for (int ne = 0; ne < MAX_ENEMIES; ne++) {
+								if (!g_enemies[ne].active) {
+									g_enemies[ne].active = true;
+									g_enemies[ne].type = 1; // Spawn a basic 1-HP enemy
+									g_enemies[ne].hp = 1;
+									g_enemies[ne].blink_timer = 0;
+									g_enemies[ne].x = spawn_x;
+									g_enemies[ne].y = spawn_y;
+									break;
+								}
 							}
 						}
 					}
@@ -134,11 +210,14 @@ void game_enemy_update() {
 			}
 			
 			// Enemy shoot
-			int shoot_chance;
+			int shoot_chance = 0;
 			if (g_enemies[e].type == 4) {
-				int boss_cycle = g_stage / 3;
-				// Base + difficulty + 5 for every boss cycle passed (no limit)
-				shoot_chance = 9 + (g_game_data.difficulty * 5) + ((boss_cycle - 1) * 5);
+				if (g_enemies[e].state == BOSS_STATE_NORMAL) {
+					int boss_cycle = g_stage / 3;
+					// Base + difficulty + 5 for every boss cycle passed (no limit)
+					shoot_chance = 9 + (g_game_data.difficulty * 5) + ((boss_cycle - 1) * 5);
+					if (g_enemies[e].hp <= boss_max_hp / 2) shoot_chance += 10; // Enrage bonus
+				}
 			} else if (g_enemies[e].type == 5) {
 				shoot_chance = 5 + g_game_data.difficulty * 2 + (g_stage / 2); // Spread shooter shoots more often
 			} else if (g_enemies[e].type == 6) {
@@ -148,14 +227,34 @@ void game_enemy_update() {
 			}
 			
 			if (shoot_chance > 0 && rand() % 1000 < shoot_chance) {
-				if (g_enemies[e].type == 4 || g_enemies[e].type == 5) {
-					// Triple shot burst for Boss and Spread Shooter
+				if (g_enemies[e].type == 4) {
+					bool is_enraged = (g_enemies[e].hp <= boss_max_hp / 2);
+					int max_b = is_enraged ? 5 : 3;
+					int bullets_spawned = 0;
+					for (int i = 0; i < MAX_BULLETS && bullets_spawned < max_b; i++) {
+						if (!g_bullets[i].active) {
+							g_bullets[i].active = true;
+							g_bullets[i].x = g_enemies[e].x + ew / 2;
+							g_bullets[i].y = g_enemies[e].y + 12;
+							g_bullets[i].is_enemy = true;
+							
+							if (bullets_spawned == 0) g_bullets[i].vx = 0;
+							else if (bullets_spawned == 1) g_bullets[i].vx = -1;
+							else if (bullets_spawned == 2) g_bullets[i].vx = 1;
+							else if (bullets_spawned == 3) g_bullets[i].vx = -2;
+							else if (bullets_spawned == 4) g_bullets[i].vx = 2;
+							
+							bullets_spawned++;
+						}
+					}
+				} else if (g_enemies[e].type == 5) {
+					// Triple shot burst for Spread Shooter
 					int bullets_spawned = 0;
 					for (int i = 0; i < MAX_BULLETS && bullets_spawned < 3; i++) {
 						if (!g_bullets[i].active) {
 							g_bullets[i].active = true;
 							g_bullets[i].x = g_enemies[e].x + ew / 2;
-							g_bullets[i].y = g_enemies[e].y + (g_enemies[e].type == 4 ? 12 : 8);
+							g_bullets[i].y = g_enemies[e].y + 8;
 							g_bullets[i].is_enemy = true;
 							
 							if (bullets_spawned == 0) g_bullets[i].vx = 0;
@@ -190,14 +289,22 @@ void game_enemy_update() {
 			
 			for (int e = 0; e < MAX_ENEMIES; e++) {
 				if (g_enemies[e].active) {
-					g_enemies[e].x += enemy_dir;
+					// Boss does NOT move based on normal enemy_dir edge hits while Dashing/Summoning
+					// But we still apply it for normal movement
+					if (g_enemies[e].type == 4) {
+						if (g_enemies[e].state == BOSS_STATE_NORMAL) {
+							g_enemies[e].x += enemy_dir;
+						}
+					} else {
+						g_enemies[e].x += enemy_dir;
+					}
 					
 					int edge_hits_required = (g_stage > 10) ? 1 : 2;
 					int drop_amount = 1 + (g_stage / 5);
 					if (drop_amount > 4) drop_amount = 4;
 					
 					if (edge_hit_count >= edge_hits_required) {
-						if (g_enemies[e].type != 6 && g_enemies[e].type != 5) { // Carrier (6) and Spread (5) never drop down
+						if (g_enemies[e].type != 6 && g_enemies[e].type != 5 && g_enemies[e].type != 4) { 
 							g_enemies[e].y += drop_amount;
 						}
 					}

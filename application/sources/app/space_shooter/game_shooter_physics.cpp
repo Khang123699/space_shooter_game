@@ -153,7 +153,9 @@ void game_physics_update() {
 			bool hit_player = (g_player_blink == 0 && check_collision(g_enemies[e].x, g_enemies[e].y, ew, eh, g_player_x, 54, 8, 8));
 			
 			if (g_enemies[e].y > 60 || hit_player) {
-				g_enemies[e].active = false;
+				if (g_enemies[e].y > 60 || g_enemies[e].type != 4) {
+					g_enemies[e].active = false;
+				}
 				
 				if (hit_player && g_player_shield_timer > 0) {
 					g_player_shield_timer = 0;

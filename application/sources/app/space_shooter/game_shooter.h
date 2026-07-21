@@ -20,7 +20,13 @@ typedef struct {
 	bool active;
 	bool is_enemy;
 } bullet_t;
-typedef struct { int8_t x, y; int8_t hp; uint8_t type; bool active; int8_t blink_timer; } enemy_t;
+#define BOSS_STATE_NORMAL 0
+#define BOSS_STATE_DASH_CHARGE 1
+#define BOSS_STATE_DASH_DOWN 2
+#define BOSS_STATE_DASH_UP 3
+#define BOSS_STATE_SUMMON 4
+
+typedef struct { int8_t x, y; int8_t hp; uint8_t type; bool active; int8_t blink_timer; uint8_t state; int16_t timer; } enemy_t;
 typedef struct { int8_t x, y; int8_t timer; bool active; } explosion_t;
 typedef struct { int8_t x, y; uint8_t type; bool active; } powerup_t;
 
