@@ -56,6 +56,12 @@ void game_enemy_spawn() {
 					g_enemies[e].blink_timer = 0;
 					g_enemies[e].x = 20 + c * SPAWN_OFFSET_X;
 					g_enemies[e].y = SPAWN_START_Y + r * SPAWN_OFFSET_Y;
+					
+					// If this is a wide enemy, skip the next column so they don't touch
+					if (g_enemies[e].type == 5 || g_enemies[e].type == 6) {
+						c++; 
+					}
+					
 					e++;
 					if (e >= MAX_ENEMIES) break;
 				}
