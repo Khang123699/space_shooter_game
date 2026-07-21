@@ -79,7 +79,8 @@ void game_physics_update() {
 							if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_CLICK);
 							if (g_enemies[e].hp <= 0) {
 								g_enemies[e].active = false;
-								g_score += (g_enemies[e].type == 4) ? 100 : 10;
+								uint32_t base_score = (g_enemies[e].type == 4) ? 100 : 10;
+								g_score += base_score + (base_score * g_game_data.difficulty) / 2;
 								
 								// Drop powerup chance (10%)
 								if (g_enemies[e].type != 4 && rand() % 100 < 10) {
@@ -199,7 +200,8 @@ void game_physics_update() {
 							
 							if (g_enemies[e].hp <= 0) {
 								g_enemies[e].active = false;
-								g_score += (g_enemies[e].type == 4) ? 100 : 10;
+								uint32_t base_score = (g_enemies[e].type == 4) ? 100 : 10;
+								g_score += base_score + (base_score * g_game_data.difficulty) / 2;
 								for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
 									if (!g_explosions[ex].active) {
 										g_explosions[ex].active = true;
