@@ -12,7 +12,7 @@
 
 | Document | Purpose |
 |---|---|
-| [README.md](README.md) | High-level system overview, target hardware, and game mechanics. |
+| [README.md](README.md) | Project overview, target hardware, and game mechanics. |
 | [docs/01-guide-getting-started.md](docs/01-guide-getting-started.md) | Step-by-step instructions for environment setup and project initialization. |
 | [docs/02-guide-coding-rules.md](docs/02-guide-coding-rules.md) | Standardized coding conventions and commit message formats. |
 | [docs/03-design-sequence-object.md](docs/03-design-sequence-object.md) | Detailed sequence diagrams defining the lifecycle of in-game entities. |
