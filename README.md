@@ -146,10 +146,18 @@ The application boots into a **Title Screen**, progressing to a **Main Menu** co
 | <img src="resources/images/bitmap/explosion_anim.gif" width="100"/> | **Explosion** | A transient visual effect rendered at the coordinates of a destroyed entity using particle animation (drawing API). |
 | <img src="resources/images/bitmap/icon_play.png" width="100"/><br><img src="resources/images/bitmap/icon_setting.png" width="100"/><br><img src="resources/images/bitmap/icon_trophy.png" width="100"/><br><img src="resources/images/bitmap/icon_menu.png" width="100"/><br><img src="resources/images/bitmap/icon_heart.png" width="100"/> | **UI Elements** | Assorted UI icons (Play, Settings, High Score, Menu, Hearts) used in menus and the HUD. |
 
-### How to Play & Game Mechanics:
+### How to Play:
 
-- **Controls:** Navigate the Player unit horizontally (Left/Right) using the **[Up]** and **[Down]** hardware buttons. Trigger the primary weapon using the **[Mode]** button.
-- **Scoring:** Each enemy destroyed is worth points based on its type. The running score and current lives are shown at the top of the screen.
+You control the Player ship. Use the **[Up]** and **[Down]** buttons to navigate horizontally (Left/Right) across the screen. Holding either button moves the ship faster.
+
+Press the **[Mode]** button to fire a Bullet at the incoming Enemies.
+
+Enemies appear from the top of the screen in a grid formation and slowly drop downward towards you (Space Invaders style).
+
+The goal is to score as many points as possible. Points are awarded based on the enemy's base score scaled by the difficulty level. The match ends when the Player's life counter reaches zero.
+
+### Game Mechanics:
+
 - **Waves & Difficulty:** As stages progress, the game dynamically spawns more enemies and increases their movement speed. The starting difficulty (EASY, MED, HARD) can be customized in the **Setting** menu.
 - **Powerups:** Destroying enemies has a chance to drop powerups that provide temporary invincibility shields, weapon upgrades (super bullet), or a screen-clearing nuke.
 - **Boss Fights:** Every 3 stages, a powerful Boss ship appears, requiring the player to dodge multi-projectile burst attacks and chip away at its high health pool.
