@@ -20,9 +20,7 @@
 
 ## 1. Overview
 
-Space Shooter is an embedded software project developed for the AK Embedded Base Kit. It demonstrates the implementation of a classic arcade game using a cooperative event-driven OS.
-
-This repository provides practical examples of:
+Space Shooter is a classic arcade shoot 'em up game built on top of the AK Embedded Base Kit — a hands-on platform for embedded programming enthusiasts to explore event-driven design in depth. While building and playing Space Shooter, you put the following core concepts of modern embedded engineering into practice:
 
 - **System design:** Modelling complex logic flows with UML.
 - **Process management:** Coordinating cooperative Tasks and scheduling them efficiently.
