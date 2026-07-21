@@ -14,13 +14,11 @@ void game_shooter_task(ak_msg_t* msg) {
 			break;
 			
 		case AC_GAME_BTN_UP:
-			// Move player left (negative delta)
-			game_player_move(8);
+			// Handled smoothly in game_logic_update() via hardware button polling
 			break;
 			
 		case AC_GAME_BTN_DOWN:
-			// Move player right (positive delta)
-			game_player_move(-8);
+			// Handled smoothly in game_logic_update() via hardware button polling
 			break;
 			
 		case AC_GAME_BTN_MODE:

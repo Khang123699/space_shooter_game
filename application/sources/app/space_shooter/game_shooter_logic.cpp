@@ -2,6 +2,8 @@
 #include "task_list.h"
 #include "timer.h"
 #include <string.h>
+#include "button.h"
+#include "app_bsp.h"
 
 // Global UI navigation
 uint8_t g_menu_selected = 0;
@@ -61,6 +63,14 @@ void game_logic_update() {
 	if (g_player_blink > 0) g_player_blink--;
 	if (g_player_super_gun_timer > 0) g_player_super_gun_timer--;
 	if (g_player_shield_timer > 0) g_player_shield_timer--;
+	
+	// Smooth sliding movement check
+	if (btn_up.read() == BUTTON_HW_STATE_PRESSED) {
+		game_player_move(-2); // Left
+	}
+	if (btn_down.read() == BUTTON_HW_STATE_PRESSED) {
+		game_player_move(2); // Right
+	}
 	
 	// Update enemy blink timers
 	for (int e = 0; e < MAX_ENEMIES; e++) {
