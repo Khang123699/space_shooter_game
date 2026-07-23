@@ -6,6 +6,8 @@
 
 # Space Shooter Game on AK Embedded Base Kit
 
+## GamePlay Demo
+Gameplay video will be added when the game is complete
 <hr>
 
 ## System Documentation
@@ -17,6 +19,7 @@
 | [docs/02-guide-coding-rules.md](docs/02-guide-coding-rules.md) | Standardized coding conventions and commit message formats. |
 | [docs/03-design-sequence-object.md](docs/03-design-sequence-object.md) | Detailed sequence diagrams defining the lifecycle of in-game entities. |
 | [docs/04-design-sequence-runtime.md](docs/04-design-sequence-runtime.md) | System architecture detailing signal processing and task scheduling. |
+| [docs/05-design-data-storage.md](docs/05-design-data-storage.md) | Persistent storage mechanism for settings and high scores in SPI Flash. |
 
 ## 1. Overview
 
@@ -82,6 +85,7 @@ The application boots into a **Title Screen**, progressing to a **Main Menu** co
 - **Play:** Initialize a new game session.
 - **Setting:** Adjust system parameters (Sound, Difficulty).
 - **High score:** Display the highest recorded scores.
+- **Exit:** Return to the Title Screen.
 
 ### User Interface & Game Screens:
 
@@ -144,7 +148,7 @@ The application boots into a **Title Screen**, progressing to a **Main Menu** co
 | <img src="resources/images/bitmap/bmp_boss.png" width="50"/> | **Boss** | A high-HP entity that spawns every 3 stages. Features horizontal movement, high health, and advanced mechanics: Enrage (5-way spread attack when <50% HP), Dash Attack (rapidly dives toward the player), and Summoning (spawns 2 minions). |
 | <img src="resources/images/bitmap/icon_item_super.png" width="50"/><br><img src="resources/images/bitmap/icon_item_shield.png" width="50"/><br><img src="resources/images/bitmap/icon_item_nuke.png" width="50"/> | **Powerup** | Dropped conditionally upon Enemy destruction. Applies temporary state modifiers to the Player (Super bullet, Shield, Nuke). |
 | <img src="resources/images/bitmap/explosion_anim.gif" width="50"/> | **Explosion** | A transient visual effect rendered at the coordinates of a destroyed entity using particle animation (drawing API). |
-| <img src="resources/images/bitmap/icon_play.png" width="50"/><br><img src="resources/images/bitmap/icon_setting.png" width="50"/><br><img src="resources/images/bitmap/icon_trophy.png" width="50"/><br><img src="resources/images/bitmap/icon_menu.png" width="50"/><br><img src="resources/images/bitmap/icon_heart.png" width="50"/> | **UI Elements** | Assorted UI icons (Play, Settings, High Score, Menu, Hearts) used in menus and the HUD. |
+| <img src="resources/images/bitmap/icon_play.png" width="50"/><br><img src="resources/images/bitmap/icon_setting.png" width="50"/><br><img src="resources/images/bitmap/icon_trophy.png" width="50"/><br><img src="resources/images/bitmap/icon_menu.png" width="50"/><br><img src="resources/images/bitmap/icon_heart.png" width="50"/> | **UI Elements** | Assorted UI icons (Play, Settings, High Score, Exit, Menu, Hearts) used in menus and the HUD. |
 
 ### How to Play:
 
