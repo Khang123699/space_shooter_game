@@ -74,6 +74,8 @@ extern int8_t g_transition_timer;
 extern uint16_t g_tick_count;
 extern uint8_t g_shoot_cooldown;
 extern int8_t enemy_dir;
+extern bool g_is_moving_left;
+extern bool g_is_moving_right;
 
 // Logic Interfaces
 extern void game_logic_init();

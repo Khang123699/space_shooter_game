@@ -12,8 +12,14 @@ void handle_ui_playing_input(ak_msg_t *msg) {
 		case AC_DISPLAY_BUTTON_UP_PRESSED:
 			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_UP);
 			break;
+		case AC_DISPLAY_BUTTON_UP_RELEASED:
+			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_UP_RELEASED);
+			break;
 		case AC_DISPLAY_BUTTON_DOWN_PRESSED:
 			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_DOWN);
+			break;
+		case AC_DISPLAY_BUTTON_DOWN_RELEASED:
+			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_DOWN_RELEASED);
 			break;
 		case AC_DISPLAY_BUTTON_MODE_PRESSED:
 			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_MODE);

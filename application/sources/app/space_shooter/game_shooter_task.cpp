@@ -18,6 +18,22 @@ void game_shooter_task(ak_msg_t* msg) {
 			game_player_shoot();
 			break;
 			
+		case AC_GAME_BTN_UP:
+			g_is_moving_left = true;
+			break;
+			
+		case AC_GAME_BTN_UP_RELEASED:
+			g_is_moving_left = false;
+			break;
+			
+		case AC_GAME_BTN_DOWN:
+			g_is_moving_right = true;
+			break;
+			
+		case AC_GAME_BTN_DOWN_RELEASED:
+			g_is_moving_right = false;
+			break;
+			
 		case AC_GAME_UPDATE_TICK:
 			// Main physics and logic tick event triggered by timer
 			game_logic_update();

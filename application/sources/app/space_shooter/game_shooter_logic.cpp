@@ -32,6 +32,8 @@ powerup_t g_powerups[MAX_POWERUPS];
 star_t g_stars[MAX_STARS];
 uint8_t g_stage = 1;
 int8_t g_transition_timer = 0;
+bool g_is_moving_left = false;
+bool g_is_moving_right = false;
 
 // Initialize or reset the game state variables for a new session
 void game_logic_init() {
@@ -43,6 +45,8 @@ void game_logic_init() {
 	enemy_dir = 1;
 	g_player_super_bullet_timer = 0;
 	g_player_shield_timer = 0;
+	g_is_moving_left = false;
+	g_is_moving_right = false;
 	memset(g_bullets, 0, sizeof(g_bullets));
 	memset(g_explosions, 0, sizeof(g_explosions));
 	memset(g_powerups, 0, sizeof(g_powerups));
@@ -65,11 +69,19 @@ void game_logic_update() {
 	if (g_player_shield_timer > 0) g_player_shield_timer--;
 	
 	// Smooth sliding movement check
-	if (btn_up.read() == BUTTON_HW_STATE_PRESSED) {
-		game_player_move(2); // Left
+	if (g_is_moving_left) {
+		if (btn_up.read() == BUTTON_HW_STATE_RELEASED) {
+			g_is_moving_left = false;
+		} else {
+			game_player_move(2); // Left
+		}
 	}
-	if (btn_down.read() == BUTTON_HW_STATE_PRESSED) {
-		game_player_move(-2); // Right
+	if (g_is_moving_right) {
+		if (btn_down.read() == BUTTON_HW_STATE_RELEASED) {
+			g_is_moving_right = false;
+		} else {
+			game_player_move(-2); // Right
+		}
 	}
 	
 	// Update enemy blink timers
