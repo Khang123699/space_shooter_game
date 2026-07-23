@@ -9,6 +9,7 @@
 void handle_ui_title_input(ak_msg_t *msg) {
 	if (msg->sig == AC_DISPLAY_BUTTON_MODE_PRESSED) {
 		g_game_state = GAME_STATE_MENU;
+		g_menu_selected = 0;
 	}
 }
 
@@ -16,10 +17,10 @@ void handle_ui_title_input(ak_msg_t *msg) {
 void handle_ui_menu_input(ak_msg_t *msg) {
 	switch (msg->sig) {
 		case AC_DISPLAY_BUTTON_UP_PRESSED:
-			g_menu_selected = (g_menu_selected > 0) ? g_menu_selected - 1 : 2;
+			g_menu_selected = (g_menu_selected > 0) ? g_menu_selected - 1 : 3;
 			break;
 		case AC_DISPLAY_BUTTON_DOWN_PRESSED:
-			g_menu_selected = (g_menu_selected < 2) ? g_menu_selected + 1 : 0;
+			g_menu_selected = (g_menu_selected < 3) ? g_menu_selected + 1 : 0;
 			break;
 		case AC_DISPLAY_BUTTON_MODE_PRESSED:
 			if (g_menu_selected == 0) { 
@@ -31,6 +32,8 @@ void handle_ui_menu_input(ak_msg_t *msg) {
 			} else if (g_menu_selected == 2) { 
 				g_game_state = GAME_STATE_HIGH_SCORE; 
 				g_score_selected = 0; 
+			} else if (g_menu_selected == 3) {
+				g_game_state = GAME_STATE_TITLE;
 			}
 			break;
 	}

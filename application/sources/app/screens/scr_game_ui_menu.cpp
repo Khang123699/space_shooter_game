@@ -44,23 +44,27 @@ void game_shooter_menu_display() {
 	
 	view_render.drawRect(0, 0, 128, 64, WHITE);
 	view_render.setTextSize(1);
-	view_render.setCursor(CENTER_X(12, 6), 6);
+	view_render.setCursor(CENTER_X(12, 6), 4);
 	view_render.print("SPACE SHOOTER");
-	view_render.drawLine(10, 16, 117, 16, WHITE);
+	view_render.drawLine(10, 14, 117, 14, WHITE);
 	
-	view_render.drawBitmap(18, 24, icon_play, 8, 8, WHITE);
-	view_render.setCursor(32, 24);
+	view_render.drawBitmap(18, 18, icon_play, 8, 8, WHITE);
+	view_render.setCursor(32, 18);
 	view_render.print("Play");
 	
-	view_render.drawBitmap(18, 36, icon_setting, 8, 8, WHITE);
-	view_render.setCursor(32, 36);
+	view_render.drawBitmap(18, 29, icon_setting, 8, 8, WHITE);
+	view_render.setCursor(32, 29);
 	view_render.print("Setting");
 	
-	view_render.drawBitmap(18, 48, icon_trophy, 8, 8, WHITE);
-	view_render.setCursor(32, 48);
+	view_render.drawBitmap(18, 40, icon_trophy, 8, 8, WHITE);
+	view_render.setCursor(32, 40);
 	view_render.print("High score");
 	
-	view_render.setCursor(6, 24 + g_menu_selected * 12);
+	view_render.drawBitmap(18, 51, icon_exit, 8, 8, WHITE);
+	view_render.setCursor(32, 51);
+	view_render.print("Exit");
+	
+	view_render.setCursor(6, 18 + g_menu_selected * 11);
 	view_render.print(">");
 }
 

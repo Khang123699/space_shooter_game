@@ -11,6 +11,7 @@ extern const uint8_t icon_play[8];
 extern const uint8_t icon_setting[8];
 extern const uint8_t icon_trophy[8];
 extern const uint8_t icon_menu[8];
+extern const uint8_t icon_exit[8];
 extern const uint8_t icon_heart[8];
 extern const uint8_t bmp_boss[32];
 extern const uint8_t icon_flame1[8];
