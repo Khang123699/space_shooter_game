@@ -27,7 +27,7 @@ void handle_ui_gameover_input(ak_msg_t *msg) {
 		g_new_high_score_rank = game_update_high_score(g_score);
 		g_game_state = GAME_STATE_SHOW_SCORE;
 		g_show_score_selected = 0;
-		if (g_new_high_score_rank > 0 && g_game_data.sound_en) {
+		if (g_new_high_score_rank > 0 && g_game_setting.sound_en) {
 			BUZZER_PlaySound(BUZZER_SOUND_HIGHSCORE);
 		}
 	}

@@ -50,11 +50,11 @@ void handle_ui_setting_input(ak_msg_t *msg) {
 			break;
 		case AC_DISPLAY_BUTTON_MODE_PRESSED:
 			if (g_setting_selected == 0) { 
-				g_game_data.sound_en = !g_game_data.sound_en; 
-				game_save_data(); 
+				g_game_setting.sound_en = !g_game_setting.sound_en; 
+				game_save_setting(); 
 			} else if (g_setting_selected == 1) { 
-				g_game_data.difficulty = (g_game_data.difficulty + 1) % 3; 
-				game_save_data(); 
+				g_game_setting.difficulty = (g_game_setting.difficulty + 1) % 3; 
+				game_save_setting(); 
 			} else if (g_setting_selected == 2) { 
 				g_game_state = GAME_STATE_MENU; 
 			}

@@ -64,7 +64,7 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 			if (g_game_state != GAME_STATE_PLAYING) {
 				// Reset idle timeout on user interaction
 				timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
-				if (g_game_data.sound_en) {
+				if (g_game_setting.sound_en) {
 					BUZZER_PlaySound(BUZZER_SOUND_CLICK);
 				}
 			}
@@ -73,7 +73,7 @@ void scr_game_ui_handle(ak_msg_t *msg) {
 		case AC_DISPLAY_GAME_OVER_NEXT:
 			g_game_state = GAME_STATE_GAMEOVER;
 			g_gameover_anim_frame = 0;
-			if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_LOWSCORE);
+			if(g_game_setting.sound_en) BUZZER_PlaySound(BUZZER_SOUND_LOWSCORE);
 			
 			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
 			return;

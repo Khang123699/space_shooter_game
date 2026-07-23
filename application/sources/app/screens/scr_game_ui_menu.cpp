@@ -84,13 +84,13 @@ void game_shooter_setting_display() {
 	view_render.setCursor(26, 22);
 	view_render.print("Sound:");
 	view_render.setCursor(80, 22);
-	view_render.print(g_game_data.sound_en ? "ON" : "OFF");
+	view_render.print(g_game_setting.sound_en ? "ON" : "OFF");
 	
 	view_render.setCursor(26, 34);
 	view_render.print("Diff:");
 	view_render.setCursor(80, 34);
 	const char* diff_str[] = {"EASY", "MED", "HARD"};
-	view_render.print(diff_str[g_game_data.difficulty]);
+	view_render.print(diff_str[g_game_setting.difficulty]);
 	
 	view_render.setCursor(26, 48);
 	view_render.print("Back");
@@ -118,7 +118,7 @@ void game_shooter_highscore_display() {
 		view_render.print(prefixes[i]);
 		
 		char temp_str[12];
-		xsprintf(temp_str, "%u", (unsigned int)g_game_data.top_score[i]);
+		xsprintf(temp_str, "%u", (unsigned int)g_game_score.top_score[i]);
 		view_render.print(temp_str);
 	}
 	

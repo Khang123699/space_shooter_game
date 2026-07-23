@@ -26,7 +26,7 @@ void game_enemy_spawn() {
 	} else {
 		int rows = 3;
 		int cols = 6;
-		int spawn_chance = 40 + (g_game_data.difficulty * 10) + (g_stage * 3);
+		int spawn_chance = 40 + (g_game_setting.difficulty * 10) + (g_stage * 3);
 		if (spawn_chance > 90) spawn_chance = 90;
 		bool spawned_type5 = false;
 		bool spawned_type6 = false;
@@ -86,7 +86,7 @@ void game_enemy_spawn() {
 void game_enemy_update() {
 	bool hit_edge = false;
 	enemy_move_ticks++;
-	int move_threshold = 4 - g_game_data.difficulty - (g_stage / 5);
+	int move_threshold = 4 - g_game_setting.difficulty - (g_stage / 5);
 	if (g_stage % 3 == 0) move_threshold--;
 	if (move_threshold < 1) move_threshold = 1;
 	bool do_move = (enemy_move_ticks >= move_threshold);
@@ -215,15 +215,15 @@ void game_enemy_update() {
 				if (g_enemies[e].state == BOSS_STATE_NORMAL) {
 					int boss_cycle = g_stage / 3;
 					// Base + difficulty + 5 for every boss cycle passed (no limit)
-					shoot_chance = 9 + (g_game_data.difficulty * 5) + ((boss_cycle - 1) * 5);
+					shoot_chance = 9 + (g_game_setting.difficulty * 5) + ((boss_cycle - 1) * 5);
 					if (g_enemies[e].hp <= boss_max_hp / 2) shoot_chance += 10; // Enrage bonus
 				}
 			} else if (g_enemies[e].type == 5) {
-				shoot_chance = 5 + g_game_data.difficulty * 2 + (g_stage / 2); // Spread shooter shoots more often
+				shoot_chance = 5 + g_game_setting.difficulty * 2 + (g_stage / 2); // Spread shooter shoots more often
 			} else if (g_enemies[e].type == 6) {
 				shoot_chance = 0; // Carrier doesn't shoot
 			} else {
-				shoot_chance = 3 + g_game_data.difficulty + (g_stage / 2);
+				shoot_chance = 3 + g_game_setting.difficulty + (g_stage / 2);
 			}
 			
 			if (shoot_chance > 0 && rand() % 1000 < shoot_chance) {

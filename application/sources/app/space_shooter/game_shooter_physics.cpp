@@ -60,7 +60,7 @@ void game_physics_update() {
 						g_lives--;
 						g_player_blink = 34;
 					}
-					if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
+					if(g_game_setting.sound_en) BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
 					continue; // Skip movement if destroyed
 				}
 			} else {
@@ -76,11 +76,11 @@ void game_physics_update() {
 							int damage = (g_player_super_bullet_timer > 0) ? 3 : 1;
 							g_enemies[e].hp -= damage;
 							g_enemies[e].blink_timer = 22;
-							if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_CLICK);
+							if(g_game_setting.sound_en) BUZZER_PlaySound(BUZZER_SOUND_CLICK);
 							if (g_enemies[e].hp <= 0) {
 								g_enemies[e].active = false;
 								uint32_t base_score = (g_enemies[e].type == 4) ? 100 : 10;
-								g_score += base_score + (base_score * g_game_data.difficulty) / 2;
+								g_score += base_score + (base_score * g_game_setting.difficulty) / 2;
 								
 								// Drop powerup chance (10%)
 								if (g_enemies[e].type != 4 && rand() % 100 < 10) {
@@ -117,9 +117,9 @@ void game_physics_update() {
 			g_bullets[i].x += g_bullets[i].vx;
 			if (g_bullets[i].is_enemy) {
 				int drop = 1;
-				if (g_game_data.difficulty == 2 || g_stage >= 10) drop = 2; // Capped at 2px/frame
+				if (g_game_setting.difficulty == 2 || g_stage >= 10) drop = 2; // Capped at 2px/frame
 				
-				bool move_enemy_bullet = (g_game_data.difficulty > 0) || (g_stage > 3) || (g_tick_count % 2 == 0);
+				bool move_enemy_bullet = (g_game_setting.difficulty > 0) || (g_stage > 3) || (g_tick_count % 2 == 0);
 				
 				if (move_enemy_bullet) {
 					g_bullets[i].y += drop;
@@ -176,7 +176,7 @@ void game_physics_update() {
 							break;
 						}
 					}
-					if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
+					if(g_game_setting.sound_en) BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
 				}
 			}
 		}
@@ -187,7 +187,7 @@ void game_physics_update() {
 		if (g_powerups[p].active) {
 			if (check_collision(g_powerups[p].x, g_powerups[p].y, 8, 8, g_player_x, 54, 8, 8)) {
 				g_powerups[p].active = false;
-				if(g_game_data.sound_en) BUZZER_PlaySound(BUZZER_SOUND_BANG);
+				if(g_game_setting.sound_en) BUZZER_PlaySound(BUZZER_SOUND_BANG);
 				
 				if (g_powerups[p].type == POWERUP_TYPE_SUPER_BULLET) {
 					g_player_super_bullet_timer = 200; // 10 seconds (20 ticks per second)
@@ -203,7 +203,7 @@ void game_physics_update() {
 							if (g_enemies[e].hp <= 0) {
 								g_enemies[e].active = false;
 								uint32_t base_score = (g_enemies[e].type == 4) ? 100 : 10;
-								g_score += base_score + (base_score * g_game_data.difficulty) / 2;
+								g_score += base_score + (base_score * g_game_setting.difficulty) / 2;
 								for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
 									if (!g_explosions[ex].active) {
 										g_explosions[ex].active = true;
