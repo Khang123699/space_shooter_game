@@ -41,6 +41,28 @@ Firmware compilation and flashing require a Linux-based environment (preferably 
 
 **[AK Embedded Base Kit STM32L151 — Configuration Guide](https://epcb.vn/blogs/ak-embedded-software/ak-embedded-base-kit-stm32l151-getting-started)**
 
+### 2.1 Configuring Makefile Paths for Different Linux Machines
+
+By default, the `Makefile`s in this project (`application/Makefile` and `boot/Makefile`) contain hardcoded toolchain paths that might not match every developer's environment. To make the build process work on your specific Linux machine, you should update the toolchain variables inside these Makefiles.
+
+1. Open `application/Makefile` and `boot/Makefile`.
+2. Locate the path configuration section (usually near the top).
+3. Modify them to match your local installation paths, or use the `?=` operator to allow environment variable overrides:
+
+```makefile
+# Allow overriding via environment variables
+GCC_PATH            ?= /usr
+PROGRAMER_PATH      ?= /usr/local/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin
+OPENOCD_CFG_PATH    ?= /usr/share/openocd/scripts/board/stm32ldiscovery.cfg
+```
+
+If you installed `gcc-arm-none-eabi` globally via `apt`, it's recommended to remove the `$(GCC_PATH)/bin/` prefix from the compiler definitions (`CC`, `CPP`, etc.) so the OS can automatically locate them via the `$PATH` variable:
+
+```makefile
+CC  = arm-none-eabi-gcc
+CPP = arm-none-eabi-g++
+```
+
 ---
 
 ## 3. Standard Development Workflow
