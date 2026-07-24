@@ -6,6 +6,12 @@
 
 # Space Shooter Game on AK Embedded Base Kit
 
+<table align="center">
+  <tr>
+    <td align="center"><img src="resources/images/game_banner.png" alt="Space Shooter Banner" width="100%"/></td>
+  </tr>
+</table>
+
 ## GamePlay Demo
 Gameplay video will be added when the game is complete
 <hr>
