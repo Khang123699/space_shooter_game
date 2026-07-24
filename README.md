@@ -1,3 +1,4 @@
+
 <div align="center">
   
 ![Repo Traffic](https://komarev.com/ghpvc/?username=space-shooter-game&label=Repo+Traffic&color=blue&style=flat-square)
@@ -13,7 +14,10 @@
 </table>
 
 ## GamePlay Demo
-Gameplay video will be added when the game is complete
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/e4980cdb-4362-4278-af67-74cd10bfc62f" controls width="480"></video>
+</div>
+
 <hr>
 
 ## System Documentation
