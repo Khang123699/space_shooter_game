@@ -186,11 +186,7 @@ The goal is to score as many points as possible. Points are awarded based on the
 ## 5. Contact & Support
 ``` Note
 Thank you for visiting this repository.
-If you have any questions, suggestions, or feedback about this project
-
-https://github.com/user-attachments/assets/afe3dd20-a7ad-4717-a372-d2f4eb79e702
-
-, feel free to contact me directly.
+If you have any questions, suggestions, or feedback about this project, feel free to contact me directly.
 ```
 
 <a href="https://github.com/Khang123699">
