@@ -1,4 +1,3 @@
-
 <div align="center">
   
 ![Repo Traffic](https://komarev.com/ghpvc/?username=space-shooter-game&label=Repo+Traffic&color=blue&style=flat-square)
@@ -16,6 +15,9 @@
 ## GamePlay Demo
 <div align="center">
   <video src="https://github.com/user-attachments/assets/e4980cdb-4362-4278-af67-74cd10bfc62f" controls width="480"></video>
+</div>
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/a39ffca7-9dc8-441a-9a1d-c7b8cb1fe944" controls width="480"></video>
 </div>
 
 <hr>
@@ -184,7 +186,11 @@ The goal is to score as many points as possible. Points are awarded based on the
 ## 5. Contact & Support
 ``` Note
 Thank you for visiting this repository.
-If you have any questions, suggestions, or feedback about this project or firmware development, feel free to contact me directly.
+If you have any questions, suggestions, or feedback about this project
+
+https://github.com/user-attachments/assets/afe3dd20-a7ad-4717-a372-d2f4eb79e702
+
+, feel free to contact me directly.
 ```
 
 <a href="https://github.com/Khang123699">
