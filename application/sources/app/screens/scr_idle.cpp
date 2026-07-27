@@ -1,5 +1,5 @@
 #include "scr_idle.h"
-#include "scr_game_ui.h"
+#include "screens.h"
 #include "game_shooter.h"
 
 #define MAX_BALL_DISPLAY (5)
@@ -96,11 +96,8 @@ int ball::total;
 
 static void scr_idle_return_screen() {
 	timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE_BALL_MOVING_UPDATE);
-	if (g_game_state == GAME_STATE_PLAYING) {
-		timer_set(AC_TASK_GAME_SHOOTER_ID, AC_GAME_UPDATE_TICK, 50, TIMER_PERIODIC);
-	}
 	timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
-	SCREEN_TRAN(scr_game_ui_handle, &scr_game_ui);
+	SCREEN_BACK();
 }
 
 void view_scr_idle() {

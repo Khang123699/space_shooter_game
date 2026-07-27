@@ -20,6 +20,7 @@ typedef struct {
 	bool active;
 	bool is_enemy;
 } bullet_t;
+
 #define BOSS_STATE_NORMAL 0
 #define BOSS_STATE_DASH_CHARGE 1
 #define BOSS_STATE_DASH_DOWN 2
@@ -36,27 +37,9 @@ typedef struct {
 	int8_t speed;
 } star_t;
 
-// Define states for the game menu and play flow
-typedef enum {
-	GAME_STATE_TITLE,
-	GAME_STATE_MENU,
-	GAME_STATE_SETTING,
-	GAME_STATE_HIGH_SCORE,
-	GAME_STATE_PLAYING,
-	GAME_STATE_GAMEOVER,
-	GAME_STATE_SHOW_SCORE
-} game_state_t;
-
-// Exported global variables for UI and Logic
-extern game_state_t g_game_state;
-extern uint8_t g_menu_selected;
-extern uint8_t g_setting_selected;
-extern uint8_t g_score_selected;
-extern uint8_t g_show_score_selected;
-extern const char* g_encouragement_text;
+// Exported global variables for Logic and UI Screens
 extern uint8_t g_new_high_score_rank;
 extern bool g_render_pending;
-extern uint8_t g_gameover_anim_frame;
 
 extern int16_t g_player_x;
 extern uint8_t g_player_blink;
@@ -77,17 +60,37 @@ extern int8_t enemy_dir;
 extern bool g_is_moving_left;
 extern bool g_is_moving_right;
 
-// Logic Interfaces
+// Core Logic Interfaces
 extern void game_logic_init();
 extern void game_player_move(int8_t dir);
 extern void game_player_shoot();
 extern void game_logic_update();
+extern void game_shooter_update_stars();
 
+// Background Parallax Module
+extern void game_background_init();
+extern void game_background_update();
+
+// Stage & Progression Module
+extern void game_powerups_update();
+extern void game_stage_update();
+extern void game_check_game_over();
+
+// Enemy & AI Modules
 extern void game_enemy_spawn();
 extern void game_enemy_update();
-extern void game_physics_update();
+extern void game_boss_spawn();
+extern void game_boss_update_state(int e, bool do_move, int move_threshold, int boss_max_hp, bool& hit_edge);
+extern void game_boss_shoot(int e, int ew, int boss_max_hp);
+extern void game_carrier_update(int e);
 
-// UI Interfaces
-extern void view_scr_game_ui();
+// Bullets & Physics Modules
+extern void game_bullets_update();
+extern void game_physics_update();
+extern bool game_check_collision(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2);
+extern void game_spawn_explosion(int x, int y);
+extern void game_drop_powerup(int x, int y);
+extern void game_enemy_kill(int e);
+extern void game_player_hit();
 
 #endif

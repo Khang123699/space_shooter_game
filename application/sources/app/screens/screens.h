@@ -21,10 +21,40 @@
 #include <vector>
 
 
-// scr_game_ui
-extern view_dynamic_t dyn_view_game_ui;
-extern view_screen_t scr_game_ui;
-extern void scr_game_ui_handle(ak_msg_t* msg);
+// scr_game_title
+extern view_dynamic_t dyn_view_game_title;
+extern view_screen_t scr_game_title;
+extern void scr_game_title_handle(ak_msg_t* msg);
+
+// scr_game_menu
+extern view_dynamic_t dyn_view_game_menu;
+extern view_screen_t scr_game_menu;
+extern void scr_game_menu_handle(ak_msg_t* msg);
+
+// scr_game_setting
+extern view_dynamic_t dyn_view_game_setting;
+extern view_screen_t scr_game_setting;
+extern void scr_game_setting_handle(ak_msg_t* msg);
+
+// scr_game_highscore
+extern view_dynamic_t dyn_view_game_highscore;
+extern view_screen_t scr_game_highscore;
+extern void scr_game_highscore_handle(ak_msg_t* msg);
+
+// scr_game_play
+extern view_dynamic_t dyn_view_game_play;
+extern view_screen_t scr_game_play;
+extern void scr_game_play_handle(ak_msg_t* msg);
+
+// scr_game_gameover
+extern view_dynamic_t dyn_view_game_gameover;
+extern view_screen_t scr_game_gameover;
+extern void scr_game_gameover_handle(ak_msg_t* msg);
+
+// scr_game_showscore
+extern view_dynamic_t dyn_view_game_showscore;
+extern view_screen_t scr_game_showscore;
+extern void scr_game_showscore_handle(ak_msg_t* msg);
 
 
 // scr_startup

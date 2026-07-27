@@ -1,18 +1,35 @@
-#include "scr_game_ui.h"
+#include "scr_game_play.h"
 #include "game_shooter.h"
+#include "game_save.h"
 #include "view_render.h"
+#include "buzzer.h"
+#include "timer.h"
+#include "task_list.h"
 #include "xprintf.h"
 #include "game_bitmaps.h"
 #include <string.h>
 
-// Helper macro to center text horizontally on a 128px screen
 #define CENTER_X(str_len, char_width) ((128 - (str_len) * (char_width)) / 2)
 
-// Draw all active enemies and boss health bar
+static void view_scr_game_play();
+
+view_dynamic_t dyn_view_game_play = {
+	{
+		.item_type = ITEM_TYPE_DYNAMIC,
+	},
+	view_scr_game_play
+};
+
+view_screen_t scr_game_play = {
+	&dyn_view_game_play,
+	ITEM_NULL,
+	ITEM_NULL,
+	.focus_item = 0,
+};
+
 static void draw_enemies() {
 	for (int e = 0; e < MAX_ENEMIES; e++) {
 		if (g_enemies[e].active) {
-			// Blinking effect when taking damage (except Boss)
 			bool draw_sprite = true;
 			if (g_enemies[e].blink_timer > 0 && g_enemies[e].type != 4 && (g_tick_count % 4 < 2)) {
 				draw_sprite = false;
@@ -22,7 +39,6 @@ static void draw_enemies() {
 				if (draw_sprite) {
 					view_render.drawBitmap(g_enemies[e].x, g_enemies[e].y, bmp_boss, 16, 16, WHITE);
 				}
-				// HP Bar for Boss
 				int boss_cycle = g_stage / 3;
 				int max_hp = 10 + (boss_cycle - 1) * 5;
 				int hp_width = (g_enemies[e].hp * 16) / max_hp;
@@ -45,7 +61,6 @@ static void draw_enemies() {
 	}
 }
 
-// Draw powerups
 static void draw_powerups() {
 	for (int p = 0; p < MAX_POWERUPS; p++) {
 		if (g_powerups[p].active) {
@@ -60,7 +75,6 @@ static void draw_powerups() {
 	}
 }
 
-// Draw explosion effects for destroyed entities
 static void draw_explosions() {
 	for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
 		if (g_explosions[ex].active) {
@@ -83,7 +97,6 @@ static void draw_explosions() {
 	}
 }
 
-// Draw all active player and enemy bullets
 static void draw_bullets() {
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		if (g_bullets[i].active) {
@@ -100,16 +113,13 @@ static void draw_bullets() {
 	}
 }
 
-// Render Main Gameplay UI (player ship, UI bar, entities)
-void game_shooter_playing_display() {
-	// Draw Parallax Stars
+static void view_scr_game_play() {
 	for (int i = 0; i < MAX_STARS; i++) {
 		view_render.drawPixel(g_stars[i].x, g_stars[i].y, WHITE);
 	}
 
 	if (g_player_blink % 2 == 0) {
 		view_render.drawBitmap(g_player_x, 54, icon_player, 8, 8, WHITE);
-		// Draw exhaust flame animation
 		if ((g_tick_count / 2) % 2 == 0) {
 			view_render.drawBitmap(g_player_x, 62, icon_flame1, 8, 8, WHITE);
 		} else {
@@ -118,7 +128,6 @@ void game_shooter_playing_display() {
 	}
 	
 	if (g_player_shield_timer > 0) {
-		// Blinking effect when shield is about to expire (< 3 seconds remaining)
 		if (g_player_shield_timer > 60 || (g_player_shield_timer % 10 < 5)) {
 			view_render.drawCircle(g_player_x + 3, 54 + 4, 6, WHITE);
 		}
@@ -129,7 +138,6 @@ void game_shooter_playing_display() {
 	draw_explosions();
 	draw_bullets();
 	
-	// Draw Top UI Bar
 	view_render.fillRect(0, 0, 128, 11, BLACK);
 	view_render.drawLine(0, 10, 127, 10, WHITE);
 	view_render.setTextSize(1);
@@ -152,8 +160,8 @@ void game_shooter_playing_display() {
 	int buff_x = 55;
 	if (g_player_super_bullet_timer > 0) {
 		bool draw_gun = true;
-		if (g_player_super_bullet_timer > 160) draw_gun = (g_player_super_bullet_timer % 6 < 3); // Blink fast (first 2s)
-		else if (g_player_super_bullet_timer <= 60) draw_gun = (g_player_super_bullet_timer % 10 < 5); // Blink slow (last 3s)
+		if (g_player_super_bullet_timer > 160) draw_gun = (g_player_super_bullet_timer % 6 < 3);
+		else if (g_player_super_bullet_timer <= 60) draw_gun = (g_player_super_bullet_timer % 10 < 5);
 		
 		if (draw_gun) {
 			view_render.drawBitmap(buff_x, 1, icon_item_super, 8, 8, WHITE);
@@ -182,87 +190,42 @@ void game_shooter_playing_display() {
 	}
 }
 
-// Render Game Over screen with exploding ship animation
-void game_shooter_gameover_display() {
-	// 1. Exploding Spaceship (Particles)
-	if (g_gameover_anim_frame <= 20) {
-		int r = g_gameover_anim_frame / 2; // radius of explosion expands 0 to 10
-		int cx = g_player_x + 4;
-		int cy = 58;
-		
-		// Draw 8 flying particles
-		view_render.drawPixel(cx - r, cy - r, WHITE);
-		view_render.drawPixel(cx + r, cy - r, WHITE);
-		view_render.drawPixel(cx - r, cy + r, WHITE);
-		view_render.drawPixel(cx + r, cy + r, WHITE);
-		view_render.drawPixel(cx, cy - r - 2, WHITE);
-		view_render.drawPixel(cx, cy + r + 2, WHITE);
-		view_render.drawPixel(cx - r - 2, cy, WHITE);
-		view_render.drawPixel(cx + r + 2, cy, WHITE);
-		
-		// Fading center core
-		if (g_gameover_anim_frame < 10) {
-			view_render.drawPixel(cx, cy, WHITE);
-		}
-	}
+void scr_game_play_handle(ak_msg_t* msg) {
+	switch (msg->sig) {
+		case SCREEN_ENTRY:
+			timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT);
+			timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE);
+			timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK);
+			break;
 
-	// 2. GAME OVER Text
-	view_render.setTextSize(2);
-	int go_y = -16 + (g_gameover_anim_frame * 2);
-	if (go_y > 8) go_y = 8;
-	view_render.setCursor(CENTER_X(9, 12), go_y);
-	view_render.print("GAME OVER");
-	
-	// 3. Stats (Appears after text settles)
-	view_render.setTextSize(1);
-	if (g_gameover_anim_frame > 40) {
-		char score_str[16];
-		xsprintf(score_str, "SCORE: %u", (unsigned int)g_score);
-		int score_w = strlen(score_str) * 6;
-		view_render.setCursor((128 - score_w) / 2, 28);
-		view_render.print(score_str);
-		
-		char stage_str[16];
-		xsprintf(stage_str, "STAGE: %u", (unsigned int)g_stage);
-		int stage_w = strlen(stage_str) * 6;
-		view_render.setCursor((128 - stage_w) / 2, 38);
-		view_render.print(stage_str);
-	}
-	
-	// 4. Press MODE (Blinking text effect)
-	if (g_gameover_anim_frame > 60 && ((g_gameover_anim_frame / 5) % 2 == 0)) {
-		view_render.setCursor(CENTER_X(18, 6), 52); // (128 - 18 * 6) / 2 = 10
-		view_render.print("Press MODE to next");
-	}
-}
+		case AC_DISPLAY_BUTTON_UP_PRESSED:
+			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_UP);
+			break;
 
-// Render standard Score screen after death
-void game_shooter_score_display() {
-	view_render.setTextSize(1);
-	if (g_new_high_score_rank > 0) {
-		view_render.setCursor(CENTER_X(15, 6), 6);
-		view_render.print("NEW HIGH SCORE!");
-		view_render.setCursor(CENTER_X(5, 6), 16);
-		view_render.print("TOP ");
-		char temp[4];
-		xsprintf(temp, "%u", (unsigned int)g_new_high_score_rank);
-		view_render.print(temp);
-	} else {
-		view_render.setCursor(CENTER_X(11, 6), 14);
-		view_render.print("YOUR SCORE:");
+		case AC_DISPLAY_BUTTON_UP_RELEASED:
+			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_UP_RELEASED);
+			break;
+
+		case AC_DISPLAY_BUTTON_DOWN_PRESSED:
+			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_DOWN);
+			break;
+
+		case AC_DISPLAY_BUTTON_DOWN_RELEASED:
+			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_DOWN_RELEASED);
+			break;
+
+		case AC_DISPLAY_BUTTON_MODE_PRESSED:
+			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_MODE);
+			break;
+
+		case AC_DISPLAY_GAME_OVER_NEXT:
+			g_new_high_score_rank = game_update_high_score(g_score);
+			if (g_new_high_score_rank > 0 && g_game_setting.sound_en) {
+				BUZZER_PlaySound(BUZZER_SOUND_HIGHSCORE);
+			} else if (g_game_setting.sound_en) {
+				BUZZER_PlaySound(BUZZER_SOUND_LOWSCORE);
+			}
+			SCREEN_TRAN(scr_game_gameover_handle, &scr_game_gameover);
+			break;
 	}
-	
-	view_render.setTextSize(2);
-	char temp_final[12];
-	xsprintf(temp_final, "%u", (unsigned int)g_score);
-	int16_t w = strlen(temp_final) * 12;
-	view_render.setCursor((128 - w) / 2, 28);
-	view_render.print(temp_final);
-	
-	view_render.drawBitmap(30, 48, icon_play, 8, 8, WHITE);
-	view_render.drawBitmap(60, 48, icon_trophy, 8, 8, WHITE);
-	view_render.drawBitmap(90, 48, icon_menu, 8, 8, WHITE);
-	
-	uint8_t selected_x = 30 + (g_show_score_selected * 30);
-	view_render.drawRect(selected_x - 3, 45, 14, 14, WHITE);
 }
