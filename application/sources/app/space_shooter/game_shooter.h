@@ -2,6 +2,7 @@
 #define __GAME_SHOOTER_H__
 
 #include "app.h"
+#include "game_save.h"
 
 #define MAX_ENEMIES 35
 #define MAX_BULLETS 20
@@ -57,6 +58,7 @@ extern int8_t g_transition_timer;
 extern uint16_t g_tick_count;
 extern uint8_t g_shoot_cooldown;
 extern int8_t enemy_dir;
+extern uint8_t enemy_move_ticks;
 extern bool g_is_moving_left;
 extern bool g_is_moving_right;
 
