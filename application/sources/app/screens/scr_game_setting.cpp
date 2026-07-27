@@ -36,33 +36,27 @@ static void view_scr_game_setting() {
 	
 	view_render.drawRect(0, 0, 128, 64, WHITE);
 	view_render.setTextSize(1);
-	view_render.setCursor(CENTER_X(8, 6), 4);
+	view_render.setCursor(CENTER_X(8, 6), 6);
 	view_render.print("SETTINGS");
-	view_render.drawLine(10, 14, 117, 14, WHITE);
+	view_render.drawLine(10, 16, 117, 16, WHITE);
 	
-	const char* diff_names[] = {"EASY", "NORMAL", "HARD"};
-	char opt_str[32];
+	view_render.setCursor(26, 22);
+	view_render.print("Sound:");
+	view_render.setCursor(80, 22);
+	view_render.print(g_game_setting.sound_en ? "ON" : "OFF");
 	
-	for (int i = 0; i < 3; i++) {
-		if (i == 0) {
-			strcpy(opt_str, "SOUND: ");
-			strcat(opt_str, g_game_setting.sound_en ? "ON" : "OFF");
-		} else if (i == 1) {
-			strcpy(opt_str, "DIFF: ");
-			strcat(opt_str, diff_names[g_game_setting.difficulty % 3]);
-		} else {
-			strcpy(opt_str, "BACK");
-		}
-		
-		if (i == setting_selected) {
-			view_render.fillRect(15, 20 + i * 13, 98, 11, WHITE);
-			view_render.setTextColor(BLACK);
-		} else {
-			view_render.setTextColor(WHITE);
-		}
-		view_render.setCursor(CENTER_X(strlen(opt_str), 6), 22 + i * 13);
-		view_render.print(opt_str);
-	}
+	view_render.setCursor(26, 34);
+	view_render.print("Diff:");
+	view_render.setCursor(80, 34);
+	if (g_game_setting.difficulty == 0) view_render.print("EASY");
+	else if (g_game_setting.difficulty == 1) view_render.print("MED");
+	else view_render.print("HARD");
+	
+	view_render.setCursor(26, 48);
+	view_render.print("Back");
+	
+	view_render.setCursor(14, 22 + setting_selected * 13);
+	view_render.print(">");
 }
 
 void scr_game_setting_handle(ak_msg_t* msg) {

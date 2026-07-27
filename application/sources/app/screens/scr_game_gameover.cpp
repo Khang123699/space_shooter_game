@@ -27,34 +27,36 @@ view_screen_t scr_game_gameover = {
 };
 
 static void view_scr_game_gameover() {
-	for (int i = 0; i < MAX_STARS; i++) {
-		view_render.drawPixel(g_stars[i].x, g_stars[i].y, WHITE);
+	// 1. GAME OVER Text falling from top
+	int y_pos = -12 + (int)gameover_anim_frame;
+	if (y_pos > 8) {
+		y_pos = 8;
+	}
+	view_render.setTextSize(2);
+	view_render.setCursor(CENTER_X(9, 12), y_pos);
+	view_render.print("GAME OVER");
+
+	// 2. SCORE & STAGE
+	if (gameover_anim_frame >= 20) {
+		view_render.setTextSize(1);
+		char str_score[20];
+		xsprintf(str_score, "SCORE: %u", (unsigned int)g_score);
+		view_render.setCursor(CENTER_X(strlen(str_score), 6), 28);
+		view_render.print(str_score);
+
+		char str_stage[20];
+		xsprintf(str_stage, "STAGE: %u", (unsigned int)g_stage);
+		view_render.setCursor(CENTER_X(strlen(str_stage), 6), 38);
+		view_render.print(str_stage);
 	}
 
-	// 1. Exploding Spaceship (Particles)
-	if (gameover_anim_frame <= 20) {
-		int r = gameover_anim_frame / 2;
-		int cx = g_player_x + 4;
-		int cy = 58;
-		
-		view_render.drawPixel(cx - r, cy - r, WHITE);
-		view_render.drawPixel(cx + r, cy - r, WHITE);
-		view_render.drawPixel(cx - r, cy + r, WHITE);
-		view_render.drawPixel(cx + r, cy + r, WHITE);
-		view_render.drawPixel(cx, cy - r - 2, WHITE);
-		view_render.drawPixel(cx, cy + r + 2, WHITE);
-		view_render.drawPixel(cx - r - 2, cy, WHITE);
-		view_render.drawPixel(cx + r + 2, cy, WHITE);
-		
-		if (gameover_anim_frame < 10) {
-			view_render.drawPixel(cx, cy, WHITE);
+	// 3. Blinking Instruction 
+	if (gameover_anim_frame >= 30) {
+		if ((gameover_anim_frame / 5) % 2 == 0) {
+			view_render.setCursor(CENTER_X(18, 6), 52);
+			view_render.print("Press MODE to next");
 		}
 	}
-
-	// 2. GAME OVER Text
-	view_render.setTextSize(2);
-	view_render.setCursor(CENTER_X(9, 12), 24);
-	view_render.print("GAME OVER");
 }
 
 void scr_game_gameover_handle(ak_msg_t* msg) {
@@ -66,13 +68,8 @@ void scr_game_gameover_handle(ak_msg_t* msg) {
 			break;
 
 		case AC_DISPLAY_GAME_UI_ANIM_TICK:
-			game_shooter_update_stars();
-			if (gameover_anim_frame < 60) {
-				gameover_anim_frame++;
-				if (gameover_anim_frame == 60) {
-					SCREEN_TRAN(scr_game_showscore_handle, &scr_game_showscore);
-				}
-			}
+			gameover_anim_frame++;
+			task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
 			break;
 
 		case AC_DISPLAY_SHOW_IDLE:

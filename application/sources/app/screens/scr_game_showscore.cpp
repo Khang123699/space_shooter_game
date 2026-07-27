@@ -30,10 +30,6 @@ view_screen_t scr_game_showscore = {
 };
 
 static void view_scr_game_showscore() {
-	for (int i = 0; i < MAX_STARS; i++) {
-		view_render.drawPixel(g_stars[i].x, g_stars[i].y, WHITE);
-	}
-
 	view_render.setTextSize(1);
 	if (g_new_high_score_rank > 0) {
 		view_render.setCursor(CENTER_X(15, 6), 6);
@@ -60,18 +56,16 @@ static void view_scr_game_showscore() {
 	view_render.drawBitmap(90, 48, icon_menu, 8, 8, WHITE);
 	
 	uint8_t selected_x = 30 + (show_score_selected * 30);
-	view_render.drawRect(selected_x - 3, 45, 14, 14, WHITE);
+	view_render.fillRect(selected_x, 58, 8, 2, WHITE);
 }
 
 void scr_game_showscore_handle(ak_msg_t* msg) {
 	switch (msg->sig) {
 		case SCREEN_ENTRY:
-			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK, 50, TIMER_PERIODIC);
 			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
 			break;
 
 		case AC_DISPLAY_GAME_UI_ANIM_TICK:
-			game_shooter_update_stars();
 			break;
 
 		case AC_DISPLAY_SHOW_IDLE:

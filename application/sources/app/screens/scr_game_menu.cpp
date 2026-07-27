@@ -5,6 +5,7 @@
 #include "buzzer.h"
 #include "timer.h"
 #include "task_list.h"
+#include "game_bitmaps.h"
 #include <string.h>
 
 #define CENTER_X(str_len, char_width) ((128 - (str_len) * (char_width)) / 2)
@@ -42,17 +43,24 @@ static void view_scr_game_menu() {
 	view_render.print("SPACE SHOOTER");
 	view_render.drawLine(10, 14, 117, 14, WHITE);
 	
-	const char* menu_items[] = {"PLAY GAME", "SETTINGS", "HIGH SCORES", "EXIT"};
-	for (int i = 0; i < 4; i++) {
-		if (i == current_location) {
-			view_render.fillRect(15, 17 + i * 11, 98, 10, WHITE);
-			view_render.setTextColor(BLACK);
-		} else {
-			view_render.setTextColor(WHITE);
-		}
-		view_render.setCursor(CENTER_X(strlen(menu_items[i]), 6), 18 + i * 11);
-		view_render.print(menu_items[i]);
-	}
+	view_render.drawBitmap(18, 18, icon_play, 8, 8, WHITE);
+	view_render.setCursor(32, 18);
+	view_render.print("Play");
+	
+	view_render.drawBitmap(18, 29, icon_setting, 8, 8, WHITE);
+	view_render.setCursor(32, 29);
+	view_render.print("Setting");
+	
+	view_render.drawBitmap(18, 40, icon_trophy, 8, 8, WHITE);
+	view_render.setCursor(32, 40);
+	view_render.print("High score");
+	
+	view_render.drawBitmap(18, 51, icon_exit, 8, 8, WHITE);
+	view_render.setCursor(32, 51);
+	view_render.print("Exit");
+	
+	view_render.setCursor(6, 18 + current_location * 11);
+	view_render.print(">");
 }
 
 void scr_game_menu_handle(ak_msg_t* msg) {
