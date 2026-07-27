@@ -56,7 +56,7 @@ static void view_scr_game_showscore() {
 	view_render.drawBitmap(90, 48, icon_menu, 8, 8, WHITE);
 	
 	uint8_t selected_x = 30 + (show_score_selected * 30);
-	view_render.fillRect(selected_x, 58, 8, 2, WHITE);
+	view_render.drawRect(selected_x - 3, 45, 14, 14, WHITE);
 }
 
 void scr_game_showscore_handle(ak_msg_t* msg) {
