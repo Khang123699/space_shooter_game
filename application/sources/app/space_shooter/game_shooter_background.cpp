@@ -1,4 +1,5 @@
 #include "game_shooter.h"
+#include "task_list.h"
 #include <stdlib.h>
 
 // Initialize stars for parallax background
@@ -33,4 +34,5 @@ void game_shooter_update_stars() {
 			g_stars[i].speed = (rand() % 2) + 1;
 		}
 	}
+	task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
 }

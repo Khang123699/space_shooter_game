@@ -58,6 +58,7 @@ static void view_scr_game_menu() {
 void scr_game_menu_handle(ak_msg_t* msg) {
 	switch (msg->sig) {
 		case SCREEN_ENTRY:
+			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK, 50, TIMER_PERIODIC);
 			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
 			break;
 

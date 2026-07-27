@@ -40,7 +40,6 @@ typedef struct {
 
 // Exported global variables for Logic and UI Screens
 extern uint8_t g_new_high_score_rank;
-extern bool g_render_pending;
 
 extern int16_t g_player_x;
 extern uint8_t g_player_blink;

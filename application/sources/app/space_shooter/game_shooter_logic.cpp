@@ -6,7 +6,6 @@
 #include <stdlib.h>
 
 uint8_t g_new_high_score_rank = 0;
-bool g_render_pending = false;
 
 int16_t g_player_x = 60;
 uint8_t g_player_blink = 0;
@@ -39,7 +38,6 @@ void game_logic_init() {
 	g_tick_count = 0;
 	g_shoot_cooldown = 0;
 	g_new_high_score_rank = 0;
-	g_render_pending = false;
 	g_is_moving_left = false;
 	g_is_moving_right = false;
 	enemy_dir = 1;
@@ -97,9 +95,6 @@ void game_logic_update() {
 	game_stage_update();
 	game_check_game_over();
 	
-	// Force a redraw of the UI frame with new positions if not already rendering
-	if (!g_render_pending) {
-		g_render_pending = true;
-		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
-	}
+	// Force a redraw of the UI frame with new positions
+	task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
 }
