@@ -102,11 +102,11 @@ The core application logic is located within the `application/sources/app` direc
 
 #### Procedure for Modifying UI Components (Example: Title Screen)
 
-**Step 3.3.1 —** Inspect the header definitions in `screens/scr_game_ui.h` to understand the UI rendering API.
+**Step 3.3.1 —** Inspect the header definitions in `screens/screens.h` to understand the UI rendering API.
 
-**Step 3.3.2 —** Modify the implementation in `scr_game_ui_menu.cpp`. This file processes bitmap data and updates entity coordinates for the Title Screen.
+**Step 3.3.2 —** Modify the implementation in `scr_game_title.cpp`. This file processes bitmap data and updates entity coordinates for the Title Screen.
 
-**Step 3.3.3 —** If new source files are introduced (e.g., `screens_bitmap.cpp`), they must be appended to the `Makefile.mk` list within the `screens/` directory to be included in the compilation target.
+**Step 3.3.3 —** If new source files are introduced (e.g., `scr_game_new.cpp`), they must be appended to the `Makefile.mk` list within the `screens/` directory to be included in the compilation target.
 
 **Step 3.3.4 —** Execute the build script and flash the resulting binary to the MCU.
 

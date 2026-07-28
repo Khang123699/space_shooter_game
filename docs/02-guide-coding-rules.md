@@ -52,8 +52,8 @@ Source and header files always carry a module prefix so you can identify the mod
 
 | Prefix | Meaning | Example |
 |---|---|---|
-| `scr_*` | Handler of a screen | `scr_game_ui_play.cpp`, `scr_game_ui.h` |
-| `game_shooter_*` | Object belonging to the Space Shooter game | `game_shooter_enemy.cpp`, `game_shooter.h` |
+| `scr_*` | Handler of a screen | `scr_game_play.cpp`, `screens.h` |
+| `game_shooter_*` | Object belonging to the Space Shooter game | `game_shooter_logic.cpp`, `game_shooter.h` |
 
 Each game defines its own short prefix (for example `game_shooter_*` for Space Shooter) and applies it consistently to every file in that game's folder.
 
@@ -109,7 +109,7 @@ Signals are the **public contract** between tasks. Always use the full prefix â€
 
 | Pattern | Applied to | Example |
 |---|---|---|
-| `<PREFIX>_<TASK>_<ACTION>` | Task signals | `AC_DISPLAY_GAME_UI_INIT` |
+| `<PREFIX>_<TASK>_<ACTION>` | Task signals | `AC_DISPLAY_GAME_UI_ANIM_TICK` |
 
 Declare each task's signal set in `app.h` as its own enum block, anchored to `AK_USER_DEFINE_SIG` (or `AK_SYS_DEFINE_SIG` for system signals):
 
@@ -135,10 +135,10 @@ Use the pattern `<PREFIX>_<NAME>_ID`, fully uppercased, registered in `task_list
 AC_TASK_DISPLAY_ID
 ```
 
-The corresponding handler in `task_list.cpp` keeps the same name, replacing the `_ID` suffix with `_handle` and lowercased:
+The corresponding handler in `task_list.cpp` generally uses the prefix `task_` or suffix `_task` and is lowercased:
 
 ```cpp
-{AC_TASK_DISPLAY_ID, TASK_PRI_LEVEL_8, ac_task_display_handle},
+{AC_TASK_DISPLAY_ID, TASK_PRI_LEVEL_4, task_display},
 ```
 
 ### 7. Data types and typedef
@@ -162,10 +162,10 @@ Types provided by the framework follow the same pattern (`ak_msg_t`, `view_scree
 Use `lower_snake_case` with the module name as prefix, so that grepping the prefix returns every entry point of that module:
 
 ```cpp
-void game_shooter_update();
-void game_shooter_update_player();
-void game_shooter_spawn_enemy();
-void game_shooter_update_bullets();
+void game_logic_init();
+void game_logic_update();
+void game_player_shoot();
+void game_player_move();
 ```
 
 ### 9. Variables
@@ -175,10 +175,10 @@ Use `lower_snake_case`. Do not start names with an underscore.
 - **Globals shared between modules:** declare `extern` in the header, define exactly once in the `.cpp` of the owning module.
 
   ```cpp
-  // game_shooter_player.h
+  // space_shooter/game_shooter.h
   extern int16_t g_player_x;
   extern uint8_t g_lives;
-  extern uint16_t g_score;
+  extern uint32_t g_score;
   ```
 
 - **Module-internal variables:** declare `static` in the `.cpp`.
