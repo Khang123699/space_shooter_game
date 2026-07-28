@@ -27,6 +27,25 @@ view_screen_t scr_game_gameover = {
 };
 
 static void view_scr_game_gameover() {
+	// Exploding Spaceship 
+	if (gameover_anim_frame <= 20) {
+		int r = gameover_anim_frame / 2;
+		int cx = g_player_x + 4;
+		int cy = 58;
+		
+		view_render.drawPixel(cx - r, cy - r, WHITE);
+		view_render.drawPixel(cx + r, cy - r, WHITE);
+		view_render.drawPixel(cx - r, cy + r, WHITE);
+		view_render.drawPixel(cx + r, cy + r, WHITE);
+		view_render.drawPixel(cx, cy - r - 2, WHITE);
+		view_render.drawPixel(cx, cy + r + 2, WHITE);
+		view_render.drawPixel(cx - r - 2, cy, WHITE);
+		view_render.drawPixel(cx + r + 2, cy, WHITE);
+		
+		if (gameover_anim_frame < 10) {
+			view_render.drawPixel(cx, cy, WHITE);
+		}
+	}
 	// 1. GAME OVER Text falling from top
 	int y_pos = -12 + (int)gameover_anim_frame;
 	if (y_pos > 8) {
@@ -52,7 +71,7 @@ static void view_scr_game_gameover() {
 
 	// 3. Blinking Instruction 
 	if (gameover_anim_frame >= 30) {
-		if ((gameover_anim_frame / 5) % 2 == 0) {
+		if ((gameover_anim_frame / 10) % 2 == 0) {
 			view_render.setCursor(CENTER_X(18, 6), 52);
 			view_render.print("Press MODE to next");
 		}

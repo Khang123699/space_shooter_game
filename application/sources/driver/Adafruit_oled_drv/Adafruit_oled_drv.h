@@ -5,7 +5,7 @@
 #include "Adafruit_GFX.h"
 
 #if defined (SH1106_DRIVER_EN)
-#define OLED_COL_OFFSET 0
+#define OLED_COL_OFFSET 2
 #elif defined (SSD1309_DRIVER_EN)
 #define OLED_COL_OFFSET 0
 #else

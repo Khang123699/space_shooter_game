@@ -47,7 +47,7 @@ static void view_scr_game_title() {
 	view_render.print("SHOOTER");
 	
 	view_render.setTextSize(1);
-	if ((g_tick_count / 5) % 2 == 0) { // Blink every ~0.5s
+	if ((g_tick_count / 10) % 2 == 0) { // Blink every ~0.5s
 		view_render.setCursor(CENTER_X(18, 6), 56);
 		view_render.print("PRESS MODE TO PLAY");
 	}
