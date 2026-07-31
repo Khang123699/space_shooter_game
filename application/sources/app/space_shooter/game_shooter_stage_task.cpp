@@ -40,9 +40,6 @@ void game_check_game_over() {
 	if (g_lives <= 0) {
 		// Stop logic timer to pause the game world
 		timer_remove_attr(AC_TASK_GAME_PLAYER_ID, AC_GAME_UPDATE_TICK);
-		timer_remove_attr(AC_TASK_GAME_ENEMY_ID, AC_GAME_UPDATE_TICK);
-		timer_remove_attr(AC_TASK_GAME_BULLET_ID, AC_GAME_UPDATE_TICK);
-		timer_remove_attr(AC_TASK_GAME_STAGE_ID, AC_GAME_UPDATE_TICK);
 		// Signal UI task to transition to Game Over screen
 		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_OVER_NEXT);
 	}
