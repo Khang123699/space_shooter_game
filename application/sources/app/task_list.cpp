@@ -19,7 +19,10 @@ const task_t app_task_table[] = {
 	{AC_TASK_UART_IF_ID			,	TASK_PRI_LEVEL_4	,	task_uart_if		},
 	{AC_TASK_DBG_ID				,	TASK_PRI_LEVEL_4	,	task_dbg			},
 	{AC_TASK_DISPLAY_ID			,	TASK_PRI_LEVEL_4	,	task_display		},
-	{AC_TASK_GAME_SHOOTER_ID    ,   TASK_PRI_LEVEL_4    ,   game_shooter_task   },
+	{AC_TASK_GAME_PLAYER_ID     ,   TASK_PRI_LEVEL_4    ,   game_player_task    },
+	{AC_TASK_GAME_ENEMY_ID      ,   TASK_PRI_LEVEL_4    ,   game_enemy_task     },
+	{AC_TASK_GAME_BULLET_ID     ,   TASK_PRI_LEVEL_4    ,   game_bullet_task    },
+	{AC_TASK_GAME_STAGE_ID      ,   TASK_PRI_LEVEL_4    ,   game_stage_task     },
 	
 	#if defined(TASK_ZIGBEE_EN)
 	{AC_TASK_ZIGBEE_ID			,	TASK_PRI_LEVEL_4	,	task_zigbee			},

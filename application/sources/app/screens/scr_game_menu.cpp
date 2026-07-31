@@ -1,5 +1,9 @@
 #include "scr_game_menu.h"
-#include "game_shooter.h"
+#include "game_shooter_player_task.h"
+#include "game_shooter_enemy_task.h"
+#include "game_shooter_bullet_task.h"
+#include "game_shooter_stage_task.h"
+#include "game_shooter_render.h"
 #include "game_save.h"
 #include "view_render.h"
 #include "buzzer.h"
@@ -103,7 +107,7 @@ void scr_game_menu_handle(ak_msg_t* msg) {
 			switch (current_location) {
 				case 0:
 					SCREEN_TRAN(scr_game_play_handle, &scr_game_play);
-					task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_START_REQ);
+					task_post_pure_msg(AC_TASK_GAME_PLAYER_ID, AC_GAME_START_REQ);
 					break;
 				case 1:
 					SCREEN_TRAN(scr_game_setting_handle, &scr_game_setting);

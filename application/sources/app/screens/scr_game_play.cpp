@@ -1,5 +1,9 @@
 #include "scr_game_play.h"
-#include "game_shooter.h"
+#include "game_shooter_player_task.h"
+#include "game_shooter_enemy_task.h"
+#include "game_shooter_bullet_task.h"
+#include "game_shooter_stage_task.h"
+#include "game_shooter_render.h"
 #include "game_save.h"
 #include "view_render.h"
 #include "buzzer.h"
@@ -199,23 +203,23 @@ void scr_game_play_handle(ak_msg_t* msg) {
 			break;
 
 		case AC_DISPLAY_BUTTON_UP_PRESSED:
-			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_UP);
+			task_post_pure_msg(AC_TASK_GAME_PLAYER_ID, AC_GAME_BTN_UP);
 			break;
 
 		case AC_DISPLAY_BUTTON_UP_RELEASED:
-			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_UP_RELEASED);
+			task_post_pure_msg(AC_TASK_GAME_PLAYER_ID, AC_GAME_BTN_UP_RELEASED);
 			break;
 
 		case AC_DISPLAY_BUTTON_DOWN_PRESSED:
-			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_DOWN);
+			task_post_pure_msg(AC_TASK_GAME_PLAYER_ID, AC_GAME_BTN_DOWN);
 			break;
 
 		case AC_DISPLAY_BUTTON_DOWN_RELEASED:
-			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_DOWN_RELEASED);
+			task_post_pure_msg(AC_TASK_GAME_PLAYER_ID, AC_GAME_BTN_DOWN_RELEASED);
 			break;
 
 		case AC_DISPLAY_BUTTON_MODE_PRESSED:
-			task_post_pure_msg(AC_TASK_GAME_SHOOTER_ID, AC_GAME_BTN_MODE);
+			task_post_pure_msg(AC_TASK_GAME_PLAYER_ID, AC_GAME_BTN_MODE);
 			break;
 
 		case AC_DISPLAY_GAME_OVER_NEXT:

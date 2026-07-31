@@ -1,6 +1,10 @@
 #include "scr_idle.h"
 #include "screens.h"
-#include "game_shooter.h"
+#include "game_shooter_player_task.h"
+#include "game_shooter_enemy_task.h"
+#include "game_shooter_bullet_task.h"
+#include "game_shooter_stage_task.h"
+#include "game_shooter_render.h"
 
 #define MAX_BALL_DISPLAY (5)
 #define BALL_MOVE_STEP	 (2)

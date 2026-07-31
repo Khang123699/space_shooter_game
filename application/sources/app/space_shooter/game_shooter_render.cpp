@@ -1,6 +1,10 @@
-#include "game_shooter.h"
+#include "game_shooter_render.h"
+#include "game_shooter_player_task.h" // For g_tick_count
+#include "app.h"
 #include "task_list.h"
 #include <stdlib.h>
+
+star_t g_stars[MAX_STARS];
 
 // Initialize stars for parallax background
 void game_background_init() {
@@ -36,5 +40,9 @@ void game_shooter_update_stars() {
 			g_stars[i].speed = (rand() % 2) + 1;
 		}
 	}
+	task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
+}
+
+void game_shooter_request_render() {
 	task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_RENDER_SCREEN);
 }
