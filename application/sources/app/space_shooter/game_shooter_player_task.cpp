@@ -127,9 +127,6 @@ void game_player_task(ak_msg_t* msg) {
 		case AC_GAME_START_REQ:
 			game_logic_init();
 			timer_set(AC_TASK_GAME_PLAYER_ID, AC_GAME_UPDATE_TICK, 50, TIMER_PERIODIC);
-			timer_set(AC_TASK_GAME_ENEMY_ID, AC_GAME_UPDATE_TICK, 50, TIMER_PERIODIC);
-			timer_set(AC_TASK_GAME_BULLET_ID, AC_GAME_UPDATE_TICK, 50, TIMER_PERIODIC);
-			timer_set(AC_TASK_GAME_STAGE_ID, AC_GAME_UPDATE_TICK, 50, TIMER_PERIODIC);
 			break;
 			
 		case AC_GAME_BTN_MODE:
@@ -154,6 +151,9 @@ void game_player_task(ak_msg_t* msg) {
 			
 		case AC_GAME_UPDATE_TICK:
 			update_player_sliding_and_timers();
+			task_post_pure_msg(AC_TASK_GAME_ENEMY_ID, AC_GAME_UPDATE_TICK);
+			task_post_pure_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_UPDATE_TICK);
+			task_post_pure_msg(AC_TASK_GAME_STAGE_ID, AC_GAME_UPDATE_TICK);
 			break;
 	}
 }
