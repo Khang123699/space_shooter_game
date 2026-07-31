@@ -177,11 +177,13 @@ void game_boss_shoot(int e, int ew, int boss_max_hp) {
 			g_bullets[i].y = g_enemies[e].y + 12;
 			g_bullets[i].is_enemy = true;
 			
-			if (bullets_spawned == 0) g_bullets[i].vx = 0;
-			else if (bullets_spawned == 1) g_bullets[i].vx = -1;
-			else if (bullets_spawned == 2) g_bullets[i].vx = 1;
-			else if (bullets_spawned == 3) g_bullets[i].vx = -2;
-			else if (bullets_spawned == 4) g_bullets[i].vx = 2;
+			switch (bullets_spawned) {
+				case 0: g_bullets[i].vx = 0; break;
+				case 1: g_bullets[i].vx = -1; break;
+				case 2: g_bullets[i].vx = 1; break;
+				case 3: g_bullets[i].vx = -2; break;
+				case 4: g_bullets[i].vx = 2; break;
+			}
 			
 			bullets_spawned++;
 		}
@@ -254,9 +256,11 @@ static void handle_enemy_shooting(int e, int ew, int boss_max_hp) {
 					g_bullets[i].x = g_enemies[e].x + ew / 2;
 					g_bullets[i].y = g_enemies[e].y + 8;
 					g_bullets[i].is_enemy = true;
-					if (bullets_spawned == 0) g_bullets[i].vx = 0;
-					else if (bullets_spawned == 1) g_bullets[i].vx = -1;
-					else if (bullets_spawned == 2) g_bullets[i].vx = 1;
+					switch (bullets_spawned) {
+						case 0: g_bullets[i].vx = 0; break;
+						case 1: g_bullets[i].vx = -1; break;
+						case 2: g_bullets[i].vx = 1; break;
+					}
 					bullets_spawned++;
 				}
 			}

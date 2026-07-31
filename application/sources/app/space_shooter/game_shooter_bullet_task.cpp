@@ -202,15 +202,7 @@ static void update_powerup_collisions() {
 							g_enemies[e].active = false;
 							uint32_t base_score = (g_enemies[e].type == 4) ? 100 : 10;
 							g_score += base_score + (base_score * g_game_setting.difficulty) / 2;
-							for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
-								if (!g_explosions[ex].active) {
-									g_explosions[ex].active = true;
-									g_explosions[ex].x = g_enemies[e].x + (g_enemies[e].type >= 4 ? 4 : 0);
-									g_explosions[ex].y = g_enemies[e].y;
-									g_explosions[ex].timer = 5;
-									break;
-								}
-							}
+							game_spawn_explosion(g_enemies[e].x + (g_enemies[e].type >= 4 ? 4 : 0), g_enemies[e].y);
 						}
 					}
 				}
