@@ -35,12 +35,12 @@
 
 ## Introduction
 
-Space Shooter is a classic arcade shoot 'em up game built on top of the AK Embedded Base Kit — a hands-on platform for embedded programming enthusiasts to explore event-driven design in depth. While building and playing Space Shooter, you put the following core concepts of modern embedded engineering into practice:
+Space Shooter is a classic arcade shooter game built on top of the AK Embedded Base Kit — a hands-on platform for embedded programming enthusiasts to explore event-driven design in depth. While building and playing Space Shooter, you put the following core concepts of modern embedded engineering into practice:
 
-- **System design:** Modelling complex logic flows with UML.
-- **Process management:** Coordinating cooperative Tasks and scheduling them efficiently.
-- **Communication:** Using Signals, Timers, and Messages to react in real time.
-- **Control logic:** Building robust state machines for the player, the enemies, and the overall match progression.
+* **System design:** Modelling complex logic flows with UML.
+* **Process management:** Coordinating cooperative Tasks and scheduling them efficiently.
+* **Communication:** Using Signals, Timers, and Messages to react in real time.
+* **Control logic:** Building robust state machines for the player, the enemies, and the overall match progression.
 
 ### I. Hardware
 
