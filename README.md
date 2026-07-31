@@ -14,10 +14,10 @@
 
 ## GamePlay Demo
 <div align="center">
-  <video src="https://github.com/user-attachments/assets/e4980cdb-4362-4278-af67-74cd10bfc62f" controls width="480"></video>
+  <video src="https://github.com/user-attachments/assets/78dac83e-d2ad-44c3-942c-a80e8f1aae6d" controls width="480"></video>
 </div>
 <div align="center">
-  <video src="https://github.com/user-attachments/assets/a39ffca7-9dc8-441a-9a1d-c7b8cb1fe944" controls width="480"></video>
+  <video src="https://github.com/user-attachments/assets/f65ba539-5f63-459f-93ae-a78fa13b1343" controls width="480"></video>
 </div>
 
 <hr>
