@@ -30,7 +30,7 @@ The conventions below are drawn directly from the existing source code. You can 
 
 | Style | Description | Example in project | Applied to |
 |---|---|---|---|
-| `lower_snake_case` | Lowercase letters, words separated by underscore `_` | `game_shooter_logic`, `g_score` | Variables, functions, typedefs, source file names, folder names |
+| `lower_snake_case` | Lowercase letters, words separated by underscore `_` | `game_shooter_player_task`, `g_score` | Variables, functions, typedefs, source file names, folder names |
 | `UPPER_SNAKE_CASE` | Uppercase letters, words separated by underscore `_` | `MAX_ENEMIES`, `AC_GAME_BTN_UP`, `AC_TASK_DISPLAY_ID` | `#define` constants, signal enums, task IDs, macros |
 | `kebab-case` | Lowercase letters, words separated by hyphen `-` | `02-guide-coding-rules.md` | Documentation file names under `docs/` |
 
@@ -53,7 +53,7 @@ Source and header files always carry a module prefix so you can identify the mod
 | Prefix | Meaning | Example |
 |---|---|---|
 | `scr_*` | Handler of a screen | `scr_game_play.cpp`, `screens.h` |
-| `game_shooter_*` | Object belonging to the Space Shooter game | `game_shooter_logic.cpp`, `game_shooter.h` |
+| `game_shooter_*` | Object belonging to the Space Shooter game | `game_shooter_player_task.cpp`, `game_shooter_enemy_task.h` |
 
 Each game defines its own short prefix (for example `game_shooter_*` for Space Shooter) and applies it consistently to every file in that game's folder.
 
@@ -88,7 +88,7 @@ Pattern: `<OBJECT>_<PROPERTY>` or `<OBJECT>_<ACTION>` — the object always come
 Examples done right:
 
 ```cpp
-// game_shooter.h
+// game_shooter_player_task.h
 #define MAX_BULLETS            (20)
 #define MAX_ENEMIES            (35)
 #define MAX_POWERUPS           (3)
@@ -101,7 +101,7 @@ Examples done right:
 #define GAME_STATE_PLAY  (1)
 ```
 
-Group related constants in the right module header (`game_shooter.h` holds game constants, etc.). Never leave magic numbers scattered across `.cpp` files.
+Group related constants in the right module header (`game_shooter_player_task.h` holds game constants, etc.). Never leave magic numbers scattered across `.cpp` files.
 
 ### 5. Signal (enum values)
 
@@ -175,7 +175,7 @@ Use `lower_snake_case`. Do not start names with an underscore.
 - **Globals shared between modules:** declare `extern` in the header, define exactly once in the `.cpp` of the owning module.
 
   ```cpp
-  // space_shooter/game_shooter.h
+  // space_shooter/game_shooter_player_task.h
   extern int16_t g_player_x;
   extern uint8_t g_lives;
   extern uint32_t g_score;
@@ -184,7 +184,7 @@ Use `lower_snake_case`. Do not start names with an underscore.
 - **Module-internal variables:** declare `static` in the `.cpp`.
 
   ```cpp
-  // game_shooter_logic.cpp
+  // game_shooter_player_task.cpp
   static uint8_t s_boss_stage = 0;
   ```
 

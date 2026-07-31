@@ -1,33 +1,30 @@
 <h1 align="center">Game Object Sequences</h1>
 
-This document describes the runtime sequence of each main object in Space Shooter. Space Shooter centralizes object synchronization inside `game_shooter_logic.cpp`. All objects are evaluated periodically via the `AC_GAME_UPDATE_TICK` signal.
+This document describes the runtime sequence of each main object in Space Shooter. Space Shooter separates objects into independent tasks: Player, Enemy, Bullet, Stage, and a Render module. All objects are periodically evaluated via the `AC_GAME_UPDATE_TICK` signal routed through the task pipeline.
 
 ## I. Object Summary
 
-| Object | Data | Routine | Main responsibility |
+| Task / Module | Main Data | Routine | Main responsibility |
 |---|---|---|---|
-| Player | `g_player_x`, `g_lives` | `game_player_move()` | Controls the user-controlled unit and tracks volatile health parameters. |
-| Bullet | `g_bullets[]` | `game_bullets_update()` | Handles translation of projectiles and collision validation. |
-| Enemy | `g_enemies[]` | `game_enemy_update()` | Handles movement logic, pseudo-random generation, and boss spawning. |
-| Powerup | `g_powerups[]` | `game_powerups_update()` | Translates active modifiers (shield, super bullet, nuke) and handles expiration. |
-| Explosion | `g_explosions[]` | `update_explosions()` | Renders transient visual particle effects at entity destruction coordinates. |
-| Star | `g_stars[]` | `game_background_update()` | Background parallax rendering. |
+| `PLAYER` | `g_player_x`, `g_lives` | `update_player_sliding_and_timers()` | Controls the user-controlled unit, tracks volatile health parameters, and cooldowns. |
+| `BULLET` | `g_bullets[]` | `game_physics_update()` | Handles translation of projectiles, checks collisions (AABB / pixel-perfect), and spawns explosions. |
+| `ENEMY` | `g_enemies[]` | `game_enemy_update()` | Handles movement logic, enemy projectile generation, and boss spawning. Manages powerup drops. |
+| `STAGE` | `g_stage` | `game_stage_update()` | Checks wave transitions (when enemies are cleared) and routes to Game Over when lives are exhausted. |
+| Render Module | `g_stars[]` | `game_background_update()` | Moves background space effects (parallax) and coordinates screen rendering. (Not a separate task) |
 
-The main Game task (`game_shooter_task.cpp`) sets up a 50ms periodic timer generating `AC_GAME_UPDATE_TICK`. On each tick, `game_logic_update()` is invoked to synchronously fan out processing to each object routine.
+The Player task receives a 50ms periodic timer which dispatches `AC_GAME_UPDATE_TICK`. On each tick, it executes its logic and then sequentially pushes the signal down the pipeline to the other tasks.
 
 ## II. Player Object Sequence
 
-Player owns the coordinate `g_player_x` and state trackers (`g_lives`, `g_score`).
+The Player task owns the coordinate `g_player_x` and state trackers (`g_lives`, `g_score`).
 
 **Setup.** `game_logic_init()` parks the player at `x = 60` and sets `g_lives = 3`.
 
-**Input.** The hardware button driver translates physical presses into `AC_GAME_BTN_*_PRESSED` and `AC_GAME_BTN_*_RELEASED` messages. `game_shooter_task` catches these to toggle boolean flags (`g_is_moving_left`, `g_is_moving_right`).
+**Input.** Hardware button interrupts route asynchronous signals directly from the Display Task to `AC_TASK_GAME_PLAYER_ID`.
 
 **Per-tick.** Smooth sliding state is handled via `g_is_moving_left` and `g_is_moving_right` flags:
-- If a flag is active (button held) — calls `game_player_move()` to continuously adjust `g_player_x` and clamps to screen bounds.
+- If a flag is active (button held) — continuously adjusts `g_player_x` and clamps to screen bounds.
 - Blinking logic: `g_player_blink` is decremented each tick if `> 0`.
-
-**Reset.** Handled inside `game_logic_init()`.
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{'fontSize':'18px','primaryColor':'#1565c0','primaryTextColor':'#ffffff','primaryBorderColor':'#0d47a1','lineColor':'#90a4ae','signalColor':'#ffc107','signalTextColor':'#ffc107','actorBkg':'#1565c0','actorBorder':'#0d47a1','actorTextColor':'#ffffff','actorLineColor':'#90caf9','noteBkgColor':'#fff59d','noteTextColor':'#000000','noteBorderColor':'#f57f17','activationBkgColor':'#66bb6a','activationBorderColor':'#2e7d32','sequenceNumberColor':'#ffffff','loopTextColor':'#ffc107','labelBoxBkgColor':'#37474f','labelBoxBorderColor':'#90a4ae','labelTextColor':'#ffffff'},'sequence':{'actorMargin':120,'messageFontSize':17,'noteFontSize':15,'actorFontSize':17,'boxMargin':15,'boxTextMargin':8,'noteMargin':12,'useMaxWidth':true}}}%%
@@ -35,29 +32,21 @@ sequenceDiagram
     autonumber
     actor Btn as Button
     participant OS as OS Timer
-    participant Tsk as Game Task
-    participant Lgc as Logic Module
-
+    participant Tsk as Player Task
+    
     Note over Tsk: AC_GAME_START_REQ
-    Tsk->>Lgc: game_logic_init()
-    activate Lgc
-    Note right of Lgc: init g_player_x = 60, g_lives = 3
-    deactivate Lgc
-    Note over Tsk: arm 50 ms periodic tick (AC_GAME_UPDATE_TICK)
-
-    Btn->>OS: Hardware Interrupt
-    Note right of OS: HW Button buffer updated
-
+    Tsk->>Tsk: game_logic_init()
+    Note right of Tsk: init g_player_x = 60, g_lives = 3
+    Note over Tsk: Enable independent 50ms periodic timer
+    
+    Btn->>Tsk: UI Signal (e.g., AC_GAME_BTN_UP)
+    Note right of Tsk: Set flag g_is_moving_left = true
+    
     loop Each AC_GAME_UPDATE_TICK
         OS->>Tsk: AC_GAME_UPDATE_TICK
-        Tsk->>Lgc: game_logic_update()
-        activate Lgc
         alt g_is_moving_left == true
-            Note right of Lgc: game_player_move(2)<br/>g_player_x += 2<br/>clamp 0..120
-        else g_is_moving_right == true
-            Note right of Lgc: game_player_move(-2)<br/>g_player_x += (-2)<br/>clamp 0..120
+            Note right of Tsk: game_player_move(2)<br/>g_player_x += 2<br/>clamp 0..120
         end
-        deactivate Lgc
     end
 ```
 
@@ -65,52 +54,39 @@ sequenceDiagram
 
 ## III. Bullet Object Sequence
 
-Bullet owns the `g_bullets[MAX_BULLETS]` array. It handles shooting from the MODE button.
+Bullet task owns the `g_bullets[MAX_BULLETS]` array.
 
-**Setup.** `game_logic_init()` clears every slot to `0`.
+**Shooting.** On `AC_GAME_BTN_MODE`, the Player Task calls `game_player_shoot()` to spawn a new bullet. The Enemy Task can also spawn enemy bullets via `game_boss_shoot()`.
 
-**Input.** On `AC_GAME_BTN_MODE` the Game task calls `game_player_shoot()`. It picks the first free slot in `g_bullets[]`, spawns it at `(g_player_x + 4, 52)`, and sets `is_enemy = false`.
-
-**Per-tick.** Each `AC_GAME_UPDATE_TICK` calls `game_physics_update()`:
-- **Collision Check:** Player bullets are checked against active enemies. If `g_player_super_bullet_timer > 0` (Super Bullet active), each hit deals 3 damage instead of 1. Enemy bullets are checked against the player via pixel-perfect collision.
-- **Movement:** Visible bullets shift (`y -= speed` for player, `y += speed` for enemies). Bullets leaving the screen (`y < 0` or `y > 64`) are marked `active = false`.
-
-**Cross-task (Enemy).** `game_enemy_update()` may randomly spawn bullets targeting the player with `is_enemy = true`.
+**Per-tick.** Upon receiving `AC_GAME_UPDATE_TICK` from the queue, it calls `game_physics_update()`:
+- **Collision Check:** Player bullets are checked against active enemies. Enemy bullets are checked against the player (pixel-perfect). If hit, triggers an Explosion.
+- **Movement:** Visible bullets translate (`y -= speed` or `y += speed`).
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{'fontSize':'18px','primaryColor':'#1565c0','primaryTextColor':'#ffffff','primaryBorderColor':'#0d47a1','lineColor':'#90a4ae','signalColor':'#ffc107','signalTextColor':'#ffc107','actorBkg':'#1565c0','actorBorder':'#0d47a1','actorTextColor':'#ffffff','actorLineColor':'#90caf9','noteBkgColor':'#fff59d','noteTextColor':'#000000','noteBorderColor':'#f57f17','activationBkgColor':'#66bb6a','activationBorderColor':'#2e7d32','sequenceNumberColor':'#ffffff','loopTextColor':'#ffc107','labelBoxBkgColor':'#37474f','labelBoxBorderColor':'#90a4ae','labelTextColor':'#ffffff'},'sequence':{'actorMargin':120,'messageFontSize':17,'noteFontSize':15,'actorFontSize':17,'boxMargin':15,'boxTextMargin':8,'noteMargin':12,'useMaxWidth':true}}}%%
 sequenceDiagram
     autonumber
-    actor Btn as Button
-    participant Tsk as Game Task
-    participant Plr as Player Routine
-    participant Phy as Physics Routine
-
-    Note over Tsk: AC_GAME_START_REQ
-    Tsk->>Plr: game_logic_init()
-    Note right of Plr: g_bullets[*]: active=false, x=y=0
-
-    Note over Btn,Tsk: MODE button fires asynchronously
-    Btn->>Tsk: AC_GAME_BTN_MODE
-    Tsk->>Plr: game_player_shoot()
-    activate Plr
-    Note right of Plr: pick free slot(s)<br/>active=true, is_enemy=false<br/>g_shoot_cooldown = 8
-    deactivate Plr
-
+    participant Q as AKOS Message Queue
+    participant Plr as Player Task
+    participant Bul as Bullet Task
+    
+    Plr->>Plr: Receive AC_GAME_BTN_MODE
+    Note right of Plr: game_player_shoot(): spawn new bullet
+    
     loop Each AC_GAME_UPDATE_TICK
-        Tsk->>Phy: game_physics_update()
-        activate Phy
-        Note right of Phy: Phase 1 — Collision
+        Q-)Bul: AC_GAME_UPDATE_TICK
+        activate Bul
+        Note right of Bul: Phase 1 — Collision
         loop for each active bullet
             opt Intersection detected
-                Note right of Phy: active=false, spawn explosion,<br/>deduct HP/lives
+                Note right of Bul: active=false, spawn explosion,<br/>call game_player_hit() / deduct enemy HP
             end
         end
-        Note right of Phy: Phase 2 — Movement
+        Note right of Bul: Phase 2 — Movement
         loop for each active bullet
-            Note right of Phy: adjust y by speed<br/>if offscreen, active=false
+            Note right of Bul: adjust y by speed<br/>if offscreen, active=false
         end
-        deactivate Phy
+        deactivate Bul
     end
 ```
 
@@ -118,83 +94,37 @@ sequenceDiagram
 
 ## IV. Enemy Object Sequence
 
-Enemy owns the `g_enemies[MAX_ENEMIES]` array.
+The Enemy Task manages the `g_enemies[MAX_ENEMIES]` and `g_powerups[MAX_POWERUPS]` arrays.
 
-**Setup.** `game_logic_init()` clears every slot, then invokes `game_enemy_spawn()` to populate the initial wave.
+**Setup & Spawn.** `game_enemy_spawn()` creates a wave or Boss based on `g_stage`. This is triggered at the start of the game or when the Stage Task detects the screen is clear.
 
 **Per-tick.** Each `AC_GAME_UPDATE_TICK` calls `game_enemy_update()`:
-- **Movement & Abilities:** Normal enemies (Type 1–3) move horizontally in sync with `enemy_dir` at a speed that scales with `g_stage`. The Boss (Type 4) utilizes an internal state machine to execute dynamic phases (Dash Charge, Dash Down, Dash Up, Summon) and an Enrage mode when HP < 50%. The Spread Shooter (Type 5) fires 3-way bursts. The Carrier (Type 6) periodically spawns new enemies.
-- **Spawn Check:** Handled by `game_stage_update()` — if all enemies are `active = false`, `g_stage` increments and starts a 90-tick (4.5s) transition timer before calling `game_enemy_spawn()`.
-
-**Collision.** `game_physics_update()` handles AABB intersections. For enemy-player collisions, normal enemies are destroyed upon impact, while the Boss survives to prevent instant mechanical bypass. When an enemy's HP drops to 0, the system adds to `g_score`, potentially spawns a Powerup, triggers an Explosion, and marks the slot `active = false`.
+- **Movement & Abilities:** Enemies move according to their internal states. The Boss executes dynamic phases. Carriers spawn minions.
+- **Powerups:** Translates active powerups falling down the screen.
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{'fontSize':'18px','primaryColor':'#1565c0','primaryTextColor':'#ffffff','primaryBorderColor':'#0d47a1','lineColor':'#90a4ae','signalColor':'#ffc107','signalTextColor':'#ffc107','actorBkg':'#1565c0','actorBorder':'#0d47a1','actorTextColor':'#ffffff','actorLineColor':'#90caf9','noteBkgColor':'#fff59d','noteTextColor':'#000000','noteBorderColor':'#f57f17','activationBkgColor':'#66bb6a','activationBorderColor':'#2e7d32','sequenceNumberColor':'#ffffff','loopTextColor':'#ffc107','labelBoxBkgColor':'#37474f','labelBoxBorderColor':'#90a4ae','labelTextColor':'#ffffff'},'sequence':{'actorMargin':120,'messageFontSize':17,'noteFontSize':15,'actorFontSize':17,'boxMargin':15,'boxTextMargin':8,'noteMargin':12,'useMaxWidth':true}}}%%
 sequenceDiagram
     autonumber
-    participant Tsk as Game Task
-    participant Lgc as Logic Module
-    participant Phy as Physics Routine
-    participant Enm as Enemy Routine
+    participant Q as AKOS Message Queue
+    participant Enm as Enemy Task
+    participant Stg as Stage Task
 
-    Note over Tsk: AC_GAME_START_REQ
-    Tsk->>Lgc: game_logic_init()
-    Lgc->>Enm: game_enemy_spawn()
+    Stg-)Q: Call spawn request (if clear)
+    Q-)Enm: AC_GAME_UPDATE_TICK (from pipeline)
     activate Enm
     Note right of Enm: initialize enemy wave based on g_stage
     deactivate Enm
 
     loop Each AC_GAME_UPDATE_TICK
-        Tsk->>Phy: game_physics_update()
-        activate Phy
-        Note right of Phy: Check bullet AABB vs enemies.<br/>On HP ≤ 0: active=false, add score,<br/>roll powerup chance, trigger explosion.
-        deactivate Phy
-
-        Tsk->>Enm: game_enemy_update()
+        Q-)Enm: AC_GAME_UPDATE_TICK
         activate Enm
         loop for each active enemy
-            Note right of Enm: Apply movement vectors<br/>Probabilistic projectile generation (is_enemy=true)
+            Note right of Enm: Apply movement vectors<br/>Generate hostile bullets (is_enemy=true)
         end
+        Note right of Enm: Move active powerups
         deactivate Enm
-        
-        opt all_dead == true
-            Tsk->>Lgc: g_stage++
-            Note right of Lgc: wait 90 ticks (4.5s) transition
-            Lgc->>Enm: game_enemy_spawn()
-        end
     end
 ```
 
 <p align="center"><strong><em>Figure 3:</em></strong> Enemy sequence logic</p>
-
-## V. Per-Tick Execution Order
-
-On every `AC_GAME_UPDATE_TICK` (50ms interval), `game_shooter_task` invokes `game_logic_update()` which processes logic in the following sequence:
-
-1. `update_player_sliding_and_timers()`: Updates smooth movement flags and countdown active timers (blink, shield, cooldown).
-2. `game_physics_update()`: Checks AABB collisions, handles bullet movement and damage.
-3. `game_enemy_update()`: Handles enemy translation and hostile bullet generation.
-4. `game_powerups_update()`: Translates active powerups.
-5. `game_stage_update()`: Wave validation, advances stage if all enemies are dead.
-6. `game_check_game_over()`: Transitions state if the player runs out of lives.
-7. Post `AC_DISPLAY_RENDER_SCREEN` to the UI task to update the interface.
-
-## VI. Code References
-
-| Object | Source file | Header file |
-|---|---|---|
-| Main Task | `game_shooter_task.cpp` | `game_shooter.h` |
-| Logic & Core Loop | `game_shooter_logic.cpp` | `game_shooter.h` |
-| Player (Move/Shoot) | `game_shooter_player.cpp` | `game_shooter.h` |
-| Bullet & Collision | `game_shooter_bullets.cpp` | `game_shooter.h` |
-| Physics Orchestrator | `game_shooter_physics.cpp` | `game_shooter.h` |
-| Background (Parallax) | `game_shooter_background.cpp` | `game_shooter.h` |
-| Enemy (Movement/AI) | `game_shooter_enemy.cpp` | `game_shooter.h` |
-| Enemy Spawn | `game_shooter_enemy_spawn.cpp` | `game_shooter.h` |
-| Boss | `game_shooter_boss.cpp` | `game_shooter.h` |
-| Carrier | `game_shooter_carrier.cpp` | `game_shooter.h` |
-| Stage & Powerup | `game_shooter_stage.cpp` | `game_shooter.h` |
-| Save Game | `game_save.cpp` | `game_save.h` |
-| UI & Screens | `screens/scr_game_*.cpp` | `screens/screens.h` |
-
-> **Note:** All files above are located in `application/sources/app/space_shooter/`, except UI & Screens which are in `application/sources/app/screens/`.
