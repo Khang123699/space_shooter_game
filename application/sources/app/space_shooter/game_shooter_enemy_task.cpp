@@ -6,6 +6,9 @@
 #include "app.h"
 #include <stdlib.h>
 
+enemy_t g_enemies[MAX_ENEMIES];
+powerup_t g_powerups[MAX_POWERUPS];
+
 int8_t enemy_dir = 1;
 uint8_t enemy_move_ticks = 0;
 

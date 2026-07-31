@@ -6,6 +6,7 @@
 #include "game_save.h"
 #include "timer.h"
 #include "task_list.h"
+#include "app.h"
 
 uint8_t g_stage = 1;
 int8_t g_transition_timer = 0;

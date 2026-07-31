@@ -7,6 +7,7 @@
 #include "game_bitmaps.h"
 #include "buzzer.h"
 #include <stdlib.h>
+#include "app.h"
 
 bullet_t g_bullets[MAX_BULLETS];
 explosion_t g_explosions[MAX_EXPLOSIONS];
