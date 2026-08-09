@@ -34,7 +34,7 @@ static void view_scr_game_gameover() {
 	// Exploding Spaceship 
 	if (gameover_anim_frame <= 20) {
 		int r = gameover_anim_frame / 2;
-		int cx = g_player_x + 4;
+		int cx = game_get_player_x() + 4;
 		int cy = 58;
 		
 		view_render.drawPixel(cx - r, cy - r, WHITE);
@@ -63,12 +63,12 @@ static void view_scr_game_gameover() {
 	if (gameover_anim_frame >= 20) {
 		view_render.setTextSize(1);
 		char str_score[20];
-		xsprintf(str_score, "SCORE: %u", (unsigned int)g_score);
+		xsprintf(str_score, "SCORE: %u", (unsigned int)game_get_score());
 		view_render.setCursor(CENTER_X(strlen(str_score), 6), 28);
 		view_render.print(str_score);
 
 		char str_stage[20];
-		xsprintf(str_stage, "STAGE: %u", (unsigned int)g_stage);
+		xsprintf(str_stage, "STAGE: %u", (unsigned int)game_get_stage());
 		view_render.setCursor(CENTER_X(strlen(str_stage), 6), 38);
 		view_render.print(str_stage);
 	}

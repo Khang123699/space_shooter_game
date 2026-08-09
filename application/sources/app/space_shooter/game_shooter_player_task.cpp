@@ -12,47 +12,52 @@
 #include "buzzer.h"
 #include <stdlib.h>
 
-int16_t g_player_x = 60;
-uint8_t g_player_blink = 0;
-uint16_t g_player_super_bullet_timer = 0;
-uint16_t g_player_shield_timer = 0;
-uint32_t g_score = 0;
-uint8_t g_lives = 3;
-uint16_t g_tick_count = 0;
-uint8_t g_shoot_cooldown = 0;
-bool g_is_moving_left = false;
-bool g_is_moving_right = false;
+static int16_t g_player_x = 60;
+static uint8_t g_player_blink = 0;
+static uint16_t g_player_super_bullet_timer = 0;
+static uint16_t g_player_shield_timer = 0;
+static uint32_t g_score = 0;
+static uint8_t g_lives = 3;
+static uint16_t g_tick_count = 0;
+static uint8_t g_shoot_cooldown = 0;
+static bool g_is_moving_left = false;
+static bool g_is_moving_right = false;
+
+int16_t game_get_player_x() { return g_player_x; }
+uint8_t game_get_player_blink() { return g_player_blink; }
+uint16_t game_get_player_shield_timer() { return g_player_shield_timer; }
+uint16_t game_get_player_super_bullet_timer() { return g_player_super_bullet_timer; }
+uint32_t game_get_score() { return g_score; }
+uint8_t game_get_lives() { return g_lives; }
+uint16_t game_get_tick_count() { return g_tick_count; }
 
 // Move the player horizontally within screen boundaries
-void game_player_move(int8_t dir) {
+static void game_player_move(int8_t dir) {
 	g_player_x += dir;
 	if (g_player_x < 0) g_player_x = 0;
 	if (g_player_x > 120) g_player_x = 120;
 }
 
 // Shoot a player bullet if cooldown allows and slots are available
-void game_player_shoot() {
+static void game_player_shoot() {
 	if (g_shoot_cooldown > 0) return;
 	
-	for (int i = 0; i < MAX_BULLETS; i++) {
-		if (!g_bullets[i].active) {
-			g_bullets[i].active = true;
-			g_bullets[i].is_enemy = false;
-			g_bullets[i].x = g_player_x + 4;
-			g_bullets[i].y = 52;
-			g_bullets[i].vx = 0;
-			if (g_player_super_bullet_timer > 0) {
-				g_shoot_cooldown = 4; // Faster shooting
-			} else {
-				g_shoot_cooldown = 8; 
-			}
-			break;
-		}
+    game_bullet_spawn_msg_t spawn_msg;
+    spawn_msg.x = g_player_x + 4;
+    spawn_msg.y = 52;
+    spawn_msg.is_enemy = false;
+    spawn_msg.vx = 0;
+    task_post(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_BULLET, (uint8_t*)&spawn_msg, sizeof(spawn_msg));
+    
+	if (g_player_super_bullet_timer > 0) {
+		g_shoot_cooldown = 4; // Faster shooting
+	} else {
+		g_shoot_cooldown = 8; 
 	}
 }
 
 // Handle player being hit by bullet or enemy body
-void game_player_hit() {
+static void game_player_hit() {
 	if (g_player_shield_timer > 0) {
 		g_player_shield_timer = 0;
 		g_player_super_bullet_timer = 0;
@@ -63,34 +68,30 @@ void game_player_hit() {
 	}
 }
 
-// Initialize game session variables and clear entities
-void game_logic_init() {
+// Initialize game session variables and notify other tasks to reset
+static void game_logic_init() {
+	// Reset Player Task's own data
 	g_player_x = 60;
 	g_player_blink = 0;
 	g_player_super_bullet_timer = 0;
 	g_player_shield_timer = 0;
 	g_score = 0;
 	g_lives = 3;
-	g_stage = 1;
-	g_transition_timer = 0;
 	g_tick_count = 0;
 	g_shoot_cooldown = 0;
-	g_new_high_score_rank = 0;
 	g_is_moving_left = false;
 	g_is_moving_right = false;
-	enemy_dir = 1;
-	
-	for (int i = 0; i < MAX_ENEMIES; i++) g_enemies[i].active = false;
-	for (int i = 0; i < MAX_BULLETS; i++) g_bullets[i].active = false;
-	for (int i = 0; i < MAX_EXPLOSIONS; i++) g_explosions[i].active = false;
-	for (int i = 0; i < MAX_POWERUPS; i++) g_powerups[i].active = false;
 	
 	game_background_init();
-	game_enemy_spawn();
+	
+	// Send AC_GAME_START_REQ to other tasks so they reset their own data
+	task_post_pure_msg(AC_TASK_GAME_ENEMY_ID, AC_GAME_START_REQ);
+	task_post_pure_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_START_REQ);
+	task_post_pure_msg(AC_TASK_GAME_STAGE_ID, AC_GAME_START_REQ);
 }
 
 // Update player smooth sliding and cooldown timers
-void update_player_sliding_and_timers() {
+static void update_player_sliding_and_timers() {
 	if (g_player_blink > 0) g_player_blink--;
 	if (g_player_super_bullet_timer > 0) g_player_super_bullet_timer--;
 	if (g_player_shield_timer > 0) g_player_shield_timer--;
@@ -111,12 +112,7 @@ void update_player_sliding_and_timers() {
 		}
 	}
 	
-	// Update enemy blink timers
-	for (int e = 0; e < MAX_ENEMIES; e++) {
-		if (g_enemies[e].active && g_enemies[e].blink_timer > 0) {
-			g_enemies[e].blink_timer--;
-		}
-	}
+	// Enemy blink timers are now managed in game_shooter_enemy_task.cpp
 	
 	if (g_shoot_cooldown > 0) g_shoot_cooldown--;
 	g_tick_count++;
@@ -155,5 +151,25 @@ void game_player_task(ak_msg_t* msg) {
 			task_post_pure_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_UPDATE_TICK);
 			task_post_pure_msg(AC_TASK_GAME_STAGE_ID, AC_GAME_UPDATE_TICK);
 			break;
+			
+		case AC_GAME_PLAYER_HIT:
+			game_player_hit();
+			break;
+			
+		case AC_GAME_SCORE_UPDATE: {
+			game_score_update_msg_t* score_msg = (game_score_update_msg_t*)get_data_common_msg(msg);
+			g_score += score_msg->additional_score;
+			break;
+		}
+		
+		case AC_GAME_POWERUP_PICKUP: {
+			game_powerup_msg_t* pmsg = (game_powerup_msg_t*)get_data_common_msg(msg);
+			if (pmsg->type == 1) {
+				g_player_super_bullet_timer = 200;
+			} else if (pmsg->type == 2) {
+				g_player_shield_timer = 200;
+			}
+			break;
+		}
 	}
 }

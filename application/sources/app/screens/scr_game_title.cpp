@@ -35,7 +35,7 @@ static void view_scr_game_title() {
 
 	// Draw Parallax Stars
 	for (int i = 0; i < MAX_STARS; i++) {
-		view_render.drawPixel(g_stars[i].x, g_stars[i].y, WHITE);
+		view_render.drawPixel(game_get_stars()[i].x, game_get_stars()[i].y, WHITE);
 	}
 
 	// Enemy stationary at top right
@@ -51,7 +51,7 @@ static void view_scr_game_title() {
 	view_render.print("SHOOTER");
 	
 	view_render.setTextSize(1);
-	if ((g_tick_count / 10) % 2 == 0) { // Blink every ~0.5s
+	if ((game_get_tick_count() / 10) % 2 == 0) { // Blink every ~0.5s
 		view_render.setCursor(CENTER_X(18, 6), 56);
 		view_render.print("PRESS MODE TO PLAY");
 	}
@@ -61,7 +61,7 @@ void scr_game_title_handle(ak_msg_t* msg) {
 	switch (msg->sig) {
 		case SCREEN_ENTRY:
 			game_load_data();
-			if (g_stars[0].speed == 0) game_background_init();
+			if (game_get_stars()[0].speed == 0) game_background_init();
 			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK, 50, TIMER_PERIODIC);
 			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
 			break;

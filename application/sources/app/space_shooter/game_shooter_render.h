@@ -13,10 +13,11 @@ typedef struct {
 	int8_t speed;
 } star_t;
 
-extern star_t g_stars[MAX_STARS];
+const star_t* game_get_stars();
 
 extern void game_background_init();
 extern void game_background_update();
+
 extern void game_shooter_update_stars();
 extern void game_shooter_request_render();
 

@@ -35,13 +35,13 @@ view_screen_t scr_game_showscore = {
 
 static void view_scr_game_showscore() {
 	view_render.setTextSize(1);
-	if (g_new_high_score_rank > 0) {
+	if (game_get_new_high_score_rank() > 0) {
 		view_render.setCursor(CENTER_X(15, 6), 6);
 		view_render.print("NEW HIGH SCORE!");
 		view_render.setCursor(CENTER_X(5, 6), 16);
 		view_render.print("TOP ");
 		char temp[4];
-		xsprintf(temp, "%u", (unsigned int)g_new_high_score_rank);
+		xsprintf(temp, "%u", (unsigned int)game_get_new_high_score_rank());
 		view_render.print(temp);
 	} else {
 		view_render.setCursor(CENTER_X(11, 6), 14);
@@ -50,7 +50,7 @@ static void view_scr_game_showscore() {
 	
 	view_render.setTextSize(2);
 	char temp_final[12];
-	xsprintf(temp_final, "%u", (unsigned int)g_score);
+	xsprintf(temp_final, "%u", (unsigned int)game_get_score());
 	int16_t w = strlen(temp_final) * 12;
 	view_render.setCursor((128 - w) / 2, 28);
 	view_render.print(temp_final);

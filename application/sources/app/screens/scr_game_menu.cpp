@@ -38,7 +38,7 @@ static void view_scr_game_menu() {
 
 	// Draw Parallax Stars in background
 	for (int i = 0; i < MAX_STARS; i++) {
-		view_render.drawPixel(g_stars[i].x, g_stars[i].y, WHITE);
+		view_render.drawPixel(game_get_stars()[i].x, game_get_stars()[i].y, WHITE);
 	}
 	
 	view_render.drawRect(0, 0, 128, 64, WHITE);

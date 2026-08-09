@@ -193,7 +193,44 @@ enum {
     AC_GAME_BTN_DOWN,                       
     AC_GAME_BTN_DOWN_RELEASED,                       
     AC_GAME_BTN_MODE,                       
+    
+    // Event-driven communication signals
+    AC_GAME_PLAYER_HIT,
+    AC_GAME_ENEMY_HIT,
+    AC_GAME_SPAWN_BULLET,
+    AC_GAME_SCORE_UPDATE,
+    AC_GAME_PLAY_SOUND,
+    AC_GAME_POWERUP_PICKUP,
+    AC_GAME_SPAWN_ENEMY,
+    AC_GAME_SPAWN_EXPLOSION
 };
+
+/* define message payloads */
+typedef struct {
+    int16_t x;
+    int16_t y;
+    bool is_enemy;
+    int8_t vx;
+} game_bullet_spawn_msg_t;
+
+typedef struct {
+    uint8_t enemy_index;
+    uint8_t damage;
+} game_enemy_hit_msg_t;
+
+typedef struct {
+    uint8_t powerup_index;
+    uint8_t type;
+} game_powerup_msg_t;
+
+typedef struct {
+    uint32_t additional_score;
+} game_score_update_msg_t;
+
+typedef struct {
+    int16_t x;
+    int16_t y;
+} game_explosion_msg_t;
 /*****************************************************************************/
 /* DBG task define
  */
