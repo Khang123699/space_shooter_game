@@ -7,6 +7,7 @@
 #include "timer.h"
 #include "task_list.h"
 #include "app.h"
+#include "app_dbg.h"
 
 static uint8_t g_stage = 1;
 static int8_t g_transition_timer = 0;
@@ -45,7 +46,7 @@ static void game_stage_update() {
 static void game_check_game_over() {
 	if (game_get_lives() <= 0) {
 		// Stop logic timer to pause the game world
-		timer_remove_attr(AC_TASK_GAME_PLAYER_ID, AC_GAME_UPDATE_TICK);
+		timer_remove_attr(AC_TASK_GAME_STAGE_ID, AC_GAME_UPDATE_TICK);
 		// Signal UI task to transition to Game Over screen
 		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_OVER_NEXT);
 	}
@@ -54,15 +55,24 @@ static void game_check_game_over() {
 void game_stage_task(ak_msg_t* msg) {
 	switch (msg->sig) {
 		case AC_GAME_START_REQ:
+		{
+			APP_DBG_SIG("AC_GAME_START_REQ\n");
 			g_stage = 1;
 			g_transition_timer = 0;
 			g_new_high_score_rank = 0;
-			break;
+			timer_set(AC_TASK_GAME_STAGE_ID, AC_GAME_UPDATE_TICK, 50, TIMER_PERIODIC);
+		}
+		break;
 			
 		case AC_GAME_UPDATE_TICK:
+		{
+			task_post_pure_msg(AC_TASK_GAME_PLAYER_ID, AC_GAME_UPDATE_TICK);
+			task_post_pure_msg(AC_TASK_GAME_ENEMY_ID, AC_GAME_UPDATE_TICK);
+			task_post_pure_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_UPDATE_TICK);
 			game_stage_update();
 			game_check_game_over();
 			game_shooter_request_render();
-			break;
+		}
+		break;
 	}
 }

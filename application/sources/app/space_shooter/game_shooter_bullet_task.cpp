@@ -1,13 +1,15 @@
 #include "game_shooter_bullet_task.h"
 #include "game_shooter_player_task.h"
 #include "game_shooter_enemy_task.h"
-#include "game_shooter_stage_task.h" // For g_game_setting
-#include "game_shooter_render.h" // For game_background_update()
+#include "game_shooter_stage_task.h" 
+#include "game_shooter_render.h" 
 #include "game_save.h"
 #include "game_bitmaps.h"
 #include "buzzer.h"
 #include <stdlib.h>
+#include "app_dbg.h"
 #include "app.h"
+#include "task_list.h"
 
 static bullet_t g_bullets[MAX_BULLETS];
 static explosion_t g_explosions[MAX_EXPLOSIONS];
@@ -83,7 +85,7 @@ static bool process_bullet_collision(int i) {
 				int damage = (game_get_player_super_bullet_timer() > 0) ? 3 : 1;
 				
 				game_enemy_hit_msg_t hit_msg = {(uint8_t)e, (uint8_t)damage};
-				task_post(AC_TASK_GAME_ENEMY_ID, AC_GAME_ENEMY_HIT, (uint8_t*)&hit_msg, sizeof(hit_msg));
+				task_post_dynamic_msg(AC_TASK_GAME_ENEMY_ID, AC_GAME_ENEMY_HIT, (uint8_t*)&hit_msg, sizeof(hit_msg));
 				
 				return true;
 			}
@@ -132,8 +134,8 @@ static void update_explosions() {
 }
 
 // Main physics update orchestrator
-static void game_physics_update() {
-	game_background_update();
+static void game_physics_update(ak_msg_t* msg) {
+	game_render_handle(msg);
 	game_bullets_update();
 	update_explosions();
 }
@@ -141,15 +143,22 @@ static void game_physics_update() {
 void game_bullet_task(ak_msg_t* msg) {
 	switch (msg->sig) {
 		case AC_GAME_START_REQ:
+		{
+			APP_DBG_SIG("AC_GAME_START_REQ\n");
 			for (int i = 0; i < MAX_BULLETS; i++) g_bullets[i].active = false;
 			for (int i = 0; i < MAX_EXPLOSIONS; i++) g_explosions[i].active = false;
-			break;
+		}
+		break;
 		
 		case AC_GAME_UPDATE_TICK:
-			game_physics_update();
-			break;
+		{
+			game_physics_update(msg);
+		}
+		break;
 			
-		case AC_GAME_SPAWN_BULLET: {
+		case AC_GAME_SPAWN_BULLET: 
+		{
+			APP_DBG_SIG("AC_GAME_SPAWN_BULLET\n");
 			game_bullet_spawn_msg_t* spawn_msg = (game_bullet_spawn_msg_t*)get_data_common_msg(msg);
 			for (int i = 0; i < MAX_BULLETS; i++) {
 				if (!g_bullets[i].active) {
@@ -161,13 +170,15 @@ void game_bullet_task(ak_msg_t* msg) {
 					break;
 				}
 			}
-			break;
 		}
+		break;
 		
-		case AC_GAME_SPAWN_EXPLOSION: {
+		case AC_GAME_SPAWN_EXPLOSION: 
+		{
+			APP_DBG_SIG("AC_GAME_SPAWN_EXPLOSION\n");
 			game_explosion_msg_t* exp_msg = (game_explosion_msg_t*)get_data_common_msg(msg);
 			game_spawn_explosion(exp_msg->x, exp_msg->y);
-			break;
 		}
+		break;
 	}
 }

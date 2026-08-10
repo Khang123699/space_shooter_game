@@ -202,7 +202,8 @@ enum {
     AC_GAME_PLAY_SOUND,
     AC_GAME_POWERUP_PICKUP,
     AC_GAME_SPAWN_ENEMY,
-    AC_GAME_SPAWN_EXPLOSION
+    AC_GAME_SPAWN_EXPLOSION,
+    AC_GAME_BOSS_SHOOT
 };
 
 /* define message payloads */

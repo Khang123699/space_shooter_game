@@ -10,6 +10,7 @@
 #include "app_bsp.h"
 #include "game_save.h"
 #include "buzzer.h"
+#include "app_dbg.h"
 #include <stdlib.h>
 
 static int16_t g_player_x = 60;
@@ -47,7 +48,7 @@ static void game_player_shoot() {
     spawn_msg.y = 52;
     spawn_msg.is_enemy = false;
     spawn_msg.vx = 0;
-    task_post(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_BULLET, (uint8_t*)&spawn_msg, sizeof(spawn_msg));
+    task_post_dynamic_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_BULLET, (uint8_t*)&spawn_msg, sizeof(spawn_msg));
     
 	if (g_player_super_bullet_timer > 0) {
 		g_shoot_cooldown = 4; // Faster shooting
@@ -82,7 +83,9 @@ static void game_logic_init() {
 	g_is_moving_left = false;
 	g_is_moving_right = false;
 	
-	game_background_init();
+	ak_msg_t init_msg;
+	init_msg.sig = AC_GAME_START_REQ;
+	game_render_handle(&init_msg);
 	
 	// Send AC_GAME_START_REQ to other tasks so they reset their own data
 	task_post_pure_msg(AC_TASK_GAME_ENEMY_ID, AC_GAME_START_REQ);
@@ -121,55 +124,81 @@ static void update_player_sliding_and_timers() {
 void game_player_task(ak_msg_t* msg) {
 	switch (msg->sig) {
 		case AC_GAME_START_REQ:
+		{
+			APP_DBG_SIG("AC_GAME_START_REQ\n");
 			game_logic_init();
-			timer_set(AC_TASK_GAME_PLAYER_ID, AC_GAME_UPDATE_TICK, 50, TIMER_PERIODIC);
-			break;
+		}
+		break;
 			
 		case AC_GAME_BTN_MODE:
+		{
+			APP_DBG_SIG("AC_GAME_BTN_MODE\n");
 			game_player_shoot();
-			break;
+		}
+		break;
 			
 		case AC_GAME_BTN_UP:
+		{
+			APP_DBG_SIG("AC_GAME_BTN_UP\n");
 			g_is_moving_left = true;
-			break;
+		}
+		break;
 			
 		case AC_GAME_BTN_UP_RELEASED:
+		{
+			APP_DBG_SIG("AC_GAME_BTN_UP_RELEASED\n");
 			g_is_moving_left = false;
-			break;
+		}
+		break;
 			
 		case AC_GAME_BTN_DOWN:
+		{
+			APP_DBG_SIG("AC_GAME_BTN_DOWN\n");
 			g_is_moving_right = true;
-			break;
+		}
+		break;
 			
 		case AC_GAME_BTN_DOWN_RELEASED:
+		{
+			APP_DBG_SIG("AC_GAME_BTN_DOWN_RELEASED\n");
 			g_is_moving_right = false;
-			break;
+		}
+		break;
 			
 		case AC_GAME_UPDATE_TICK:
+		{
 			update_player_sliding_and_timers();
-			task_post_pure_msg(AC_TASK_GAME_ENEMY_ID, AC_GAME_UPDATE_TICK);
-			task_post_pure_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_UPDATE_TICK);
-			task_post_pure_msg(AC_TASK_GAME_STAGE_ID, AC_GAME_UPDATE_TICK);
-			break;
+		}
+		break;
 			
 		case AC_GAME_PLAYER_HIT:
+		{
+			APP_DBG_SIG("AC_GAME_PLAYER_HIT\n");
 			game_player_hit();
-			break;
+		}
+		break;
 			
-		case AC_GAME_SCORE_UPDATE: {
+		case AC_GAME_SCORE_UPDATE:
+		{
+			APP_DBG_SIG("AC_GAME_SCORE_UPDATE\n");
 			game_score_update_msg_t* score_msg = (game_score_update_msg_t*)get_data_common_msg(msg);
 			g_score += score_msg->additional_score;
-			break;
 		}
+		break;
 		
-		case AC_GAME_POWERUP_PICKUP: {
+		case AC_GAME_POWERUP_PICKUP:
+		{
+			APP_DBG_SIG("AC_GAME_POWERUP_PICKUP\n");
 			game_powerup_msg_t* pmsg = (game_powerup_msg_t*)get_data_common_msg(msg);
-			if (pmsg->type == 1) {
-				g_player_super_bullet_timer = 200;
-			} else if (pmsg->type == 2) {
-				g_player_shield_timer = 200;
+			switch (pmsg->type) {
+				case POWERUP_TYPE_SUPER_BULLET:
+					g_player_super_bullet_timer = 200;
+					break;
+				case POWERUP_TYPE_SHIELD:
+					g_player_shield_timer = 200;
+					break;
 			}
-			break;
 		}
+		break;
 	}
 }

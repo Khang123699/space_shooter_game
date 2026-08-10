@@ -75,7 +75,7 @@ void scr_game_menu_handle(ak_msg_t* msg) {
 			break;
 
 		case AC_DISPLAY_GAME_UI_ANIM_TICK:
-			game_shooter_update_stars();
+			game_render_handle(msg);
 			break;
 
 		case AC_DISPLAY_SHOW_IDLE:

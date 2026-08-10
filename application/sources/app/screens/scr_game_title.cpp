@@ -61,13 +61,17 @@ void scr_game_title_handle(ak_msg_t* msg) {
 	switch (msg->sig) {
 		case SCREEN_ENTRY:
 			game_load_data();
-			if (game_get_stars()[0].speed == 0) game_background_init();
+			if (game_get_stars()[0].speed == 0) {
+				ak_msg_t init_msg;
+				init_msg.sig = AC_GAME_START_REQ;
+				game_render_handle(&init_msg);
+			}
 			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_GAME_UI_ANIM_TICK, 50, TIMER_PERIODIC);
 			timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_IDLE_TIMEOUT, 12000, TIMER_ONE_SHOT);
 			break;
 
 		case AC_DISPLAY_GAME_UI_ANIM_TICK:
-			game_shooter_update_stars();
+			game_render_handle(msg);
 			break;
 
 		case AC_DISPLAY_SHOW_IDLE:

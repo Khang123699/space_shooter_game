@@ -13,12 +13,9 @@ typedef struct {
 	int8_t speed;
 } star_t;
 
-const star_t* game_get_stars();
-
-extern void game_background_init();
-extern void game_background_update();
-
-extern void game_shooter_update_stars();
+extern const star_t* game_get_stars();
 extern void game_shooter_request_render();
+
+void game_render_handle(ak_msg_t* msg);
 
 #endif // __GAME_SHOOTER_RENDER_H__

@@ -40,27 +40,39 @@ static void draw_enemies() {
 				draw_sprite = false;
 			}
 			
-			if (enemies[e].type == 4) {
-				if (draw_sprite) {
-					view_render.drawBitmap(enemies[e].x, enemies[e].y, bmp_boss, 16, 16, WHITE);
+			switch (enemies[e].type) {
+				case ENEMY_TYPE_BOSS:
+				{
+					if (draw_sprite) {
+						view_render.drawBitmap(enemies[e].x, enemies[e].y, bmp_boss, 16, 16, WHITE);
+					}
+					int boss_cycle = game_get_stage() / 3;
+					int max_hp = 10 + (boss_cycle - 1) * 5;
+					int hp_width = (enemies[e].hp * 16) / max_hp;
+					if (hp_width > 16) hp_width = 16;
+					if (hp_width < 0) hp_width = 0;
+					view_render.fillRect(enemies[e].x, enemies[e].y - 3, 16, 2, BLACK);
+					view_render.fillRect(enemies[e].x, enemies[e].y - 3, hp_width, 2, WHITE);
 				}
-				int boss_cycle = game_get_stage() / 3;
-				int max_hp = 10 + (boss_cycle - 1) * 5;
-				int hp_width = (enemies[e].hp * 16) / max_hp;
-				if (hp_width > 16) hp_width = 16;
-				if (hp_width < 0) hp_width = 0;
-				view_render.fillRect(enemies[e].x, enemies[e].y - 3, 16, 2, BLACK);
-				view_render.fillRect(enemies[e].x, enemies[e].y - 3, hp_width, 2, WHITE);
-			} else if (enemies[e].type == 5) {
-				if (draw_sprite) view_render.drawBitmap(enemies[e].x, enemies[e].y, bmp_enemy_spread, 16, 8, WHITE);
-			} else if (enemies[e].type == 6) {
-				if (draw_sprite) view_render.drawBitmap(enemies[e].x, enemies[e].y, bmp_enemy_carrier, 16, 8, WHITE);
-			} else {
-				const uint8_t* icon = icon_enemy1;
-				if (enemies[e].type == 2) icon = icon_enemy2;
-				else if (enemies[e].type == 3) icon = icon_enemy3;
+				break;
 				
-				if (draw_sprite) view_render.drawBitmap(enemies[e].x, enemies[e].y, icon, 8, 8, WHITE);
+				case ENEMY_TYPE_SPREAD:
+					if (draw_sprite) view_render.drawBitmap(enemies[e].x, enemies[e].y, bmp_enemy_spread, 16, 8, WHITE);
+					break;
+					
+				case ENEMY_TYPE_CARRIER:
+					if (draw_sprite) view_render.drawBitmap(enemies[e].x, enemies[e].y, bmp_enemy_carrier, 16, 8, WHITE);
+					break;
+					
+				default:
+				{
+					const uint8_t* icon = icon_enemy1;
+					if (enemies[e].type == ENEMY_TYPE_2) icon = icon_enemy2;
+					else if (enemies[e].type == ENEMY_TYPE_3) icon = icon_enemy3;
+					
+					if (draw_sprite) view_render.drawBitmap(enemies[e].x, enemies[e].y, icon, 8, 8, WHITE);
+				}
+				break;
 			}
 		}
 	}
@@ -70,12 +82,16 @@ static void draw_powerups() {
 	const powerup_t* powerups = game_get_powerups();
 	for (int p = 0; p < MAX_POWERUPS; p++) {
 		if (powerups[p].active) {
-			if (powerups[p].type == POWERUP_TYPE_SUPER_BULLET) {
-				view_render.drawBitmap(powerups[p].x, powerups[p].y, icon_item_super, 8, 8, WHITE);
-			} else if (powerups[p].type == POWERUP_TYPE_SHIELD) {
-				view_render.drawBitmap(powerups[p].x, powerups[p].y, icon_item_shield, 8, 8, WHITE);
-			} else if (powerups[p].type == POWERUP_TYPE_NUKE) {
-				view_render.drawBitmap(powerups[p].x, powerups[p].y, icon_item_nuke, 8, 8, WHITE);
+			switch (powerups[p].type) {
+				case POWERUP_TYPE_SUPER_BULLET:
+					view_render.drawBitmap(powerups[p].x, powerups[p].y, icon_item_super, 8, 8, WHITE);
+					break;
+				case POWERUP_TYPE_SHIELD:
+					view_render.drawBitmap(powerups[p].x, powerups[p].y, icon_item_shield, 8, 8, WHITE);
+					break;
+				case POWERUP_TYPE_NUKE:
+					view_render.drawBitmap(powerups[p].x, powerups[p].y, icon_item_nuke, 8, 8, WHITE);
+					break;
 			}
 		}
 	}
@@ -186,7 +202,7 @@ static void view_scr_game_play() {
 		buff_x += 22;
 	}
 	
-	uint16_t player_shield = game_get_player_shield_timer();
+	player_shield = game_get_player_shield_timer();
 	if (player_shield > 0) {
 		bool draw_shld = true;
 		if (player_shield > 160) draw_shld = (player_shield % 6 < 3);
