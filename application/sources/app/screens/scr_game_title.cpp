@@ -51,10 +51,12 @@ static void view_scr_game_title() {
 	view_render.print("SHOOTER");
 	
 	view_render.setTextSize(1);
-	if ((game_get_tick_count() / 10) % 2 == 0) { // Blink every ~0.5s
+	static uint8_t anim_tick = 0;
+	if ((anim_tick / 10) % 2 == 0) { // Blink every ~0.5s
 		view_render.setCursor(CENTER_X(18, 6), 56);
 		view_render.print("PRESS MODE TO PLAY");
 	}
+	anim_tick++;
 }
 
 void scr_game_title_handle(ak_msg_t* msg) {
