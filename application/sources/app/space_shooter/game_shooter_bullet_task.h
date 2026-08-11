@@ -8,15 +8,25 @@
 #define MAX_BULLETS 20
 #define MAX_EXPLOSIONS 5
 
+typedef enum {
+    BULLET_STATE_INACTIVE = 0,
+    BULLET_STATE_FIRED
+} bullet_state_e;
+
+typedef enum {
+    EXPLOSION_STATE_INACTIVE = 0,
+    EXPLOSION_STATE_EXPANDING
+} explosion_state_e;
+
 typedef struct {
 	int16_t x;
 	int16_t y;
 	int8_t vx;
-	bool active;
+	bullet_state_e state;
 	bool is_enemy;
 } bullet_t;
 
-typedef struct { int8_t x, y; int8_t timer; bool active; } explosion_t;
+typedef struct { int8_t x, y; int8_t timer; explosion_state_e state; } explosion_t;
 
 const bullet_t* game_get_bullets();
 const explosion_t* game_get_explosions();

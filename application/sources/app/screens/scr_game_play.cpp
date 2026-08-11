@@ -34,7 +34,7 @@ view_screen_t scr_game_play = {
 static void draw_enemies() {
 	const enemy_t* enemies = game_get_enemies();
 	for (int e = 0; e < MAX_ENEMIES; e++) {
-		if (enemies[e].active) {
+		if (enemies[e].state != ENEMY_STATE_INACTIVE) {
 			bool draw_sprite = true;
 			if (enemies[e].blink_timer > 0 && enemies[e].type != 4 && (game_get_tick_count() % 4 < 2)) {
 				draw_sprite = false;
@@ -81,7 +81,7 @@ static void draw_enemies() {
 static void draw_powerups() {
 	const powerup_t* powerups = game_get_powerups();
 	for (int p = 0; p < MAX_POWERUPS; p++) {
-		if (powerups[p].active) {
+		if (powerups[p].state != POWERUP_STATE_INACTIVE) {
 			switch (powerups[p].type) {
 				case POWERUP_TYPE_SUPER_BULLET:
 					view_render.drawBitmap(powerups[p].x, powerups[p].y, icon_item_super, 8, 8, WHITE);
@@ -100,7 +100,7 @@ static void draw_powerups() {
 static void draw_explosions() {
 	const explosion_t* explosions = game_get_explosions();
 	for (int ex = 0; ex < MAX_EXPLOSIONS; ex++) {
-		if (explosions[ex].active) {
+		if (explosions[ex].state != EXPLOSION_STATE_INACTIVE) {
 			int r = 5 - explosions[ex].timer;
 			int cx = explosions[ex].x + 4;
 			int cy = explosions[ex].y + 4;
@@ -124,7 +124,7 @@ static void draw_bullets() {
 	const bullet_t* bullets = game_get_bullets();
 	uint16_t super_timer = game_get_player_super_bullet_timer();
 	for (int i = 0; i < MAX_BULLETS; i++) {
-		if (bullets[i].active) {
+		if (bullets[i].state != BULLET_STATE_INACTIVE) {
 			if (bullets[i].is_enemy) {
 				view_render.fillRect(bullets[i].x, bullets[i].y, 2, 4, WHITE);
 			} else {

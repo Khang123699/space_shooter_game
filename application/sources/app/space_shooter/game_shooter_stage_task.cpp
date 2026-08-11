@@ -23,7 +23,7 @@ static void game_stage_update() {
 	bool all_dead = true;
 	const enemy_t* enemies = game_get_enemies();
 	for (int e = 0; e < MAX_ENEMIES; e++) {
-		if (enemies[e].active) {
+		if (enemies[e].state != ENEMY_STATE_INACTIVE) {
 			all_dead = false;
 			break;
 		}

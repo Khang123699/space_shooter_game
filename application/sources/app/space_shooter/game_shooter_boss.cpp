@@ -13,7 +13,7 @@
 
 // Boss spawn function
 static void game_boss_spawn() {
-	g_enemies[0].active = true;
+
 	g_enemies[0].type = ENEMY_TYPE_BOSS; // Boss type
 	int boss_cycle = game_get_stage() / 3;
 	g_enemies[0].hp = 10 + (boss_cycle - 1) * 5;
@@ -28,8 +28,8 @@ static void game_boss_spawn() {
 static void spawn_boss_minions(int boss_idx) {
 	int minions_spawned = 0;
 	for (int ne = 0; ne < MAX_ENEMIES && minions_spawned < 2; ne++) {
-		if (!g_enemies[ne].active) {
-			g_enemies[ne].active = true;
+		if (g_enemies[ne].state == ENEMY_STATE_INACTIVE) {
+			g_enemies[ne].state = ENEMY_STATE_IDLE;
 			g_enemies[ne].type = 1;
 			g_enemies[ne].hp = 1;
 			g_enemies[ne].blink_timer = 0;
@@ -111,7 +111,7 @@ static void game_boss_shoot() {
 		spawn_msg.y = g_enemies[e].y + 12;
 		spawn_msg.is_enemy = true;
 		spawn_msg.vx = vx_pattern[b];
-		task_post_dynamic_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_BULLET, (uint8_t*)&spawn_msg, sizeof(spawn_msg));
+		task_post_common_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_BULLET, (uint8_t*)&spawn_msg, sizeof(spawn_msg));
 	}
 }
 
@@ -129,7 +129,7 @@ void game_boss_handle(ak_msg_t* msg) {
 			
 		case AC_GAME_UPDATE_TICK:
 		{
-			if (!g_enemies[0].active || g_enemies[0].type != 4) break;
+			if (g_enemies[0].state == ENEMY_STATE_INACTIVE || g_enemies[0].type != 4) break;
 			
 			int move_threshold = 4 - g_game_setting.difficulty - (game_get_stage() / 5);
 			if (game_get_stage() % 3 == 0) move_threshold--;

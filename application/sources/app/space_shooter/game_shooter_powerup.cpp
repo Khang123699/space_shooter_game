@@ -12,12 +12,12 @@
 // Update powerup item positions
 static void game_powerups_update() {
 	for (int i = 0; i < MAX_POWERUPS; i++) {
-		if (g_powerups[i].active) {
+		if (g_powerups[i].state != POWERUP_STATE_INACTIVE) {
 			if (game_get_tick_count() % 2 == 0) { // Fall slowly (1px per 2 ticks)
 				g_powerups[i].y++;
 			}
 			if (g_powerups[i].y > 64) { // Exceeded screen height
-				g_powerups[i].active = false;
+				g_powerups[i].state = POWERUP_STATE_INACTIVE;
 			}
 		}
 	}
@@ -27,20 +27,20 @@ static void game_powerups_update() {
 static void update_powerup_collisions() {
 	int player_x = game_get_player_x();
 	for (int p = 0; p < MAX_POWERUPS; p++) {
-		if (!g_powerups[p].active) continue;
+		if (g_powerups[p].state == POWERUP_STATE_INACTIVE) continue;
 		
 		if (game_check_collision(g_powerups[p].x, g_powerups[p].y, 8, 8, player_x, 54, 8, 8)) {
-			g_powerups[p].active = false;
+			g_powerups[p].state = POWERUP_STATE_INACTIVE;
 			if (g_game_setting.sound_en) BUZZER_PlaySound(BUZZER_SOUND_BANG);
 			
 			game_powerup_msg_t pmsg = {(uint8_t)p, g_powerups[p].type};
-			task_post_dynamic_msg(AC_TASK_GAME_PLAYER_ID, AC_GAME_POWERUP_PICKUP, (uint8_t*)&pmsg, sizeof(pmsg));
+			task_post_common_msg(AC_TASK_GAME_PLAYER_ID, AC_GAME_POWERUP_PICKUP, (uint8_t*)&pmsg, sizeof(pmsg));
 			
 			// Nuke powerup instantly damages all enemies
 			switch (g_powerups[p].type) {
 				case POWERUP_TYPE_NUKE:
 					for (int e = 0; e < MAX_ENEMIES; e++) {
-						if (g_enemies[e].active) {
+						if (g_enemies[e].state != ENEMY_STATE_INACTIVE) {
 							g_enemies[e].hp--;
 							g_enemies[e].blink_timer = 22;
 							
@@ -60,7 +60,7 @@ void game_powerup_handle(ak_msg_t* msg) {
 		case AC_GAME_START_REQ:
 		{
 			APP_DBG_SIG("AC_GAME_POWERUP_START_REQ\n");
-			for (int i = 0; i < MAX_POWERUPS; i++) g_powerups[i].active = false;
+			for (int i = 0; i < MAX_POWERUPS; i++) g_powerups[i].state = POWERUP_STATE_INACTIVE;
 		}
 		break;
 			

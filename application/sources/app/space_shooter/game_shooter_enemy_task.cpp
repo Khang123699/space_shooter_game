@@ -22,18 +22,18 @@ const powerup_t* game_get_powerups() { return g_powerups; }
 
 // Handle enemy destruction sequence
 void game_enemy_kill(int e) {
-	g_enemies[e].active = false;
+	g_enemies[e].state = ENEMY_STATE_INACTIVE;
 	uint32_t base_score = (g_enemies[e].type == ENEMY_TYPE_BOSS) ? 100 : 10;
 	uint32_t additional_score = base_score + (base_score * g_game_setting.difficulty) / 2;
 	
     game_score_update_msg_t score_msg = {additional_score};
-    task_post_dynamic_msg(AC_TASK_GAME_PLAYER_ID, AC_GAME_SCORE_UPDATE, (uint8_t*)&score_msg, sizeof(score_msg));
+    task_post_common_msg(AC_TASK_GAME_PLAYER_ID, AC_GAME_SCORE_UPDATE, (uint8_t*)&score_msg, sizeof(score_msg));
 	
 	// Drop powerup chance (10%)
 	if (g_enemies[e].type != ENEMY_TYPE_BOSS && rand() % 100 < 10) {
 		for (int p = 0; p < MAX_POWERUPS; p++) {
-			if (!g_powerups[p].active) {
-				g_powerups[p].active = true;
+			if (g_powerups[p].state == POWERUP_STATE_INACTIVE) {
+				g_powerups[p].state = POWERUP_STATE_FALLING;
 				g_powerups[p].x = g_enemies[e].x;
 				g_powerups[p].y = g_enemies[e].y;
 				g_powerups[p].type = 1 + (rand() % 3);
@@ -45,7 +45,7 @@ void game_enemy_kill(int e) {
 	int ew = (g_enemies[e].type >= ENEMY_TYPE_BOSS) ? 16 : 8;
 	int eh = (g_enemies[e].type == ENEMY_TYPE_BOSS) ? 16 : 8;
 	game_explosion_msg_t exp_msg = {(int16_t)(g_enemies[e].x + ew/2 - 4), (int16_t)(g_enemies[e].y + eh/2 - 4)};
-	task_post_dynamic_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_EXPLOSION, (uint8_t*)&exp_msg, sizeof(exp_msg));
+	task_post_common_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_EXPLOSION, (uint8_t*)&exp_msg, sizeof(exp_msg));
 }
 
 #define SPAWN_START_X 8
@@ -70,7 +70,7 @@ static void game_enemy_spawn() {
 	for (int r = 0; r < rows; r++) {
 		for (int c = 0; c < cols; c++) {
 			if (rand() % 100 < spawn_chance) {
-				g_enemies[e].active = true;
+				g_enemies[e].state = ENEMY_STATE_IDLE;
 				
 				int r_val = rand() % 100;
 				int type6_chance = 15 + (game_get_stage() / 2);
@@ -105,7 +105,7 @@ static void game_enemy_spawn() {
 	}
 	
 	if (e == 0) {
-		g_enemies[0].active = true;
+		g_enemies[0].state = ENEMY_STATE_IDLE;
 		g_enemies[0].type = 1 + (rand() % 3);
 		g_enemies[0].hp = g_enemies[0].type;
 		g_enemies[0].blink_timer = 0;
@@ -116,7 +116,7 @@ static void game_enemy_spawn() {
 
 static bool is_space_clear_below(int carrier_idx, int spawn_x, int spawn_y) {
 	for (int c_e = 0; c_e < MAX_ENEMIES; c_e++) {
-		if (g_enemies[c_e].active && c_e != carrier_idx) {
+		if (g_enemies[c_e].state != ENEMY_STATE_INACTIVE && c_e != carrier_idx) {
 			int ew2 = (g_enemies[c_e].type >= ENEMY_TYPE_BOSS) ? 16 : 8;
 			if (spawn_x < g_enemies[c_e].x + ew2 && spawn_x + 8 > g_enemies[c_e].x &&
 				spawn_y < g_enemies[c_e].y + 8 && spawn_y + 8 > g_enemies[c_e].y) {
@@ -129,8 +129,8 @@ static bool is_space_clear_below(int carrier_idx, int spawn_x, int spawn_y) {
 
 static void spawn_carrier_minion(int spawn_x, int spawn_y) {
 	for (int ne = 0; ne < MAX_ENEMIES; ne++) {
-		if (!g_enemies[ne].active) {
-			g_enemies[ne].active = true;
+		if (g_enemies[ne].state == ENEMY_STATE_INACTIVE) {
+			g_enemies[ne].state = ENEMY_STATE_IDLE;
 			g_enemies[ne].type = 1;
 			g_enemies[ne].hp = 1;
 			g_enemies[ne].blink_timer = 0;
@@ -190,7 +190,7 @@ static void handle_enemy_shooting(int e, int ew, int boss_max_hp) {
 					spawn_msg.y = g_enemies[e].y + 8;
 					spawn_msg.is_enemy = true;
 					spawn_msg.vx = vx_spread[b];
-					task_post_dynamic_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_BULLET, (uint8_t*)&spawn_msg, sizeof(spawn_msg));
+					task_post_common_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_BULLET, (uint8_t*)&spawn_msg, sizeof(spawn_msg));
 				}
 			}
 			break;
@@ -201,7 +201,7 @@ static void handle_enemy_shooting(int e, int ew, int boss_max_hp) {
 				spawn_msg.y = g_enemies[e].y + 8;
 				spawn_msg.is_enemy = true;
 				spawn_msg.vx = 0;
-				task_post_dynamic_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_BULLET, (uint8_t*)&spawn_msg, sizeof(spawn_msg));
+				task_post_common_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_BULLET, (uint8_t*)&spawn_msg, sizeof(spawn_msg));
 			}
 			break;
 		}
@@ -217,7 +217,7 @@ static void handle_edge_reversal(bool hit_edge) {
 	edge_hit_count++;
 	
 	for (int e = 0; e < MAX_ENEMIES; e++) {
-		if (g_enemies[e].active) {
+		if (g_enemies[e].state != ENEMY_STATE_INACTIVE) {
 			switch (g_enemies[e].type) {
 				case ENEMY_TYPE_BOSS:
 					if (g_enemies[e].state == BOSS_STATE_NORMAL) {
@@ -258,7 +258,7 @@ static void game_enemy_update() {
 	
 	// Update enemy blink timers
 	for (int e = 0; e < MAX_ENEMIES; e++) {
-		if (g_enemies[e].active && g_enemies[e].blink_timer > 0) {
+		if (g_enemies[e].state != ENEMY_STATE_INACTIVE && g_enemies[e].blink_timer > 0) {
 			g_enemies[e].blink_timer--;
 		}
 	}
@@ -271,7 +271,7 @@ static void game_enemy_update() {
 	int boss_max_hp = 10 + ((game_get_stage() / 3) - 1) * 5;
 
 	for (int e = 0; e < MAX_ENEMIES; e++) {
-		if (!g_enemies[e].active) continue;
+		if (g_enemies[e].state == ENEMY_STATE_INACTIVE) continue;
 		
 		int ew = (g_enemies[e].type >= ENEMY_TYPE_BOSS) ? 16 : 8;
 		
@@ -310,7 +310,7 @@ static void update_enemy_body_collisions() {
 	int player_x = game_get_player_x();
 	int player_blink = game_get_player_blink();
 	for (int e = 0; e < MAX_ENEMIES; e++) {
-		if (!g_enemies[e].active) continue;
+		if (g_enemies[e].state == ENEMY_STATE_INACTIVE) continue;
 		
 		int ew = (g_enemies[e].type >= ENEMY_TYPE_BOSS) ? 16 : 8;
 		int eh = (g_enemies[e].type == ENEMY_TYPE_BOSS) ? 16 : 8;
@@ -319,13 +319,13 @@ static void update_enemy_body_collisions() {
 		
 		if (g_enemies[e].y > 60 || hit_player) {
 			if (g_enemies[e].y > 60 || g_enemies[e].type != ENEMY_TYPE_BOSS) {
-				g_enemies[e].active = false; // Out of bounds or destroyed on impact
+				g_enemies[e].state = ENEMY_STATE_INACTIVE; // Out of bounds or destroyed on impact
 			}
 			
 			if (hit_player) {
 				task_post_pure_msg(AC_TASK_GAME_PLAYER_ID, AC_GAME_PLAYER_HIT);
 				game_explosion_msg_t exp_msg = {(int16_t)player_x, 54};
-				task_post_dynamic_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_EXPLOSION, (uint8_t*)&exp_msg, sizeof(exp_msg));
+				task_post_common_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_EXPLOSION, (uint8_t*)&exp_msg, sizeof(exp_msg));
 				if (g_game_setting.sound_en) BUZZER_PlaySound(BUZZER_SOUND_3BEEP);
 			}
 		}
@@ -337,7 +337,7 @@ void game_enemy_task(ak_msg_t* msg) {
 		case AC_GAME_START_REQ:
 		{
 			APP_DBG_SIG("AC_GAME_START_REQ\n");
-			for (int i = 0; i < MAX_ENEMIES; i++) g_enemies[i].active = false;
+			for (int i = 0; i < MAX_ENEMIES; i++) g_enemies[i].state = ENEMY_STATE_INACTIVE;
 			game_powerup_handle(msg);
 			g_enemy_dir = 1;
 			g_enemy_move_ticks = 0;
@@ -374,7 +374,7 @@ void game_enemy_task(ak_msg_t* msg) {
 			APP_DBG_SIG("AC_GAME_ENEMY_HIT\n");
 			game_enemy_hit_msg_t* hit_msg = (game_enemy_hit_msg_t*)get_data_common_msg(msg);
 			int e = hit_msg->enemy_index;
-			if (g_enemies[e].active) {
+			if (g_enemies[e].state != ENEMY_STATE_INACTIVE) {
 				g_enemies[e].hp -= hit_msg->damage;
 				g_enemies[e].blink_timer = 22;
 				if (g_enemies[e].hp <= 0) {

@@ -13,30 +13,33 @@
 #include "app_dbg.h"
 #include <stdlib.h>
 
-static int16_t g_player_x = 60;
-static uint8_t g_player_blink = 0;
-static uint16_t g_player_super_bullet_timer = 0;
-static uint16_t g_player_shield_timer = 0;
-static uint32_t g_score = 0;
-static uint8_t g_lives = 3;
+static player_t g_player = {
+    .x = 60,
+    .blink_timer = 0,
+    .shield_timer = 0,
+    .super_bullet_timer = 0,
+    .lives = 3,
+    .score = 0,
+    .state = PLAYER_STATE_ALIVE
+};
 static uint16_t g_tick_count = 0;
 static uint8_t g_shoot_cooldown = 0;
 static bool g_is_moving_left = false;
 static bool g_is_moving_right = false;
 
-int16_t game_get_player_x() { return g_player_x; }
-uint8_t game_get_player_blink() { return g_player_blink; }
-uint16_t game_get_player_shield_timer() { return g_player_shield_timer; }
-uint16_t game_get_player_super_bullet_timer() { return g_player_super_bullet_timer; }
-uint32_t game_get_score() { return g_score; }
-uint8_t game_get_lives() { return g_lives; }
+int16_t game_get_player_x() { return g_player.x; }
+uint8_t game_get_player_blink() { return g_player.blink_timer; }
+uint16_t game_get_player_shield_timer() { return g_player.shield_timer; }
+uint16_t game_get_player_super_bullet_timer() { return g_player.super_bullet_timer; }
+uint32_t game_get_score() { return g_player.score; }
+uint8_t game_get_lives() { return g_player.lives; }
 uint16_t game_get_tick_count() { return g_tick_count; }
 
 // Move the player horizontally within screen boundaries
 static void game_player_move(int8_t dir) {
-	g_player_x += dir;
-	if (g_player_x < 0) g_player_x = 0;
-	if (g_player_x > 120) g_player_x = 120;
+	g_player.x += dir;
+	if (g_player.x < 0) g_player.x = 0;
+	if (g_player.x > 120) g_player.x = 120;
 }
 
 // Shoot a player bullet if cooldown allows and slots are available
@@ -44,13 +47,13 @@ static void game_player_shoot() {
 	if (g_shoot_cooldown > 0) return;
 	
     game_bullet_spawn_msg_t spawn_msg;
-    spawn_msg.x = g_player_x + 4;
+    spawn_msg.x = g_player.x + 4;
     spawn_msg.y = 52;
     spawn_msg.is_enemy = false;
     spawn_msg.vx = 0;
-    task_post_dynamic_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_BULLET, (uint8_t*)&spawn_msg, sizeof(spawn_msg));
+    task_post_common_msg(AC_TASK_GAME_BULLET_ID, AC_GAME_SPAWN_BULLET, (uint8_t*)&spawn_msg, sizeof(spawn_msg));
     
-	if (g_player_super_bullet_timer > 0) {
+	if (g_player.super_bullet_timer > 0) {
 		g_shoot_cooldown = 4; // Faster shooting
 	} else {
 		g_shoot_cooldown = 8; 
@@ -59,25 +62,33 @@ static void game_player_shoot() {
 
 // Handle player being hit by bullet or enemy body
 static void game_player_hit() {
-	if (g_player_shield_timer > 0) {
-		g_player_shield_timer = 0;
-		g_player_super_bullet_timer = 0;
-		g_player_blink = 34;
-	} else {
-		g_lives--;
-		g_player_blink = 34;
+	if (g_player.state == PLAYER_STATE_DEAD) return;
+	
+	if (g_player.state == PLAYER_STATE_INVULNERABLE && g_player.shield_timer > 0) {
+		g_player.shield_timer = 0;
+		g_player.super_bullet_timer = 0;
+		g_player.blink_timer = 34;
+		g_player.state = PLAYER_STATE_ALIVE; // Revert to normal alive state after blink finishes (handled in update)
+	} else if (g_player.state == PLAYER_STATE_ALIVE) {
+		g_player.lives--;
+		g_player.blink_timer = 34;
+		g_player.state = PLAYER_STATE_INVULNERABLE;
+		if (g_player.lives <= 0) {
+			g_player.state = PLAYER_STATE_DEAD;
+		}
 	}
 }
 
 // Initialize game session variables and notify other tasks to reset
 static void game_logic_init() {
 	// Reset Player Task's own data
-	g_player_x = 60;
-	g_player_blink = 0;
-	g_player_super_bullet_timer = 0;
-	g_player_shield_timer = 0;
-	g_score = 0;
-	g_lives = 3;
+	g_player.x = 60;
+	g_player.blink_timer = 0;
+	g_player.super_bullet_timer = 0;
+	g_player.shield_timer = 0;
+	g_player.score = 0;
+	g_player.lives = 3;
+	g_player.state = PLAYER_STATE_ALIVE;
 	g_tick_count = 0;
 	g_shoot_cooldown = 0;
 	g_is_moving_left = false;
@@ -95,9 +106,19 @@ static void game_logic_init() {
 
 // Update player smooth sliding and cooldown timers
 static void update_player_sliding_and_timers() {
-	if (g_player_blink > 0) g_player_blink--;
-	if (g_player_super_bullet_timer > 0) g_player_super_bullet_timer--;
-	if (g_player_shield_timer > 0) g_player_shield_timer--;
+	if (g_player.blink_timer > 0) {
+		g_player.blink_timer--;
+		if (g_player.blink_timer == 0 && g_player.shield_timer == 0 && g_player.state == PLAYER_STATE_INVULNERABLE) {
+			g_player.state = PLAYER_STATE_ALIVE;
+		}
+	}
+	if (g_player.super_bullet_timer > 0) g_player.super_bullet_timer--;
+	if (g_player.shield_timer > 0) {
+		g_player.shield_timer--;
+		if (g_player.shield_timer == 0 && g_player.blink_timer == 0 && g_player.state == PLAYER_STATE_INVULNERABLE) {
+			g_player.state = PLAYER_STATE_ALIVE;
+		}
+	}
 	
 	// Smooth sliding movement check
 	if (g_is_moving_left) {
@@ -182,7 +203,7 @@ void game_player_task(ak_msg_t* msg) {
 		{
 			APP_DBG_SIG("AC_GAME_SCORE_UPDATE\n");
 			game_score_update_msg_t* score_msg = (game_score_update_msg_t*)get_data_common_msg(msg);
-			g_score += score_msg->additional_score;
+			g_player.score += score_msg->additional_score;
 		}
 		break;
 		
@@ -192,10 +213,11 @@ void game_player_task(ak_msg_t* msg) {
 			game_powerup_msg_t* pmsg = (game_powerup_msg_t*)get_data_common_msg(msg);
 			switch (pmsg->type) {
 				case POWERUP_TYPE_SUPER_BULLET:
-					g_player_super_bullet_timer = 200;
+					g_player.super_bullet_timer = 200;
 					break;
 				case POWERUP_TYPE_SHIELD:
-					g_player_shield_timer = 200;
+					g_player.shield_timer = 200;
+					g_player.state = PLAYER_STATE_INVULNERABLE;
 					break;
 			}
 		}

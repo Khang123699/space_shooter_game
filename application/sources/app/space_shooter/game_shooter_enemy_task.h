@@ -19,14 +19,27 @@
 #define ENEMY_TYPE_SPREAD  5
 #define ENEMY_TYPE_CARRIER 6
 
-#define BOSS_STATE_NORMAL 0
-#define BOSS_STATE_DASH_CHARGE 1
-#define BOSS_STATE_DASH_DOWN 2
-#define BOSS_STATE_DASH_UP 3
-#define BOSS_STATE_SUMMON 4
+typedef enum {
+    ENEMY_STATE_INACTIVE = 0,
+    ENEMY_STATE_SPAWNING,
+    ENEMY_STATE_IDLE,
+    ENEMY_STATE_ATTACKING,
+    ENEMY_STATE_DYING,
+    // Boss specific states
+    BOSS_STATE_NORMAL,
+    BOSS_STATE_DASH_CHARGE,
+    BOSS_STATE_DASH_DOWN,
+    BOSS_STATE_DASH_UP,
+    BOSS_STATE_SUMMON
+} enemy_state_e;
 
-typedef struct { int8_t x, y; int8_t hp; uint8_t type; bool active; int8_t blink_timer; uint8_t state; int16_t timer; } enemy_t;
-typedef struct { int8_t x, y; uint8_t type; bool active; } powerup_t;
+typedef enum {
+    POWERUP_STATE_INACTIVE = 0,
+    POWERUP_STATE_FALLING
+} powerup_state_e;
+
+typedef struct { int8_t x, y; int8_t hp; uint8_t type; int8_t blink_timer; enemy_state_e state; int16_t timer; } enemy_t;
+typedef struct { int8_t x, y; uint8_t type; powerup_state_e state; } powerup_t;
 
 const enemy_t* game_get_enemies();
 const powerup_t* game_get_powerups();
