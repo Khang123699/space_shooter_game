@@ -101,45 +101,38 @@ The application boots into a **Title Screen**, progressing to a **Main Menu** co
 
 <table align="center">
   <tr>
-    <td align="center"><img src="resources/images/screens/scr_startup_2.png" alt="boot screen 2" width="480"/></td>
-  </tr>
-</table>
-<p align="center"><strong><em>Figure 4:</em></strong> Developer Credit</p>
-
-<table align="center">
-  <tr>
     <td align="center"><img src="resources/images/screens/scr_title.png" alt="title screen" width="480"/></td>
   </tr>
 </table>
-<p align="center"><strong><em>Figure 5:</em></strong> Title Screen</p>
+<p align="center"><strong><em>Figure 4:</em></strong> Title Screen</p>
 
 <table align="center">
   <tr>
     <td align="center"><img src="resources/images/screens/scr_main_menu.png" alt="main menu" width="480"/></td>
   </tr>
 </table>
-<p align="center"><strong><em>Figure 6:</em></strong> Main Menu</p>
+<p align="center"><strong><em>Figure 5:</em></strong> Main Menu</p>
 
 <table align="center">
   <tr>
     <td align="center"><img src="resources/images/screens/scr_gameplay.png" alt="gameplay" width="480"/></td>
   </tr>
 </table>
-<p align="center"><strong><em>Figure 7:</em></strong> Standard Gameplay</p>
+<p align="center"><strong><em>Figure 6:</em></strong> Standard Gameplay</p>
 
 <table align="center">
   <tr>
     <td align="center"><img src="resources/images/screens/scr_game_over.png" alt="game over" width="480"/></td>
   </tr>
 </table>
-<p align="center"><strong><em>Figure 8:</em></strong> Game Over Screen</p>
+<p align="center"><strong><em>Figure 7:</em></strong> Game Over Screen</p>
 
 <table align="center">
   <tr>
     <td align="center"><img src="resources/images/screens/scr_summary.png" alt="summary screen" width="480"/></td>
   </tr>
 </table>
-<p align="center"><strong><em>Figure 9:</em></strong> Summary Screen</p>
+<p align="center"><strong><em>Figure 8:</em></strong> Summary Screen</p>
 
 ### Defined Entities:
 
