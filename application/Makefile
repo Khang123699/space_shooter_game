@@ -236,7 +236,7 @@ create:
 	$(Print) CREATE $(OBJECTS_DIR) folder
 	@mkdir -p $(OBJECTS_DIR)
 
-BIN_DIR = ../bin
+BIN_DIR = ../resources/bin
 
 $(TARGET): $(OBJECTS) $(LIBC) $(LIBM) $(LIBSTDCPP_NANO) $(LIBGCC) $(LIBGCOV) $(LIBFPU) $(LIBRDPMON)
 	$(Print) LD $@
