@@ -16,9 +16,6 @@
 <div align="center">
   <video src="https://github.com/user-attachments/assets/78dac83e-d2ad-44c3-942c-a80e8f1aae6d" controls width="480"></video>
 </div>
-<div align="center">
-  <video src="https://github.com/user-attachments/assets/f65ba539-5f63-459f-93ae-a78fa13b1343" controls width="480"></video>
-</div>
 
 <hr>
 
@@ -27,15 +24,15 @@
 | Document | Purpose |
 |---|---|
 | [README.md](README.md) | Project overview, target hardware, and game mechanics. |
-| [docs/01-guide-getting-started.md](docs/01-guide-getting-started.md) | Step-by-step instructions for environment setup and project initialization. |
-| [docs/02-guide-coding-rules.md](docs/02-guide-coding-rules.md) | Standardized coding conventions and commit message formats. |
-| [docs/03-design-sequence-object.md](docs/03-design-sequence-object.md) | Detailed sequence diagrams defining the lifecycle of in-game entities. |
-| [docs/04-design-sequence-runtime.md](docs/04-design-sequence-runtime.md) | System architecture detailing signal processing and task scheduling. |
-| [docs/05-design-data-storage.md](docs/05-design-data-storage.md) | Persistent storage mechanism for settings and high scores in SPI Flash. |
+| [resources/docs/01-guide-getting-started.md](resources/docs/01-guide-getting-started.md) | Step-by-step instructions for environment setup and project initialization. |
+| [resources/docs/02-guide-coding-rules.md](resources/docs/02-guide-coding-rules.md) | Standardized coding conventions and commit message formats. |
+| [resources/docs/03-design-sequence-object.md](resources/docs/03-design-sequence-object.md) | Detailed sequence diagrams defining the lifecycle of in-game entities. |
+| [resources/docs/04-design-sequence-runtime.md](resources/docs/04-design-sequence-runtime.md) | System architecture detailing signal processing and task scheduling. |
+| [resources/docs/05-design-data-storage.md](resources/docs/05-design-data-storage.md) | Persistent storage mechanism for settings and high scores in internal EEPROM. |
 
 ## Introduction
 
-Space Shooter is a classic arcade shooter game built on top of the AK Embedded Base Kit — a hands-on platform for embedded programming enthusiasts to explore event-driven design in depth. While building and playing Space Shooter, you put the following core concepts of modern embedded engineering into practice:
+Space Shooter is a classic shooting game inspired by the popular "Chicken Invaders" genre. It is built using the AK Embedded Kit, a hands-on platform designed to help learners of embedded programming explore event-driven programming. While developing and playing Space Shooter, you will apply the following core concepts of modern embedded engineering in a practical setting:
 
 * **System design:** Modelling complex logic flows with UML.
 * **Process management:** Coordinating cooperative Tasks and scheduling them efficiently.
@@ -181,10 +178,9 @@ The goal is to score as many points as possible. Points are awarded based on the
 
 ### IV. Basic Game Sequence Logic
 
-The diagram below shows the **runtime flow**—the time-ordered sequence of messages and actions that occur during a single 50 ms game-loop tick across multiple tasks, from the OS timers firing through to the OLED frame being rendered.
+The diagram below illustrates the basic program execution flow, as well as the sequence of messages and actions over time within a 50 ms cycle of the game loop.
 
 ```mermaid
-%%{init: {'theme':'base','themeVariables':{'fontSize':'18px','primaryColor':'#1565c0','primaryTextColor':'#ffffff','primaryBorderColor':'#0d47a1','lineColor':'#90a4ae','signalColor':'#ffc107','signalTextColor':'#ffc107','actorBkg':'#1565c0','actorBorder':'#0d47a1','actorTextColor':'#ffffff','actorLineColor':'#90caf9','noteBkgColor':'#fff59d','noteTextColor':'#000000','noteBorderColor':'#f57f17','activationBkgColor':'#66bb6a','activationBorderColor':'#2e7d32','sequenceNumberColor':'#ffffff','loopTextColor':'#ffc107','labelBoxBkgColor':'#37474f','labelBoxBorderColor':'#90a4ae','labelTextColor':'#ffffff'},'sequence':{'actorMargin':120,'messageFontSize':17,'noteFontSize':15,'actorFontSize':17,'boxMargin':15,'boxTextMargin':8,'noteMargin':12,'useMaxWidth':true}}}%%
 sequenceDiagram
     autonumber
     actor Btn as Button
@@ -196,94 +192,92 @@ sequenceDiagram
     participant Stg as Stage task
     participant UI as Display task
 
-    rect rgb(20, 40, 20)
-        Note left of Btn: SCREEN ENTRY
-        UI-)Q: AC_GAME_START_REQ
-        Q-)Plr: dispatch
-        activate Plr
-        Plr->>Plr: game_logic_init()
-        Plr->>Tmr: Set 50ms periodic timer
-        deactivate Plr
-    end
+    Note left of Btn: SCREEN ENTRY
+    UI-)Q: AC_GAME_START_REQ
+    Q-)Plr: dispatch
+    activate Plr
+    Plr->>Plr: game_logic_init()
+    Plr-)Q: AC_GAME_START_REQ to Stage
+    deactivate Plr
+    
+    Q-)Stg: AC_GAME_START_REQ
+    activate Stg
+    Stg->>Tmr: Set 50ms periodic timer
+    deactivate Stg
 
-    rect rgb(40, 20, 40)
-        Note left of Btn: GAME PLAY
-        Note left of Btn: Normal (Tick)
-        Tmr-)Q: AC_GAME_UPDATE_TICK
-        Q-)Plr: dispatch
-        activate Plr
-        Note right of Plr: update_player_sliding_and_timers()
-        Plr-)Q: AC_GAME_UPDATE_TICK to AC_TASK_GAME_ENEMY_ID
-        Plr-)Q: AC_GAME_UPDATE_TICK to AC_TASK_GAME_BULLET_ID
-        Plr-)Q: AC_GAME_UPDATE_TICK to AC_TASK_GAME_STAGE_ID
-        deactivate Plr
+    Note left of Btn: GAME PLAY
+    Note left of Btn: Normal (Tick)
+    
+    Tmr-)Q: AC_GAME_UPDATE_TICK
+    Q-)Stg: dispatch
+    activate Stg
+    Stg-)Q: AC_GAME_UPDATE_TICK to Player
+    Stg-)Q: AC_GAME_UPDATE_TICK to Enemy
+    Stg-)Q: AC_GAME_UPDATE_TICK to Bullet
+    Note right of Stg: Check wave clear / advance stage
+    Stg-)Q: AC_DISPLAY_RENDER_SCREEN
+    deactivate Stg
 
-        Note over Q: AK scheduler dispatches queued signals
+    Note over Q: AK scheduler dispatches queued signals
 
-        Q-)Enm: AC_GAME_UPDATE_TICK
-        activate Enm
-        Note right of Enm: Move enemies & drop items
-        deactivate Enm
+    Q-)Plr: AC_GAME_UPDATE_TICK
+    activate Plr
+    Note right of Plr: update_player_sliding_and_timers()
+    deactivate Plr
 
-        Q-)Bul: AC_GAME_UPDATE_TICK
-        activate Bul
-        Note right of Bul: Check collisions & move bullets
-        deactivate Bul
+    Q-)Enm: AC_GAME_UPDATE_TICK
+    activate Enm
+    Note right of Enm: Move enemies & drop items
+    deactivate Enm
 
-        Q-)Stg: AC_GAME_UPDATE_TICK
-        activate Stg
-        Note right of Stg: Check wave clear / advance stage
-        Stg-)Q: AC_DISPLAY_RENDER_SCREEN
-        deactivate Stg
-        
-        Q-)UI: AC_DISPLAY_RENDER_SCREEN
-        activate UI
-        Note right of UI: game_shooter_render() to OLED
-        deactivate UI
+    Q-)Bul: AC_GAME_UPDATE_TICK
+    activate Bul
+    Note right of Bul: Check collisions & move bullets
+    deactivate Bul
 
-        Note left of Btn: Action (Input)
-        Btn-)Q: Button [MODE] pressed
-        Q-)Plr: AC_GAME_BTN_MODE (dispatch)
-        activate Plr
-        Note right of Plr: Spawn player bullet
-        deactivate Plr
-        
-        Btn-)Q: Button [UP] pressed
-        Q-)Plr: AC_GAME_BTN_UP (dispatch)
-        activate Plr
-        Note right of Plr: g_is_moving_left = true
-        deactivate Plr
+    Q-)UI: AC_DISPLAY_RENDER_SCREEN
+    activate UI
+    Note right of UI: game_shooter_render() to OLED
+    deactivate UI
 
-        Btn-)Q: Button [DOWN] pressed
-        Q-)Plr: AC_GAME_BTN_DOWN (dispatch)
-        activate Plr
-        Note right of Plr: g_is_moving_right = true
-        deactivate Plr
-    end
+    Note left of Btn: Action (Input)
+    Btn-)Q: Button [MODE] pressed
+    Q-)Plr: AC_GAME_BTN_MODE (dispatch)
+    activate Plr
+    Note right of Plr: Spawn player bullet
+    deactivate Plr
+    
+    Btn-)Q: Button [UP] pressed
+    Q-)Plr: AC_GAME_BTN_UP (dispatch)
+    activate Plr
+    Note right of Plr: g_is_moving_left = true
+    deactivate Plr
 
-    rect rgb(60, 20, 20)
-        Note left of Btn: GAME OVER
-        Note right of Stg: If g_lives <= 0 during Tick
-        Stg-)Q: AC_DISPLAY_GAME_OVER_NEXT
-        Q-)UI: dispatch
-        activate UI
-        Note right of UI: Stop periodic timer<br/>Change screen to scr_game_gameover
-        deactivate UI
-    end
+    Btn-)Q: Button [DOWN] pressed
+    Q-)Plr: AC_GAME_BTN_DOWN (dispatch)
+    activate Plr
+    Note right of Plr: g_is_moving_right = true
+    deactivate Plr
 
-    rect rgb(20, 40, 60)
-        Note left of Btn: EXIT TO TITLE
-        Btn-)Q: Button [MODE] released
-        Q-)UI: AC_DISPLAY_BUTTON_MODE_RELEASED
-        activate UI
-        Note right of UI: Transition to scr_startup
-        deactivate UI
-    end
+    Note left of Btn: GAME OVER
+    Note right of Stg: If lives <= 0 during Tick
+    Stg-)Q: AC_DISPLAY_GAME_OVER_NEXT
+    Q-)UI: dispatch
+    activate UI
+    Note right of UI: Stop periodic timer<br/>Change screen to scr_game_gameover
+    deactivate UI
+
+    Note left of Btn: EXIT TO TITLE
+    Btn-)Q: Button [MODE] released
+    Q-)UI: AC_DISPLAY_BUTTON_MODE_RELEASED
+    activate UI
+    Note right of UI: Transition to scr_startup
+    deactivate UI
 ```
 
 ### V. Technical Architecture
 
-> **Reference:** For comprehensive documentation on system execution flows and object interaction, refer to [Runtime Signal Processing](docs/04-design-sequence-runtime.md) and [Game Object Sequences](docs/03-design-sequence-object.md).
+> **Reference:** For comprehensive documentation on system execution flows and object interaction, refer to [Runtime Signal Processing](resources/docs/04-design-sequence-runtime.md) and [Game Object Sequences](resources/docs/03-design-sequence-object.md).
 
 ## Contact & Support
 ``` Note
