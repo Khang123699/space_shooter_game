@@ -64,10 +64,10 @@ File extensions: `.h` for headers, `.cpp` for implementation (the project is bui
 Use the pattern `__<FILE_NAME>_H__`, fully uppercased, matching the file name exactly:
 
 ```cpp
-#ifndef __GAME_SHOOTER_ENEMY_H__
-#define __GAME_SHOOTER_ENEMY_H__
+#ifndef __GAME_SHOOTER_ENEMY_TASK_H__
+#define __GAME_SHOOTER_ENEMY_TASK_H__
 ...
-#endif //__GAME_SHOOTER_ENEMY_H__
+#endif //__GAME_SHOOTER_ENEMY_TASK_H__
 ```
 
 ### 4. Macros and compile-time constants
@@ -88,8 +88,10 @@ Pattern: `<OBJECT>_<PROPERTY>` or `<OBJECT>_<ACTION>` — the object always come
 Examples done right:
 
 ```cpp
-// game_shooter_player_task.h
+// game_shooter_bullet_task.h
 #define MAX_BULLETS            (20)
+
+// game_shooter_enemy_task.h
 #define MAX_ENEMIES            (35)
 #define MAX_POWERUPS           (3)
 ```
@@ -101,7 +103,7 @@ Examples done right:
 #define GAME_STATE_PLAY  (1)
 ```
 
-Group related constants in the right module header (`game_shooter_player_task.h` holds game constants, etc.). Never leave magic numbers scattered across `.cpp` files.
+Group related constants in the right module header (`game_shooter_enemy_task.h` holds enemy constants, `game_shooter_bullet_task.h` holds bullet constants, etc.). Never leave magic numbers scattered across `.cpp` files.
 
 ### 5. Signal (enum values)
 
@@ -147,12 +149,13 @@ Use `lower_snake_case` with the `_t` suffix. The struct stays anonymous; the typ
 
 ```cpp
 typedef struct {
-    float x;
-    float y;
-    int type;
-    bool active;
-    uint8_t hp;
-} game_enemy_t;
+    int8_t x, y;
+    int8_t hp;
+    uint8_t type;
+    int8_t blink_timer;
+    enemy_state_e state;
+    int16_t timer;
+} enemy_t;
 ```
 
 Types provided by the framework follow the same pattern (`ak_msg_t`, `view_screen_t`).
@@ -163,29 +166,29 @@ Use `lower_snake_case` with the module name as prefix, so that grepping the pref
 
 ```cpp
 void game_logic_init();
-void game_logic_update();
 void game_player_shoot();
-void game_player_move();
+void game_player_move(int8_t dir);
+void game_enemy_update();
 ```
 
 ### 9. Variables
 
 Use `lower_snake_case`. Do not start names with an underscore.
 
-- **Globals shared between modules:** declare `extern` in the header, define exactly once in the `.cpp` of the owning module.
+- **Globals shared between modules (Encapsulation):** Hide variables by declaring them `static` inside the `.cpp` file, and provide `getter` functions in the header for other modules to read them safely. **Do not use `extern` variables.**
 
   ```cpp
   // space_shooter/game_shooter_player_task.h
-  extern int16_t g_player_x;
-  extern uint8_t g_lives;
-  extern uint32_t g_score;
+  int16_t game_get_player_x();
+  uint8_t game_get_lives();
+  uint32_t game_get_score();
   ```
 
 - **Module-internal variables:** declare `static` in the `.cpp`.
 
   ```cpp
   // game_shooter_player_task.cpp
-  static uint8_t s_boss_stage = 0;
+  static uint8_t g_shoot_cooldown = 0;
   ```
 
 - **Local variables:** short, describe the role accurately. Loop counters can use `i`, `j`, `k` when the scope is clear.

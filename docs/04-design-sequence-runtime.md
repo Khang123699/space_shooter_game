@@ -10,10 +10,10 @@ In Space Shooter, the application logic is divided into 4 independent Game Tasks
 
 Execution Pipeline:
 
-1. **Game Initialization:** Player Task receives `AC_GAME_START_REQ`, initializing `game_logic_init()` and setting up global variables. The system activates a single periodic timer (50ms interval) that fires to the Player Task.
-2. **Pipeline Logic Tick (50ms):** OS Timer sends the `AC_GAME_UPDATE_TICK` signal to the Player Task. After processing, the Player Task uses `task_post_pure_msg` to sequentially push the signal to the Enemy Task, Bullet Task, and Stage Task via the AKOS Message Queue.
-3. **Physics & State:** Each task is successively awakened by the Scheduler to update positions, check collisions, and change game states.
-4. **Render Trigger:** At the end of the cycle, the Stage Task sends the `AC_DISPLAY_RENDER_SCREEN` signal to `AC_TASK_DISPLAY_ID`.
+1. **Game Initialization:** Player Task receives `AC_GAME_START_REQ`, initializing `game_logic_init()` and sending `AC_GAME_START_REQ` to other tasks. When the Stage Task receives this, it activates a single periodic timer (50ms interval) that fires to the Stage Task.
+2. **Pipeline Logic Tick (50ms):** OS Timer sends the `AC_GAME_UPDATE_TICK` signal to the Stage Task. The Stage Task acts as an Orchestrator and uses `task_post_pure_msg` to sequentially enqueue the tick signal to the Player Task, Enemy Task, and Bullet Task via the AKOS Message Queue, before processing its own stage transitions and game over logic.
+3. **Render Trigger:** At the end of its tick handler, the Stage Task sends the `AC_DISPLAY_RENDER_SCREEN` signal to `AC_TASK_DISPLAY_ID`.
+4. **Physics & State:** Since all tasks share the same priority, AKOS schedules them in FIFO order. Each task (Player, Enemy, Bullet, Display) is successively awakened by the Scheduler to update positions, check collisions, and finally render to the screen.
 5. **Rendering:** The Display task wakes up on `AC_DISPLAY_RENDER_SCREEN`, clears the buffer, reads the global entity arrays, and pushes pixels to OLED via `view_render()`.
 
 ### High-Level Component Diagram
@@ -27,7 +27,7 @@ The overall state of the application is determined by AKOS's `view_render_list` 
 - `scr_game_play`: Active execution of physics and game logic. Receives render signals from the pipeline.
 - `scr_game_setting`: Configuration of system parameters (e.g., Audio).
 - `scr_game_highscore`: Data retrieval and display of the maximum recorded scores.
-- `scr_game_gameover`: Termination screen displayed when `g_lives <= 0`.
+- `scr_game_gameover`: Termination screen displayed when `game_get_lives() <= 0`.
 
 #### 2. Periodic Execution Loop (Tick)
 
@@ -44,16 +44,22 @@ sequenceDiagram
     participant UI as Display Task
 
     Tmr-)Q: AC_GAME_UPDATE_TICK
-    Q-)Plr: Dispatch
+    Q-)Stg: Dispatch
+    activate Stg
+    Stg-)Q: Enqueue AC_GAME_UPDATE_TICK for Player
+    Stg-)Q: Enqueue AC_GAME_UPDATE_TICK for Enemy
+    Stg-)Q: Enqueue AC_GAME_UPDATE_TICK for Bullet
+    Note right of Stg: Check transitions / Game Over
+    Stg-)Q: Enqueue AC_DISPLAY_RENDER_SCREEN
+    deactivate Stg
+    
+    Note over Q: AK scheduler dispatches queued signals (FIFO Priority 4)
+    
+    Q-)Plr: AC_GAME_UPDATE_TICK
     activate Plr
-    Note right of Plr: Compute button inputs and movement flags
-    Plr-)Q: AC_GAME_UPDATE_TICK to Enemy Task
-    Plr-)Q: AC_GAME_UPDATE_TICK to Bullet Task
-    Plr-)Q: AC_GAME_UPDATE_TICK to Stage Task
+    Note right of Plr: Compute movement and cooldowns
     deactivate Plr
-    
-    Note over Q: AK scheduler dispatches queued signals
-    
+
     Q-)Enm: AC_GAME_UPDATE_TICK
     activate Enm
     Note right of Enm: Move enemies, drop powerups
@@ -63,12 +69,6 @@ sequenceDiagram
     activate Bul
     Note right of Bul: Update collisions and move bullets
     deactivate Bul
-
-    Q-)Stg: AC_GAME_UPDATE_TICK
-    activate Stg
-    Note right of Stg: Check transitions / Game Over
-    Stg-)Q: AC_DISPLAY_RENDER_SCREEN
-    deactivate Stg
 
     Q-)UI: Dispatch AC_DISPLAY_RENDER_SCREEN
     activate UI
