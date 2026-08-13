@@ -8,13 +8,13 @@
 
 <table align="center">
   <tr>
-    <td align="center"><img src="resources/images/game_banner.png" alt="Space Shooter Banner" width="100%"/></td>
+    <td align="center"><img src="resources/images/game_banner.gif" alt="Space Shooter Banner" width="100%"/></td>
   </tr>
 </table>
 
 ## GamePlay Demo
 <div align="center">
-  <video src="https://github.com/user-attachments/assets/b35da7ef-d556-4fd3-aa29-753fb4132931" controls width="480"></video>
+  <video src="https://github.com/user-attachments/assets/78dac83e-d2ad-44c3-942c-a80e8f1aae6d" controls width="480"></video>
 </div>
 
 <hr>
@@ -31,13 +31,7 @@
 | [resources/docs/05-design-data-storage.md](resources/docs/05-design-data-storage.md) | Persistent storage mechanism for settings and high scores in internal EEPROM. |
 
 ## Introduction
-
-Space Shooter is a classic shooting game inspired by the popular "Chicken Invaders" genre. It is built using the AK Embedded Kit, a hands-on platform designed to help learners of embedded programming explore event-driven programming. While developing and playing Space Shooter, you will apply the following core concepts of modern embedded engineering in a practical setting:
-
-* **System design:** Modelling complex logic flows with UML.
-* **Process management:** Coordinating cooperative Tasks and scheduling them efficiently.
-* **Communication:** Using Signals, Timers, and Messages to react in real time.
-* **Control logic:** Building robust state machines for the player, the enemies, and the overall match progression.
+Space Shooter is a classic shooting game inspired by the famous "Chicken Invaders" genre. The game was developed using the AK Embedded Kit, a hands-on platform designed to help embedded programming learners explore event-driven programming on the AKOS real-time operating system. Through this project, learners can apply concepts such as event handling, state management, and task scheduling within a practical, interactive embedded application.
 
 ### I. Hardware
 
