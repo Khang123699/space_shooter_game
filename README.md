@@ -180,15 +180,14 @@ The goal is to score as many points as possible. Points are awarded based on the
 
 The diagram below illustrates the basic program execution flow, as well as the sequence of messages and actions over time within a 50 ms cycle of the game loop.
 
+#### 1. Screen Entry
 ```mermaid
+%%{init: {'theme':'base','themeVariables':{'fontSize':'18px','primaryColor':'#1565c0','primaryTextColor':'#ffffff','primaryBorderColor':'#0d47a1','lineColor':'#90a4ae','signalColor':'#ffc107','signalTextColor':'#ffc107','actorBkg':'#1565c0','actorBorder':'#0d47a1','actorTextColor':'#ffffff','actorLineColor':'#90caf9','noteBkgColor':'#fff59d','noteTextColor':'#000000','noteBorderColor':'#f57f17','activationBkgColor':'#66bb6a','activationBorderColor':'#2e7d32','sequenceNumberColor':'#ffffff','loopTextColor':'#ffc107','labelBoxBkgColor':'#37474f','labelBoxBorderColor':'#90a4ae','labelTextColor':'#ffffff'},'sequence':{'actorMargin':40,'messageFontSize':17,'noteFontSize':15,'actorFontSize':17,'boxMargin':15,'boxTextMargin':8,'noteMargin':12,'useMaxWidth':true}}}%%
 sequenceDiagram
     autonumber
-    actor Btn as Button
     participant Tmr as Timer
     participant Q as AKOS Event-Driven (Message pool & Scheduler)
     participant Plr as Player task
-    participant Enm as Enemy task
-    participant Bul as Bullet task
     participant Stg as Stage task
     participant UI as Display task
 
@@ -205,6 +204,21 @@ sequenceDiagram
         Stg->>Tmr: Set 50ms periodic timer
         deactivate Stg
     end
+```
+
+#### 2. Game Play
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'fontSize':'18px','primaryColor':'#1565c0','primaryTextColor':'#ffffff','primaryBorderColor':'#0d47a1','lineColor':'#90a4ae','signalColor':'#ffc107','signalTextColor':'#ffc107','actorBkg':'#1565c0','actorBorder':'#0d47a1','actorTextColor':'#ffffff','actorLineColor':'#90caf9','noteBkgColor':'#fff59d','noteTextColor':'#000000','noteBorderColor':'#f57f17','activationBkgColor':'#66bb6a','activationBorderColor':'#2e7d32','sequenceNumberColor':'#ffffff','loopTextColor':'#ffc107','labelBoxBkgColor':'#37474f','labelBoxBorderColor':'#90a4ae','labelTextColor':'#ffffff'},'sequence':{'actorMargin':40,'messageFontSize':17,'noteFontSize':15,'actorFontSize':17,'boxMargin':15,'boxTextMargin':8,'noteMargin':12,'useMaxWidth':true}}}%%
+sequenceDiagram
+    autonumber
+    actor Btn as Button
+    participant Tmr as Timer
+    participant Q as AKOS Event-Driven (Message pool & Scheduler)
+    participant Plr as Player task
+    participant Enm as Enemy task
+    participant Bul as Bullet task
+    participant Stg as Stage task
+    participant UI as Display task
 
     opt GAME PLAY (Normal Tick)
         Tmr-)Q: AC_GAME_UPDATE_TICK
@@ -259,6 +273,16 @@ sequenceDiagram
         Note right of Plr: g_is_moving_right = true
         deactivate Plr
     end
+```
+
+#### 3. Game Over
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'fontSize':'18px','primaryColor':'#1565c0','primaryTextColor':'#ffffff','primaryBorderColor':'#0d47a1','lineColor':'#90a4ae','signalColor':'#ffc107','signalTextColor':'#ffc107','actorBkg':'#1565c0','actorBorder':'#0d47a1','actorTextColor':'#ffffff','actorLineColor':'#90caf9','noteBkgColor':'#fff59d','noteTextColor':'#000000','noteBorderColor':'#f57f17','activationBkgColor':'#66bb6a','activationBorderColor':'#2e7d32','sequenceNumberColor':'#ffffff','loopTextColor':'#ffc107','labelBoxBkgColor':'#37474f','labelBoxBorderColor':'#90a4ae','labelTextColor':'#ffffff'},'sequence':{'actorMargin':40,'messageFontSize':17,'noteFontSize':15,'actorFontSize':17,'boxMargin':15,'boxTextMargin':8,'noteMargin':12,'useMaxWidth':true}}}%%
+sequenceDiagram
+    autonumber
+    participant Q as AKOS Event-Driven (Message pool & Scheduler)
+    participant Stg as Stage task
+    participant UI as Display task
 
     opt GAME OVER
         Note right of Stg: If lives <= 0 during Tick
@@ -266,14 +290,6 @@ sequenceDiagram
         Q-)UI: dispatch
         activate UI
         Note right of UI: Stop periodic timer<br/>Change screen to scr_game_gameover
-        deactivate UI
-    end
-
-    opt EXIT TO TITLE
-        Btn-)Q: Button [MODE] released
-        Q-)UI: AC_DISPLAY_BUTTON_MODE_RELEASED
-        activate UI
-        Note right of UI: Transition to scr_startup
         deactivate UI
     end
 ```
