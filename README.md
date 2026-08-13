@@ -8,7 +8,7 @@
 
 <table align="center">
   <tr>
-    <td align="center"><img src="resources/images/game_banner.gif" alt="Space Shooter Banner" width="800"/></td>
+    <td align="center"><img src="resources/images/game_banner.gif" alt="Space Shooter Banner" width="852"/></td>
   </tr>
 </table>
 
