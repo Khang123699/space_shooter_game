@@ -192,87 +192,90 @@ sequenceDiagram
     participant Stg as Stage task
     participant UI as Display task
 
-    Note left of Btn: SCREEN ENTRY
-    UI-)Q: AC_GAME_START_REQ
-    Q-)Plr: dispatch
-    activate Plr
-    Plr->>Plr: game_logic_init()
-    Plr-)Q: AC_GAME_START_REQ to Stage
-    deactivate Plr
-    
-    Q-)Stg: AC_GAME_START_REQ
-    activate Stg
-    Stg->>Tmr: Set 50ms periodic timer
-    deactivate Stg
+    opt SCREEN ENTRY
+        UI-)Q: AC_GAME_START_REQ
+        Q-)Plr: dispatch
+        activate Plr
+        Plr->>Plr: game_logic_init()
+        Plr-)Q: AC_GAME_START_REQ to Stage
+        deactivate Plr
+        
+        Q-)Stg: AC_GAME_START_REQ
+        activate Stg
+        Stg->>Tmr: Set 50ms periodic timer
+        deactivate Stg
+    end
 
-    Note left of Btn: GAME PLAY
-    Note left of Btn: Normal (Tick)
-    
-    Tmr-)Q: AC_GAME_UPDATE_TICK
-    Q-)Stg: dispatch
-    activate Stg
-    Stg-)Q: AC_GAME_UPDATE_TICK to Player
-    Stg-)Q: AC_GAME_UPDATE_TICK to Enemy
-    Stg-)Q: AC_GAME_UPDATE_TICK to Bullet
-    Note right of Stg: Check wave clear / advance stage
-    Stg-)Q: AC_DISPLAY_RENDER_SCREEN
-    deactivate Stg
+    opt GAME PLAY (Normal Tick)
+        Tmr-)Q: AC_GAME_UPDATE_TICK
+        Q-)Stg: dispatch
+        activate Stg
+        Stg-)Q: AC_GAME_UPDATE_TICK to Player
+        Stg-)Q: AC_GAME_UPDATE_TICK to Enemy
+        Stg-)Q: AC_GAME_UPDATE_TICK to Bullet
+        Note right of Stg: Check wave clear / advance stage
+        Stg-)Q: AC_DISPLAY_RENDER_SCREEN
+        deactivate Stg
 
-    Note over Q: AK scheduler dispatches queued signals
+        Note over Q: AK scheduler dispatches queued signals
 
-    Q-)Plr: AC_GAME_UPDATE_TICK
-    activate Plr
-    Note right of Plr: update_player_sliding_and_timers()
-    deactivate Plr
+        Q-)Plr: AC_GAME_UPDATE_TICK
+        activate Plr
+        Note right of Plr: update_player_sliding_and_timers()
+        deactivate Plr
 
-    Q-)Enm: AC_GAME_UPDATE_TICK
-    activate Enm
-    Note right of Enm: Move enemies & drop items
-    deactivate Enm
+        Q-)Enm: AC_GAME_UPDATE_TICK
+        activate Enm
+        Note right of Enm: Move enemies & drop items
+        deactivate Enm
 
-    Q-)Bul: AC_GAME_UPDATE_TICK
-    activate Bul
-    Note right of Bul: Check collisions & move bullets
-    deactivate Bul
+        Q-)Bul: AC_GAME_UPDATE_TICK
+        activate Bul
+        Note right of Bul: Check collisions & move bullets
+        deactivate Bul
 
-    Q-)UI: AC_DISPLAY_RENDER_SCREEN
-    activate UI
-    Note right of UI: game_shooter_render() to OLED
-    deactivate UI
+        Q-)UI: AC_DISPLAY_RENDER_SCREEN
+        activate UI
+        Note right of UI: game_shooter_render() to OLED
+        deactivate UI
+    end
 
-    Note left of Btn: Action (Input)
-    Btn-)Q: Button [MODE] pressed
-    Q-)Plr: AC_GAME_BTN_MODE (dispatch)
-    activate Plr
-    Note right of Plr: Spawn player bullet
-    deactivate Plr
-    
-    Btn-)Q: Button [UP] pressed
-    Q-)Plr: AC_GAME_BTN_UP (dispatch)
-    activate Plr
-    Note right of Plr: g_is_moving_left = true
-    deactivate Plr
+    opt GAME PLAY (Action Input)
+        Btn-)Q: Button [MODE] pressed
+        Q-)Plr: AC_GAME_BTN_MODE (dispatch)
+        activate Plr
+        Note right of Plr: Spawn player bullet
+        deactivate Plr
+        
+        Btn-)Q: Button [UP] pressed
+        Q-)Plr: AC_GAME_BTN_UP (dispatch)
+        activate Plr
+        Note right of Plr: g_is_moving_left = true
+        deactivate Plr
 
-    Btn-)Q: Button [DOWN] pressed
-    Q-)Plr: AC_GAME_BTN_DOWN (dispatch)
-    activate Plr
-    Note right of Plr: g_is_moving_right = true
-    deactivate Plr
+        Btn-)Q: Button [DOWN] pressed
+        Q-)Plr: AC_GAME_BTN_DOWN (dispatch)
+        activate Plr
+        Note right of Plr: g_is_moving_right = true
+        deactivate Plr
+    end
 
-    Note left of Btn: GAME OVER
-    Note right of Stg: If lives <= 0 during Tick
-    Stg-)Q: AC_DISPLAY_GAME_OVER_NEXT
-    Q-)UI: dispatch
-    activate UI
-    Note right of UI: Stop periodic timer<br/>Change screen to scr_game_gameover
-    deactivate UI
+    opt GAME OVER
+        Note right of Stg: If lives <= 0 during Tick
+        Stg-)Q: AC_DISPLAY_GAME_OVER_NEXT
+        Q-)UI: dispatch
+        activate UI
+        Note right of UI: Stop periodic timer<br/>Change screen to scr_game_gameover
+        deactivate UI
+    end
 
-    Note left of Btn: EXIT TO TITLE
-    Btn-)Q: Button [MODE] released
-    Q-)UI: AC_DISPLAY_BUTTON_MODE_RELEASED
-    activate UI
-    Note right of UI: Transition to scr_startup
-    deactivate UI
+    opt EXIT TO TITLE
+        Btn-)Q: Button [MODE] released
+        Q-)UI: AC_DISPLAY_BUTTON_MODE_RELEASED
+        activate UI
+        Note right of UI: Transition to scr_startup
+        deactivate UI
+    end
 ```
 
 ### V. Technical Architecture
