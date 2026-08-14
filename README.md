@@ -44,36 +44,6 @@ Space Shooter is a classic shooting game inspired by the famous "Chicken Invader
 
 The game is designed to run on the [AK Embedded Base Kit](https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu). It utilizes a **1.54" OLED display** for graphics rendering, **three push buttons** for user input, and a **buzzer** for audio feedback.
 
-**Microcontroller Specifications:**
-
-```text
-SoC Name : STM32L151CBT6
-RAM      : 16 KB
-
-Flash Partitions Layout
-----------------------
-[ 0x08000000 - 0x08001FFF ] : Bootloader Partition (8 KB)
-=> AK Bootloader
-
-[ 0x08002000 - 0x08002FFF ] : BSF Shared Partition (4 KB)
-=> Used for data sharing between Bootloader and Application
-
-[ 0x08003000 - 0x0801FFFF ] : Application Partition (116 KB)
-=> Space Shooter Firmware
-```
-
-**MCU Naming Convention:**
-
-| Part | Meaning |
-|---|---|
-| `STM32` | STMicroelectronics 32-bit MCU family. |
-| `L` | Low-power series. |
-| `151` | STM32L151 product line. |
-| `C` | 48-pin package. |
-| `B` | 128 KB Flash memory. |
-| `T` | LQFP package. |
-| `6` | Industrial temperature grade. |
-
 <table align="center">
   <tr>
     <td align="center"><img src="resources/images/board-view-top-bottom.png" width="900"/></td>
