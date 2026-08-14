@@ -8,7 +8,7 @@
 
 <table align="center">
   <tr>
-    <td align="center"><img src="resources/images/game_banner.gif" alt="Space Shooter Banner" width="800"/></td>
+    <td align="center"><img src="resources/images/banner/game_banner.gif" alt="Space Shooter Banner" width="800"/></td>
   </tr>
 </table>
 
@@ -37,7 +37,7 @@ Space Shooter is a classic shooting game inspired by the famous "Chicken Invader
 
 <table align="center">
   <tr>
-    <td align="center"><img src="resources/images/ak-embedded-base-kit-version-3.jpg" alt="AK Embedded Base Kit - STM32L151 - v3.0" width="480"/></td>
+    <td align="center"><img src="resources/images/ak-kit-image/ak-embedded-base-kit-version-3.jpg" alt="AK Embedded Base Kit - STM32L151 - v3.0" width="480"/></td>
   </tr>
 </table>
 <p align="center"><strong><em>Figure 1:</em></strong> AK Embedded Base Kit - STM32L151</p>
