@@ -23,7 +23,7 @@ The Player task owns the `g_player` struct (coordinate, lives, score, state).
 **Input.** Hardware button interrupts route asynchronous signals directly from the Display Task to `AC_TASK_GAME_PLAYER_ID`.
 
 **Per-tick.** Smooth sliding state is handled via `g_is_moving_left` and `g_is_moving_right` flags:
-- If a flag is active (button held) — continuously adjusts `g_player.x` and clamps to screen bounds.
+- If a flag is active (button held), continuously adjusts `g_player.x` and clamps to screen bounds.
 - Blinking logic: `g_player.blink_timer` is decremented each tick if `> 0`.
 
 ```mermaid
