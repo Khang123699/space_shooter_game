@@ -42,7 +42,7 @@ Space Shooter is a classic shooting game inspired by the famous "Chicken Invader
 </table>
 <p align="center"><strong><em>Figure 1:</em></strong> AK Embedded Base Kit - STM32L151</p>
 
-The game is designed to run on the [AK Embedded Base Kit](https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu). It utilizes a **1.54" OLED display** for graphics rendering, **three push buttons** for user input, and a **buzzer** for audio feedback. For more information about the board, see [AK Embedded Base Kit](https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu).
+The game is designed to run on the AK Embedded Base Kit. It utilizes a **1.54" OLED display** for graphics rendering, **three push buttons** for user input, and a **buzzer** for audio feedback. For more information about the board, see [AK Embedded Base Kit](https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu).
 
 ### II. Game Description and Objects
 
