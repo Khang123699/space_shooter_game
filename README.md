@@ -46,7 +46,7 @@ The game is designed to run on the AK Embedded Base Kit. It utilizes a **1.54" O
 
 ### II. Game Description and Objects
 
-The application boots into a **Title Screen**, progressing to a **Main Menu** containing the following options:
+The application boots into **Startup Screen**, then progresses to a **Title Screen**, then to a **Main Menu** containing the following options:
 
 - **Play:** Initialize a new game session.
 - **Setting:** Adjust system parameters (Sound, Difficulty).
