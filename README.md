@@ -15,8 +15,8 @@
 ## GamePlay Demo
 <table align="center">
   <tr>
-    <td width="250" align="center">
-      <video src="https://github.com/user-attachments/assets/b6ae2fad-1937-49b5-8bcb-346576daeeec" controls width="250"></video>
+    <td width="360" align="center">
+      <video src="https://github.com/user-attachments/assets/b6ae2fad-1937-49b5-8bcb-346576daeeec" controls width="360"></video>
     </td>
   </tr>
 </table>
