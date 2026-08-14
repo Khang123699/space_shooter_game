@@ -61,45 +61,45 @@ The application boots into **Startup Screen**, then progresses to a **Title Scre
 
 <table align="center">
   <tr>
-    <td align="center"><img src="resources/images/screens/scr_startup_1.png" alt="boot screen 1" width="480"/></td>
+    <td align="center"><img src="resources/images/screens/scr_startup.png" alt="boot screen 1" width="480"/></td>
   </tr>
 </table>
-<p align="center"><strong><em>Figure 3:</em></strong> Active Kernel Boot Logo</p>
+<p align="center"><strong><em>Figure 2:</em></strong> Active Kernel Boot Logo</p>
 
 <table align="center">
   <tr>
-    <td align="center"><img src="resources/images/screens/scr_title.png" alt="title screen" width="480"/></td>
+    <td align="center"><img src="resources/images/screens/scr_title.gif" alt="title screen" width="480"/></td>
   </tr>
 </table>
-<p align="center"><strong><em>Figure 4:</em></strong> Title Screen</p>
+<p align="center"><strong><em>Figure 3:</em></strong> Title Screen</p>
 
 <table align="center">
   <tr>
-    <td align="center"><img src="resources/images/screens/scr_main_menu.png" alt="main menu" width="480"/></td>
+    <td align="center"><img src="resources/images/screens/scr_main_menu.gif" alt="main menu" width="480"/></td>
   </tr>
 </table>
-<p align="center"><strong><em>Figure 5:</em></strong> Main Menu</p>
+<p align="center"><strong><em>Figure 4:</em></strong> Main Menu</p>
 
 <table align="center">
   <tr>
-    <td align="center"><img src="resources/images/screens/scr_gameplay.png" alt="gameplay" width="480"/></td>
+    <td align="center"><img src="resources/images/screens/scr_game_play.gif" alt="gameplay" width="480"/></td>
   </tr>
 </table>
-<p align="center"><strong><em>Figure 6:</em></strong> Standard Gameplay</p>
+<p align="center"><strong><em>Figure 5:</em></strong> Standard Gameplay</p>
 
 <table align="center">
   <tr>
-    <td align="center"><img src="resources/images/screens/scr_game_over.png" alt="game over" width="480"/></td>
+    <td align="center"><img src="resources/images/screens/scr_game_over.gif" alt="game over" width="480"/></td>
   </tr>
 </table>
-<p align="center"><strong><em>Figure 7:</em></strong> Game Over Screen</p>
+<p align="center"><strong><em>Figure 6:</em></strong> Game Over Screen</p>
 
 <table align="center">
   <tr>
     <td align="center"><img src="resources/images/screens/scr_summary.png" alt="summary screen" width="480"/></td>
   </tr>
 </table>
-<p align="center"><strong><em>Figure 8:</em></strong> Summary Screen</p>
+<p align="center"><strong><em>Figure 7:</em></strong> Summary Screen</p>
 
 ### Defined Entities:
 
